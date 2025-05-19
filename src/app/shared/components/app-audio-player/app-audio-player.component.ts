@@ -80,76 +80,21 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   isVideoMode = false;
   showEffect = false;
   showVideo = false;
-  showOverlaySubtitle = false;
   videoVolume = 0.5;
   videoSpeed = 1;
   selectedVideo?: VideoItem;
   private destroy$ = new Subject<void>();
-  private pipWindow: Window | null = null;
 
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
-    this.backgroundMusic = new Audio(
-      'assets/music/Chìm Sâu - RPT MCK (feat. Trung Trần) _ Official Lyrics Video (Backing Track) (Mel-RoFormer by unwa).mp3'
-    );
+    this.backgroundMusic = new Audio('assets/music/Chìm Sâu - RPT MCK (feat. Trung Trần) _ Official Lyrics Video (Backing Track) (Mel-RoFormer by unwa).mp3');
     this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.5;
+    this.backgroundMusic.volume = 0.1;
     if (this.isListeningMode && !this.backgroundMuted) {
       this.backgroundMusic.play();
     }
-    this.setupVisibilityListener();
     this.playSequence();
-  }
-
-  setupVisibilityListener() {
-    // this.renderer.listen('document', 'visibilitychange', () => {
-    //   if (document.visibilityState === 'hidden' && this.isListeningMode) {
-    //     this.openAnswerPiP();
-    //   } else {
-    //     this.closeAnswerPiP();
-    //   }
-    // });
-  }
-
-  openAnswerPiP() {
-    if (this.pipWindow && !this.pipWindow.closed) {
-      this.pipWindow.document.body.innerHTML = `<div style='font-size: 20px;'>${this.currentQuestion?.answer || ''}</div>`;
-      return;
-    }
-
-    const content = this.currentQuestion?.answer || 'No content';
-    const pipHtml = `
-      <html>
-        <head>
-          <title>Answer PiP</title>
-          <style>
-            body {
-              background-color: #111827;
-              color: white;
-              font-size: 20px;
-              padding: 10px;
-              margin: 0;
-              font-family: sans-serif;
-              overflow-wrap: break-word;
-            }
-          </style>
-        </head>
-        <body><div>${content}</div></body>
-      </html>`;
-
-    this.pipWindow = window.open('', '_blank', 'width=400,height=150,alwaysOnTop=1');
-    if (this.pipWindow) {
-      this.pipWindow.document.write(pipHtml);
-      this.pipWindow.document.close();
-    }
-  }
-
-  closeAnswerPiP() {
-    if (this.pipWindow && !this.pipWindow.closed) {
-      this.pipWindow.close();
-      this.pipWindow = null;
-    }
   }
 
   toggleMode(): void {
@@ -203,8 +148,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.backgroundMusic.pause();
     this.showVideo = false;
-    this.showOverlaySubtitle = false;
-    this.closeAnswerPiP();
   }
 
   public nextAudio() {
@@ -216,11 +159,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.resetAudio();
     this.audio = new Audio(audioFile.filePath);
     this.audio.play();
-
-    // Update PiP window if open
-    if (this.pipWindow && !this.pipWindow.closed) {
-      this.pipWindow.document.body.innerHTML = `<div style='font-size: 20px;'>${audioFile.answer}</div>`;
-    }
 
     this.audio.onended = () => {
       if (this.isListeningMode && audioFile.audioListen) {
@@ -278,7 +216,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
     this.resetAudio();
     this.backgroundMusic.pause();
-    this.closeAnswerPiP();
   }
 
   get currentQuestion(): ListQuestion | null {

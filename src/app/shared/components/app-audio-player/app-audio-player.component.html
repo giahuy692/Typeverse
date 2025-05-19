@@ -26,10 +26,6 @@
     </button>
   </div>
 
-  <button (click)="openAnswerPiP()" class="bg-yellow-500 hover:bg-yellow-600 px-4 py-1 text-sm rounded">
-    🪟 Mở Answer PiP
-  </button>
-
   <!-- Chế độ Nghe/Nói -->
   <div *ngIf="currentQuestion && !isVideoMode" class="space-y-4 bg-[#2b2b40] p-4 rounded shadow">
     <h2 class="text-xl text-emerald-300 font-semibold">{{ currentQuestion.question }}</h2>
