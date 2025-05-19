@@ -1,0 +1,19 @@
+.audio-container {
+  @apply bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto mt-12 text-center;
+
+  h2 {
+    @apply mb-4;
+  }
+
+  .countdown {
+    @apply mt-6;
+  }
+
+  .controls {
+    @apply flex justify-center gap-4;
+  }
+
+  button {
+    @apply transition duration-200 ease-in-out;
+  }
+}

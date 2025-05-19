@@ -1,0 +1,27 @@
+<ul class="space-y-2">
+  <li *ngFor="let item of items" class="flex items-center justify-between p-2 bg-white dark:bg-gray-800 rounded shadow-sm">
+    <label class="flex items-center gap-2 w-full cursor-pointer">
+      <input
+        type="checkbox"
+        [checked]="isSelected(item)"
+        (change)="toggle(item)"
+        [disabled]="!multiSelect && selectedItems.size === 1 && !isSelected(item)"
+      />
+      <span class="text-sm text-gray-800 dark:text-gray-100 truncate">{{ item }}</span>
+    </label>
+
+    <button
+      *ngIf="removable"
+      class="text-red-500 hover:text-red-700 text-sm"
+      (click)="toggle(item); triggerRemove()"
+      title="Xoá mục đã chọn"
+    >🗑</button>
+  </li>
+</ul>
+
+<!-- Nút xoá nhiều -->
+<div *ngIf="removable && selectedItems.size > 0" class="text-right mt-3">
+  <button class="px-4 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm" (click)="triggerRemove()">
+    Xoá các mục đã chọn ({{ selectedItems.size }})
+  </button>
+</div>

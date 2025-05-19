@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './assets/scss/_variables.scss';
+@import './assets/scss/_mixins.scss';
+@import './assets/scss/main.scss';
+@import './assets/scss/_typography.scss';

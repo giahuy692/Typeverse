@@ -1,0 +1,75 @@
+<div class="max-w-3xl mx-auto p-6 bg-[#1e1e2f] text-white rounded-xl shadow-lg space-y-6 font-sans">
+
+  <!-- Tiêu đề -->
+  <div class="text-center">
+    <h1 class="text-2xl font-bold text-white">🎧 Luyện Nghe & Nói Tiếng Anh</h1>
+    <p class="text-sm text-gray-300">Tập phản xạ tiếng Anh qua từng câu hỏi thực tế</p>
+  </div>
+
+  <!-- Chế độ & điều khiển -->
+  <div class="flex items-center justify-between bg-[#2c2c3c] px-4 py-2 rounded-md shadow text-sm">
+    <div>
+      <span class="pr-1">Chế độ hiện tại:</span>
+      <span class="font-bold text-emerald-400">{{ currentMode }}</span>
+    </div>
+    <button (click)="toggleMode()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded transition">
+      🔁 Đổi sang {{ isListeningMode ? '🗣️ Nói' : '🎧 Nghe' }}
+    </button>
+  </div>
+
+  <!-- Điều khiển chính -->
+  <div class="flex justify-center gap-4">
+    <button
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded disabled:opacity-50"
+      (click)="playSequence()"
+      [disabled]="isPlaying"
+    >
+      ▶️ Bắt đầu
+    </button>
+    <button
+      class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded disabled:opacity-50"
+      (click)="stopSequence()"
+      [disabled]="!isPlaying"
+    >
+      ⏹️ Dừng
+    </button>
+  </div>
+
+  <!-- Âm lượng nhạc nền -->
+  <div *ngIf="isListeningMode" class="mt-2 text-sm text-gray-300">
+    <label for="volume">🔊 Âm lượng nhạc nền:</label>
+    <input
+      type="range"
+      id="volume"
+      min="0"
+      max="1"
+      step="0.1"
+      [value]="backgroundMusic.volume"
+      (input)="updateBackgroundVolume($any($event.target).value)"
+      class="w-full mt-1 accent-emerald-400"
+    />
+  </div>
+
+  <!-- Thông báo chưa phát -->
+  <div *ngIf="!isPlaying" class="text-center italic text-gray-400 mt-4">
+    Nhấn “Bắt đầu” để luyện tập ngay!
+  </div>
+
+  <!-- Nội dung phát -->
+  <div *ngIf="currentQuestion" class="bg-[#2b2b40] p-4 rounded-md shadow space-y-3">
+    <h2 class="text-xl font-semibold text-emerald-300">{{ currentQuestion.cauHoi }}</h2>
+
+    <!-- Đoạn văn -->
+    <p class="text-base text-gray-200 italic">{{ currentQuestion.doanVan }}</p>
+
+    <!-- Đếm ngược (chỉ ở chế độ nói) -->
+    <div *ngIf="!isListeningMode && isCountdown" class="text-5xl text-yellow-400 font-bold text-center tracking-widest mt-4">
+      {{ countdown }}s
+    </div>
+
+    <!-- Hiệu ứng khi đang phát answer audio -->
+    <div *ngIf="showEffect" class="text-center text-pink-400 font-bold animate-pulse mt-4">
+      🔈 Đang phát câu trả lời mẫu...
+    </div>
+  </div>
+</div>

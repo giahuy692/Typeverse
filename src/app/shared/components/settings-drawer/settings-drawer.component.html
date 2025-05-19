@@ -1,0 +1,25 @@
+<!-- ✅ settings-drawer.component.html -->
+
+<aside class="drawer" [class.open]="isOpen">
+  <header class="drawer-header">
+    <h2>Cài đặt luyện gõ</h2>
+    <button class="close-btn" (click)="closeDrawer()">✕</button>
+  </header>
+
+  <div class="drawer-content">
+    <div class="form-group">
+      <label>Chế độ luyện gõ:</label>
+      <select [(ngModel)]="typingMode">
+        <option value="timed">Gõ theo thời gian</option>
+        <option value="free">Gõ tự do</option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="typingMode === 'timed'">
+      <label>Thời gian (giây):</label>
+      <input type="number" [(ngModel)]="duration" min="5" max="600" />
+    </div>
+
+    <button class="apply-btn" (click)="applySettings()">Áp dụng</button>
+  </div>
+</aside>

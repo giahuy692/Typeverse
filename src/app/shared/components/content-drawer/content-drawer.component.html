@@ -1,0 +1,45 @@
+<aside class="drawer" [class.open]="isOpen">
+  <header class="drawer-header">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">📚 Danh sách nội dung</h2>
+    <button (click)="closeDrawer()" class="text-gray-500 hover:text-gray-800 dark:hover:text-white">✕</button>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs flex gap-2 mb-4">
+    <button
+      class="px-3 py-1 rounded text-sm"
+      [class.bg-blue-600]="tab === 'preset'"
+      (click)="switchTab('preset')"
+    >Hệ thống</button>
+
+    <button
+      class="px-3 py-1 rounded text-sm"
+      [class.bg-blue-600]="tab === 'custom'"
+      (click)="switchTab('custom')"
+    >Người dùng</button>
+  </div>
+
+  <!-- Danh sách nội dung -->
+  <app-content-list
+    [items]="tab === 'preset' ? presetContents : userContents"
+    [multiSelect]="tab === 'preset'"
+    [removable]="tab === 'custom'"
+    (select)="selected = $event"
+    (remove)="removeSelected($event)"
+  ></app-content-list>
+
+  <!-- Footer -->
+  <div class="mt-4 flex justify-between items-center">
+    <button
+      *ngIf="tab === 'custom'"
+      class="text-sm text-blue-600 hover:underline"
+      (click)="promptNewCustom()"
+    >+ Thêm nội dung mới</button>
+
+    <button
+      class="px-4 py-1 rounded bg-green-600 text-white hover:bg-green-700 text-sm"
+      [disabled]="selected.length === 0"
+      (click)="confirmSelection()"
+    >Bắt đầu gõ ({{ selected.length }})</button>
+  </div>
+</aside>

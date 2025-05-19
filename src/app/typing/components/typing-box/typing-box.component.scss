@@ -1,0 +1,129 @@
+::ng-deep app-typing-box {
+    .typing-box {
+        outline: none;
+        font-family: monospace;
+        font-size: 22px;
+        color: #e5e7eb;
+        line-height: 2.2rem;
+        background-color: #1f2937;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        max-width: 768px;
+        min-height: 200px;
+        margin: 0 auto;
+        user-select: none;
+        word-break: break-word;
+    }
+
+    .typing-stats {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #facc15;
+        margin-bottom: 1.25rem;
+
+        .timer {
+            font-size: 0.875rem;
+            opacity: 0.6;
+        }
+    }
+
+    .typing-content {
+        white-space: normal;
+    }
+
+    .typing-char {
+        display: inline-grid;
+
+        &.correct {
+            color: #4ade80; // green-400
+        }
+
+        &.incorrect {
+            color: #ef4444; // red-500
+        }
+
+        &.caret {
+            border-left: 2px solid #facc15;
+            animation: blink 1s step-end infinite;
+        }
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: #facc15;
+        }
+    }
+
+    .result-box-modern {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: #f3f4f6;
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+
+        .result-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: #2563eb;
+        }
+
+        .result-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .result-item-block {
+            flex: 1 1 120px;
+            background-color: #dad8d8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: translateY(-4px);
+            }
+
+            .label {
+                font-size: 0.875rem;
+                color: #6b7280;
+                margin-bottom: 0.25rem;
+            }
+
+            .value {
+                font-size: 1.5rem;
+                font-weight: bold;
+
+                &.green {
+                    color: #22c55e;
+                }
+
+                &.red {
+                    color: #ef4444;
+                }
+
+                &.blue {
+                    color: #3b82f6;
+                }
+            }
+        }
+    }
+
+
+}

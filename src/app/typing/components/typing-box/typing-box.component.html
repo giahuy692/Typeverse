@@ -1,0 +1,66 @@
+<!-- ✅ typing-box.component.html -->
+
+<!-- ✅ Điều hướng qua lại nội dung -->
+<div class="flex justify-between mb-4">
+  <button
+    (click)="previousText()"
+    class="nav-btn prev"
+    [disabled]="currentIndex === 0"
+  >← Bài trước</button>
+
+  <button
+    (click)="nextText()"
+    class="nav-btn next"
+    [disabled]="currentIndex >= textList.length - 1"
+  >Bài tiếp →</button>
+</div>
+
+<div #typingContainer tabindex="0" (keydown)="handleKeyPress($event)" class="typing-box">
+  <div class="typing-stats">
+    <span>✔️ {{ correctCount }} / {{ textToType.length }}</span>
+
+    <!-- Chỉ hiển thị nếu là chế độ 'timed' -->
+    <span class="timer" *ngIf="typingMode === 'timed'">
+      ⏱️ {{ countdownValue }}s
+    </span>
+
+  </div>
+
+
+  <div class="typing-content">
+    <ng-container *ngFor="let char of textToType.split(''); let i = index">
+      <span class="typing-char" [ngClass]="{
+          'correct': userInput[i] === char,
+          'incorrect': userInput[i] && userInput[i] !== char,
+          'caret': i === userInput.length && !sessionEnded
+        }">
+        {{ char === ' ' ? ' ' : char }}
+      </span>
+    </ng-container>
+  </div>
+</div>
+
+<!-- ✅ Bảng kết quả hiện đại sau khi hết giờ -->
+<div *ngIf="sessionEnded" class="result-box-modern">
+  <h3 class="result-heading">
+    🎯 Kết quả phiên gõ
+  </h3>
+  <div class="result-grid">
+    <div class="result-item-block">
+      <p class="label">Ký tự đúng</p>
+      <p class="value green">{{ correctCount }}</p>
+    </div>
+    <div class="result-item-block">
+      <p class="label">Ký tự sai</p>
+      <p class="value red">{{ incorrectCount }}</p>
+    </div>
+    <div class="result-item-block">
+      <p class="label">Tổng đã gõ</p>
+      <p class="value blue">{{ userInput.length }}</p>
+    </div>
+    <div class="result-item-block">
+      <p class="label">TG gõ</p>
+      <p class="value blue">{{ elapsedTimeInSeconds }}s</p>
+    </div>
+  </div>
+</div>

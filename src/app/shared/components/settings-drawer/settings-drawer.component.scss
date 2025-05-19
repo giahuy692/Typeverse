@@ -1,0 +1,85 @@
+::ng-deep app-settings-drawer {
+    // ✅ Giao diện modern cho drawer bên phải
+
+    .drawer {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100vh;
+        background-color: #1f2937; // 🌒 màu tối hơn
+        color: #f9fafb;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+        padding: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        border-left: 1px solid #374151;
+
+        &.open {
+            right: 0;
+        }
+    }
+
+    .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.125rem;
+        margin-bottom: 1.25rem;
+        color: #facc15;
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.25rem;
+            color: #f9fafb;
+            cursor: pointer;
+        }
+    }
+
+    .drawer-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label {
+                font-size: 0.875rem;
+                color: #d1d5db;
+            }
+
+            input,
+            select {
+                padding: 0.5rem;
+                background-color: #111827;
+                color: #f9fafb;
+                border: 1px solid #4b5563;
+                border-radius: 0.375rem;
+                font-size: 0.875rem;
+            }
+        }
+    }
+
+    .apply-btn {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: #2563eb;
+        }
+    }
+
+
+}
