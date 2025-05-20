@@ -1,5 +1,5 @@
 // audio-player.component.ts
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subject, takeUntil, timer } from 'rxjs';
 
 interface ListQuestion {
@@ -21,7 +21,7 @@ interface VideoItem {
   templateUrl: './app-audio-player.component.html',
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy {
-  data: ListQuestion[] = [
+    data: ListQuestion[] = [
     {
       filePath: 'assets/audios/Whatdidyoudoyesterday.mp3',
       question: 'What did you do yesterday?',
@@ -68,12 +68,14 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     },
   ];
 
-  currentIndex: number = 0;
+  currentIndex = 0;
+  playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
   answerAudio!: HTMLAudioElement;
-  backgroundMusic: HTMLAudioElement = new Audio();
+  backgroundMusic: HTMLAudioElement = new Audio('assets/music/Chìm Sâu - RPT MCK.mp3');
   backgroundMuted = false;
-  countdown: number = 0;
+
+  countdown = 0;
   isPlaying = true;
   isCountdown = false;
   isListeningMode = true;
@@ -83,42 +85,58 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   videoVolume = 0.5;
   videoSpeed = 1;
   selectedVideo?: VideoItem;
+
   private destroy$ = new Subject<void>();
 
-  constructor(private renderer: Renderer2) {}
-
   ngOnInit() {
-    this.backgroundMusic = new Audio('assets/music/Chìm Sâu - RPT MCK (feat. Trung Trần) _ Official Lyrics Video (Backing Track) (Mel-RoFormer by unwa).mp3');
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.1;
-    if (this.isListeningMode && !this.backgroundMuted) {
-      this.backgroundMusic.play();
-    }
-    this.playSequence();
+    this.activateListeningMode();
   }
 
   toggleMode(): void {
-    this.isListeningMode = !this.isListeningMode;
-    this.isVideoMode = false;
-    this.handleBackgroundMusic();
+    if (this.isListeningMode) {
+      this.activateSpeakingMode();
+    } else {
+      this.activateListeningMode();
+    }
   }
 
   toggleVideoMode(): void {
+    this.stopSequence();
+    this.resetAudio();
+    this.backgroundMusic.pause();
     this.isVideoMode = true;
     this.isListeningMode = false;
-    this.backgroundMusic.pause();
+  }
+
+  private activateListeningMode(): void {
     this.stopSequence();
+    this.resetAudio();
+    this.isVideoMode = false;
+    this.isListeningMode = true;
+    this.playedIndexes = [];
+    this.playSequence();
+    if (!this.backgroundMuted) {
+      this.backgroundMusic.play();
+    }
+  }
+
+  private activateSpeakingMode(): void {
+    this.stopSequence();
+    this.resetAudio();
+    this.backgroundMusic.pause();
+    this.isListeningMode = false;
+    this.isVideoMode = false;
+    this.playedIndexes = [];
+    this.playSequence();
   }
 
   toggleBackgroundMute(): void {
     this.backgroundMuted = !this.backgroundMuted;
-    this.handleBackgroundMusic();
-  }
-
-  private handleBackgroundMusic(): void {
-    if (this.backgroundMuted || !this.isListeningMode || !this.isPlaying) {
+    if (this.backgroundMuted) {
       this.backgroundMusic.pause();
-    } else {
+    } else if (this.isListeningMode && this.isPlaying) {
       this.backgroundMusic.play();
     }
   }
@@ -138,7 +156,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   playSequence() {
     this.isPlaying = true;
     this.showVideo = false;
-    this.handleBackgroundMusic();
     this.nextAudio();
   }
 
@@ -148,14 +165,24 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.backgroundMusic.pause();
     this.showVideo = false;
+    this.isCountdown = false;
   }
 
   public nextAudio() {
-    if (!this.isPlaying) return;
+    if (!this.isPlaying || this.data.length === 0) return;
 
-    this.currentIndex = Math.floor(Math.random() * this.data.length);
+    const availableIndexes = this.data.map((_, i) => i).filter(i => !this.playedIndexes.includes(i));
+    if (availableIndexes.length === 0) {
+      this.playedIndexes = [];
+      this.nextAudio();
+      return;
+    }
+
+    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+    this.currentIndex = randomIndex;
+    this.playedIndexes.push(randomIndex);
+
     const audioFile = this.data[this.currentIndex];
-
     this.resetAudio();
     this.audio = new Audio(audioFile.filePath);
     this.audio.play();
@@ -163,15 +190,10 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.audio.onended = () => {
       if (this.isListeningMode && audioFile.audioListen) {
         this.playAnswerAudio(audioFile.audioListen);
-      } else {
+      } else if (!this.isListeningMode) {
         this.startCountdown();
       }
     };
-  }
-
-  playVideo(item: VideoItem) {
-    this.selectedVideo = item;
-    this.showVideo = true;
   }
 
   private playAnswerAudio(filePath: string) {
@@ -228,6 +250,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       : this.isListeningMode
       ? '🎧 Nghe'
       : '🗣️ Nói';
+  }
+
+  playVideo(video: VideoItem) {
+    this.selectedVideo = video;
+    this.showVideo = true;
   }
 
   enterPiP(videoElement: HTMLVideoElement) {
