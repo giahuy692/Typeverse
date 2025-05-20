@@ -1,19 +1,17 @@
-.audio-container {
-  @apply bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto mt-12 text-center;
+::ng-deep app-audio-player {
 
-  h2 {
-    @apply mb-4;
-  }
+  // @keyframes dog-walk {
+  //   0% {
+  //     left: 0%;
+  //   }
 
-  .countdown {
-    @apply mt-6;
-  }
+  //   100% {
+  //     left: 100%;
+  //   }
+  // }
 
-  .controls {
-    @apply flex justify-center gap-4;
-  }
-
-  button {
-    @apply transition duration-200 ease-in-out;
-  }
+  // .animate-dog-walk {
+  //   animation: dog-walk 10s linear infinite;
+  //   position: absolute;
+  // }
 }

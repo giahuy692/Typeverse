@@ -1,5 +1,11 @@
 // audio-player.component.ts
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { interval, Subject, takeUntil, timer } from 'rxjs';
 
 interface ListQuestion {
@@ -19,9 +25,10 @@ interface VideoItem {
 @Component({
   selector: 'app-audio-player',
   templateUrl: './app-audio-player.component.html',
+  styleUrls: ['./app-audio-player.component.scss'],
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy {
-    data: ListQuestion[] = [
+  data: ListQuestion[] = [
     {
       filePath: 'assets/audios/Whatdidyoudoyesterday.mp3',
       question: 'What did you do yesterday?',
@@ -72,8 +79,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
   answerAudio!: HTMLAudioElement;
-  backgroundMusic: HTMLAudioElement = new Audio('assets/music/Chìm Sâu - RPT MCK.mp3');
+  backgroundMusic: HTMLAudioElement = new Audio(
+    'assets/music/Chìm Sâu - RPT MCK.mp3'
+  );
   backgroundMuted = false;
+
 
   countdown = 0;
   isPlaying = true;
@@ -89,9 +99,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   ngOnInit() {
+    const savedVolume = localStorage.getItem('audioVolume');
+    this.audioVolume = savedVolume ? parseFloat(savedVolume) : 0.5;
+
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.1;
-    this.activateListeningMode();
   }
 
   toggleMode(): void {
@@ -171,20 +183,26 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   public nextAudio() {
     if (!this.isPlaying || this.data.length === 0) return;
 
-    const availableIndexes = this.data.map((_, i) => i).filter(i => !this.playedIndexes.includes(i));
+    const availableIndexes = this.data
+      .map((_, i) => i)
+      .filter((i) => !this.playedIndexes.includes(i));
+
     if (availableIndexes.length === 0) {
       this.playedIndexes = [];
       this.nextAudio();
       return;
     }
 
-    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+    const randomIndex =
+      availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
     this.currentIndex = randomIndex;
     this.playedIndexes.push(randomIndex);
 
     const audioFile = this.data[this.currentIndex];
     this.resetAudio();
+
     this.audio = new Audio(audioFile.filePath);
+    this.audio.volume = this.audioVolume; // áp dụng volume
     this.audio.play();
 
     this.audio.onended = () => {
@@ -198,7 +216,10 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
 
   private playAnswerAudio(filePath: string) {
     this.answerAudio = new Audio(filePath);
+    this.answerAudio.volume = this.audioVolume; // áp dụng volume giống audio chính
     this.answerAudio.play();
+    this.trackAnswerProgress(); // để cập nhật tiến độ thanh progress
+
     this.showEffect = true;
 
     this.answerAudio.onended = () => {
@@ -271,5 +292,51 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
         console.error('Exit PiP error:', error);
       });
     }
+  }
+
+  hasStarted = false;
+  startApp() {
+    this.hasStarted = true;
+    this.activateListeningMode();
+  }
+
+  stopApp() {
+    this.hasStarted = false;
+    this.stopSequence();
+  }
+
+  answerCurrentTime = 0;
+  answerDuration = 0;
+  answerProgress = 0;
+
+private trackAnswerProgress() {
+  interval(500)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => {
+      if (this.answerAudio) {
+        this.answerCurrentTime = this.answerAudio.currentTime;
+        this.answerDuration = this.answerAudio.duration || 0;
+        this.answerProgress = this.answerDuration
+          ? (this.answerCurrentTime / this.answerDuration) * 100
+          : 0;
+
+        // Nếu audio kết thúc: reset chó về lại đầu
+        if (
+          this.answerAudio.currentTime >= this.answerAudio.duration &&
+          this.answerDuration > 0
+        ) {
+          this.answerProgress = 0; // reset % tiến trình
+        }
+      }
+    });
+}
+
+
+  audioVolume = 0.5;
+  updateAllAudioVolume(volume: number) {
+    this.audioVolume = volume;
+    if (this.audio) this.audio.volume = volume;
+    if (this.answerAudio) this.answerAudio.volume = volume;
+    localStorage.setItem('audioVolume', String(volume));
   }
 }

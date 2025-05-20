@@ -6,60 +6,113 @@
     <p class="text-sm text-gray-400 mt-1">Chế độ hiện tại: <span class="text-emerald-400 font-bold">{{ currentMode
         }}</span></p>
   </div>
-  <!-- Âm lượng và tắt/mở nhạc nền -->
-  <div *ngIf="isListeningMode" class="space-y-2">
-    <label for="volume">🔊 Âm lượng nền:</label>
-    <input type="range" id="volume" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
-      (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-emerald-400" />
-    <button (click)="toggleBackgroundMute()" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded">
-      {{ backgroundMuted ? '🔇 Bật lại nhạc nền' : '🔈 Tắt nhạc nền' }}
+
+  <!-- Nút bắt đầu / kết thúc -->
+  <div *ngIf="!hasStarted" class="text-center mt-8">
+    <button (click)="startApp()"
+      class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded text-lg">
+      ▶️ Bắt đầu luyện tập
     </button>
   </div>
 
-  <!-- Chuyển chế độ -->
-  <div class="flex justify-center gap-4">
-    <button (click)="toggleMode()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded">
-      {{ isListeningMode ? '🔁 Chuyển sang Nói' : '🔁 Chuyển sang Nghe' }}
-    </button>
-    <button (click)="toggleVideoMode()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">
-      🎥 Video Bài Học
-    </button>
-  </div>
-
-  <!-- Chế độ Nghe/Nói -->
-  <div *ngIf="currentQuestion && !isVideoMode" class="space-y-4 bg-[#2b2b40] p-4 rounded shadow">
-    <h2 class="text-xl text-emerald-300 font-semibold">{{ currentQuestion.question }}</h2>
-    <p class="text-gray-200 italic">{{ currentQuestion.answer }}</p>
-
-    <div *ngIf="isCountdown" class="text-center text-4xl text-yellow-400 font-bold">
-      {{ countdown }}s
+  <div *ngIf="hasStarted">
+    <!-- Âm lượng và tắt/mở nhạc nền -->
+    <div *ngIf="isListeningMode" class="space-y-2">
+      <label for="volume">🔊 Âm lượng nền:</label>
+      <input type="range" id="volume" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
+        (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-emerald-400" />
+      <button (click)="toggleBackgroundMute()" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded">
+        {{ backgroundMuted ? '🔇 Bật lại nhạc nền' : '🔈 Tắt nhạc nền' }}
+      </button>
     </div>
 
-    <div *ngIf="showEffect" class="text-center text-pink-400 font-bold animate-pulse">
-      🔈 Đang phát câu trả lời mẫu...
-    </div>
-  </div>
-
-  <!-- VIDEO PLAYLIST -->
-  <div *ngIf="isVideoMode" class="space-y-6">
-    <h2 class="text-lg text-center text-pink-300 font-semibold">📺 Danh sách Video</h2>
-
-    <ul class="space-y-2">
-      <li *ngFor="let video of videoPlaylist">
-        <button (click)="playVideo(video)"
-          class="w-full text-left bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded">
-          ▶️ {{ video.title }}
-        </button>
-      </li>
-    </ul>
-
-    <!-- Video đang phát -->
-    <div *ngIf="selectedVideo && showVideo" class="mt-4 space-y-2">
-      <h3 class="text-emerald-400 text-lg">{{ selectedVideo.title }}</h3>
-      <video #videoPlayer class="w-full rounded" [src]="selectedVideo.videoPath" [volume]="videoVolume"
-        [playbackRate]="videoSpeed" controls autoplay></video>
-      <div class="bg-black/70 text-white text-center text-sm px-4 py-2 rounded">{{ selectedVideo.subtitle }}</div>
+    <!-- Chuyển chế độ -->
+    <div class="flex justify-center gap-4 py-[10px]">
+      <button (click)="toggleMode()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded">
+        {{ isListeningMode ? '🔁 Chuyển sang Nói' : '🔁 Chuyển sang Nghe' }}
+      </button>
+      <button (click)="toggleVideoMode()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">
+        🎥 Video Bài Học
+      </button>
+      <button (click)="stopApp()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">
+        ⏹️ Kết thúc
+      </button>
     </div>
 
+    <div *ngIf="answerAudio && !isVideoMode" class="relative overflow-hidden h-20">
+<img
+  #dog
+  src="assets/images/Animation - 1747750875890.gif"
+  alt="walking dog"
+  class="absolute bottom-0 h-16 transition-all duration-300"
+  [style.left.%]="answerProgress"
+/>
+    </div>
+
+    <div *ngIf="answerAudio && !isVideoMode" class="mt-4 pb-4">
+      <div class="flex items-center justify-between text-sm text-gray-300 mb-1">
+        <span>⏱️ {{ answerCurrentTime | number: '1.0-0' }}s</span>
+        <span class="font-medium text-white">Tiến độ</span>
+        <span>{{ answerDuration | number: '1.0-0' }}s</span>
+      </div>
+
+      <div class="w-full bg-gray-700 rounded-full h-3 shadow-inner overflow-hidden">
+        <div
+          class="h-full rounded-full bg-gradient-to-r from-red-400 via-yellow-300 to-green-400 transition-all duration-300"
+          [style.width.%]="answerProgress"></div>
+      </div>
+    </div>
+
+
+    <!-- Chế độ Nghe/Nói -->
+    <div *ngIf="currentQuestion && !isVideoMode" class="answer space-y-4 bg-[#2b2b40] p-4 rounded shadow">
+      <h2 class="text-xl text-emerald-300 font-semibold">{{ currentQuestion.question }}</h2>
+      <p class="text-gray-200 italic">{{ currentQuestion.answer }}</p>
+
+      <div *ngIf="isCountdown" class="text-center text-4xl text-yellow-400 font-bold">
+        {{ countdown }}s
+      </div>
+
+      <div *ngIf="showEffect" class="text-center text-pink-400 font-bold animate-pulse space-y-2">
+        🔈 Đang phát câu trả lời mẫu...
+      </div>
+    </div>
+
+    <div *ngIf="currentQuestion && !isVideoMode" class="py-[10px]">
+      <label class="block text-sm mb-1">🔉 Âm lượng câu trả lời mẫu:</label>
+      <input type="range" min="0" max="1" step="0.05" [value]="audioVolume"
+        (input)="updateAllAudioVolume($any($event.target).value)" class="w-full accent-pink-400" />
+    </div>
+
+    <div *ngIf="currentQuestion && !isVideoMode" class="py-[10px] flex justify-center gap-x-4">
+      <button (click)="answerAudio?.pause()" class="bg-red-600 hover:bg-yellow-600 text-white px-3 py-1 rounded px-4">
+        ⏸️ Tạm dừng
+      </button>
+      <button (click)="answerAudio?.play()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded px-4">
+        ▶️ Tiếp tục
+      </button>
+    </div>
+
+    <!-- VIDEO PLAYLIST -->
+    <div *ngIf="isVideoMode" class="space-y-6">
+      <h2 class="text-lg text-center text-pink-300 font-semibold">📺 Danh sách Video</h2>
+
+      <ul class="space-y-2">
+        <li *ngFor="let video of videoPlaylist">
+          <button (click)="playVideo(video)"
+            class="w-full text-left bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded">
+            ▶️ {{ video.title }}
+          </button>
+        </li>
+      </ul>
+
+      <!-- Video đang phát -->
+      <div *ngIf="selectedVideo && showVideo" class="mt-4 space-y-2">
+        <h3 class="text-emerald-400 text-lg">{{ selectedVideo.title }}</h3>
+        <video #videoPlayer class="w-full rounded" [src]="selectedVideo.videoPath" [volume]="videoVolume"
+          [playbackRate]="videoSpeed" controls autoplay></video>
+        <div class="bg-black/70 text-white text-center text-sm px-4 py-2 rounded">{{ selectedVideo.subtitle }}</div>
+      </div>
+    </div>
   </div>
 </div>
