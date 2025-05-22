@@ -7,20 +7,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { interval, Subject, takeUntil, timer } from 'rxjs';
+import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
+import { DTOListQuestion } from '../../DTO/DTOListQuestion';
+import { DTOVideoItem } from '../../DTO/DTOVideoItem';
 
-interface ListQuestion {
-  filePath: string;
-  question: string;
-  answer: string;
-  audioListen?: string;
-  videoPath?: string;
-}
-
-interface VideoItem {
-  title: string;
-  videoPath: string;
-  subtitle: string;
-}
 
 @Component({
   selector: 'app-audio-player',
@@ -28,36 +18,9 @@ interface VideoItem {
   styleUrls: ['./app-audio-player.component.scss'],
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy {
-  data: ListQuestion[] = [
-    {
-      filePath: 'assets/audios/Whatdidyoudoyesterday.mp3',
-      question: 'What did you do yesterday?',
-      answer:
-        'Yesterday, I played tennis with my friend near my house. We usually play every day, but yesterday was special because we played for a long time. It helped me relax, reduced stress, and improved my health.',
-      audioListen: 'assets/audios/answer - What did you do yesterday.mp3',
-      videoPath: 'assets/videos/AllLesson.mp4',
-    },
-    {
-      filePath: 'assets/audios/Pleasetellmeaboutyourfriends.mp3',
-      question: 'Please tell me about your friends.',
-      answer:
-        'I am going to tell you about my best friend. Her name is Ngoc. She is 25 years old. She is from Hanoi.  She is a teacher at a high school in Ha Noi. She is an interesting and kind person. She often helps me when I need and shares difficulties with me. I love her very much.',
-      audioListen:
-        'assets/audios/answer - Please tell me about your friends.mp3',
-      videoPath: 'assets/videos/AllLesson.mp4',
-    },
-    {
-      filePath: 'assets/audios/Pleasetellmeaboutyourfavoritefilm.mp3',
-      question: 'Please tell me about your favorite film.',
-      answer:
-        'My favorite film is Tom and Jerry. It’s a funny cartoon about a cat and a mouse. It is very interesting and funny. I have seen this film many times. It helps me relax and reduce stress.',
-      audioListen:
-        'assets/audios/answer - Please tell me about your favorite film.mp3',
-      videoPath: 'assets/videos/AllLesson.mp4',
-    },
-  ];
+  data: DTOListQuestion[] = LIST_QUESTIONS
 
-  videoPlaylist: VideoItem[] = [
+  videoPlaylist: DTOVideoItem[] = [
     {
       title: 'Daily Routine - Listening Practice',
       videoPath: 'assets/videos/AllLesson.mp4',
@@ -84,7 +47,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   );
   backgroundMuted = false;
 
-
   countdown = 0;
   isPlaying = true;
   isCountdown = false;
@@ -94,7 +56,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   showVideo = false;
   videoVolume = 0.5;
   videoSpeed = 1;
-  selectedVideo?: VideoItem;
+  selectedVideo?: DTOVideoItem;
 
   private destroy$ = new Subject<void>();
 
@@ -201,7 +163,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     const audioFile = this.data[this.currentIndex];
     this.resetAudio();
 
-    this.audio = new Audio(audioFile.filePath);
+    this.audio = new Audio(audioFile.audioQuestion);
     this.audio.volume = this.audioVolume; // áp dụng volume
     this.audio.play();
 
@@ -214,9 +176,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     };
   }
 
-  private playAnswerAudio(filePath: string) {
-    this.answerAudio = new Audio(filePath);
+  private playAnswerAudio(audioQuestion: string) {
+    this.answerAudio = new Audio(audioQuestion);
     this.answerAudio.volume = this.audioVolume; // áp dụng volume giống audio chính
+    this.answerProgress = 0;
+    this.resetDogPosition();
     this.answerAudio.play();
     this.trackAnswerProgress(); // để cập nhật tiến độ thanh progress
 
@@ -224,8 +188,23 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
 
     this.answerAudio.onended = () => {
       this.showEffect = false;
+      this.answerProgress = 0;
+      this.resetDogPosition();
       this.nextAudio();
     };
+  }
+
+  @ViewChild('dog', { static: false }) dogEl?: ElementRef<HTMLImageElement>;
+  resetDogPosition() {
+    if (this.dogEl?.nativeElement) {
+      const el = this.dogEl.nativeElement;
+      el.style.transition = 'none';
+      el.style.left = '0%';
+
+      // Force reflow để áp dụng lại từ đầu
+      el.offsetHeight;
+
+    }
   }
 
   private startCountdown() {
@@ -259,9 +238,10 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
     this.resetAudio();
     this.backgroundMusic.pause();
+    cancelAnimationFrame(this.animationFrameId); // stop loop
   }
 
-  get currentQuestion(): ListQuestion | null {
+  get currentQuestion(): DTOListQuestion | null {
     return this.isPlaying ? this.data[this.currentIndex] : null;
   }
 
@@ -273,7 +253,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       : '🗣️ Nói';
   }
 
-  playVideo(video: VideoItem) {
+  playVideo(video: DTOVideoItem) {
     this.selectedVideo = video;
     this.showVideo = true;
   }
@@ -309,28 +289,26 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   answerDuration = 0;
   answerProgress = 0;
 
-private trackAnswerProgress() {
-  interval(500)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(() => {
-      if (this.answerAudio) {
-        this.answerCurrentTime = this.answerAudio.currentTime;
-        this.answerDuration = this.answerAudio.duration || 0;
-        this.answerProgress = this.answerDuration
-          ? (this.answerCurrentTime / this.answerDuration) * 100
-          : 0;
+  private animationFrameId: any;
 
-        // Nếu audio kết thúc: reset chó về lại đầu
-        if (
-          this.answerAudio.currentTime >= this.answerAudio.duration &&
-          this.answerDuration > 0
-        ) {
-          this.answerProgress = 0; // reset % tiến trình
-        }
+  private trackAnswerProgress() {
+    const update = () => {
+      if (this.answerAudio && !this.answerAudio.paused) {
+        const current = this.answerAudio.currentTime;
+        const duration = this.answerAudio.duration || 0;
+
+        this.answerCurrentTime = current;
+        this.answerDuration = duration;
+
+        const ratio = duration > 0 ? current / duration : 0;
+        this.answerProgress = Math.min(100, Math.max(0, ratio * 100));
       }
-    });
-}
 
+      this.animationFrameId = requestAnimationFrame(update);
+    };
+
+    this.animationFrameId = requestAnimationFrame(update);
+  }
 
   audioVolume = 0.5;
   updateAllAudioVolume(volume: number) {

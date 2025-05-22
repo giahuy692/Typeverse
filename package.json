@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --base-href /Typeverse/ && npx angular-cli-ghpages --dir=dist/Typeverse",
+    "build": "ng build --configuration production --base-href /Typeverse/",
+    "deploy": "npx angular-cli-ghpages --dir=dist/Typeverse --no-silent",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -27,6 +28,7 @@
     "@angular/cli": "~16.0.2",
     "@angular/compiler-cli": "^16.0.0",
     "@types/jasmine": "~4.3.0",
+    "angular-cli-ghpages": "^2.0.3",
     "autoprefixer": "^10.4.21",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
