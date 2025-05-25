@@ -242,43 +242,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
+  repeatMode: '3' | '5' | '10' | 'infinite' = '3';
+readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 'infinite'];
+  repeatCount = 0;
   private playAnswerAudio(filePath: string) {
-    if (this.beepEnabled) {
-      const beep = new Audio('assets/sfx/beep.mp3');
-      beep.volume = 0.2;
-
-      // ✅ Khi beep phát xong, mới bắt đầu answerAudio
-      beep.onended = () => {
-        this.answerAudio = new Audio(filePath);
-        this.answerAudio.volume = this.audioVolume;
-        this.answerAudio.play();
-        this.trackAnswerProgress();
-        this.showEffect = true;
-
-        this.answerAudio.onended = () => {
-          this.showEffect = false;
-          this.answerProgress = 0;
-          this.resetDogPosition();
-          this.nextAudio();
-        };
-      };
-      // 🚀 Bắt đầu phát beep
-      beep.play().catch((err) => {
-        // Nếu beep lỗi (trên 1 số thiết bị), phát luôn answerAudio
-        this.answerAudio = new Audio(filePath);
-        this.answerAudio.volume = this.audioVolume;
-        this.answerAudio.play();
-        this.trackAnswerProgress();
-        this.showEffect = true;
-
-        this.answerAudio.onended = () => {
-          this.showEffect = false;
-          this.answerProgress = 0;
-          this.resetDogPosition();
-          this.nextAudio();
-        };
-      });
-    } else {
+    const startAnswer = () => {
       this.answerAudio = new Audio(filePath);
       this.answerAudio.volume = this.audioVolume;
       this.answerAudio.play();
@@ -289,9 +257,45 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
         this.showEffect = false;
         this.answerProgress = 0;
         this.resetDogPosition();
-        this.nextAudio();
+
+        // 🔁 Lặp lại nếu chưa đạt limit
+        this.repeatCount++;
+        const repeatLimit =
+          this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
+
+        if (this.repeatCount < repeatLimit) {
+          this.playQuestionAgain(); // lặp lại câu hiện tại
+        } else {
+          this.repeatCount = 0;
+          this.nextAudio(); // sang câu tiếp theo
+        }
       };
+    };
+
+    if (this.beepEnabled) {
+      const beep = new Audio('assets/sfx/beep.mp3');
+      beep.volume = 0.2;
+
+      beep.onended = () => startAnswer();
+      beep.play().catch(() => startAnswer());
+    } else {
+      startAnswer();
     }
+  }
+
+  private playQuestionAgain(): void {
+    const item = this.data[this.currentIndex];
+    this.audio = new Audio(item.audioQuestion);
+    this.audio.volume = this.audioVolume;
+    this.audio.play();
+
+    this.audio.onended = () => {
+      if (this.isListeningMode && item.audioListen) {
+        this.playAnswerAudio(item.audioListen);
+      } else if (!this.isListeningMode) {
+        this.playBeepBeforeCountdown();
+      }
+    };
   }
 
   @ViewChild('dog', { static: false }) dogEl?: ElementRef<HTMLImageElement>;

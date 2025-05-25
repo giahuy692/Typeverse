@@ -45,6 +45,17 @@
       </div>
     </div>
 
+    <div class="flex gap-2 text-sm items-center">
+      <span class="text-gray-400 font-medium">🔁 Chế độ lặp:</span>
+      <button *ngFor="let mode of repeatOptions" (click)="repeatMode = mode" [ngClass]="{
+            'bg-emerald-500 text-white': repeatMode === mode,
+            'bg-gray-700 text-gray-300 hover:bg-gray-600': repeatMode !== mode
+          }" class="px-3 py-1 rounded text-sm font-medium transition">
+        {{ mode === 'infinite' ? '♾️ Vô hạn' : mode + ' lần' }}
+      </button>
+    </div>
+
+
     <!-- Z-PATTERN: Audio Visualization -->
     <div *ngIf="answerAudio && isListeningMode" class="relative overflow-hidden h-20 pt-2">
       <img #dog id="dog" src="assets/images/Animation - 1747750875890.gif" alt="walking dog"
@@ -96,7 +107,7 @@
     </div>
 
     <!-- Z-PATTERN: Speaking Mode Skip -->
-    <div *ngIf="isCountdown && !isListeningMode" class="text-center">
+    <div *ngIf="isCountdown && !isListeningMode || isListeningMode" class="text-center">
       <button (click)="skipSpeakingCountdown()"
         class="mt-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-1 rounded text-sm">
         ⏭️ Câu tiếp theo
