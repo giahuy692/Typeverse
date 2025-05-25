@@ -1,50 +1,57 @@
-<div class="p-6 max-w-4xl mx-auto text-white font-sans bg-[#1e1e2f] space-y-6">
+<div class="px-6 py-8 bg-[#1e1e2f] text-white font-sans relative overflow-x-hidden">
 
-  <!-- Header -->
-  <div class="text-center">
-    <h1 class="text-2xl font-bold text-white">🧠 Typeverse</h1>
-    <p class="text-sm text-gray-400 mt-1">Chế độ hiện tại: <span class="text-emerald-400 font-bold">{{ currentMode
-        }}</span></p>
+  <!-- Z-PATTERN: Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">🧠 Typeverse</h1>
+    <span class="text-sm text-gray-400">Chế độ: <strong class="text-emerald-400">{{ currentMode }}</strong></span>
   </div>
 
-  <!-- Nút bắt đầu / kết thúc -->
-  <div *ngIf="!hasStarted" class="text-center mt-8">
+  <!-- Z-PATTERN: Start Button -->
+  <div *ngIf="!hasStarted" class="flex flex-col items-center justify-center mt-10 animate-fade-in">
+    <img src="assets/images/Animation - 1748181133136.gif" alt="wellcome" class="w-[150px] h-[150px]" />
     <button (click)="startApp()"
-      class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded text-lg">
+      class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded text-lg shadow-md transition">
       ▶️ Bắt đầu luyện tập
     </button>
   </div>
 
-  <div *ngIf="hasStarted">
-    <!-- Âm lượng và tắt/mở nhạc nền -->
-    <div *ngIf="isListeningMode" class="space-y-2">
-      <label for="volume">🔊 Âm lượng nền:</label>
-      <input type="range" id="volume" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
-        (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-emerald-400" />
-      <button (click)="toggleBackgroundMute()" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded">
-        {{ backgroundMuted ? '🔇 Bật lại nhạc nền' : '🔈 Tắt nhạc nền' }}
-      </button>
+  <div *ngIf="hasStarted" class="space-y-6 animate-fade-in">
+
+    <!-- Z-PATTERN: Top Controls -->
+    <div class="flex flex-wrap gap-2 justify-between items-center">
+      <div class="flex gap-2">
+        <button (click)="toggleMode()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded shadow">
+          {{ isListeningMode ? '🔁 Sang Nói' : '🔁 Sang Nghe' }}
+        </button>
+        <button (click)="toggleVideoMode()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded shadow">
+          🎥 Video
+        </button>
+        <button (click)="stopApp()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded shadow">
+          ⏹️ Kết thúc
+        </button>
+      </div>
+      <div *ngIf="isListeningMode" class="flex gap-2 items-center">
+        <button (click)="toggleBackgroundMute()"
+          class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm">
+          {{ backgroundMuted ? '🔇 Bật nhạc nền' : '🔈 Tắt nhạc nền' }}
+        </button>
+        <button (click)="beepEnabled = !beepEnabled; showBeepToast(beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt')"
+          [ngClass]="{
+            'bg-pink-700 hover:bg-pink-800': beepEnabled,
+            'bg-gray-500 hover:bg-gray-600': !beepEnabled
+          }" class="text-white px-3 py-1 rounded text-sm transition duration-150 ease-in-out">
+          {{ beepEnabled ? '🔔 Beep đang bật' : '🔕 Beep đã tắt' }}
+        </button>
+      </div>
     </div>
 
-    <!-- Chuyển chế độ -->
-    <div class="flex justify-center gap-4 py-[10px]">
-      <button (click)="toggleMode()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded">
-        {{ isListeningMode ? '🔁 Chuyển sang Nói' : '🔁 Chuyển sang Nghe' }}
-      </button>
-      <button (click)="toggleVideoMode()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">
-        🎥 Video Bài Học
-      </button>
-      <button (click)="stopApp()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">
-        ⏹️ Kết thúc
-      </button>
-    </div>
-
-    <div *ngIf="answerAudio && !isVideoMode" class="relative overflow-hidden h-20">
+    <!-- Z-PATTERN: Audio Visualization -->
+    <div *ngIf="answerAudio && isListeningMode" class="relative overflow-hidden h-20 pt-2">
       <img #dog id="dog" src="assets/images/Animation - 1747750875890.gif" alt="walking dog"
         class="absolute bottom-0 h-16 transition-all" [style.left.%]="answerProgress" />
     </div>
 
-    <div *ngIf="answerAudio && !isVideoMode" class="mt-4 pb-4">
+    <div *ngIf="answerAudio && isListeningMode" class="mt-4 pb-4">
       <div class="flex items-center justify-between text-sm text-gray-300 mb-1">
         <span>⏱️ {{ answerCurrentTime | number: '1.0-0' }}s</span>
         <span class="font-medium text-white">Tiến độ</span>
@@ -58,41 +65,47 @@
       </div>
     </div>
 
-
-    <!-- Chế độ Nghe/Nói -->
-    <div *ngIf="currentQuestion && !isVideoMode" class="answer space-y-4 bg-[#2b2b40] p-4 rounded shadow">
-      <h2 class="text-xl text-emerald-300 font-semibold">Question {{ currentQuestion?.orderBy }}/{{data.length}}: {{
-        currentQuestion.question }}</h2>
-      <p class="text-gray-200 italic">{{ currentQuestion.answer }}</p>
-
-      <div *ngIf="isCountdown" class="text-center text-4xl text-yellow-400 font-bold">
+    <!-- Z-PATTERN: Question Display -->
+    <div *ngIf="currentQuestion && !isVideoMode"
+      class="bg-[#2b2b40] p-4 rounded shadow space-y-4 border border-[#3a3a50] animate-fade-in">
+      <h2 class="text-xl font-semibold text-emerald-300">Câu {{ currentQuestion?.orderBy }}/{{ data.length }}:
+        {{ currentQuestion.question }}
+      </h2>
+      <p class="italic text-gray-200">{{ currentQuestion.answer }}</p>
+      <div *ngIf="isCountdown" class="text-center text-yellow-400 text-4xl font-bold animate-pulse">
         {{ countdown }}s
       </div>
-
-      <div *ngIf="showEffect" class="text-center text-pink-400 font-bold animate-pulse space-y-2">
+      <div *ngIf="showEffect" class="text-center text-pink-400 font-bold animate-pulse">
         🔈 Đang phát câu trả lời mẫu...
       </div>
     </div>
 
-    <div *ngIf="currentQuestion && !isVideoMode" class="py-[10px]">
-      <label class="block text-sm mb-1">🔉 Âm lượng câu trả lời mẫu:</label>
+    <!-- Z-PATTERN: Audio control -->
+    <div *ngIf="currentQuestion && isListeningMode" class="space-y-2">
+      <label class="text-sm text-gray-300">🔉 Âm lượng câu trả lời mẫu:</label>
       <input type="range" min="0" max="1" step="0.05" [value]="audioVolume"
-        (input)="updateAllAudioVolume($any($event.target).value)" class="w-full accent-pink-400" />
+        (input)="updateAllAudioVolume($any($event.target).value)" class="w-full accent-pink-400 transition" />
+      <div class="flex gap-4 justify-center pt-2">
+        <button (click)="answerAudio?.pause()" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-1 rounded text-white">
+          ⏸️ Tạm dừng
+        </button>
+        <button (click)="answerAudio?.play()" class="bg-green-600 hover:bg-green-700 px-4 py-1 rounded text-white">
+          ▶️ Tiếp tục
+        </button>
+      </div>
     </div>
 
-    <div *ngIf="currentQuestion && !isVideoMode" class="py-[10px] flex justify-center gap-x-4">
-      <button (click)="answerAudio?.pause()" class="bg-red-600 hover:bg-yellow-600 text-white px-3 py-1 rounded px-4">
-        ⏸️ Tạm dừng
-      </button>
-      <button (click)="answerAudio?.play()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded px-4">
-        ▶️ Tiếp tục
+    <!-- Z-PATTERN: Speaking Mode Skip -->
+    <div *ngIf="isCountdown && !isListeningMode" class="text-center">
+      <button (click)="skipSpeakingCountdown()"
+        class="mt-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-1 rounded text-sm">
+        ⏭️ Câu tiếp theo
       </button>
     </div>
 
-    <!-- VIDEO PLAYLIST -->
-    <div *ngIf="isVideoMode" class="space-y-6">
-      <h2 class="text-lg text-center text-pink-300 font-semibold">📺 Danh sách Video</h2>
-
+    <!-- Z-PATTERN: Video Mode -->
+    <div *ngIf="isVideoMode" class="space-y-4 pt-4">
+      <h3 class="text-center text-pink-300 font-semibold text-lg">📺 Video Bài Học</h3>
       <ul class="space-y-2">
         <li *ngFor="let video of videoPlaylist">
           <button (click)="playVideo(video)"
@@ -101,14 +114,18 @@
           </button>
         </li>
       </ul>
-
-      <!-- Video đang phát -->
-      <div *ngIf="selectedVideo && showVideo" class="mt-4 space-y-2">
-        <h3 class="text-emerald-400 text-lg">{{ selectedVideo.title }}</h3>
+      <div *ngIf="selectedVideo && showVideo" class="space-y-2">
+        <h4 class="text-emerald-400">{{ selectedVideo.title }}</h4>
         <video #videoPlayer class="w-full rounded" [src]="selectedVideo.videoPath" [volume]="videoVolume"
           [playbackRate]="videoSpeed" controls autoplay></video>
-        <div class="bg-black/70 text-white text-center text-sm px-4 py-2 rounded">{{ selectedVideo.subtitle }}</div>
+        <p class="text-center text-white text-sm bg-black/70 px-3 py-1 rounded">{{ selectedVideo.subtitle }}</p>
       </div>
     </div>
+  </div>
+
+  <!-- Toast -->
+  <div *ngIf="showToast" [@toastAnim]
+    class="fixed bottom-6 right-6 bg-black/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
+    {{ toastMessage }}
   </div>
 </div>

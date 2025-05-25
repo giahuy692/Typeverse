@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./theme-toggle.component.scss']
 })
 export class ThemeToggleComponent implements OnInit {
-  theme: 'light' | 'dark' = 'light';
+  theme: 'light' | 'dark' = 'dark';
 
   ngOnInit(): void {
     const saved = localStorage.getItem('theme');

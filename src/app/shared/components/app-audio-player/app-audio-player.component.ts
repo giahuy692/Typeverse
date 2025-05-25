@@ -1,24 +1,42 @@
 // audio-player.component.ts
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { interval, Subject, takeUntil, timer } from 'rxjs';
+import { interval, Subject, Subscription, takeUntil, timer } from 'rxjs';
 import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { DTOVideoItem } from '../../DTO/DTOVideoItem';
-
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-audio-player',
   templateUrl: './app-audio-player.component.html',
   styleUrls: ['./app-audio-player.component.scss'],
+  animations: [
+    trigger('toastAnim', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate(
+          '200ms ease-out',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+      transition(':leave', [
+        animate(
+          '200ms ease-in',
+          style({ opacity: 0, transform: 'translateY(-10px)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = LIST_QUESTIONS
+  data: DTOListQuestion[] = LIST_QUESTIONS;
 
   videoPlaylist: DTOVideoItem[] = [
     {
@@ -57,9 +75,15 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   videoVolume = 0.5;
   videoSpeed = 1;
   selectedVideo?: DTOVideoItem;
+  isRecording = false;
+  mediaRecorder?: MediaRecorder;
+  recordedChunks: Blob[] = [];
+  beepEnabled = true;
+  toastMessage = '';
+  showToast = false;
 
   private destroy$ = new Subject<void>();
-
+  constructor(private cd: ChangeDetectorRef) {}
   ngOnInit() {
     const savedVolume = localStorage.getItem('audioVolume');
     this.audioVolume = savedVolume ? parseFloat(savedVolume) : 0.5;
@@ -72,6 +96,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     if (this.isListeningMode) {
       this.activateSpeakingMode();
     } else {
+      this.beepEnabled = true; // Bật beep khi chuyển sang chế độ nói
       this.activateListeningMode();
     }
   }
@@ -85,6 +110,10 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   }
 
   private activateListeningMode(): void {
+    this.isCountdown = false;
+    this.countdown = 0;
+    this.answerProgress = 0;
+    this.resetDogPosition();
     this.stopSequence();
     this.resetAudio();
     this.isVideoMode = false;
@@ -97,6 +126,12 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   }
 
   private activateSpeakingMode(): void {
+    this.dogProgress = 0;
+    this.isCountdown = false;
+    this.countdown = 0;
+    this.answerProgress = 0;
+    this.isRecording = false;
+    this.resetDogPosition();
     this.stopSequence();
     this.resetAudio();
     this.backgroundMusic.pause();
@@ -171,27 +206,92 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       if (this.isListeningMode && audioFile.audioListen) {
         this.playAnswerAudio(audioFile.audioListen);
       } else if (!this.isListeningMode) {
-        this.startCountdown();
+        this.playBeepBeforeCountdown();
       }
     };
   }
 
-  private playAnswerAudio(audioQuestion: string) {
-    this.answerAudio = new Audio(audioQuestion);
-    this.answerAudio.volume = this.audioVolume; // áp dụng volume giống audio chính
-    this.answerProgress = 0;
-    this.resetDogPosition();
-    this.answerAudio.play();
-    this.trackAnswerProgress(); // để cập nhật tiến độ thanh progress
+  recordedAudios: { url: string; name: string }[] = [];
+  dogProgress = 0;
 
-    this.showEffect = true;
+  /**
+   * Phát tiếng beep (nếu được bật) trước khi bắt đầu đếm ngược và ghi âm.
+   * Nếu bị tắt, vào thẳng countdown + recording.
+   */
+  private playBeepBeforeCountdown(): void {
+    if (!this.beepEnabled) {
+      this.startCountdown();
+      return;
+    }
 
-    this.answerAudio.onended = () => {
-      this.showEffect = false;
-      this.answerProgress = 0;
-      this.resetDogPosition();
-      this.nextAudio();
-    };
+    if (this.beepEnabled) {
+      const beep = new Audio('assets/sfx/beep.mp3');
+      beep.volume = this.audioVolume;
+      // ✅ Khi beep phát xong, mới bắt đầu countdown + recording
+      beep.onended = () => {
+        this.startCountdown();
+      };
+
+      beep.play().catch(() => {
+        // Nếu play thất bại, fallback vào countdown
+        this.startCountdown();
+      });
+    } else {
+      // Nếu beep bị tắt, vào thẳng countdown + recording
+      this.startCountdown();
+    }
+  }
+
+  private playAnswerAudio(filePath: string) {
+    if (this.beepEnabled) {
+      const beep = new Audio('assets/sfx/beep.mp3');
+      beep.volume = 0.2;
+
+      // ✅ Khi beep phát xong, mới bắt đầu answerAudio
+      beep.onended = () => {
+        this.answerAudio = new Audio(filePath);
+        this.answerAudio.volume = this.audioVolume;
+        this.answerAudio.play();
+        this.trackAnswerProgress();
+        this.showEffect = true;
+
+        this.answerAudio.onended = () => {
+          this.showEffect = false;
+          this.answerProgress = 0;
+          this.resetDogPosition();
+          this.nextAudio();
+        };
+      };
+      // 🚀 Bắt đầu phát beep
+      beep.play().catch((err) => {
+        // Nếu beep lỗi (trên 1 số thiết bị), phát luôn answerAudio
+        this.answerAudio = new Audio(filePath);
+        this.answerAudio.volume = this.audioVolume;
+        this.answerAudio.play();
+        this.trackAnswerProgress();
+        this.showEffect = true;
+
+        this.answerAudio.onended = () => {
+          this.showEffect = false;
+          this.answerProgress = 0;
+          this.resetDogPosition();
+          this.nextAudio();
+        };
+      });
+    } else {
+      this.answerAudio = new Audio(filePath);
+      this.answerAudio.volume = this.audioVolume;
+      this.answerAudio.play();
+      this.trackAnswerProgress();
+      this.showEffect = true;
+
+      this.answerAudio.onended = () => {
+        this.showEffect = false;
+        this.answerProgress = 0;
+        this.resetDogPosition();
+        this.nextAudio();
+      };
+    }
   }
 
   @ViewChild('dog', { static: false }) dogEl?: ElementRef<HTMLImageElement>;
@@ -200,23 +300,28 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       const el = this.dogEl.nativeElement;
       el.style.transition = 'none';
       el.style.left = '0%';
-
-      // Force reflow để áp dụng lại từ đầu
-      el.offsetHeight;
-
+      el.offsetHeight; // force reflow
+      el.style.transition = 'left 0.06s linear';
     }
   }
 
   private startCountdown() {
     this.countdown = 30;
     this.isCountdown = true;
+    const total = 30;
 
-    interval(1000)
-      .pipe(takeUntil(this.destroy$), takeUntil(timer(31000)))
+    this.countdownSub = interval(1000)
+      .pipe(takeUntil(this.destroy$), takeUntil(timer(total * 1000 + 100)))
       .subscribe(() => {
         this.countdown--;
+        this.dogProgress = ((total - this.countdown) / total) * 100;
+
         if (this.countdown <= 0) {
           this.isCountdown = false;
+          this.dogProgress = 0;
+          this.resetDogPosition();
+          this.stopRecordingIfActive();
+          this.countdownSub?.unsubscribe(); // 🔁
           this.nextAudio();
         }
       });
@@ -238,7 +343,11 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
     this.resetAudio();
     this.backgroundMusic.pause();
-    cancelAnimationFrame(this.animationFrameId); // stop loop
+    this.countdownSub?.unsubscribe();
+
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
   }
 
   get currentQuestion(): DTOListQuestion | null {
@@ -289,21 +398,32 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   answerDuration = 0;
   answerProgress = 0;
 
-  private animationFrameId: any;
+  private animationFrameId: number | null = null;
 
   private trackAnswerProgress() {
     const update = () => {
-      if (this.answerAudio && !this.answerAudio.paused) {
+      if (this.answerAudio) {
         const current = this.answerAudio.currentTime;
         const duration = this.answerAudio.duration || 0;
 
         this.answerCurrentTime = current;
         this.answerDuration = duration;
 
-        const ratio = duration > 0 ? current / duration : 0;
-        this.answerProgress = Math.min(100, Math.max(0, ratio * 100));
+        if (duration > 0) {
+          const ratio = Math.min(1, current / duration);
+          this.answerProgress = Number((ratio * 100).toFixed(2));
+        } else {
+          this.answerProgress = 0;
+        }
+
+        // Nếu đã kết thúc
+        if (current >= duration && duration > 0) {
+          this.answerProgress = 0;
+          this.resetDogPosition();
+        }
       }
 
+      // Gọi lại vòng lặp nếu đang hoạt động
       this.animationFrameId = requestAnimationFrame(update);
     };
 
@@ -316,5 +436,39 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     if (this.audio) this.audio.volume = volume;
     if (this.answerAudio) this.answerAudio.volume = volume;
     localStorage.setItem('audioVolume', String(volume));
+  }
+
+  private countdownSub?: Subscription;
+  skipSpeakingCountdown() {
+    this.isCountdown = false;
+    this.countdown = 0;
+    this.dogProgress = 0;
+    this.resetDogPosition();
+
+    this.countdownSub?.unsubscribe(); // ✅ Dừng vòng lặp
+    this.stopRecordingIfActive(); // ✅ Tách ghi âm ra thành hàm
+
+    this.nextAudio();
+  }
+
+  private stopRecordingIfActive() {
+    if (this.mediaRecorder && this.isRecording) {
+      this.mediaRecorder.stop();
+      this.isRecording = false;
+    }
+  }
+
+  /**
+   * Hiển thị thông báo ngắn ở góc màn hình
+   * @param message Nội dung hiển thị
+   */
+  showBeepToast(message: string): void {
+    this.toastMessage = message;
+    this.showToast = true;
+    this.cd.detectChanges();
+    setTimeout(() => {
+      this.showToast = false;
+      this.cd.detectChanges();
+    }, 2500);
   }
 }

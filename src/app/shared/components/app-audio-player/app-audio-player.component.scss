@@ -1,21 +1,33 @@
 ::ng-deep app-audio-player {
 
-  // @keyframes dog-walk {
-  //   0% {
-  //     left: 0%;
-  //   }
 
-  //   100% {
-  //     left: 100%;
-  //   }
-  // }
-
-  // .animate-dog-walk {
-  //   animation: dog-walk 10s linear infinite;
-  //   position: absolute;
-  // }
-
-  #dog{
+  #dog {
     transition: left 0.06s linear;
   }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in-out {
+    animation: fade-in-out 2.5s ease-in-out forwards;
+  }
+
 }
