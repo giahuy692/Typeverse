@@ -12,6 +12,7 @@ import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { DTOVideoItem } from '../../DTO/DTOVideoItem';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audio-player',
@@ -83,7 +84,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   showToast = false;
 
   private destroy$ = new Subject<void>();
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef, private router: Router) {}
   ngOnInit() {
     const savedVolume = localStorage.getItem('audioVolume');
     this.audioVolume = savedVolume ? parseFloat(savedVolume) : 0.5;
@@ -107,6 +108,18 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.backgroundMusic.pause();
     this.isVideoMode = true;
     this.isListeningMode = false;
+  }
+
+  get isListeningActive(): boolean {
+    return this.isListeningMode && this.hasStarted;
+  }
+
+  get isSpeakingActive(): boolean {
+    return !this.isListeningMode && !this.isVideoMode && this.hasStarted;
+  }
+
+  get isWritingActive(): boolean {
+    return this.currentMode === '✍️ Viết' && this.hasStarted;
   }
 
   private activateListeningMode(): void {
@@ -201,7 +214,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.volume = this.audioVolume; // áp dụng volume
     this.audio.play();
-
     this.audio.onended = () => {
       if (this.isListeningMode && audioFile.audioListen) {
         this.playAnswerAudio(audioFile.audioListen);
@@ -243,7 +255,12 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   }
 
   repeatMode: '3' | '5' | '10' | 'infinite' = '3';
-readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 'infinite'];
+  readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = [
+    '3',
+    '5',
+    '10',
+    'infinite',
+  ];
   repeatCount = 0;
   private playAnswerAudio(filePath: string) {
     const startAnswer = () => {
@@ -283,19 +300,38 @@ readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 
     }
   }
 
-  private playQuestionAgain(): void {
-    const item = this.data[this.currentIndex];
-    this.audio = new Audio(item.audioQuestion);
+  /**
+   * Phát lại audio câu hỏi hiện tại
+   */
+  public playQuestionAgain(): void {
+    const question = this.data[this.currentIndex];
+    if (!question) return;
+
+    this.resetAudio();
+    this.audio = new Audio(question.audioQuestion);
     this.audio.volume = this.audioVolume;
     this.audio.play();
 
     this.audio.onended = () => {
-      if (this.isListeningMode && item.audioListen) {
-        this.playAnswerAudio(item.audioListen);
+      // Xử lý lại logic sau khi phát lại nếu cần
+      if (this.isListeningMode && question.audioListen) {
+        this.playAnswerAudio(question.audioListen);
       } else if (!this.isListeningMode) {
         this.playBeepBeforeCountdown();
       }
     };
+  }
+
+  /**
+   * Chuyển về câu hỏi trước (nếu có)
+   */
+  public prevAudio(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.repeatCount = 0;
+      this.resetAudio();
+      this.playSequence();
+    }
   }
 
   @ViewChild('dog', { static: false }) dogEl?: ElementRef<HTMLImageElement>;
@@ -336,10 +372,14 @@ readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 
       this.audio.pause();
       this.audio.currentTime = 0;
     }
+
     if (this.answerAudio) {
       this.answerAudio.pause();
       this.answerAudio.currentTime = 0;
     }
+
+    this.answerProgress = 0;
+    this.resetDogPosition();
   }
 
   ngOnDestroy(): void {
@@ -359,16 +399,36 @@ readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 
   }
 
   get currentMode(): string {
-    return this.isVideoMode
-      ? '🎥 Video'
-      : this.isListeningMode
-      ? '🎧 Nghe'
-      : '🗣️ Nói';
+    switch (this.mode) {
+      case 'listening':
+        return '🎧 Listening';
+      case 'speaking':
+        return '🗣️ Speaking';
+      case 'writing':
+        return '✍️ Writing';
+      case 'video':
+        return '🎬 Video';
+      default:
+        return 'Unknown';
+    }
   }
 
   playVideo(video: DTOVideoItem) {
     this.selectedVideo = video;
     this.showVideo = true;
+  }
+
+  /**
+   * Toggle phát/tạm dừng câu trả lời mẫu (answerAudio)
+   */
+  public toggleAnswerAudio(): void {
+    if (!this.answerAudio) return;
+
+    if (this.answerAudio.paused) {
+      this.answerAudio.play();
+    } else {
+      this.answerAudio.pause();
+    }
   }
 
   enterPiP(videoElement: HTMLVideoElement) {
@@ -388,9 +448,36 @@ readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 
   }
 
   hasStarted = false;
-  startApp() {
+
+  /**'listening' | 'speaking' | 'writing' | 'video' */
+  mode: string = 'listening';
+
+  startApp(mode: string) {
     this.hasStarted = true;
-    this.activateListeningMode();
+    this.mode = mode;
+
+    switch (mode) {
+      case 'listening':
+        this.activateListeningMode();
+        break;
+      case 'speaking':
+        this.activateSpeakingMode();
+        break;
+      case 'writing':
+        this.deactivateAudioMode(); // stop music/audio if needed
+        break;
+      case 'video':
+        this.toggleVideoMode();
+        break;
+    }
+  }
+
+  private deactivateAudioMode(): void {
+    this.stopSequence();
+    this.resetAudio();
+    this.isListeningMode = false;
+    this.isVideoMode = false;
+    this.backgroundMusic.pause();
   }
 
   stopApp() {
@@ -474,5 +561,49 @@ readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = ['3', '5', '10', 
       this.showToast = false;
       this.cd.detectChanges();
     }, 2500);
+  }
+
+  /** Giới hạn số lần lặp lại tương ứng */
+  get repeatLimit(): number {
+    return this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
+  }
+
+  /**
+   * Thay đổi âm lượng cho toàn bộ hệ thống main (beep / câu hỏi / answer)
+   * @param volume Giá trị volume mới (0 - 1)
+   */
+  updateAudioVolume(volume: number): void {
+    this.audioVolume = +volume;
+    if (this.audio) this.audio.volume = this.audioVolume;
+    if (this.answerAudio) this.answerAudio.volume = this.audioVolume;
+  }
+
+  /** Writing state */
+  writingWPM: number = 0;
+  writingAccuracy: number = 100;
+  userTyping: string = '';
+
+  /** Triggered on input typing change */
+  onTypingChange(): void {
+    const target = this.currentQuestion?.answer || '';
+    const typed = this.userTyping;
+
+    // Accuracy calculation
+    let correct = 0;
+    const minLen = Math.min(target.length, typed.length);
+    for (let i = 0; i < minLen; i++) {
+      if (typed[i] === target[i]) correct++;
+    }
+    this.writingAccuracy = Math.round((correct / target.length) * 100);
+
+    // WPM (mocked or advanced logic later)
+    this.writingWPM = Math.round(typed.trim().split(/\s+/).length / 0.5); // fake 30s session
+  }
+
+  /** Reset current writing session */
+  resetWriting(): void {
+    this.userTyping = '';
+    this.writingAccuracy = 100;
+    this.writingWPM = 0;
   }
 }

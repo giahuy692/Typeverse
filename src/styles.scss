@@ -6,3 +6,13 @@
 @import './assets/scss/_mixins.scss';
 @import './assets/scss/main.scss';
 @import './assets/scss/_typography.scss';
+
+body {
+  background-color: #111827; // thậm chí còn tối hơn
+  color: #f3f4f6;  // slate-100
+}
+
+span,p {
+  color: #f3f4f6; // slate-100
+}
+

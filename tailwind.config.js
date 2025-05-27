@@ -2,12 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#1f2937', // màu tối custom
+      },
+    },
   },
   plugins: [],
-  safelist: [
-    {
-      pattern: /animate-dog-walk-\[\d+s\]/,
-    },
-  ],
+  darkMode: 'class', // Bật chế độ tối
 };
