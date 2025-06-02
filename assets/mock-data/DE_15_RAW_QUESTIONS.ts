@@ -1,0 +1,1 @@
+export const DE_15_RAW_QUESTIONS = []
