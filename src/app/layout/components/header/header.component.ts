@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           navigationPath = '/listening/audio';
           break;
         case 'speaking':
-          // navigationPath = '/speaking/test'; // TODO
+          navigationPath = '/speaking';
           console.warn('Speaking mode navigation from header not implemented yet.');
           break;
         case 'writing':

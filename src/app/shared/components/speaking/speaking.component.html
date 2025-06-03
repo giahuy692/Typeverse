@@ -1,107 +1,92 @@
 <div class="mx-auto px-4 py-6 space-y-6 text-gray-900 font-sans">
-  <h1 class="text-white text-2xl font-bold text-center">🗣️ Speaking Practice</h1>
+    <h1 class="text-white text-2xl font-bold text-center">🗣️ Speaking Practice</h1>
 
-  <div *ngIf="isCountdown && countdown > 0" class="text-center text-yellow-400 text-4xl font-bold animate-pulse">
-    {{ countdown }}s
-  </div>
-
-  <div class="flex justify-around gap-4 items-center px-4 py-1 bg-primary rounded-[15px] ring-1 ring-white">
-    <div (click)="stopApp()"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M27.9167 30H20.4167C19.2658 30 18.3333 29.1392 18.3333 28.0769V21.1538C18.3333 20.3038 17.5875 19.6154 16.6667 19.6154H13.3333C12.4125 19.6154 11.6667 20.3038 11.6667 21.1538V28.0769C11.6667 29.1392 10.7342 30 9.58333 30H2.08333C0.9325 30 0 29.1392 0 28.0769V13.3946C0 11.6262 0.878334 9.95539 2.3825 8.86154L14.2258 0.246923C14.68 -0.0823077 15.32 -0.0823077 15.7733 0.246923L27.6183 8.86154C29.1225 9.95539 30 11.6254 30 13.3931V28.0769C30 29.1392 29.0675 30 27.9167 30Z"
-          fill="white"></path>
-      </svg>
-      <div
-        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        Home
-      </div>
+    <div *ngIf="isCountdown && countdown > 0" class="text-center text-yellow-400 text-4xl font-bold animate-pulse">
+        {{ countdown }}s
     </div>
 
-    <div (click)="beepEnabled = !beepEnabled; showBeepToast(beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt')"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      {{ beepEnabled ? '🔔' : '🔕' }}
+    <div class="flex justify-around gap-4 items-center px-4 py-1 bg-primary rounded-[15px] ring-1 ring-white">
+        <div (click)="stopApp()"
+            class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
+            <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M27.9167 30H20.4167C19.2658 30 18.3333 29.1392 18.3333 28.0769V21.1538C18.3333 20.3038 17.5875 19.6154 16.6667 19.6154H13.3333C12.4125 19.6154 11.6667 20.3038 11.6667 21.1538V28.0769C11.6667 29.1392 10.7342 30 9.58333 30H2.08333C0.9325 30 0 29.1392 0 28.0769V13.3946C0 11.6262 0.878334 9.95539 2.3825 8.86154L14.2258 0.246923C14.68 -0.0823077 15.32 -0.0823077 15.7733 0.246923L27.6183 8.86154C29.1225 9.95539 30 11.6254 30 13.3931V28.0769C30 29.1392 29.0675 30 27.9167 30Z"
+                    fill="white"></path>
+            </svg>
+            <div
+                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+                Home
+            </div>
+        </div>
 
-      <div
-        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        {{ beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt' }}
-      </div>
-    </div>
+        <div (click)="beepEnabled = !beepEnabled; showBeepToast(beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt')"
+            class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
+            {{ beepEnabled ? '🔔' : '🔕' }}
 
-    <div (click)="stopApp()"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      🔚
+            <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+                {{ beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt' }}
+            </div>
+        </div>
 
-      <div
-        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        Thoát
-      </div>
-    </div>
-  </div>
+        <div (click)="stopApp()"
+            class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
+            🔚
 
-  <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all">
-    <div class="flex justify-between items-center">
-      <p class="font-semibold text-sm text-slate-300">
-        Question {{ currentIndex + 1 }}/{{ data.length }}
-      </p>
-
-      <button (click)="playQuestionAgain()" title="Replay" class="text-slate-400 hover:text-white transition">
-        <i class="ph ph-arrow-counter-clockwise text-lg"></i>
-      </button>
-      <button class="bg-[#8db9ca] border-white px-4 py-1 rounded text-white"
-        title="{{showAnswer ? 'Hiện câu trả lời':'Ẩn câu trả lời'}}" (click)="showAnswer = !showAnswer">{{showAnswer ?
-        '👁️‍🗨️' : '🗨️'}}</button>
-    </div>
-    <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide">
-      {{ currentQuestion?.question }}
-    </div>
-    <div *ngIf="showAnswer"
-      class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-sm leading-relaxed">
-      {{ currentQuestion?.answer }}
+            <div
+                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+                Thoát
+            </div>
+        </div>
     </div>
 
-    <div class="flex justify-between items-center pt-4">
-      <div class="flex gap-2">
-        <button (click)="prevAudio()"
-          class="bg-slate-700 text-white px-4 py-2 rounded hover:bg-slate-600 text-sm transition">
-          Previous
-        </button>
-        <button (click)="nextAudio()"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 text-sm transition">
-          Next
-        </button>
-      </div>
+    <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all">
+        <div class="flex justify-between items-center">
+            <p class="font-semibold text-sm text-slate-300">
+                Question {{ currentIndex + 1 }}/{{ data.length }}
+            </p>
 
-      <div class="flex items-center gap-2 text-sm text-slate-300">
-        <label for="playMode">Mode:</label>
-        <select id="playMode" [(ngModel)]="isRandomMode"
-          class="bg-slate-800 text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-500">
-          <option [ngValue]="false">Sequential</option>
-          <option [ngValue]="true">Random</option>
-        </select>
-      </div>
-    </div>
+            <button (click)="playQuestionAgain()" title="Replay" class="text-slate-400 hover:text-white transition">
+                <i class="ph ph-arrow-counter-clockwise text-lg"></i>
+            </button>
+            <button class="bg-[#8db9ca] border-white px-4 py-1 rounded text-white"
+                title="{{showAnswer ? 'Hiện câu trả lời':'Ẩn câu trả lời'}}"
+                (click)="showAnswer = !showAnswer">{{showAnswer ?
+                '👁️‍🗨️' : '🗨️'}}</button>
+        </div>
+        <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide">
+            {{ currentQuestion?.question }}
+        </div>
+        <div *ngIf="showAnswer"
+            class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-sm leading-relaxed">
+            {{ currentQuestion?.answer }}
+        </div>
 
-    <div *ngIf="isRecording" class="text-center text-red-500 font-bold animate-pulse mt-4">
-      🔴 Recording... {{ countdown }}s
+        <div class="flex justify-between items-center pt-4">
+            <div class="flex gap-2">
+                <button (click)="prevAudio()"
+                    class="bg-slate-700 text-white px-4 py-2 rounded hover:bg-slate-600 text-sm transition">
+                    Previous
+                </button>
+                <button (click)="nextAudio()"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 text-sm transition">
+                    Next
+                </button>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-slate-300">
+                <label for="playMode">Mode:</label>
+                <select id="playMode" [(ngModel)]="isRandomMode"
+                    class="bg-slate-800 text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-500">
+                    <option [ngValue]="false">Sequential</option>
+                    <option [ngValue]="true">Random</option>
+                </select>
+            </div>
+        </div>
     </div>
-    <div *ngIf="!isCountdown && !isRecording && currentQuestion" class="mt-4">
-      <button (click)="startRecording()"
-        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Start Recording</button>
-    </div>
-    <div *ngIf="recordedAudios.length > 0" class="mt-4">
-      <h3 class="text-white text-lg font-semibold">Your Recordings:</h3>
-      <ul class="text-white">
-        <li *ngFor="let audio of recordedAudios">
-          {{ audio.name }} <audio [src]="audio.url" controls></audio>
-        </li>
-      </ul>
-    </div>
-  </div>
 </div>
 
 <div *ngIf="showToast" [@toastAnim]
-  class="fixed bottom-6 right-6 bg-primary/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
-  {{ toastMessage }}
+    class="fixed bottom-6 right-6 bg-primary/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
+    {{ toastMessage }}
 </div>
