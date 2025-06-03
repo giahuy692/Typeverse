@@ -1,8 +1,8 @@
-<!-- ✅ layout.component.html - Chuẩn layout sạch dùng SCSS -->
-
 <div class="layout-wrapper">
-  <!-- <app-header (onOpenSettings)="settingsOpen = true"></app-header> -->
+  <app-header *ngIf="showHeader"></app-header>
   <main class="layout-main">
-    <router-outlet></router-outlet>
+    <app-welcome *ngIf="currentAppMode === 'idle'"></app-welcome>
+    
+    <router-outlet *ngIf="currentAppMode !== 'idle'"></router-outlet>
   </main>
 </div>

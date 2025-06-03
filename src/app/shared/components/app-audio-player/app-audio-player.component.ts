@@ -13,6 +13,7 @@ import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { DTOVideoItem } from '../../DTO/DTOVideoItem';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
+import { AppMode, AppModeService } from 'src/app/shared/services/app-mode.service'; // Đảm bảo import AppModeService và AppMode
 
 @Component({
   selector: 'app-audio-player',
@@ -82,15 +83,33 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   beepEnabled = true;
   toastMessage = '';
   showToast = false;
+  showAnswer = true;
+  /** Chế độ phát: true = phát random, false = phát theo thứ tự */
+  isRandomMode: boolean = false; // Đặt mặc định là sequential
 
   private destroy$ = new Subject<void>();
-  constructor(private cd: ChangeDetectorRef, private router: Router) {}
+  constructor(private cd: ChangeDetectorRef, private router: Router, private appModeService: AppModeService) {}
+
   ngOnInit() {
     const savedVolume = localStorage.getItem('audioVolume');
     this.audioVolume = savedVolume ? parseFloat(savedVolume) : 0.5;
 
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.1;
+
+    // Lắng nghe sự thay đổi mode từ AppModeService
+    this.appModeService.getMode().pipe(takeUntil(this.destroy$)).subscribe((mode: AppMode) => { // Tham số 'mode' giờ đây có kiểu AppMode
+      this.mode = mode; // Cập nhật mode của component
+      // Bắt đầu ứng dụng với mode tương ứng khi nhận được tín hiệu từ AppModeService
+      if (mode === 'listening_audio') {
+        this.startApp('listening');
+      } else if (mode === 'speaking') {
+        this.startApp('speaking');
+      } else if (mode === 'writing') {
+        // Nếu mode là writing, tắt các chế độ audio/video của component này
+        this.deactivateAudioMode();
+      }
+    });
   }
 
   toggleMode(): void {
@@ -116,10 +135,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
 
   get isSpeakingActive(): boolean {
     return !this.isListeningMode && !this.isVideoMode && this.hasStarted;
-  }
-
-  get isWritingActive(): boolean {
-    return this.currentMode === '✍️ Viết' && this.hasStarted;
   }
 
   private activateListeningMode(): void {
@@ -190,30 +205,49 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.isCountdown = false;
   }
 
-  public nextAudio() {
+  /**
+   * Phát câu hỏi tiếp theo theo thứ tự hoặc ngẫu nhiên tùy theo `isRandomMode`.
+   * Nếu ở chế độ nghe, sau khi câu hỏi phát xong sẽ phát câu trả lời mẫu.
+   * Nếu ở chế độ nói, sẽ phát beep rồi đếm ngược.
+   */
+  public nextAudio(): void {
     if (!this.isPlaying || this.data.length === 0) return;
+    this.countdown = 0; // Reset countdown mỗi khi chuyển câu hỏi
+    if (this.isRandomMode) {
+      // 🔁 Chế độ random
+      const availableIndexes = this.data
+        .map((_, i) => i)
+        .filter((i) => !this.playedIndexes.includes(i));
 
-    const availableIndexes = this.data
-      .map((_, i) => i)
-      .filter((i) => !this.playedIndexes.includes(i));
-
-    if (availableIndexes.length === 0) {
-      this.playedIndexes = [];
-      this.nextAudio();
-      return;
+      if (availableIndexes.length === 0) {
+        this.playedIndexes = [];
+        // Đảm bảo luôn có giá trị để phát
+        if (this.data.length > 0) {
+          const randomIndex = Math.floor(Math.random() * this.data.length);
+          this.currentIndex = randomIndex;
+          this.playedIndexes.push(randomIndex);
+        } else {
+          return; // Không có câu hỏi nào để phát
+        }
+      } else {
+        const randomIndex =
+          availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+        this.currentIndex = randomIndex;
+        this.playedIndexes.push(randomIndex);
+      }
+    } else {
+      // 🔂 Chế độ theo thứ tự
+      this.currentIndex++;
+      if (this.currentIndex >= this.data.length) {
+        this.currentIndex = 0;
+      }
     }
 
-    const randomIndex =
-      availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
-    this.currentIndex = randomIndex;
-    this.playedIndexes.push(randomIndex);
-
-    const audioFile = this.data[this.currentIndex];
     this.resetAudio();
-
+    const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
-    this.audio.volume = this.audioVolume; // áp dụng volume
     this.audio.play();
+
     this.audio.onended = () => {
       if (this.isListeningMode && audioFile.audioListen) {
         this.playAnswerAudio(audioFile.audioListen);
@@ -239,7 +273,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     if (this.beepEnabled) {
       const beep = new Audio('assets/sfx/beep.mp3');
       beep.volume = this.audioVolume;
-      // ✅ Khi beep phát xong, mới bắt đầu countdown + recording
+      // Khi beep phát xong, mới bắt đầu countdown + recording
       beep.onended = () => {
         this.startCountdown();
       };
@@ -254,8 +288,9 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  repeatMode: '3' | '5' | '10' | 'infinite' = '3';
-  readonly repeatOptions: Array<'3' | '5' | '10' | 'infinite'> = [
+  repeatMode: '1' | '3' | '5' | '10' | 'infinite' = '3'; // Đặt mặc định là 3 times
+  readonly repeatOptions: Array<'1' | '3' | '5' | '10' | 'infinite'> = [
+    '1',
     '3',
     '5',
     '10',
@@ -275,7 +310,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
         this.answerProgress = 0;
         this.resetDogPosition();
 
-        // 🔁 Lặp lại nếu chưa đạt limit
+        // Lặp lại nếu chưa đạt limit
         this.repeatCount++;
         const repeatLimit =
           this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
@@ -326,11 +361,30 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
    * Chuyển về câu hỏi trước (nếu có)
    */
   public prevAudio(): void {
-    if (this.currentIndex > 0) {
+    if (!this.isPlaying || this.data.length === 0) return;
+
+    if (this.isRandomMode) {
+      // Random không có prev rõ ràng => chọn lại random
+      return this.nextAudio();
+    } else {
+      // Theo thứ tự
       this.currentIndex--;
-      this.repeatCount = 0;
+      if (this.currentIndex < 0) {
+        this.currentIndex = this.data.length - 1;
+      }
+
       this.resetAudio();
-      this.playSequence();
+      const audioFile = this.data[this.currentIndex];
+      this.audio = new Audio(audioFile.audioQuestion);
+      this.audio.play();
+
+      this.audio.onended = () => {
+        if (this.isListeningMode && audioFile.audioListen) {
+          this.playAnswerAudio(audioFile.audioListen);
+        } else if (!this.isListeningMode) {
+          this.playBeepBeforeCountdown();
+        }
+      };
     }
   }
 
@@ -361,7 +415,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
           this.dogProgress = 0;
           this.resetDogPosition();
           this.stopRecordingIfActive();
-          this.countdownSub?.unsubscribe(); // 🔁
+          this.countdownSub?.unsubscribe(); //
           this.nextAudio();
         }
       });
@@ -400,14 +454,12 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
 
   get currentMode(): string {
     switch (this.mode) {
-      case 'listening':
-        return '🎧 Listening';
+      case 'listening_test':
+        return '🎧 listening Test';
       case 'speaking':
         return '🗣️ Speaking';
       case 'writing':
         return '✍️ Writing';
-      case 'video':
-        return '🎬 Video';
       default:
         return 'Unknown';
     }
@@ -450,24 +502,24 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   hasStarted = false;
 
   /**'listening' | 'speaking' | 'writing' | 'video' */
-  mode: string = 'listening';
+  mode: AppMode = 'idle'; // Thay đổi kiểu dữ liệu thành AppMode và giá trị mặc định là 'idle'
 
   startApp(mode: string) {
     this.hasStarted = true;
-    this.mode = mode;
+    this.mode = mode as AppMode; // Ép kiểu để phù hợp với AppMode
 
-    switch (mode) {
-      case 'listening':
+    switch (this.mode) { // Sử dụng this.mode có kiểu AppMode
+      case 'listening_test':
         this.activateListeningMode();
         break;
       case 'speaking':
         this.activateSpeakingMode();
         break;
       case 'writing':
-        this.deactivateAudioMode(); // stop music/audio if needed
+        this.deactivateAudioMode(); // Dừng nhạc/audio nếu cần
         break;
-      case 'video':
-        this.toggleVideoMode();
+      case 'idle': // Xử lý trường hợp idle nếu cần
+        this.deactivateAudioMode();
         break;
     }
   }
@@ -483,6 +535,9 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   stopApp() {
     this.hasStarted = false;
     this.stopSequence();
+    // Khi stopApp, cũng có thể đặt mode về 'idle' để điều hướng về trang welcome
+    this.appModeService.setMode('idle');
+    this.router.navigate(['/welcome']);
   }
 
   answerCurrentTime = 0;
@@ -536,8 +591,8 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.dogProgress = 0;
     this.resetDogPosition();
 
-    this.countdownSub?.unsubscribe(); // ✅ Dừng vòng lặp
-    this.stopRecordingIfActive(); // ✅ Tách ghi âm ra thành hàm
+    this.countdownSub?.unsubscribe(); // Dừng vòng lặp
+    this.stopRecordingIfActive(); // Tách ghi âm ra thành hàm
 
     this.nextAudio();
   }
@@ -576,34 +631,5 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.audioVolume = +volume;
     if (this.audio) this.audio.volume = this.audioVolume;
     if (this.answerAudio) this.answerAudio.volume = this.audioVolume;
-  }
-
-  /** Writing state */
-  writingWPM: number = 0;
-  writingAccuracy: number = 100;
-  userTyping: string = '';
-
-  /** Triggered on input typing change */
-  onTypingChange(): void {
-    const target = this.currentQuestion?.answer || '';
-    const typed = this.userTyping;
-
-    // Accuracy calculation
-    let correct = 0;
-    const minLen = Math.min(target.length, typed.length);
-    for (let i = 0; i < minLen; i++) {
-      if (typed[i] === target[i]) correct++;
-    }
-    this.writingAccuracy = Math.round((correct / target.length) * 100);
-
-    // WPM (mocked or advanced logic later)
-    this.writingWPM = Math.round(typed.trim().split(/\s+/).length / 0.5); // fake 30s session
-  }
-
-  /** Reset current writing session */
-  resetWriting(): void {
-    this.userTyping = '';
-    this.writingAccuracy = 100;
-    this.writingWPM = 0;
   }
 }

@@ -1,0 +1,50 @@
+<div
+  class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 selection:bg-indigo-500 selection:text-white">
+  <header class="text-center mb-12">
+    <img src="assets/images/logo.gif" alt="Typeverse Logo" class="w-24 h-24 mx-auto mb-4">
+    <h1 class="text-5xl font-bold text-indigo-400">Welcome to Typeverse</h1>
+    <p class="text-xl text-slate-400 mt-2">Chọn một kỹ năng để bắt đầu luyện tập.</p>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+    <button (click)="selectMode('listening_test')"
+      class="mode-card bg-slate-800 p-8 rounded-xl shadow-2xl hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 ease-in-out group">
+      <div class="text-6xl mb-4 text-center text-indigo-400 group-hover:text-white transition-colors">🎧</div>
+      <h2 class="text-2xl font-semibold mb-2 text-center text-white">Passive listening test</h2>
+      <p class="text-slate-400 text-center group-hover:text-slate-200 transition-colors">
+        Làm bài test listening
+      </p>
+    </button>
+
+    <button (click)="selectMode('listening_audio')"
+      class="mode-card bg-slate-800 p-8 rounded-xl shadow-2xl hover:bg-pink-700 transform hover:scale-105 transition-all duration-300 ease-in-out group">
+      <div class="text-6xl mb-4 text-center text-indigo-400 group-hover:text-white transition-colors">🎧</div>
+      <h2 class="text-2xl font-semibold mb-2 text-center text-white">Passive listening audio</h2>
+      <p class="text-slate-400 text-center group-hover:text-slate-200 transition-colors">
+        Nghe audio thụ động
+      </p>
+    </button>
+
+    <button (click)="selectMode('speaking')"
+      class="mode-card bg-slate-800 p-8 rounded-xl shadow-2xl hover:bg-orange-600 transform hover:scale-105 transition-all duration-300 ease-in-out group">
+      <div class="text-6xl mb-4 text-center text-orange-400 group-hover:text-white transition-colors">🎤</div>
+      <h2 class="text-2xl font-semibold mb-2 text-center text-white">Speaking</h2>
+      <p class="text-slate-400 text-center group-hover:text-slate-200 transition-colors">
+        Thực hành và cải thiện kỹ năng nói của bạn.
+      </p>
+    </button>
+
+    <button (click)="selectMode('writing')"
+      class="mode-card bg-slate-800 p-8 rounded-xl shadow-2xl hover:bg-emerald-600 transform hover:scale-105 transition-all duration-300 ease-in-out group">
+      <div class="text-6xl mb-4 text-center text-emerald-400 group-hover:text-white transition-colors">✍️</div>
+      <h2 class="text-2xl font-semibold mb-2 text-center text-white">Writing</h2>
+      <p class="text-slate-400 text-center group-hover:text-slate-200 transition-colors">
+        Rèn luyện kỹ năng viết với các dạng bài tập khác nhau. (Sắp ra mắt)
+      </p>
+    </button>
+  </main>
+
+  <footer class="mt-12 text-center text-slate-500">
+    <p>&copy; {{ currentYear }} Typeverse. All rights reserved.</p>
+  </footer>
+</div>

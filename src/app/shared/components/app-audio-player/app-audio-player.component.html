@@ -1,313 +1,51 @@
-<!-- #region Header -->
-<header *ngIf="hasStarted" class="w-full flex items-center justify-between px-6 py-3 bg-primary text-white shadow-md rounded-b-md mb-6">
+<div *ngIf="isListeningActive || isSpeakingActive || isVideoMode" class="mx-auto px-4 py-6 space-y-6 text-gray-900 font-sans">
 
-  <!-- Logo -->
-  <div class="flex items-center gap-2">
-    <img src="assets/icons/typeverse-logo.svg" alt="Logo" class="w-8 h-8" />
-    <span class="text-xl font-bold text-indigo-700">Typeverse</span>
+  <h1 class="text-white text-2xl font-bold text-center">{{currentMode}} Practice</h1>
+  <div *ngIf="isCountdown && countdown > 0" class="text-center text-yellow-400 text-4xl font-bold animate-pulse">
+    {{ countdown }}s
   </div>
 
-  <!-- Navigation -->
-<nav class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full shadow-inner">
-  <button
-    (click)="startApp('listening')"
-    [ngClass]="{
-      'bg-indigo-600 text-white shadow': isListeningActive,
-      'text-gray-600 hover:bg-gray-200': !isListeningActive
-    }"
-    class="px-4 py-1 rounded-full text-sm font-semibold transition">
-    🎧 Listening
-  </button>
-
-  <button
-    (click)="startApp('speaking')"
-    [ngClass]="{
-      'bg-orange-500 text-white shadow': isSpeakingActive,
-      'text-gray-600 hover:bg-gray-200': !isSpeakingActive
-    }"
-    class="px-4 py-1 rounded-full text-sm font-semibold transition">
-    🎤 Speaking
-  </button>
-
-  <button
-    (click)="startApp('writing')"
-    [ngClass]="{
-      'bg-emerald-600 text-white shadow': isWritingActive,
-      'text-gray-600 hover:bg-gray-200': !isWritingActive
-    }"
-    class="px-4 py-1 rounded-full text-sm font-semibold transition">
-    📝 Writing
-  </button>
-</nav>
-
-
-</header>
-<!-- #endregion -->
-
-<!-- Welcome Section -->
-
-<div *ngIf="!hasStarted" class="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center text-center space-y-6 bg-primary text-white p-10">
-
-  <div class="text-indigo-700 text-4xl font-bold">Master English with Practice</div>
-  <p class="text-gray-500 max-w-md">Improve your English skills through focused practice in listening, speaking, and
-    writing.</p>
-
-  <!-- Practice Card Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-    <!-- Listening -->
-    <div class="bg-primary/90 text-white p-6 rounded-xl shadow border hover:shadow-lg transition">
-      <div class="w-16 h-16 mx-auto bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mb-4">
-        🎧
-      </div>
-      <h3 class="font-semibold text-lg text-gray-800 mb-2">Listening</h3>
-      <p class="text-gray-500 text-sm mb-4">
-        Train your ear with audio clips, adjustable repetition, and background music.
-      </p>
-      <button (click)="startApp('listening')"
-        class="text-indigo-600 font-medium text-sm hover:underline inline-flex items-center">
-        Start Practice
-        <i class="ph ph-arrow-square-out ml-1"></i>
+  <div *ngIf="isListeningMode" class="bg-primary p-4 rounded-xl shadow border flex flex-col gap-4">
+    <div class="flex items-center gap-4">
+      <span class="text-nowrap text-sm font-medium flex items-center gap-1">🔊 Main Audio</span>
+      <button [disabled]="!answerAudio" *ngIf="isListeningMode" (click)="toggleAnswerAudio()" [ngClass]="{
+          'bg-yellow-600 hover:bg-yellow-700': !answerAudio?.paused,
+          'bg-green-600 hover:bg-green-700': answerAudio?.paused
+        }" class="px-4 py-1 rounded text-white">
+        {{ answerAudio?.paused ? '▶️' : '⏸️' }}
       </button>
+      <input type="range" min="0" max="1" step="0.05" [value]="audioVolume"
+        (input)="updateAudioVolume($any($event.target).value)" class="w-full accent-blue-500">
     </div>
 
-    <!-- Speaking -->
-    <div class="bg-primary/90 text-white p-6 rounded-xl shadow border hover:shadow-lg transition">
-      <div class="w-16 h-16 mx-auto bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-4">
-        🎤
-      </div>
-      <h3 class="font-semibold text-lg text-gray-800 mb-2">Speaking</h3>
-      <p class="text-gray-500 text-sm mb-4">
-        Practice your speech with timed exercises and pronunciation guidance.
-      </p>
-      <button (click)="startApp('speaking')"
-        class="text-orange-600 font-medium text-sm hover:underline inline-flex items-center">
-        Start Practice
-        <i class="ph ph-arrow-square-out ml-1"></i>
+    <div class="flex items-center gap-4">
+      <span class="text-nowrap text-sm font-medium flex items-center gap-1">🎵 Background Music</span>
+      <button (click)="toggleBackgroundMute()"
+        class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm">
+        {{ backgroundMuted ? '🔇' : '🔈' }}
       </button>
-    </div>
-
-    <!-- Writing -->
-    <div class="bg-primary/90 text-white p-6 rounded-xl shadow border hover:shadow-lg transition">
-      <div class="w-16 h-16 mx-auto bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
-        📝
-      </div>
-      <h3 class="font-semibold text-lg text-gray-800 mb-2">Writing</h3>
-      <p class="text-gray-500 text-sm mb-4">
-        Enhance your typing skills with an interface inspired by monkeytype.com.
-      </p>
-      <button (click)="startApp('writing')"
-        class="text-emerald-600 font-medium text-sm hover:underline inline-flex items-center">
-        Start Practice
-        <i class="ph ph-arrow-square-out ml-1"></i>
-      </button>
+      <input type="range" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
+        (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-indigo-300">
     </div>
   </div>
 
-  <!-- Footer -->
-  <p class="text-xs text-gray-400 pt-8">© 2025 English Learning Platform. All rights reserved.</p>
-</div>
-
-
-<div *ngIf="hasStarted" class="space-y-6 animate-fade-in">
-
-
-  <!-- start: main content  -->
-
-  <!-- Wrapper -->
-  <div class=" mx-auto px-4 py-6 space-y-6 text-gray-900 font-sans">
-
-    <!-- Header -->
-    <h1 class="text-white text-2xl font-bold text-center">{{currentMode}} Practice</h1>
-    <div *ngIf="isCountdown" class="text-center text-yellow-400 text-4xl font-bold animate-pulse">
-      {{ countdown }}s
-    </div>
-
-    <!-- #region WRITING MODE -->
-<div *ngIf="isWritingActive" class="mx-auto px-4 py-6 space-y-6 text-gray-800 font-sans">
-
-  <h1 class="text-2xl font-bold text-center text-gray-900">Writing Practice</h1>
-
-  <!-- Prompt Indicator -->
-  <div class="bg-primary p-6 rounded-xl shadow border space-y-4">
-    <div class="flex justify-between items-center">
-      <p class="font-semibold text-sm">Prompt {{ currentIndex + 1 }}/{{ data.length }}</p>
-      <div class="text-sm text-gray-600 flex gap-6">
-        <span><strong class="text-indigo-600">WPM:</strong> {{ writingWPM }}</span>
-        <span><strong class="text-green-600">Accuracy:</strong> {{ writingAccuracy }}%</span>
-      </div>
-    </div>
-
-    <!-- Prompt Text -->
-    <div class="bg-gray-50 p-4 rounded font-mono text-gray-600 text-sm leading-relaxed">
-      {{ currentQuestion?.answer }}
-    </div>
-
-    <!-- Typing Input -->
-    <textarea
-      [(ngModel)]="userTyping"
-      (input)="onTypingChange()"
-      rows="6"
-      class="w-full border border-gray-300 rounded p-3 font-mono text-sm focus:outline-none focus:ring focus:border-indigo-300 bg-primary"
-      placeholder="Start typing...">
-    </textarea>
-
-    <!-- Controls -->
-    <div class="flex justify-between items-center">
-      <div class="flex gap-2">
-        <button (click)="prevAudio()" class="bg-gray-100 px-4 py-2 rounded hover:bg-gray-200 text-sm">Previous</button>
-        <button (click)="nextAudio()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 text-sm">Next</button>
-      </div>
-      <button (click)="resetWriting()" class="text-orange-600 border border-orange-300 bg-orange-50 px-4 py-2 rounded hover:bg-orange-100 text-sm">
-        🔄 Restart
-      </button>
-    </div>
-  </div>
-</div>
-<!-- #endregion -->
-
-    <!-- Volume Controls -->
-    <div *ngIf="isListeningMode" class="bg-primary p-4 rounded-xl shadow border flex flex-col gap-4">
-      <!-- Main Audio -->
-
-      <div class="flex items-center gap-4">
-        <span class="text-nowrap text-sm font-medium flex items-center gap-1">🔊 Main Audio</span>
-
-        <!-- Toggle Pause/Play -->
-        <button [disabled]="!answerAudio" *ngIf="isListeningMode" (click)="toggleAnswerAudio()" [ngClass]="{
-            'bg-yellow-600 hover:bg-yellow-700': !answerAudio?.paused,
-            'bg-green-600 hover:bg-green-700': answerAudio?.paused
-          }" class="px-4 py-1 rounded text-white">
-          {{ answerAudio?.paused ? '▶️' : '⏸️' }}
-        </button>
-
-        <!-- Volume control -->
-        <input type="range" min="0" max="1" step="0.05" [value]="audioVolume"
-          (input)="updateAudioVolume($any($event.target).value)" class="w-full accent-blue-500">
-      </div>
-
-
-      <!-- Background -->
-
-      <div class="flex items-center gap-4">
-        <span class="text-nowrap text-sm font-medium flex items-center gap-1">🎵 Background Music</span>
-        <button (click)="toggleBackgroundMute()"
-          class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm">
-          {{ backgroundMuted ? '🔇' : '🔈' }}
-        </button>
-        <input type="range" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
-          (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-indigo-300">
-      </div>
-    </div>
   <div class="flex justify-around gap-4 items-center px-4 py-1 bg-primary rounded-[15px] ring-1 ring-white">
-    <div (click)="stopApp()"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M27.9167 30H20.4167C19.2658 30 18.3333 29.1392 18.3333 28.0769V21.1538C18.3333 20.3038 17.5875 19.6154 16.6667 19.6154H13.3333C12.4125 19.6154 11.6667 20.3038 11.6667 21.1538V28.0769C11.6667 29.1392 10.7342 30 9.58333 30H2.08333C0.9325 30 0 29.1392 0 28.0769V13.3946C0 11.6262 0.878334 9.95539 2.3825 8.86154L14.2258 0.246923C14.68 -0.0823077 15.32 -0.0823077 15.7733 0.246923L27.6183 8.86154C29.1225 9.95539 30 11.6254 30 13.3931V28.0769C30 29.1392 29.0675 30 27.9167 30Z"
-          fill="white"></path>
-      </svg>
-      <div
-        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        Home
-      </div>
     </div>
-
-    <div (click)="beepEnabled = !beepEnabled; showBeepToast(beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt')"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      {{ beepEnabled ? '🔔' : '🔕' }}
-
-      <div
-        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        {{ beepEnabled ? '🔔 Beep đã bật' : '🔕 Beep đã tắt' }}
-      </div>
+  <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all">
     </div>
-
-    <div (click)="stopApp()"
-      class="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500">
-      🔚
-
-      <div
-        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-primary rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        Thoát
-      </div>
-    </div>
-  </div>
-    <!-- Question Box -->
-    <!-- Khối chính -->
-<div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all">
-
-  <!-- #region Tiêu đề và nút phát lại -->
-  <div class="flex justify-between items-center">
-    <p class="font-semibold text-sm text-slate-300">
-      Question {{ currentIndex + 1 }}/{{ data.length }}
-    </p>
-
-    <button (click)="playQuestionAgain()" title="Replay"
-      class="text-slate-400 hover:text-white transition">
-      <i class="ph ph-arrow-counter-clockwise text-lg"></i>
-    </button>
-  </div>
-  <!-- #endregion -->
-
-  <!-- #region Câu hỏi -->
-  <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide">
-    {{ currentQuestion?.question }}
-  </div>
-  <!-- #endregion -->
-
-  <!-- #region Đoạn văn trả lời -->
-  <div class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-sm leading-relaxed">
-    {{ currentQuestion?.answer }}
-  </div>
-  <!-- #endregion -->
-
-  <!-- #region Số lần lặp -->
-  <div class="text-center text-sm text-slate-400">
-    Repetitions left:
-    <span class="font-semibold text-white">
-      {{ repeatMode === 'infinite' ? '♾️' : repeatLimit - repeatCount }}
-    </span>
-  </div>
-  <!-- #endregion -->
-
-  <!-- #region Điều khiển -->
-  <div class="flex justify-between items-center pt-4">
-
-    <!-- Điều hướng -->
-    <div class="flex gap-2">
-      <button (click)="prevAudio()"
-        class="bg-slate-700 text-white px-4 py-2 rounded hover:bg-slate-600 text-sm transition">
-        Previous
-      </button>
-
-      <button (click)="nextAudio()"
-        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 text-sm transition">
-        Next
-      </button>
-    </div>
-
-    <!-- Lựa chọn lặp -->
-    <div class="flex items-center gap-2 text-sm text-slate-300">
-      <label for="repeatMode">Repeat:</label>
-      <select id="repeatMode" [(ngModel)]="repeatMode"
-        class="bg-slate-800 text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-500">
-        <option value="3">3 times</option>
-        <option value="5">5 times</option>
-        <option value="10">10 times</option>
-        <option value="infinite">Infinite</option>
-      </select>
-    </div>
-  </div>
-  <!-- #endregion -->
-
 </div>
 
+<div *ngIf="showToast" [@toastAnim]
+  class="fixed bottom-6 right-6 bg-primary/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
+  {{ toastMessage }}
+</div>
 
-  </div>
-
-
-  <!-- Toast -->
-  <div *ngIf="showToast" [@toastAnim]
-    class="fixed bottom-6 right-6 bg-primary/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
-    {{ toastMessage }}
-  </div>
+<app-writing
+  *ngIf="mode === 'writing'"
+  [currentQuestion]="currentQuestion"
+  [currentIndex]="currentIndex"
+  [totalQuestions]="data.length"
+  [showAnswer]="showAnswer"
+  (prevQuestion)="prevAudio()"
+  (nextQuestion)="nextAudio()">
+</app-writing>

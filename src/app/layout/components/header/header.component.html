@@ -1,9 +1,40 @@
 <header class="header">
-  <h1 class="title">Typeverse</h1>
+  <div class="flex items-center gap-2 cursor-pointer" (click)="changeAppMode('idle')"> <img src="assets/images/logo.gif" alt="Logo Typeverse" class="w-8 h-8" />
+    <h1 class="title">Typeverse</h1>
+  </div>
+
+  <nav class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full shadow-inner">
+    <button (click)="changeAppMode('listening_test')" [ngClass]="{
+      'bg-indigo-600 text-white shadow': currentAppMode === 'listening_test',
+      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'listening_test'
+    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
+      🎧 Passive listening test
+    </button>
+
+    <button (click)="changeAppMode('listening_audio')" [ngClass]="{
+      'bg-indigo-600 text-white shadow': currentAppMode === 'listening_audio',
+      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'listening_audio'
+    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
+      🎧 Listening audio
+    </button>
+
+    <button (click)="changeAppMode('speaking')" [ngClass]="{
+      'bg-orange-500 text-white shadow': currentAppMode === 'speaking',
+      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'speaking'
+    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
+      🎤 Passive Speaking
+    </button>
+
+    <button (click)="changeAppMode('writing')" [ngClass]="{
+      'bg-emerald-600 text-white shadow': currentAppMode === 'writing',
+      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'writing'
+    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
+      ✍️ Passive Writing
+    </button>
+  </nav>
 
   <div class="header-actions">
-    <button class="settings-btn" (click)="open()">⚙️ Cài đặt</button>
-
+    <button class="settings-btn" (click)="openSettingsDrawer()">⚙️ Cài đặt</button>
     <app-theme-toggle></app-theme-toggle>
   </div>
 </header>

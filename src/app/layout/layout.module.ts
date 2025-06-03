@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+
+import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
-import { LayoutComponent } from './layout.component';
-import { RouterModule } from '@angular/router'; // 👉 BỔ SUNG DÒNG NÀY
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { LayoutRoutingModule } from './layout-routing.module';
+
+import { ListeningTestComponent } from '../shared/components/listening-test/listening-test.component'; 
 
 @NgModule({
   declarations: [
+    LayoutComponent,
     HeaderComponent,
     ThemeToggleComponent,
-    LayoutComponent
+    WelcomeComponent,
+    ListeningTestComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule // 👉 BỔ SUNG VÀO ĐÂY
+    RouterModule,
+    LayoutRoutingModule,
+    FormsModule 
   ],
-  exports: [LayoutComponent]
 })
-export class LayoutModule {}
+export class LayoutModule { }

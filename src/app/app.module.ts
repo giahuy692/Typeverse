@@ -4,11 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-import { LayoutModule } from './layout/layout.module';
-import { TypingModule } from './typing/typing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // FormsModule thường được import ở các feature module cụ thể hơn là AppModule
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module'; // SharedModule sẽ không còn khai báo ListeningComponent
+import { LayoutModule } from './layout/layout.module';
+import { HttpClientModule } from '@angular/common/http'; // Thêm HttpClientModule
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     SharedModule,
     LayoutModule,
-    TypingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule 
   ],
   bootstrap: [AppComponent]
 })
