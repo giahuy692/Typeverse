@@ -1,18 +1,7 @@
 // src/app/writing/writing.component.ts
-import {
-  Component,
-  Input,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  ChangeDetectorRef,
-} from '@angular/core';
-import {
-  WRITING_PROMPTS,
-  WritingPrompt,
-} from 'src/assets/mock-data/writing-prompts';
-import { Subscription, interval } from 'rxjs'; // Import interval và Subscription
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { WRITING_PROMPTS, WritingPrompt } from 'src/assets/mock-data/writing-prompts';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-writing',
@@ -23,31 +12,31 @@ export class WritingComponent implements OnInit, OnDestroy {
   writingPrompts: WritingPrompt[] = WRITING_PROMPTS;
   currentPromptIndex: number = 0;
 
-  // Trạng thái cho Monkeytype-like
-  promptCharacters: string[] = []; // Mảng các ký tự của prompt
-  typedCharacters: string[] = []; // Mảng các ký tự người dùng đã gõ
-  currentCharacterIndex: number = 0; // Index của ký tự hiện tại trong prompt mà người dùng đang gõ
-  isTypingStarted: boolean = false; // Đánh dấu khi người dùng bắt đầu gõ
+  promptCharacters: string[] = [];
+  typedCharacters: string[] = [];
+  currentCharacterIndex: number = 0;
+  isTypingStarted: boolean = false;
   timerSubscription: Subscription | null = null;
   startTime: number = 0;
-  elapsedTime: number = 0; // Thời gian đã trôi qua (giây)
+  elapsedTime: number = 0;
 
   writingWPM: number = 0;
   writingAccuracy: number = 100;
-  rawWPM: number = 0; // WPM thô, không tính lỗi
+  rawWPM: number = 0;
 
-  // Các biến cho kết quả cuối cùng
   totalTypedCharacters: number = 0;
   correctCharacters: number = 0;
   incorrectCharacters: number = 0;
 
-  // Vẫn giữ lại showAnswer nếu bạn muốn hiển thị/ẩn câu trả lời (ở đây là prompt gốc)
   @Input() showAnswer: boolean = true;
 
-  @ViewChild('typingInput') typingInput!: ElementRef<HTMLInputElement>; // Input ẩn để bắt sự kiện gõ phím
-  @ViewChild('promptDisplay') promptDisplay!: ElementRef<HTMLDivElement>; // Element hiển thị prompt
+  @ViewChild('typingInput') typingInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('promptDisplay') promptDisplay!: ElementRef<HTMLDivElement>;
 
-  constructor(private cd: ChangeDetectorRef) {} // Inject ChangeDetectorRef
+  currentWordStartIndex: number = 0;
+  currentWordEndIndex: number = 0;
+
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadPrompt();
@@ -64,7 +53,7 @@ export class WritingComponent implements OnInit, OnDestroy {
     const prompt = this.currentPrompt;
     if (prompt) {
       this.promptCharacters = prompt.content.split('');
-      this.typedCharacters = Array(this.promptCharacters.length).fill(''); // Khởi tạo mảng rỗng
+      this.typedCharacters = Array(this.promptCharacters.length).fill('');
       this.currentCharacterIndex = 0;
       this.isTypingStarted = false;
       this.writingWPM = 0;
@@ -76,7 +65,8 @@ export class WritingComponent implements OnInit, OnDestroy {
       this.elapsedTime = 0;
       this.stopTimer();
 
-      // Đảm bảo textarea (input ẩn) được focus để người dùng có thể gõ ngay
+      this.updateCurrentWordRange(); // Cập nhật phạm vi từ ngay khi tải prompt
+
       setTimeout(() => {
         this.typingInput.nativeElement.focus();
       }, 0);
@@ -92,12 +82,23 @@ export class WritingComponent implements OnInit, OnDestroy {
    * @param event Sự kiện bàn phím.
    */
   onKeyDown(event: KeyboardEvent): void {
-    // Ngăn chặn hành vi mặc định của trình duyệt cho các phím Tab, Enter
+    // Ngăn chặn hành vi mặc định của trình duyệt cho các phím Tab, Enter, Space (nếu ở đầu)
     if (event.key === 'Tab' || event.key === 'Enter') {
       event.preventDefault();
     }
+    // Ngăn chặn space ở đầu bài hoặc khi đang ở vị trí space nhưng gõ sai
+    if (event.key === ' ' && this.currentCharacterIndex === 0 && this.promptCharacters[0] !== ' ') {
+      event.preventDefault();
+      return;
+    }
+    if (event.key === ' ' && this.currentCharacterIndex < this.promptCharacters.length && this.promptCharacters[this.currentCharacterIndex] !== ' ') {
+      // Nếu đang ở ký tự không phải space mà lại gõ space, coi là lỗi và di chuyển
+      this.handleCharacterInput(event.key);
+      event.preventDefault(); // Ngăn space mặc định
+      return;
+    }
 
-    // Bắt đầu timer khi người dùng gõ ký tự đầu tiên (không phải dấu cách)
+
     if (!this.isTypingStarted && event.key.length === 1 && event.key !== ' ') {
       this.startTimer();
       this.isTypingStarted = true;
@@ -106,13 +107,13 @@ export class WritingComponent implements OnInit, OnDestroy {
     if (event.key === 'Backspace') {
       this.handleBackspace();
     } else if (event.key.length === 1) {
-      // Chỉ xử lý các ký tự có độ dài 1 (chữ, số, dấu câu)
       this.handleCharacterInput(event.key);
     }
 
     this.updateMetrics();
-    this.cd.detectChanges(); // Buộc Angular cập nhật giao diện ngay lập tức
-    this.scrollToCurrentCharacter(); // Cuộn đến ký tự hiện tại
+    this.updateCurrentWordRange(); // Cập nhật lại từ hiện tại sau mỗi lần gõ
+    this.cd.detectChanges();
+    this.scrollToCurrentCharacter();
   }
 
   /**
@@ -121,15 +122,11 @@ export class WritingComponent implements OnInit, OnDestroy {
   private handleBackspace(): void {
     if (this.currentCharacterIndex > 0) {
       this.currentCharacterIndex--;
-      // Nếu ký tự bị xóa là đúng, giảm correctCharacters
-      if (
-        this.typedCharacters[this.currentCharacterIndex] ===
-        this.promptCharacters[this.currentCharacterIndex]
-      ) {
+      if (this.typedCharacters[this.currentCharacterIndex] === this.promptCharacters[this.currentCharacterIndex]) {
         this.correctCharacters--;
       }
-      this.typedCharacters[this.currentCharacterIndex] = ''; // Xóa ký tự đã gõ
-      this.totalTypedCharacters--; // Giảm tổng số ký tự đã gõ
+      this.typedCharacters[this.currentCharacterIndex] = '';
+      this.totalTypedCharacters--;
     }
   }
 
@@ -150,10 +147,35 @@ export class WritingComponent implements OnInit, OnDestroy {
       this.currentCharacterIndex++;
     }
 
-    // Kiểm tra hoàn thành bài nếu đã gõ hết tất cả các ký tự của prompt
     if (this.currentCharacterIndex >= this.promptCharacters.length) {
       this.finishTest();
     }
+  }
+
+  /**
+   * Cập nhật phạm vi của từ hiện tại đang gõ.
+   */
+  private updateCurrentWordRange(): void {
+    let start = this.currentCharacterIndex;
+    let end = this.currentCharacterIndex;
+
+    // Tìm điểm bắt đầu của từ hiện tại (bỏ qua khoảng trắng/xuống dòng phía trước)
+    while (start > 0 && this.promptCharacters[start - 1] !== ' ' && this.promptCharacters[start - 1] !== '\n') {
+      start--;
+    }
+    // Bỏ qua khoảng trắng/xuống dòng ở đầu từ
+    while (start < this.promptCharacters.length && (this.promptCharacters[start] === ' ' || this.promptCharacters[start] === '\n')) {
+      start++;
+    }
+
+    // Tìm điểm kết thúc của từ hiện tại (đến khoảng trắng hoặc xuống dòng tiếp theo)
+    end = start;
+    while (end < this.promptCharacters.length && this.promptCharacters[end] !== ' ' && this.promptCharacters[end] !== '\n') {
+      end++;
+    }
+
+    this.currentWordStartIndex = start;
+    this.currentWordEndIndex = end;
   }
 
   /**
@@ -161,17 +183,13 @@ export class WritingComponent implements OnInit, OnDestroy {
    */
   private updateMetrics(): void {
     if (this.elapsedTime > 0) {
-      // WPM = (Số ký tự đúng / 5) / Thời gian (phút)
-      // Một từ trung bình được ước tính là 5 ký tự
       const minutes = this.elapsedTime / 60;
-      this.rawWPM = this.totalTypedCharacters / 5 / minutes; // WPM thô (tổng số ký tự gõ)
-      this.writingWPM = this.correctCharacters / 5 / minutes; // WPM thực tế (chỉ tính ký tự đúng)
+      this.rawWPM = this.totalTypedCharacters / 5 / minutes;
+      this.writingWPM = this.correctCharacters / 5 / minutes;
 
-      // Accuracy = (Số ký tự đúng / Tổng số ký tự đã gõ) * 100
-      this.writingAccuracy =
-        this.totalTypedCharacters > 0
-          ? (this.correctCharacters / this.totalTypedCharacters) * 100
-          : 100;
+      this.writingAccuracy = this.totalTypedCharacters > 0
+        ? (this.correctCharacters / this.totalTypedCharacters) * 100
+        : 100;
     } else {
       this.writingWPM = 0;
       this.writingAccuracy = 100;
@@ -206,19 +224,14 @@ export class WritingComponent implements OnInit, OnDestroy {
   private finishTest(): void {
     this.stopTimer();
     this.isTypingStarted = false;
-    this.updateMetrics(); // Cập nhật lần cuối
-    this.showBeepToast(
-      `Bạn đã hoàn thành bài viết! WPM: ${this.writingWPM.toFixed(
-        0
-      )}, Accuracy: ${this.writingAccuracy.toFixed(2)}%`
-    );
-    // Tự động chuyển bài sau 3 giây
+    this.updateMetrics();
+    this.showBeepToast(`Bạn đã hoàn thành bài viết! WPM: ${this.writingWPM.toFixed(0)}, Accuracy: ${this.writingAccuracy.toFixed(2)}%`);
     setTimeout(() => this.nextPrompt(), 3000);
   }
 
   /** Đặt lại phiên gõ hiện tại */
   resetWriting(): void {
-    this.loadPrompt(); // Tải lại prompt hiện tại
+    this.loadPrompt();
   }
 
   /** Chuyển đến bài viết mẫu trước đó */
@@ -237,9 +250,7 @@ export class WritingComponent implements OnInit, OnDestroy {
       this.currentPromptIndex++;
       this.loadPrompt();
     } else {
-      this.showBeepToast(
-        'Bạn đã hoàn thành tất cả các bài viết mẫu! Quay lại bài đầu tiên.'
-      );
+      this.showBeepToast('Bạn đã hoàn thành tất cả các bài viết mẫu! Quay lại bài đầu tiên.');
       this.currentPromptIndex = 0;
       this.loadPrompt();
     }
@@ -250,15 +261,16 @@ export class WritingComponent implements OnInit, OnDestroy {
    */
   private scrollToCurrentCharacter(): void {
     if (this.promptDisplay && this.typingInput) {
-      const currentSpan = this.promptDisplay.nativeElement.querySelector(
-        `.char-${this.currentCharacterIndex}`
-      );
+      const currentSpan = this.promptDisplay.nativeElement.querySelector(`.char-${this.currentCharacterIndex}`);
       if (currentSpan) {
-        currentSpan.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
-        });
+        // Lấy vị trí tương đối của span so với promptDisplay
+        const spanRect = currentSpan.getBoundingClientRect();
+        const promptRect = this.promptDisplay.nativeElement.getBoundingClientRect();
+
+        // Kiểm tra nếu span nằm ngoài tầm nhìn trên hoặc dưới
+        if (spanRect.top < promptRect.top || spanRect.bottom > promptRect.bottom) {
+          currentSpan.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        }
       }
     }
   }

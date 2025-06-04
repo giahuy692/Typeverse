@@ -20,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http'; // Thêm HttpClientModu
     LayoutModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule 
+    HttpClientModule ,
+    
   ],
   bootstrap: [AppComponent]
 })

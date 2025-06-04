@@ -10,6 +10,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { ListeningTestComponent } from '../shared/components/listening-test/listening-test.component'; 
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,13 @@ import { ListeningTestComponent } from '../shared/components/listening-test/list
     HeaderComponent,
     ThemeToggleComponent,
     WelcomeComponent,
-    ListeningTestComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     LayoutRoutingModule,
-    FormsModule 
+    FormsModule,
+    SharedModule
   ],
 })
 export class LayoutModule { }

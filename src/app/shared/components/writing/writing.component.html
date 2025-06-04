@@ -1,86 +1,86 @@
 <!-- src/app/writing/writing.component.html -->
 <div
-    class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 selection:bg-indigo-500 selection:text-white font-sans">
-    <header class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-indigo-400 drop-shadow-lg">✍️ Luyện Viết</h1>
-        <p class="text-xl text-slate-400 mt-2">Cải thiện tốc độ và độ chính xác của bạn.</p>
-    </header>
+  class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 selection:bg-indigo-500 selection:text-white font-sans">
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-indigo-400 drop-shadow-lg">✍️ Luyện Viết</h1>
+    <p class="text-xl text-slate-400 mt-2">Cải thiện tốc độ và độ chính xác của bạn.</p>
+  </header>
 
-    <main
-        class="w-full max-w-4xl bg-slate-800 p-8 rounded-2xl shadow-2xl space-y-6 border border-slate-700 backdrop-blur-sm bg-opacity-70">
-        <!-- Metrics Display -->
-        <div class="flex justify-between items-center text-slate-300 text-lg font-semibold mb-4">
-            <span>WPM: <span class="text-indigo-400 text-2xl">{{ writingWPM.toFixed(0) }}</span></span>
-            <span>Accuracy: <span class="text-green-400 text-2xl">{{ writingAccuracy.toFixed(2) }}%</span></span>
-            <span>Thời gian: <span class="text-yellow-400 text-2xl">{{ elapsedTime }}s</span></span>
-            <span>Bài tập: <span class="text-white text-2xl">{{ currentPromptIndex + 1 }}/{{ writingPrompts.length
-                    }}</span></span>
-        </div>
-
-        <!-- Tiêu đề của bài viết mẫu -->
-        <h2 class="text-2xl font-semibold text-white text-center mb-4">{{ currentPrompt?.title }}</h2>
-
-        <!-- Hidden Input for Typing - Input này sẽ không hiển thị, chỉ dùng để bắt sự kiện gõ phím -->
-        <!-- Đảm bảo input này luôn được focus để bắt sự kiện gõ -->
-        <input #typingInput type="text" class="absolute opacity-0 pointer-events-none" (keydown)="onKeyDown($event)"
-            autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="-1"
-            aria-hidden="true">
-
-        <!-- Prompt Display Area - Hiển thị từng ký tự của văn bản mẫu -->
-        <div #promptDisplay
-            class="prompt-display bg-slate-700 p-6 rounded-lg shadow-inner text-2xl leading-relaxed font-mono overflow-y-auto h-48 cursor-text"
-            tabindex="0" (click)="typingInput.focus()">
-            <ng-container *ngFor="let char of promptCharacters; let i = index">
-                <span *ngIf="char !== '\n'" [class.current-char]="i === currentCharacterIndex"
-                    [class.correct]="typedCharacters[i] === char && i < currentCharacterIndex"
-                    [class.incorrect]="typedCharacters[i] !== char && i < currentCharacterIndex && typedCharacters[i] !== ''"
-                    [class.to-type]="i >= currentCharacterIndex" class="inline-block transition-colors duration-50"
-                    [ngClass]="'char-' + i">
-                    {{ char === ' ' ? '&nbsp;' : char }}
-                </span>
-                <br *ngIf="char === '\n'"> <!-- Thêm thẻ <br> cho ký tự xuống dòng -->
-            </ng-container>
-        </div>
-
-        <!-- Controls -->
-        <div class="flex justify-center gap-4 mt-6">
-            <button (click)="prevPrompt()"
-                class="bg-slate-700 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-slate-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                [disabled]="currentPromptIndex === 0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-arrow-left">
-                    <path d="m12 19-7-7 7-7" />
-                    <path d="M19 12H5" />
-                </svg>
-                Trước
-            </button>
-            <button (click)="resetWriting()"
-                class="bg-orange-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-rotate-ccw">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.76 2.75L3 8" />
-                    <path d="M3 3v5h5" />
-                </svg>
-                Gõ lại
-            </button>
-            <button (click)="nextPrompt()"
-                class="bg-indigo-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                Tiếp
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-arrow-right">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                </svg>
-            </button>
-        </div>
-    </main>
-
-    <!-- Toast -->
-    <div *ngIf="showToast"
-        class="fixed bottom-6 right-6 bg-blue-600/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50 transition-all duration-300">
-        {{ toastMessage }}
+  <main
+    class="w-full max-w-4xl bg-slate-800 p-8 rounded-2xl shadow-2xl space-y-6 border border-slate-700 backdrop-blur-sm bg-opacity-70">
+    <!-- Metrics Display -->
+    <div class="flex justify-between items-center text-slate-300 text-lg font-semibold mb-4">
+      <span>WPM: <span class="text-indigo-400 text-2xl">{{ writingWPM.toFixed(0) }}</span></span>
+      <span>Accuracy: <span class="text-green-400 text-2xl">{{ writingAccuracy.toFixed(2) }}%</span></span>
+      <span>Thời gian: <span class="text-yellow-400 text-2xl">{{ elapsedTime }}s</span></span>
+      <span>Bài tập: <span class="text-white text-2xl">{{ currentPromptIndex + 1 }}/{{ writingPrompts.length
+          }}</span></span>
     </div>
+
+    <!-- Tiêu đề của bài viết mẫu -->
+    <h2 class="text-2xl font-semibold text-white text-center mb-4">{{ currentPrompt?.title }}</h2>
+
+    <!-- Hidden Input for Typing - Input này sẽ không hiển thị, chỉ dùng để bắt sự kiện gõ phím -->
+    <input #typingInput type="text" class="hidden-input" (keydown)="onKeyDown($event)" autocomplete="off"
+      autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="-1" aria-hidden="true" />
+
+    <!-- Prompt Display Area - Hiển thị từng ký tự của văn bản mẫu -->
+    <div #promptDisplay
+      class="prompt-display bg-slate-700 p-6 rounded-lg shadow-inner text-2xl leading-relaxed font-mono overflow-y-auto h-48 cursor-text"
+      tabindex="0" (click)="typingInput.focus()">
+      <ng-container *ngFor="let char of promptCharacters; let i = index">
+        <span [class.current-char]="i === currentCharacterIndex"
+          [class.correct]="typedCharacters[i] === char && i < currentCharacterIndex"
+          [class.incorrect]="typedCharacters[i] !== char && i < currentCharacterIndex && typedCharacters[i] !== ''"
+          [class.to-type]="i >= currentCharacterIndex"
+          [class.current-word-highlight]="i >= currentWordStartIndex && i < currentWordEndIndex && i >= currentCharacterIndex"
+          class="inline-block transition-colors duration-50" [ngClass]="'char-' + i">
+          {{ char === ' ' ? '&nbsp;' : char }}
+        </span>
+      </ng-container>
+      <!-- Blinking Cursor -->
+      <span class="blinking-cursor" [style.left.px]="0" [style.top.px]="0"></span>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex justify-center gap-4 mt-6">
+      <button (click)="prevPrompt()"
+        class="bg-slate-700 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-slate-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        [disabled]="currentPromptIndex === 0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-arrow-left">
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>
+        Trước
+      </button>
+      <button (click)="resetWriting()"
+        class="bg-orange-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-rotate-ccw">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.76 2.75L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
+        Gõ lại
+      </button>
+      <button (click)="nextPrompt()"
+        class="bg-indigo-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        Tiếp
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-arrow-right">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div *ngIf="showToast"
+    class="fixed bottom-6 right-6 bg-blue-600/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50 transition-all duration-300">
+    {{ toastMessage }}
+  </div>
 </div>

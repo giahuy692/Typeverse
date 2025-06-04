@@ -18,12 +18,14 @@ import { DE_13_RAW_QUESTIONS } from 'src/assets/mock-data/DE_13_RAW_QUESTIONS';
 import { DE_14_RAW_QUESTIONS } from 'src/assets/mock-data/DE_14_RAW_QUESTIONS';
 import { DE_15_RAW_QUESTIONS } from 'src/assets/mock-data/DE_15_RAW_QUESTIONS';
 import { DE_1_RAW_QUESTIONS } from 'src/assets/mock-data/DE_1_RAW_QUESTIONS';
+import { Router } from '@angular/router'; // Import Router for navigation
 
 // ENUMS
 export enum TestState {
   StartScreen,
   InstructionsScreen,
-  TestInProgress
+  TestInProgress,
+  ResultsScreen // New state for displaying results
 }
 
 export enum QuestionDisplayType {
@@ -38,6 +40,7 @@ interface RawAnswerOption {
   answer: string;
   is_correct?: number;
   correct?: number;
+  choose?: boolean; // Keep for now if it's in your raw data
 }
 
 interface RawQuestionData {
@@ -74,10 +77,10 @@ interface JsonFileRootItem {
 
 
 // INTERFACES FOR COMPONENT'S QUESTION STRUCTURE
+// OptionState no longer needs 'status' as we'll derive it directly from selected answer
 interface OptionState {
   label: string;
   text: string;
-  status: 'correct' | 'incorrect' | 'neutral' | 'unanswered';
 }
 
 interface QuestionBase {
@@ -91,8 +94,9 @@ interface QuestionMCQ extends QuestionBase {
   displayType: QuestionDisplayType.MCQ;
   questionText: string;
   audioUrl: string;
-  options: OptionState[];
-  selectedAnswerLabel?: string;
+  options: OptionState[]; // These are display options
+  selectedAnswerLabel?: string; // Still useful for current selection
+  userSelectedAnswer?: RawAnswerOption; // Store the original raw answer option chosen by user
   correctAnswerLabel: string;
   isAnswered: boolean;
 }
@@ -101,7 +105,8 @@ interface SubQuestionMCQ {
   id: number;
   questionText: string;
   options: OptionState[];
-  selectedAnswerLabel?: string;
+  selectedAnswerLabel?: string; // Still useful for current selection
+  userSelectedAnswer?: RawAnswerOption; // Store the original raw answer option chosen by user
   correctAnswerLabel: string;
   isBookmarked: boolean;
   isAnswered: boolean;
@@ -125,11 +130,11 @@ interface SubQuestionDropdown {
   promptText: string;
   dropdownAudioUrl?: string;
   options: DropdownOption[];
-  selectedOptionText?: string;
+  selectedOptionText?: string; // Still useful for current selection
+  userSelectedAnswer?: RawAnswerOption; // Store the original raw answer option chosen by user
   correctOptionText: string;
   isBookmarked: boolean;
   isAnswered: boolean;
-  status: 'correct' | 'incorrect' | 'neutral' | 'unanswered';
   playCount: number;
 }
 
@@ -187,8 +192,16 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   userMessage: string | null = null;
   messageType: 'success' | 'error' | 'warning' = 'success';
 
-  // HttpClient is not needed if all data is embedded
-  constructor(private cdRef: ChangeDetectorRef /*, private http: HttpClient*/) {}
+  // New properties for results summary
+  correctAnswersCount: number = 0;
+  incorrectAnswersCount: number = 0;
+  unansweredCount: number = 0;
+
+
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private router: Router // Inject Router for navigation
+  ) {}
 
   ngOnInit(): void {
     this.prepareExamFileList();
@@ -220,33 +233,28 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             const tempParsed = this._parseRawQuestions(exam.rawQuestionList);
             exam.questionCount = tempParsed.filter(q => q.displayType !== QuestionDisplayType.Unsupported).length;
         } else {
-            // If rawQuestionList is explicitly an empty array (placeholder), count is 0
-            // If rawQuestionList is undefined (not yet fetched/filled), count remains undefined
             exam.questionCount = (exam.rawQuestionList && exam.rawQuestionList.length === 0) ? 0 : undefined;
         }
     });
   }
-  
+
   fetchAndCacheQuestionCount(examIndex: number): void {
     const examFileEntry = this.allExamFiles[examIndex];
-    // Only calculate if not already done and raw data is available
     if (examFileEntry && examFileEntry.questionCount === undefined && examFileEntry.rawQuestionList) {
       if (examFileEntry.rawQuestionList.length > 0) {
           const tempParsedQuestions = this._parseRawQuestions(examFileEntry.rawQuestionList);
           examFileEntry.questionCount = tempParsedQuestions.filter(q => q.displayType !== QuestionDisplayType.Unsupported).length;
       } else {
-          examFileEntry.questionCount = 0; // Empty data array
+          examFileEntry.questionCount = 0;
       }
       this.cdRef.detectChanges();
     } else if (examFileEntry && !examFileEntry.rawQuestionList) {
-        // This case implies data should be fetched, but we are using embedded data.
-        // For now, if rawQuestionList is not even an empty array, it means data is missing in constants.
         console.warn(`Raw data for ${examFileEntry.name} is missing in constants.`);
-        examFileEntry.questionCount = 0; // Or handle as an error
+        examFileEntry.questionCount = 0;
         this.cdRef.detectChanges();
     }
   }
-  
+
   onExamSelectionChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedExamIndex = parseInt(selectElement.value, 10);
@@ -256,7 +264,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   get currentExamQuestionCountOnStartScreen(): string {
     if (this.allExamFiles.length > 0 && this.selectedExamIndex < this.allExamFiles.length && this.allExamFiles[this.selectedExamIndex]) {
       const count = this.allExamFiles[this.selectedExamIndex].questionCount;
-      if (count === undefined) return 'N/A'; // Or 'Đang tải...' if you had an async fetch
+      if (count === undefined) return 'N/A';
       return count.toString();
     }
     return 'N/A';
@@ -276,11 +284,13 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
           const optionsMCQ: OptionState[] = rq.answer.map((ans, optIndex) => {
             const label = questionLabels[optIndex];
             if (ans.is_correct === 1) correctAnswerLabelMCQ = label;
-            return { label, text: ans.answer, status: 'unanswered' };
+            // No status property here as it will be derived from userSelectedAnswer
+            return { label, text: ans.answer };
           });
           return {
             id: rq.id, displayType: QuestionDisplayType.MCQ, questionText: cleanHtml(rq.title), audioUrl: this.baseUrl + rq.audio_url,
-            options: optionsMCQ, playCount: 0, isBookmarked: false, correctAnswerLabel: correctAnswerLabelMCQ, userFriendlyId, isAnswered: false
+            options: optionsMCQ, playCount: 0, isBookmarked: false, correctAnswerLabel: correctAnswerLabelMCQ, userFriendlyId, isAnswered: false,
+            userSelectedAnswer: undefined // Initialize user's selected answer
           } as QuestionMCQ;
 
         case 2:
@@ -292,18 +302,19 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             const subOptions: OptionState[] = child.answer ? child.answer.map((ans, optIndex) => {
               const label = questionLabels[optIndex];
               if (ans.is_correct === 1) correctSubAnswerLabel = label;
-              return { label, text: ans.answer, status: 'unanswered' };
+              return { label, text: ans.answer };
             }) : [];
             return {
               id: child.id, questionText: cleanHtml(child.title), options: subOptions, correctAnswerLabel: correctSubAnswerLabel,
-              isBookmarked: false, isAnswered: false, audioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined, playCount: 0
+              isBookmarked: false, isAnswered: false, audioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined, playCount: 0,
+              userSelectedAnswer: undefined // Initialize
             };
           });
           return {
             id: rq.id, displayType: QuestionDisplayType.GroupedMCQ, mainInstruction: parentInstructionMCQ, mainAudioUrl: commonAudioUrl,
             subQuestions: subQuestionsMCQ, playCount: 0, isBookmarked: false, userFriendlyId
           } as QuestionGroupedMCQ;
-        
+
         case 3:
           const parentInstructionDropdown = cleanHtml(rq.content || rq.title);
           if (!rq.childs || rq.childs.length === 0) return { id: rq.id, displayType: QuestionDisplayType.Unsupported, userFriendlyId, title: parentInstructionDropdown, rawType: rq.type, playCount:0, isBookmarked: false } as QuestionUnsupported;
@@ -313,7 +324,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             return {
               id: child.id, promptText: cleanHtml(child.title), dropdownAudioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined,
               options: childOptions, correctOptionText: correctOpt ? correctOpt.answer : '',
-              isBookmarked: false, isAnswered: false, status: 'unanswered', playCount: 0
+              isBookmarked: false, isAnswered: false, userSelectedAnswer: undefined, playCount: 0 // Initialize
             };
           });
            if (subQuestionsDropdown.length === 0 && rq.childs && rq.childs.length > 0) {
@@ -352,7 +363,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
     if (this.allExamFiles.length > 0 && examIndex < this.allExamFiles.length) {
       const selectedExamFile = this.allExamFiles[examIndex];
-      
+
       // Use pre-loaded rawQuestionList from constants
       const rawQs = selectedExamFile.rawQuestionList;
 
@@ -371,7 +382,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
         } else {
           this.showUserMessage(`Không tìm thấy câu hỏi phù hợp trong ${selectedExamFile.name}.`, 'error');
         }
-      } else { 
+      } else {
           this.showUserMessage(`Dữ liệu cho ${selectedExamFile.name} là rỗng hoặc chưa được cung cấp. Vui lòng điền dữ liệu vào các hằng số trong component.`, 'warning');
       }
     } else {
@@ -389,16 +400,22 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     this.clearUserMessage();
+    // Ensure current question's answer is recorded before moving
+    this.recordCurrentQuestionAnswer();
+
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
       this.loadQuestion(this.currentQuestionIndex);
     } else {
-      this.finishTest();
+      this.finishTest(); // Auto-submit when reaching the end
     }
   }
 
   previousQuestion(): void {
     this.clearUserMessage();
+    // Ensure current question's answer is recorded before moving
+    this.recordCurrentQuestionAnswer();
+
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
       this.loadQuestion(this.currentQuestionIndex);
@@ -410,40 +427,44 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
       this.currentQuestion.isBookmarked = !this.currentQuestion.isBookmarked;
     }
   }
-  
+
+  // Modified selectOption to store RawAnswerOption
   selectOption(optionLabel: string, subQuestionId?: number): void {
     this.clearUserMessage();
     if (!this.currentQuestion) return;
-  
-    const applySelection = (question: QuestionMCQ | SubQuestionMCQ, optLabel: string) => {
+
+    const rawQuestionData = this.allExamFiles[this.selectedExamIndex]
+                                .rawQuestionList?.find(rq => rq.id === this.currentQuestion.id);
+
+    const applySelection = (question: QuestionMCQ | SubQuestionMCQ, optLabel: string, rawAnswers: RawAnswerOption[] | null | undefined) => {
       if (!question.isAnswered) {
         question.selectedAnswerLabel = optLabel;
         question.isAnswered = true;
-        question.options.forEach(opt => {
-          if (opt.label === optLabel) { 
-            opt.status = opt.label === question.correctAnswerLabel ? 'correct' : 'incorrect';
-          } else if (opt.label === question.correctAnswerLabel) { 
-            if (optLabel !== question.correctAnswerLabel) opt.status = 'correct';
-            else opt.status = 'neutral';
-          } else { 
-            if(opt.status !== 'correct') opt.status = 'neutral';
-          }
+        // Find the raw answer option corresponding to the selected label
+        question.userSelectedAnswer = rawAnswers?.find(ra => {
+          // Find the OptionState object that matches the selected label
+          const selectedOptionState = question.options.find(o => o.label === optLabel);
+          // Match raw answer by its 'answer' text with the selected option's text
+          return ra.answer === selectedOptionState?.text;
         });
       }
     };
-  
+
     if (this.currentQuestion.displayType === QuestionDisplayType.MCQ) {
-      applySelection(this.currentQuestion as QuestionMCQ, optionLabel);
+      applySelection(this.currentQuestion as QuestionMCQ, optionLabel, rawQuestionData?.answer);
     } else if (this.currentQuestion.displayType === QuestionDisplayType.GroupedMCQ && subQuestionId !== undefined) {
       const qGroup = this.currentQuestion as QuestionGroupedMCQ;
       const subQ = qGroup.subQuestions.find(sq => sq.id === subQuestionId);
+      const rawSubQuestionData = rawQuestionData?.childs?.find(rc => rc.id === subQuestionId);
+
       if (subQ) {
-        applySelection(subQ, optionLabel);
+        applySelection(subQ, optionLabel, rawSubQuestionData?.answer);
       }
     }
     this.cdRef.detectChanges();
   }
-  
+
+  // Modified handleDropdownChange (no change needed in itself, just its caller)
   handleDropdownChange(event: Event, subQuestionId: number): void {
     const target = event.target as HTMLSelectElement;
     if (target) {
@@ -451,6 +472,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Modified selectDropdownOption to store RawAnswerOption
   selectDropdownOption(selectedText: string, subQuestionId: number): void {
     this.clearUserMessage();
     if (!this.currentQuestion || this.currentQuestion.displayType !== QuestionDisplayType.DropdownMatch) return;
@@ -458,28 +480,29 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     const qMatch = this.currentQuestion as QuestionDropdownMatch;
     const subQ = qMatch.subQuestions.find(sq => sq.id === subQuestionId);
 
+    const rawQuestionData = this.allExamFiles[this.selectedExamIndex]
+                                .rawQuestionList?.find(rq => rq.id === this.currentQuestion.id);
+    const rawSubQuestionData = rawQuestionData?.childs?.find(rc => rc.id === subQuestionId);
+
     if (subQ && !subQ.isAnswered) {
       subQ.selectedOptionText = selectedText;
       subQ.isAnswered = true;
-      if (selectedText === subQ.correctOptionText) {
-        subQ.status = 'correct';
-      } else {
-        subQ.status = 'incorrect';
-      }
+      // Find the raw answer option corresponding to the selected text
+      subQ.userSelectedAnswer = rawSubQuestionData?.answer?.find(ra => ra.answer === selectedText);
     }
     this.cdRef.detectChanges();
   }
 
-  getPlayButtonText(): string { 
+  getPlayButtonText(): string {
     if (this.isPlayingAudio) return 'Dừng';
     return 'Phát Audio Chính';
   }
 
   getSubQuestionPlayButtonText(subQuestion: SubQuestionMCQ | SubQuestionDropdown): string {
     let audioUrl: string | undefined;
-    if ('audioUrl' in subQuestion && subQuestion.audioUrl) { 
+    if ('audioUrl' in subQuestion && subQuestion.audioUrl) {
         audioUrl = subQuestion.audioUrl;
-    } else if ('dropdownAudioUrl' in subQuestion && subQuestion.dropdownAudioUrl) { 
+    } else if ('dropdownAudioUrl' in subQuestion && subQuestion.dropdownAudioUrl) {
         audioUrl = subQuestion.dropdownAudioUrl;
     }
 
@@ -488,7 +511,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     }
     return 'Phát';
   }
-  
+
   startOverallTimer(): void {
     this.updateTimerDisplay();
     clearInterval(this.timerInterval);
@@ -526,37 +549,75 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     this.userMessage = null;
   }
 
-  finishTest(): void {
-    clearInterval(this.timerInterval);
-    const score = this.calculateScore();
-    const totalScorable = this.getTotalScorableQuestions();
-    console.log("Test Finished. Score:", score, "/", totalScorable, "Answers:", this.questions);
-    this.showUserMessage(`Bạn đã hoàn thành bài thi! Điểm số: ${score}/${totalScorable}`, 'success');
+  // recordCurrentQuestionAnswer no longer sets isCorrect directly,
+  // it just ensures the user's choice is saved.
+  recordCurrentQuestionAnswer(): void {
+    // Selection is already recorded in selectOption/selectDropdownOption
+    // This function can remain as a placeholder or remove if no additional logic is needed here.
   }
 
-  calculateScore(): number {
-    let score = 0;
+
+  finishTest(): void {
+    clearInterval(this.timerInterval); // Stop the timer
+    this.audioPlayer.pause(); // Stop any playing audio
+
+    // Re-evaluate results for all questions to ensure correctness based on final state
+    this.calculateResults(); // Calculate final correct/incorrect/unanswered counts
+    this.currentState = TestState.ResultsScreen; // Change state to show results screen
+    this.cdRef.detectChanges(); // Ensure UI updates
+  }
+
+  calculateResults(): void {
+    this.correctAnswersCount = 0;
+    this.incorrectAnswersCount = 0;
+    this.unansweredCount = 0;
+
     this.questions.forEach(q => {
       if (q.displayType === QuestionDisplayType.MCQ) {
-        if (q.isAnswered && q.selectedAnswerLabel === q.correctAnswerLabel) {
-          score++;
+        const mcqQ = q as QuestionMCQ;
+        if (mcqQ.isAnswered) {
+          // Check correctness directly from userSelectedAnswer's is_correct or correct property
+          if (mcqQ.userSelectedAnswer && (mcqQ.userSelectedAnswer.is_correct === 1 || mcqQ.userSelectedAnswer.correct === 1)) {
+            this.correctAnswersCount++;
+          } else {
+            this.incorrectAnswersCount++;
+          }
+        } else {
+          this.unansweredCount++;
         }
       } else if (q.displayType === QuestionDisplayType.GroupedMCQ) {
-        q.subQuestions.forEach(subQ => {
-          if (subQ.isAnswered && subQ.selectedAnswerLabel === subQ.correctAnswerLabel) {
-            score++;
+        const groupedQ = q as QuestionGroupedMCQ;
+        groupedQ.subQuestions.forEach(subQ => {
+          if (subQ.isAnswered) {
+            // Check correctness directly from userSelectedAnswer's is_correct or correct property
+            if (subQ.userSelectedAnswer && (subQ.userSelectedAnswer.is_correct === 1 || subQ.userSelectedAnswer.correct === 1)) {
+              this.correctAnswersCount++;
+            } else {
+              this.incorrectAnswersCount++;
+            }
+          } else {
+            this.unansweredCount++;
           }
         });
       } else if (q.displayType === QuestionDisplayType.DropdownMatch) {
-        q.subQuestions.forEach(subQ => {
-          if (subQ.isAnswered && subQ.selectedOptionText === subQ.correctOptionText) {
-            score++;
+        const dropdownQ = q as QuestionDropdownMatch;
+        dropdownQ.subQuestions.forEach(subQ => {
+          if (subQ.isAnswered) {
+            // Check correctness directly from userSelectedAnswer's is_correct or correct property
+            if (subQ.userSelectedAnswer && (subQ.userSelectedAnswer.is_correct === 1 || subQ.userSelectedAnswer.correct === 1)) {
+              this.correctAnswersCount++;
+            } else {
+              this.incorrectAnswersCount++;
+            }
+          } else {
+            this.unansweredCount++;
           }
         });
       }
+      // Unsupported questions are ignored for scoring
     });
-    return score;
   }
+
 
   getTotalScorableQuestions(): number {
     let total = 0;
@@ -619,7 +680,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             this.isPlayingAudio = false;
             this.cdRef.detectChanges();
           });
-        
+
         this.audioPlayer.onended = () => {
           this.isPlayingAudio = false;
           this.cdRef.detectChanges();
@@ -637,9 +698,9 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     this.clearUserMessage();
     let audioUrlToPlay: string | undefined;
 
-    if ('audioUrl' in subQuestion && subQuestion.audioUrl) { 
+    if ('audioUrl' in subQuestion && subQuestion.audioUrl) {
         audioUrlToPlay = subQuestion.audioUrl;
-    } else if ('dropdownAudioUrl' in subQuestion && subQuestion.dropdownAudioUrl) { 
+    } else if ('dropdownAudioUrl' in subQuestion && subQuestion.dropdownAudioUrl) {
         audioUrlToPlay = subQuestion.dropdownAudioUrl;
     }
 
@@ -649,20 +710,20 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     }
 
     if (this.isPlayingAudio && this.audioPlayer.src !== audioUrlToPlay) {
-        this.audioPlayer.pause(); 
+        this.audioPlayer.pause();
         this.isPlayingAudio = false;
     }
-    
+
     if (this.audioPlayer.src !== audioUrlToPlay) {
         this.audioPlayer.src = audioUrlToPlay;
-        this.isPlayingAudio = false; 
+        this.isPlayingAudio = false;
     }
 
     if (this.audioPlayer.paused || this.audioPlayer.ended) {
         if (subQuestion.playCount < this.maxAudioPlays) {
             this.audioPlayer.play()
               .then(() => {
-                this.isPlayingAudio = true; 
+                this.isPlayingAudio = true;
                 subQuestion.playCount++;
                 this.cdRef.detectChanges();
               })
@@ -679,7 +740,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
         } else {
             this.showUserMessage("Bạn đã hết số lần nghe cho đoạn ghi âm này.", 'warning');
         }
-    } else { 
+    } else {
         this.audioPlayer.pause();
         this.isPlayingAudio = false;
     }
@@ -689,8 +750,116 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     clearInterval(this.timerInterval);
     if (this.audioPlayer) {
       this.audioPlayer.pause();
-      this.audioPlayer.removeAttribute('src'); 
+      this.audioPlayer.removeAttribute('src');
       this.audioPlayer.load();
+    }
+  }
+
+  // New method to navigate back to the start screen
+  goToStartScreen(): void {
+    // Reset component state for a new test if necessary
+    this.currentState = TestState.StartScreen;
+    this.questions = []; // Clear questions
+    this.currentQuestionIndex = 0;
+    this.audioPlayer.pause();
+    this.audioPlayer.removeAttribute('src');
+    this.audioPlayer.load();
+    this.correctAnswersCount = 0;
+    this.incorrectAnswersCount = 0;
+    this.unansweredCount = 0;
+    clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+    this.timeRemaining = '40:00'; // Reset display timer
+    this.userMessage = null; // Clear any messages
+    this.cdRef.detectChanges();
+  }
+
+  // NEW: Helper method to determine the overall styling for a question in results
+  getQuestionResultClasses(question: QuestionUnion): { [key: string]: boolean } {
+    let isCorrectOverall = false;
+    let isIncorrectOverall = false;
+    let isUnansweredOverall = false;
+
+    if (question.displayType === QuestionDisplayType.MCQ) {
+      const q = question as QuestionMCQ;
+      if (q.isAnswered) {
+        isCorrectOverall = (q.userSelectedAnswer?.is_correct === 1 || q.userSelectedAnswer?.correct === 1);
+        isIncorrectOverall = !isCorrectOverall;
+      } else {
+        isUnansweredOverall = true;
+      }
+    } else if (question.displayType === QuestionDisplayType.GroupedMCQ) {
+      const q = question as QuestionGroupedMCQ;
+      const answeredSubQuestions = q.subQuestions.filter(sq => sq.isAnswered);
+      if (answeredSubQuestions.length === 0) {
+        isUnansweredOverall = true;
+      } else {
+        // A grouped question is correct overall if ALL answered sub-questions are correct
+        isCorrectOverall = q.subQuestions.every(subQ => !subQ.isAnswered || (subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1));
+        // A grouped question is incorrect overall if ANY answered sub-question is incorrect
+        isIncorrectOverall = q.subQuestions.some(subQ => subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1));
+      }
+    } else if (question.displayType === QuestionDisplayType.DropdownMatch) {
+      const q = question as QuestionDropdownMatch;
+      const answeredSubQuestions = q.subQuestions.filter(sq => sq.isAnswered);
+      if (answeredSubQuestions.length === 0) {
+        isUnansweredOverall = true;
+      } else {
+        // Similar logic for dropdown match
+        isCorrectOverall = q.subQuestions.every(subQ => !subQ.isAnswered || (subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1));
+        isIncorrectOverall = q.subQuestions.some(subQ => subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1));
+      }
+    }
+
+    return {
+      'border-green-300 bg-green-50': isCorrectOverall,
+      'border-red-300 bg-red-50': isIncorrectOverall,
+      'border-gray-200 bg-gray-50': isUnansweredOverall
+    };
+  }
+
+
+  // NEW: Helper to get selected answer text for display in results
+  // This function now correctly handles both main questions (MCQ) and sub-questions.
+  getUserSelectedAnswerText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
+    if (item.isAnswered && item.userSelectedAnswer) {
+      // Check if it's an MCQ or GroupedMCQ sub-question (which have selectedAnswerLabel and options)
+      if ('selectedAnswerLabel' in item && item.selectedAnswerLabel) {
+        return `${item.selectedAnswerLabel}. ${item.userSelectedAnswer.answer}`;
+      }
+      // Check if it's a DropdownMatch sub-question (which has selectedOptionText)
+      else if ('selectedOptionText' in item && item.selectedOptionText) {
+        return item.userSelectedAnswer.answer;
+      }
+    }
+    return 'Chưa trả lời';
+  }
+
+  // NEW: Helper to get correct answer text for display in results
+  // This function now correctly handles both main questions (MCQ) and sub-questions.
+  getCorrectAnswerText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
+    // Check if it's an MCQ or GroupedMCQ sub-question (which have correctAnswerLabel and options)
+    if ('correctAnswerLabel' in item && item.correctAnswerLabel) {
+      const correctOption = item.options.find(opt => opt.label === item.correctAnswerLabel);
+      return `${item.correctAnswerLabel}. ${correctOption?.text || ''}`;
+    }
+    // Check if it's a DropdownMatch sub-question (which has correctOptionText)
+    else if ('correctOptionText' in item && item.correctOptionText) {
+      return item.correctOptionText;
+    }
+    return '';
+  }
+
+  // NEW: Helper to get correctness status text for display in results
+  // This function now correctly handles both main questions (MCQ) and sub-questions.
+  getAnswerStatusText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
+    if (!item.isAnswered) {
+      return 'Chưa trả lời';
+    }
+
+    if (item.userSelectedAnswer && (item.userSelectedAnswer.is_correct === 1 || item.userSelectedAnswer.correct === 1)) {
+      return 'Đúng';
+    } else {
+      return 'Sai';
     }
   }
 }

@@ -1,7 +1,10 @@
+// src/assets/mock-data/writing-prompts.ts
+
 export interface WritingPrompt {
   id: number;
   title: string;
   content: string;
+  audioPath?: string; // Thêm trường audioPath
 }
 
 export const WRITING_PROMPTS: WritingPrompt[] = [
@@ -13,6 +16,7 @@ How are you?
 I have read an email from the club saying "...". I'm feeling down/ I'm feeling happy. I will think more about it and share with you later. The club should deliver a gift, and flowers to each member's home, making them feel more attached to the club.
 Love,
 Huy.`,
+    audioPath: 'assets/audio/email_informal.mp3', // Thay thế bằng đường dẫn audio thực tế
   },
   {
     id: 2,
@@ -27,5 +31,6 @@ Finally, I think the club should consider carefully before making any decision. 
 Here are all of my ideas. I look forward to your reply.
 Best regards,
 Huy.`,
+    audioPath: 'assets/audio/email_formal.mp3', // Thay thế bằng đường dẫn audio thực tế
   },
 ];
