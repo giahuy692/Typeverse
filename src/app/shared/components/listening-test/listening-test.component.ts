@@ -197,6 +197,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   incorrectAnswersCount: number = 0;
   unansweredCount: number = 0;
 
+  flatResultItems: (QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown)[] = [];
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -324,7 +325,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             return {
               id: child.id, promptText: cleanHtml(child.title), dropdownAudioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined,
               options: childOptions, correctOptionText: correctOpt ? correctOpt.answer : '',
-              isBookmarked: false, isAnswered: false, userSelectedAnswer: undefined, playCount: 0 // Initialize
+              isBookmarked: false, isAnswered: false, userSelectedAnswer: undefined, playCount: 0,  // Initialize
             };
           });
            if (subQuestionsDropdown.length === 0 && rq.childs && rq.childs.length > 0) {
@@ -558,68 +559,62 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
 
   finishTest(): void {
-    clearInterval(this.timerInterval); // Stop the timer
-    this.audioPlayer.pause(); // Stop any playing audio
+    clearInterval(this.timerInterval); // Dừng bộ đếm thời gian
+    this.audioPlayer.pause(); // Dừng bất kỳ âm thanh nào đang phát
 
-    // Re-evaluate results for all questions to ensure correctness based on final state
-    this.calculateResults(); // Calculate final correct/incorrect/unanswered counts
-    this.currentState = TestState.ResultsScreen; // Change state to show results screen
-    this.cdRef.detectChanges(); // Ensure UI updates
+    // Đảm bảo các câu trả lời của câu hỏi cuối cùng được ghi lại và đánh giá
+    this.recordCurrentQuestionAnswer(); // Logic này đã có, giữ nguyên
+
+    this.prepareFlatResultItems(); // NEW: Chuẩn bị danh sách phẳng cho màn hình kết quả
+    this.calculateResults(); // Tính toán số câu đúng/sai/chưa trả lời
+    this.currentState = TestState.ResultsScreen; // Chuyển trạng thái sang màn hình kết quả
+    this.cdRef.detectChanges(); // Đảm bảo UI được cập nhật
   }
 
-  calculateResults(): void {
-    this.correctAnswersCount = 0;
-    this.incorrectAnswersCount = 0;
-    this.unansweredCount = 0;
-
+  prepareFlatResultItems(): void {
+    this.flatResultItems = [];
     this.questions.forEach(q => {
       if (q.displayType === QuestionDisplayType.MCQ) {
-        const mcqQ = q as QuestionMCQ;
-        if (mcqQ.isAnswered) {
-          // Check correctness directly from userSelectedAnswer's is_correct or correct property
-          if (mcqQ.userSelectedAnswer && (mcqQ.userSelectedAnswer.is_correct === 1 || mcqQ.userSelectedAnswer.correct === 1)) {
-            this.correctAnswersCount++;
-          } else {
-            this.incorrectAnswersCount++;
-          }
-        } else {
-          this.unansweredCount++;
-        }
+        this.flatResultItems.push(q as QuestionMCQ);
       } else if (q.displayType === QuestionDisplayType.GroupedMCQ) {
         const groupedQ = q as QuestionGroupedMCQ;
         groupedQ.subQuestions.forEach(subQ => {
-          if (subQ.isAnswered) {
-            // Check correctness directly from userSelectedAnswer's is_correct or correct property
-            if (subQ.userSelectedAnswer && (subQ.userSelectedAnswer.is_correct === 1 || subQ.userSelectedAnswer.correct === 1)) {
-              this.correctAnswersCount++;
-            } else {
-              this.incorrectAnswersCount++;
-            }
-          } else {
-            this.unansweredCount++;
-          }
+          this.flatResultItems.push(subQ);
         });
       } else if (q.displayType === QuestionDisplayType.DropdownMatch) {
         const dropdownQ = q as QuestionDropdownMatch;
         dropdownQ.subQuestions.forEach(subQ => {
-          if (subQ.isAnswered) {
-            // Check correctness directly from userSelectedAnswer's is_correct or correct property
-            if (subQ.userSelectedAnswer && (subQ.userSelectedAnswer.is_correct === 1 || subQ.userSelectedAnswer.correct === 1)) {
-              this.correctAnswersCount++;
-            } else {
-              this.incorrectAnswersCount++;
-            }
-          } else {
-            this.unansweredCount++;
-          }
+          this.flatResultItems.push(subQ);
         });
       }
-      // Unsupported questions are ignored for scoring
+      // Bỏ qua Unsupported questions
+    });
+  }
+
+    calculateResults(): void {
+    this.correctAnswersCount = 0;
+    this.incorrectAnswersCount = 0;
+    this.unansweredCount = 0;
+
+    // Duyệt qua mảng flatResultItems đã chuẩn bị
+    this.flatResultItems.forEach(item => {
+      if (item.isAnswered) {
+        if (item.userSelectedAnswer && (item.userSelectedAnswer.is_correct === 1 || item.userSelectedAnswer.correct === 1)) {
+          this.correctAnswersCount++;
+        } else {
+          this.incorrectAnswersCount++;
+        }
+      } else {
+        this.unansweredCount++;
+      }
     });
   }
 
 
   getTotalScorableQuestions(): number {
+    // Nên sử dụng this.flatResultItems.length sau khi nó đã được chuẩn bị
+    // hoặc tính toán lại dựa trên logic tương tự prepareFlatResultItems
+    // Ví dụ:
     let total = 0;
     this.questions.forEach(q => {
       if (q.displayType === QuestionDisplayType.MCQ) {
@@ -771,9 +766,10 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     this.timeRemaining = '40:00'; // Reset display timer
     this.userMessage = null; // Clear any messages
     this.cdRef.detectChanges();
+    this.flatResultItems = []; // Reset mảng kết quả phẳng
   }
 
-  // NEW: Helper method to determine the overall styling for a question in results
+  // Helper method to determine the overall styling for a question in results
   getQuestionResultClasses(question: QuestionUnion): { [key: string]: boolean } {
     let isCorrectOverall = false;
     let isIncorrectOverall = false;
@@ -817,16 +813,12 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     };
   }
 
-
-  // NEW: Helper to get selected answer text for display in results
-  // This function now correctly handles both main questions (MCQ) and sub-questions.
+// Helper to get selected answer text for display in results
   getUserSelectedAnswerText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
     if (item.isAnswered && item.userSelectedAnswer) {
-      // Check if it's an MCQ or GroupedMCQ sub-question (which have selectedAnswerLabel and options)
       if ('selectedAnswerLabel' in item && item.selectedAnswerLabel) {
         return `${item.selectedAnswerLabel}. ${item.userSelectedAnswer.answer}`;
       }
-      // Check if it's a DropdownMatch sub-question (which has selectedOptionText)
       else if ('selectedOptionText' in item && item.selectedOptionText) {
         return item.userSelectedAnswer.answer;
       }
@@ -834,23 +826,23 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     return 'Chưa trả lời';
   }
 
-  // NEW: Helper to get correct answer text for display in results
-  // This function now correctly handles both main questions (MCQ) and sub-questions.
+  // Helper to get correct answer text for display in results
   getCorrectAnswerText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
-    // Check if it's an MCQ or GroupedMCQ sub-question (which have correctAnswerLabel and options)
     if ('correctAnswerLabel' in item && item.correctAnswerLabel) {
-      const correctOption = item.options.find(opt => opt.label === item.correctAnswerLabel);
-      return `${item.correctAnswerLabel}. ${correctOption?.text || ''}`;
+      const mcqOrSubMcqItem = item as (QuestionMCQ | SubQuestionMCQ);
+      const correctOption = mcqOrSubMcqItem.options.find(
+        (opt: { label: string; text: string }) => opt.label === mcqOrSubMcqItem.correctAnswerLabel
+      );
+      return `${mcqOrSubMcqItem.correctAnswerLabel}. ${correctOption?.text || ''}`;
     }
-    // Check if it's a DropdownMatch sub-question (which has correctOptionText)
     else if ('correctOptionText' in item && item.correctOptionText) {
-      return item.correctOptionText;
+      const dropdownItem = item as SubQuestionDropdown;
+      return dropdownItem.correctOptionText;
     }
-    return '';
+    return ''; // Should not happen for supported question types
   }
 
-  // NEW: Helper to get correctness status text for display in results
-  // This function now correctly handles both main questions (MCQ) and sub-questions.
+  // Helper to get correctness status text for display in results
   getAnswerStatusText(item: QuestionMCQ | SubQuestionMCQ | SubQuestionDropdown): string {
     if (!item.isAnswered) {
       return 'Chưa trả lời';
@@ -862,4 +854,6 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
       return 'Sai';
     }
   }
+
+  
 }

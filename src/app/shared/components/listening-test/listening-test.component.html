@@ -284,7 +284,7 @@
           <div *ngIf="question.displayType !== QuestionDisplayTypeEnum.Unsupported"
                class="p-4 border rounded-lg shadow-sm"
                [ngClass]="getQuestionResultClasses(question)">
-            <p class="font-semibold mb-2">Câu hỏi {{ question.userFriendlyId }}:</p>
+            <p class="font-semibold mb-2">Câu hỏi {{ i + 1 }}:</p>
 
             <ng-container *ngIf="question.displayType === QuestionDisplayTypeEnum.MCQ && question as qMCQ">
               <p class="mb-2 text-sm">{{ qMCQ.questionText }}</p>

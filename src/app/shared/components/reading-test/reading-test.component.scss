@@ -1,26 +1,72 @@
-ng-deep app-reading-test{
-    /* src/app/shared/components/reading-test/reading-test.component.scss */
+ng-deep app-reading-test {
+  /* reading-test.component.scss */
 
-:host {
-  display: block;
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #1a202c, #2d3748);
-  font-family: 'Inter', sans-serif;
-}
+  ::ng-deep app-reading-test {
 
-button {
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+    /* Đảm bảo component chiếm toàn bộ chiều cao nếu nó là root component của một route */
+    :host {
+      display: block;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #1a202c, #2d3748);
+      /* Nền gradient tối */
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+      /* Màu chữ mặc định cho host, để đảm bảo văn bản sáng trên nền tối */
+    }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+    // Ghi đè màu chữ mặc định của một số thẻ HTML nếu Tailwind không áp dụng trực tiếp
+    // (ví dụ: do component khác có thể thêm kiểu và bị ghi đè)
+    span,
+    p,
+    select,
+    option {
+      color: inherit;
+      /* Kế thừa màu từ cha, hoặc bạn có thể đặt màu cố định như #e2e8f0 */
+    }
 
-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    /* Kiểu cho bóng đổ hướng lên trên cho footer */
+    .shadow-upward {
+      box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.4), 0 -2px 4px -1px rgba(0, 0, 0, 0.2);
+      /* Tăng độ đậm bóng cho nền tối */
+    }
+
+    button {
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      /* Bóng đậm hơn cho nền tối */
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      /* Bóng khi hover đậm hơn */
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      /* Bóng khi active */
+    }
+
+    /* Styles for fill-in-the-blanks input if not fully covered by Tailwind */
+    input[type="text"] {
+      // Tùy chỉnh thêm nếu cần, ví dụ: background-color, border, text-color
+      // Các lớp Tailwind đã được thêm vào HTML, CSS này chỉ bổ sung
+    }
+  }
+
+  /* Căn chỉnh cho màn hình bắt đầu, hướng dẫn và kết quả để chúng luôn ở giữa và chiếm toàn bộ màn hình */
+  app-reading-test>div {
+    /* Áp dụng cho tất cả các div con trực tiếp của app-reading-test */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Để chúng giãn ra lấp đầy không gian */
+  }
+
+  app-reading-test>div.flex-col.items-center.justify-center {
+    min-height: 100vh;
+    /* Đảm bảo các màn hình này chiếm toàn bộ chiều cao viewport nếu nội dung ít */
+  }
 
 }
