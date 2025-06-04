@@ -1,0 +1,32 @@
+// ✅ main.scss – tệp SCSS tổng hợp dùng toàn dự án
+
+@use 'variables';
+@use 'mixins';
+
+// Reset cơ bản
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: $color-bg;
+  color: $color-text;
+}
+
+// Utility classes toàn cục (nếu cần)
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+// Dark mode override
+.dark body {
+  background-color: $color-bg-dark;
+  color: $color-text-dark;
+}
