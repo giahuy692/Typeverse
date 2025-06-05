@@ -7,7 +7,7 @@ export const DE_1_RAW_QUESTIONS = [
       'A person calls a friend about his new car. How much does the small car cost him?',
     explain:
       'Hey, I just wanted to tell you about my new car! It&#39;s a small one, perfect for my needs. I got it for a great price&mdash;only 3,250 pounds! Can you believe it? I was looking at bigger models too, but they were way more expensive, around 3,550 pounds or even 4,250 pounds. I&#39;m really happy with my choice!.',
-    audio_url: '/storage/exam/mp3/6IvHKoJeZ5CQMbbBYvHX1kjj7aiUQ5mzVZ5Kbjz7.mp3',
+    audio_url: null,
     answer: [
       {
         answer: '4250 pounds',
@@ -36,7 +36,7 @@ export const DE_1_RAW_QUESTIONS = [
       'Two people are talking about meeting for dinner. What time does Ahmed meet Rose?',
     explain:
       'Hi Rose. It&rsquo;s Ahmed, what time should we meet for dinner tonight? How about we meet at quarter past seven instead? Oh wait, I just remembered&mdash;I have a meeting ending at a half past seven. Let&rsquo;s make it quarter to eight instead so we could have 15 minutes to travel. Does that work for you?',
-    audio_url: '/storage/exam/mp3/iyjgjjpcWrwnBTjj7HROpGxmnayTP7c3R3msD0Zm.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'quarter to eight',
@@ -64,7 +64,7 @@ export const DE_1_RAW_QUESTIONS = [
     title: 'A man calls the teleshop. What is the teleshop number ?',
     explain:
       'Hello, I need to call the teleshop for some information. My phone is not working. Can you remind me of the number? I think it starts with 20 or 10 or 30 something. Is it 102030 or 301020? No, wait! I remember now - it&#39;s 201030! I really need to order that new gadget. Thanks for your help!',
-    audio_url: '/storage/exam/mp3/jmCuzzZabs52105wZg7tmxTmA9V3PEbxoJQfDaIS.mp3',
+    audio_url: null,
     answer: [
       {
         answer: '301020',
@@ -93,7 +93,7 @@ export const DE_1_RAW_QUESTIONS = [
       'A man is talking to a shopping assistant. What color top is he going to buy?',
     explain:
       'Man: Hello, I would like to buy a top, please. Woman: Sure, do you have anything particular in mind? Man: I like the design of that green one over there. Do you have it in blue? Woman: Maybe. What size are you? Man: I am wearing large. Woman: Let me see. Ohh. We have that one in blue but small. The red and black ones, however, are available in large. Man: Red is not my cup of tea. Well, I will go with the other option then.',
-    audio_url: '/storage/exam/mp3/GUddydqVIyq4olNF3814h8DndTzu335DRBG2HpTc.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Black',
@@ -122,7 +122,7 @@ export const DE_1_RAW_QUESTIONS = [
       'Anna is calling her brother Max. What does Anna do later in the afternoon?',
     explain:
       'Anna: Hey Max, it&rsquo;s Anna. I want to ask you for a favor this afternoon. I have to stay late at the office to finish some work. Could you please pick up my kids from school? After that, I know you&rsquo;ll want to hang out with your friends, so feel free to take them along. I really appreciate your help!',
-    audio_url: '/storage/exam/mp3/sUkmBCEoo0U3gAylNyebDLfNLcNdSk75YsWm7FNc.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Pick up her kids',
@@ -150,7 +150,7 @@ export const DE_1_RAW_QUESTIONS = [
     title: 'Vincent is calling James. Why does Vincent call James?',
     explain:
       'Hi James, it&rsquo;s Vincent. I just want to check in and see how you&rsquo;re doing. It&rsquo;s been a while since we last caught up! How about we grab a drink later? I know a great new place that has very nice tea. You should definitely try it next time you visit me. Text me back!',
-    audio_url: '/storage/exam/mp3/8zPN5w9x8cbBf8UBaGmxgZ6UcxdX48znIk80eJaG.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'To suggest a drink',
@@ -178,7 +178,7 @@ export const DE_1_RAW_QUESTIONS = [
     title: 'A man is talking about his trip. What did he enjoy last year?',
     explain:
       'Man: Last year, I had an amazing trip! One of the best things I enjoyed was going cycling in the countryside. The views were stunning, and it felt great to be outdoors. I also went for a walk a few times, but cycling really allowed me to explore more areas. We even had a picnic one day, which was lovely too!',
-    audio_url: '/storage/exam/mp3/JIFmYEGzrdnRY54gprpvEfAMGzJfXFy4jxL4KL3f.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Go cycling',
@@ -207,7 +207,7 @@ export const DE_1_RAW_QUESTIONS = [
       'A woman is talking about her job. What encouraged her to become a scientist?',
     explain:
       'Woman: I&rsquo;ve always loved science, but there was a moment that really encouraged me to become a scientist. I remember when I was a child, I found a large stone during a school trip. It sparked my curiosity about geology. My mother also inspired me to explore my interests in science. Of course, I use the computer a lot now for my research, but that stone was the beginning.',
-    audio_url: '/storage/exam/mp3/hdFNa43sJ7I8W0txCgYFDhJJQI5OzqaR2p1fJ692.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'The computer',
@@ -235,7 +235,7 @@ export const DE_1_RAW_QUESTIONS = [
     title: 'A man is talking about the city concert. How will the concert end?',
     explain:
       'Man: I can&rsquo;t wait for the concert this weekend! It&rsquo;s going to be such an exciting event. The highlight ending will be the city&rsquo;s favorite group performing on stage. I&rsquo;ve heard they have some amazing songs planned. There will also be a fireworks performance to celebrate before that, and I&rsquo;m sure the orchestra will do some singing as well. It&rsquo;s going to be a night to remember!',
-    audio_url: '/storage/exam/mp3/alcxu2tctYkBiOcWIQx3BaDH848w5c4aLHJ8puRv.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Fireworks performance',
@@ -264,7 +264,7 @@ export const DE_1_RAW_QUESTIONS = [
       'A man is talking about his family trip. What does the man&rsquo;s wife enjoy?',
     explain:
       'Man: On our family trip last summer, we had such a great time! My wife really enjoys photography. So, when we went walking together in the parks, she spent a lot of time taking pictures of the beautiful landscapes. Well, at least she is not crazy about shopping.',
-    audio_url: '/storage/exam/mp3/uyOpO1PF9EdzXleHw2urZJhU1GWIS7C38nsdxJ34.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'shopping',
@@ -293,7 +293,7 @@ export const DE_1_RAW_QUESTIONS = [
       'Jana is talking to her friend. What does Jana&rsquo;s sister look like?',
     explain:
       'Jana: Hey, could you do me a favor? My sister is waiting outside, and I need you to give her my book. She&rsquo;s the one who is short and has straight hair, so you can&rsquo;t miss her. I also think she&rsquo;s wearing a blue jacket today. If you see her, just hand it to her, and I&rsquo;ll be so grateful. Thanks for helping me out!&quot;',
-    audio_url: '/storage/exam/mp3/bK2Gk5Y3TVU6vwCoto7z2idYB7C7vJ76yRCrQ2c7.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Thin',
@@ -321,7 +321,7 @@ export const DE_1_RAW_QUESTIONS = [
     title: 'A man is calling his sister. Where are they going to meet?',
     explain:
       'Man: Hi, it&#39;s me! I wanted to confirm where we&rsquo;re meeting today. I thought we agreed to meet at the park, right? It&rsquo;s a nice place to relax and catch up. The station would be too crowded, and the university is a bit far for me. Let&rsquo;s stick to the park so we can enjoy the weather. What time should I meet you there?',
-    audio_url: '/storage/exam/mp3/7jNZOckyleEiuePr01tGEb9xgDzt92gWJ18W0EI0.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'At the station',
@@ -350,7 +350,7 @@ export const DE_1_RAW_QUESTIONS = [
       'A woman is talking about her vacation. What is the relationship between the speaker and Lisa?',
     explain:
       'Woman: I just got back from an amazing vacation with Lisa! We&rsquo;ve been friends for years, and this trip really brought us closer. I can&rsquo;t imagine going with anyone else. Some people think we look like mother and daughter because we care for each other so much, but it&rsquo;s really just best friends hanging out!',
-    audio_url: '/storage/exam/mp3/NVXoYb5I98PP8ZcsXOftYgKww0Ejo1wPf65FNSt3.mp3',
+    audio_url: null,
     answer: [
       {
         answer: 'Teacher and student',
@@ -535,7 +535,7 @@ export const DE_1_RAW_QUESTIONS = [
     title:
       '<strong>Listen to two people discussing the Internet. Read the opinions below and decide whose opinion matches the statements, the man, the woman, or both the man and the woman. You can listen to the discussion twice.</strong>',
     explain: null,
-    audio_url: '/storage/exam/mp3/LkmEphhP0XRoqNTvOmGfizG5p9OAGpIemVkZ2Y96.mp3',
+    audio_url: null,
     answer: null,
     sort_by: 15,
     childs: [
@@ -668,7 +668,7 @@ export const DE_1_RAW_QUESTIONS = [
     title:
       '<strong>Listen to an announcer talking about a newly released novel and answer the questions below.</strong>',
     explain: null,
-    audio_url: '/storage/exam/mp3/cL4lVRbOBKU4A6ylgrkjVtE3wGr9SRoj5pgzcC5E.mp3',
+    audio_url: null,
     answer: null,
     sort_by: 16,
     childs: [
@@ -742,7 +742,7 @@ export const DE_1_RAW_QUESTIONS = [
     title:
       '<strong>Listen to an expert talking about professionalism and answer the questions below.</strong>',
     explain: null,
-    audio_url: '/storage/exam/mp3/2Z8nUJC8scQ8md9VwwOIImf6EWsq1CmlX4gV2GCo.mp3',
+    audio_url: null,
     answer: null,
     sort_by: 17,
     childs: [
