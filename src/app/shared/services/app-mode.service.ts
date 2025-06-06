@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
  * - speaking: Chế độ luyện nói.
  * - writing: Chế độ luyện viết.
  */
-export type AppMode = 'listening_test' | 'listening_audio' | 'speaking' | 'writing' | 'idle' ;
+export type AppMode = 'listening_test' | 'listening_audio' | 'speaking' | 'writing' | 'idle' | 'reading_test';
 
 /**
  * @Injectable

@@ -1,0 +1,418 @@
+<!-- reading-test.component.html -->
+<div class="font-['Inter'] relative min-h-screen bg-gray-900 text-gray-100 flex flex-col">
+  <!-- User Message Display -->
+  <div *ngIf="userMessage"
+       class="fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 text-white max-w-sm break-words"
+       [ngClass]="{
+         'bg-green-500': messageType === 'success',
+         'bg-red-500': messageType === 'error',
+         'bg-yellow-500': messageType === 'warning'
+       }">
+    {{ userMessage }}
+    <button (click)="clearUserMessage()" class="ml-4 font-bold text-lg align-top">&times;</button>
+  </div>
+
+  <!-- Start Screen -->
+  <div *ngIf="currentState === TestStateEnum.StartScreen" class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+    <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl text-center w-full max-w-lg">
+      <h2 class="text-sm font-medium text-gray-400">Aptis General Practice Test</h2>
+      <h1 class="text-3xl sm:text-4xl font-bold text-purple-400 mt-2 mb-6">Reading</h1>
+
+      <div class="my-6">
+        <label for="examSelect" class="block text-sm font-medium text-gray-300 mb-2">Chọn đề thi:</label>
+        <select id="examSelect" name="selectedExam" [(ngModel)]="selectedExamIndex" (change)="onExamSelectionChange($event)"
+                class="w-full p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:focus:border-purple-500 bg-gray-700 text-gray-100">
+          <option *ngFor="let exam of allExamFiles; let i = index" [value]="i">
+            {{ exam.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
+        <div class="text-center sm:text-left">
+          <p class="text-xs text-gray-500">Số lượng câu hỏi</p>
+          <p class="text-lg font-semibold text-gray-300">{{ currentExamQuestionCountOnStartScreen }}</p>
+        </div>
+        <div class="text-center sm:text-left">
+          <p class="text-xs text-gray-500">Thời gian cho phép</p>
+          <p class="text-lg font-semibold text-gray-300">{{ allExamFiles[selectedExamIndex]?.timeAllowedMinutes || 'N/A' }} phút</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-400 mb-8">Đây là bài thực hành cho phần thi đọc Aptis General. Nhấn vào nút dưới đây để bắt đầu.</p>
+      <button (click)="goToInstructions()"
+              class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+        Bắt đầu làm bài
+      </button>
+    </div>
+  </div>
+
+  <!-- Instructions Screen -->
+  <div *ngIf="currentState === TestStateEnum.InstructionsScreen" class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+      <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-2xl">
+          <h1 class="text-xl sm:text-2xl font-bold text-purple-400 mb-4 text-center">Hướng dẫn làm bài đọc Aptis General</h1>
+          <h2 class="text-lg font-semibold text-gray-300 mb-6 text-center">Đề thi: {{ allExamFiles[selectedExamIndex]?.name || 'Đang chọn...' }}</h2>
+          <div class="text-gray-300 space-y-3 text-sm sm:text-base leading-relaxed">
+              <p>Bài thi có <strong>{{ allExamFiles[selectedExamIndex]?.questionCount || 'N/A' }} phần</strong>.</p>
+              <p>Bạn có <strong>{{ allExamFiles[selectedExamIndex]?.timeAllowedMinutes || 'N/A' }} phút</strong> để hoàn thành bài thi.</p>
+              <p>Khi bạn nhấn nút <strong>'Tiếp theo'</strong>, bài thi sẽ bắt đầu.</p>
+          </div>
+          <p class="mt-10 text-sm text-gray-400">Chúc bạn may mắn!</p>
+          <div class="mt-8 text-right">
+               <button (click)="startTest()"
+                      class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 sm:px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                  Tiếp theo &rarr;
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Test In Progress Screen -->
+  <div *ngIf="currentState === TestStateEnum.TestInProgress && currentQuestion" class="flex flex-col min-h-screen bg-gray-900">
+    <!-- Header for Test In Progress -->
+    <div class="bg-gray-800 shadow-md p-3 sm:p-4 flex justify-between items-center sticky top-0 z-10">
+      <div>
+        <h1 class="text-lg sm:text-xl font-semibold text-purple-400">Reading - {{ allExamFiles[selectedExamIndex]?.name }}</h1>
+        <p class="text-xs sm:text-sm text-gray-400">{{ currentQuestion.userFriendlyId }} / {{ getTotalScorableQuestions() }}</p>
+      </div>
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <button (click)="toggleBookmark()"
+                [title]="currentQuestion.isBookmarked ? 'Bỏ đánh dấu' : 'Đánh dấu'"
+                class="p-2 border border-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <svg class="w-5 h-5 text-gray-400" [ngClass]="{'text-purple-400': currentQuestion.isBookmarked}" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path *ngIf="!currentQuestion.isBookmarked" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path><path *ngIf="currentQuestion.isBookmarked" d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path></svg>
+        </button>
+        <div class="text-right">
+          <p class="text-xs text-gray-500">Thời gian còn lại</p>
+          <p class="text-base sm:text-lg font-bold text-purple-400">{{ timeRemaining }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area for Questions -->
+    <div class="flex-grow p-4 sm:p-8 overflow-y-auto">
+      <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+
+        <div [ngSwitch]="currentQuestion.displayType">
+
+          <!-- Question 1: Email Fill-in-the-Blanks (unnamed 8.png) -->
+          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.EmailFillInBlanks">
+            <div *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.EmailFillInBlanks && currentQuestion as qEmail">
+              <h2 class="text-xl font-semibold mb-4 text-gray-200" [innerHTML]="qEmail.mainInstruction"></h2>
+              <div class="text-gray-300 leading-relaxed">
+                <p class="whitespace-pre-wrap">
+                  <ng-container *ngFor="let part of qEmail.emailTemplateParts">
+                    <ng-container *ngIf="part.type === 'text'">{{ part.content }}</ng-container>
+                    <ng-container *ngIf="part.type === 'gap' && part.gapIndex !== undefined">
+                      <mat-form-field appearance="outline" class="material-dropdown-wrapper">
+                        <mat-select
+                          [(ngModel)]="qEmail.gaps[part.gapIndex].selectedOption"
+                          (selectionChange)="handleDropdownChange($event.value, qEmail.gaps[part.gapIndex].id, part.gapIndex)"
+                          [disabled]="qEmail.isAnswered">
+                          <mat-option [value]="undefined" disabled selected>-- Chọn đáp án --</mat-option>
+                          <mat-option *ngFor="let option of qEmail.gaps[part.gapIndex].options" [value]="option">
+                            {{ option }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </ng-container>
+                  </ng-container>
+                </p>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Question 2: Sentence Reordering (unnamed 7.png, unnamed 6.png) -->
+          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.SentenceReordering">
+            <div *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.SentenceReordering && currentQuestion as qReorder">
+              <h2 class="text-xl font-semibold mb-4 text-gray-200" [innerHTML]="qReorder.mainInstruction"></h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column: Fixed First Sentence and Drop Boxes -->
+                <div class="space-y-4">
+                  <div class="bg-gray-700 p-3 rounded-md border border-gray-600">
+                    <h3 class="font-medium text-gray-200">Signs on the coast road</h3>
+                    <p class="text-gray-300">{{ qReorder.fixedSentence }}</p>
+                  </div>
+                  <div *ngFor="let slot of qReorder.userOrder; let i = index"
+                       class="border border-dashed border-gray-600 p-4 min-h-20 rounded-md flex items-center justify-center text-gray-400 relative"
+                       [ngClass]="{'bg-gray-700 border-solid': slot !== null}">
+                    <span *ngIf="slot === null">Kéo thả câu vào đây (hoặc click vào câu bên phải)</span>
+                    <div *ngIf="slot !== null" class="text-gray-200 flex items-center justify-between w-full">
+                      <span>{{ slot.text }}</span>
+                      <button (click)="clearReorderSlot(i)"
+                              class="text-red-400 hover:text-red-300 ml-2 p-1 rounded-full bg-gray-600 hover:bg-gray-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column: Draggable Sentences -->
+                <div class="space-y-4">
+                  <div *ngFor="let sentence of qReorder.draggableSentences"
+                       class="bg-gray-700 p-3 rounded-md border border-gray-600 cursor-pointer text-gray-200 hover:bg-gray-600 transition-colors duration-150"
+                       [ngClass]="{'opacity-50 cursor-not-allowed': isSentenceUsed(sentence.id)}"
+                       (click)="!isSentenceUsed(sentence.id) && selectReorderOption(sentence)">
+                    <span class="font-bold mr-2">#</span> {{ sentence.text }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Question 4: Multiple Choice from Text (unnamed 2.png) -->
+          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.MultipleChoiceFromText">
+            <div *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.MultipleChoiceFromText && currentQuestion as qMCQText" class="flex flex-col md:flex-row gap-6">
+              <!-- Left side: Passage -->
+              <div class="md:w-1/2 bg-gray-700 p-4 rounded-lg shadow-md overflow-y-auto max-h-[calc(100vh-200px)]">
+                <h3 class="text-lg font-semibold mb-3 text-gray-100">Đọc đoạn văn sau:</h3>
+                <div class="prose prose-invert text-gray-200 text-sm space-y-3" [innerHTML]="qMCQText.passage[0].text"></div>
+              </div>
+
+              <!-- Right side: Questions -->
+              <div class="md:w-1/2 space-y-6">
+                 <h3 class="text-lg font-semibold mb-3 text-gray-100" [innerHTML]="qMCQText.mainInstruction"></h3>
+                <div *ngFor="let questionItem of qMCQText.questions" class="flex flex-col space-y-2 p-3 rounded-lg border border-gray-700 bg-gray-700">
+                  <span class="font-medium text-gray-100 text-sm">{{ questionItem.questionText }}</span>
+                   <mat-form-field appearance="outline" class="material-dropdown-wrapper">
+                      <mat-select
+                        [(ngModel)]="questionItem.selectedOption"
+                        (selectionChange)="handleDropdownChange($event.value, questionItem.id)"
+                        [disabled]="qMCQText.isAnswered">
+                        <mat-option [value]="undefined" disabled selected>-- Chọn đáp án --</mat-option>
+                        <mat-option *ngFor="let option of questionItem.options" [value]="option">
+                          {{ option }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Question 5: Heading Matching (unnamed 1.png) -->
+          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.HeadingMatching">
+            <div *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.HeadingMatching && currentQuestion as qHeading" class="flex flex-col md:flex-row gap-6">
+              <!-- Left side: Headings/Dropdowns -->
+              <div class="md:w-1/2 space-y-6">
+                <h3 class="text-xl font-semibold mb-4 text-gray-200" [innerHTML]="qHeading.mainInstruction"></h3>
+                <div *ngFor="let paragraph of qHeading.paragraphs; let i = index" class="space-y-2 p-3 rounded-lg border border-gray-700 bg-gray-700">
+                  <p class="text-sm text-gray-100"><strong class="text-white">Đoạn {{ i + 1 }}:</strong></p>
+                  <mat-form-field appearance="outline" class="material-dropdown-wrapper">
+                    <mat-select
+                      [(ngModel)]="paragraph.selectedHeading"
+                      (selectionChange)="handleDropdownChange($event.value, paragraph.id)"
+                      [disabled]="qHeading.isAnswered">
+                      <mat-option [value]="undefined" disabled selected>-- Chọn đáp án --</mat-option>
+                      <mat-option *ngFor="let option of paragraph.options" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Right side: Paragraphs -->
+              <div class="md:w-1/2 bg-gray-700 p-4 rounded-lg shadow-md overflow-y-auto">
+                <h3 class="text-lg font-semibold mb-3 text-gray-100">Đoạn văn bản:</h3>
+                <div *ngFor="let paragraph of qHeading.paragraphs; let i = index" class="mb-4 text-gray-200 text-sm">
+                  <p><strong class="text-white">{{ i + 1 }}.</strong> {{ paragraph.text }}</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Unsupported Question Type -->
+          <ng-container *ngSwitchDefault>
+            <div class="text-red-400 font-semibold">Loại câu hỏi này chưa được hỗ trợ hiển thị.</div>
+            <p class="text-gray-400 mt-2">ID câu hỏi: {{ currentQuestion.id }}</p>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer for Test In Progress -->
+    <div class="bg-gray-800 shadow-upward p-3 sm:p-4 flex justify-between items-center sticky bottom-0 z-10 border-t border-gray-700">
+      <div class="flex space-x-1 sm:space-x-2">
+          <button title="Menu" class="p-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </button>
+           <button title="Tùy chọn trợ năng" class="p-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 1114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
+          </button>
+      </div>
+
+      <div class="flex space-x-2 sm:space-x-3">
+        <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0"
+                class="px-4 sm:px-6 py-2 border border-purple-700 rounded-md text-sm font-medium text-purple-400 hover:bg-purple-900 disabled:opacity-50 disabled:cursor-not-allowed flex items-center transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <svg class="w-4 h-4 mr-1 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Trước
+        </button>
+        <button *ngIf="currentQuestionIndex < questions.length - 1" (click)="nextQuestion()"
+                class="px-4 sm:px-6 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 flex items-center transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+          Sau
+          <svg class="w-4 h-4 ml-1 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <button *ngIf="currentQuestionIndex === questions.length - 1" (click)="finishTest()"
+                class="px-4 sm:px-6 py-2 bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+          Nộp bài
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div *ngIf="currentState === TestStateEnum.ResultsScreen" class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+    <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-4xl text-gray-50">
+      <h2 class="text-2xl sm:text-3xl font-bold text-purple-400 mb-6 text-center">Kết Quả Bài Thi Đọc</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-center">
+        <div class="bg-green-700 p-4 rounded-lg">
+          <p class="text-sm text-green-200">Số câu đúng</p>
+          <p class="text-2xl font-bold text-green-50">{{ correctAnswersCount }}</p>
+        </div>
+        <div class="bg-red-700 p-4 rounded-lg">
+          <p class="text-sm text-red-200">Số câu sai</p>
+          <p class="text-2xl font-bold text-red-50">{{ incorrectAnswersCount }}</p>
+        </div>
+        <div class="bg-yellow-700 p-4 rounded-lg">
+          <p class="text-sm text-yellow-200">Chưa trả lời</p>
+          <p class="text-2xl font-bold text-yellow-50">{{ unansweredCount }}</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold text-white mb-4">Tổng quan các câu hỏi đã làm:</h3>
+      <div class="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
+        <ng-container *ngFor="let question of questions; let i = index">
+          <div *ngIf="question.displayType !== QuestionDisplayTypeEnum.Unsupported"
+               class="p-4 border border-gray-700 rounded-lg shadow-sm"
+               [ngClass]="getQuestionResultClasses(question)">
+            <p class="font-semibold mb-2 text-white">Câu hỏi {{ i + 1 }}:</p>
+
+            <!-- Display for Email Fill-in-Blanks Results -->
+            <ng-container *ngIf="question.displayType === QuestionDisplayTypeEnum.EmailFillInBlanks && question as qEmail">
+              <p class="mb-2 text-sm text-gray-100">Email:</p>
+              <div class="text-sm text-gray-100 whitespace-pre-wrap mb-2">
+                <ng-container *ngFor="let part of qEmail.emailTemplateParts">
+                  <ng-container *ngIf="part.type === 'text'">{{ part.content }}</ng-container>
+                  <ng-container *ngIf="part.type === 'gap' && part.gapIndex !== undefined">
+                    <span class="inline-block text-purple-200 bg-gray-700 px-2 py-1 rounded-md mx-1">
+                      {{ qEmail.gaps[part.gapIndex].selectedOption || '[EMPTY]' }}
+                    </span>
+                  </ng-container>
+                </ng-container>
+              </div>
+              <p class="text-sm text-gray-100">Đáp án của bạn:
+                <span [ngClass]="{
+                  'text-green-300 font-medium': getStatusForDisplay(qEmail) === 'Đúng',
+                  'text-red-300 font-medium': getStatusForDisplay(qEmail) === 'Sai',
+                  'text-yellow-300': getStatusForDisplay(qEmail) === 'Chưa trả lời'
+                }">
+                  {{ getUserAnswerForDisplay(qEmail) }}
+                </span>
+              </p>
+              <p class="text-sm text-green-300">Đáp án đúng: <span class="font-medium">{{ getCorrectAnswerForDisplay(qEmail) }}</span></p>
+              <p class="text-sm text-gray-100">Trạng thái:
+                <span [ngClass]="{
+                  'text-green-300 font-medium': getStatusForDisplay(qEmail) === 'Đúng',
+                  'text-red-300 font-medium': getStatusForDisplay(qEmail) === 'Sai',
+                  'text-yellow-300': getStatusForDisplay(qEmail) === 'Chưa trả lời'
+                }">
+                  {{ getStatusForDisplay(qEmail) }}
+                </span>
+              </p>
+            </ng-container>
+
+            <!-- Display for Sentence Reordering Results -->
+            <ng-container *ngIf="question.displayType === QuestionDisplayTypeEnum.SentenceReordering && question as qReorder">
+              <p class="mb-2 text-sm text-gray-100" [innerHTML]="qReorder.mainInstruction"></p>
+              <p class="text-sm text-gray-100">Câu cố định: <span class="font-medium">{{ qReorder.fixedSentence }}</span></p>
+              <p class="text-sm text-gray-100">Đáp án của bạn:</p>
+              <pre class="text-sm whitespace-pre-wrap rounded-md p-2"
+                   [ngClass]="{
+                     'bg-green-900 text-green-100': getStatusForDisplay(qReorder) === 'Đúng',
+                     'bg-red-900 text-red-100': getStatusForDisplay(qReorder) === 'Sai',
+                     'bg-gray-700 text-gray-200': getStatusForDisplay(qReorder) === 'Chưa trả lời'
+                   }">{{ getUserAnswerForDisplay(qReorder) }}</pre>
+              <p class="text-sm text-green-300">Đáp án đúng:</p>
+              <pre class="text-sm text-green-300 font-medium whitespace-pre-wrap rounded-md p-2 bg-gray-700">{{ getCorrectAnswerForDisplay(qReorder) }}</pre>
+              <p class="text-sm text-gray-100">Trạng thái:
+                <span [ngClass]="{
+                  'text-green-300 font-medium': getStatusForDisplay(qReorder) === 'Đúng',
+                  'text-red-300 font-medium': getStatusForDisplay(qReorder) === 'Sai',
+                  'text-yellow-300': getStatusForDisplay(qReorder) === 'Chưa trả lời'
+                }">
+                  {{ getStatusForDisplay(qReorder) }}
+                </span>
+              </p>
+            </ng-container>
+
+            <!-- Display for Multiple Choice from Text Results -->
+            <ng-container *ngIf="question.displayType === QuestionDisplayTypeEnum.MultipleChoiceFromText && question as qMCQText">
+              <p class="mb-2 text-sm text-gray-100" [innerHTML]="qMCQText.mainInstruction"></p>
+              <div class="prose prose-invert text-gray-100 space-y-4 mb-2">
+                <div [innerHTML]="qMCQText.passage[0].text"></div>
+              </div>
+              <div *ngFor="let item of qMCQText.questions; let idx = index" class="ml-4 mt-3 border-l-2 pl-3 border-gray-700">
+                <p class="text-sm text-gray-100">{{ item.questionText }}</p>
+                <p class="text-sm text-gray-100">Đáp án của bạn:
+                  <span [ngClass]="{
+                    'text-green-300 font-medium': item.selectedOption === item.correctAnswer,
+                    'text-red-300 font-medium': item.selectedOption !== item.correctAnswer && item.selectedOption !== undefined,
+                    'text-yellow-300': item.selectedOption === undefined
+                  }">
+                    {{ item.selectedOption || 'Chưa trả lời' }}
+                  </span>
+                </p>
+                <p class="text-sm text-green-300">Đáp án đúng: <span class="font-medium">{{ item.correctAnswer }}</span></p>
+                <p class="text-sm text-gray-100">Trạng thái:
+                  <span [ngClass]="{
+                    'text-green-300 font-medium': item.selectedOption === item.correctAnswer,
+                    'text-red-300 font-medium': item.selectedOption !== item.correctAnswer && item.selectedOption !== undefined,
+                    'text-yellow-300': item.selectedOption === undefined
+                  }">
+                    {{ item.selectedOption === item.correctAnswer ? 'Đúng' : (item.selectedOption !== undefined ? 'Sai' : 'Chưa trả lời') }}
+                  </span>
+                </p>
+              </div>
+            </ng-container>
+
+            <!-- Display for Heading Matching Results -->
+            <ng-container *ngIf="question.displayType === QuestionDisplayTypeEnum.HeadingMatching && question as qHeading">
+              <p class="mb-2 text-sm text-gray-100" [innerHTML]="qHeading.mainInstruction"></p>
+              <div *ngFor="let item of qHeading.paragraphs; let idx = index" class="ml-4 mt-3 border-l-2 pl-3 border-gray-700">
+                <p class="text-sm text-gray-100"><strong class="text-white">Đoạn {{ idx + 1 }}:</strong> {{ item.text.substring(0, 100) }}...</p>
+                <p class="text-sm text-gray-100">Đáp án của bạn:
+                  <span [ngClass]="{
+                    'text-green-300 font-medium': item.selectedHeading === item.correctHeading,
+                    'text-red-300 font-medium': item.selectedHeading !== item.correctHeading && item.selectedHeading !== undefined,
+                    'text-yellow-300': item.selectedHeading === undefined
+                  }">
+                    {{ item.selectedHeading || 'Chưa trả lời' }}
+                  </span>
+                </p>
+                <p class="text-sm text-green-300">Đáp án đúng: <span class="font-medium">{{ item.correctHeading }}</span></p>
+                <p class="text-sm text-gray-100">Trạng thái:
+                  <span [ngClass]="{
+                    'text-green-300 font-medium': item.selectedHeading === item.correctHeading,
+                    'text-red-300 font-medium': item.selectedHeading !== item.correctHeading && item.selectedHeading !== undefined,
+                    'text-yellow-300': item.selectedHeading === undefined
+                  }">
+                    {{ item.selectedHeading === item.correctHeading ? 'Đúng' : (item.selectedHeading !== undefined ? 'Sai' : 'Chưa trả lời') }}
+                  </span>
+                </p>
+              </div>
+            </ng-container>
+
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="mt-8 text-center">
+        <button (click)="goToStartScreen()"
+                class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+          Quay về giao diện chọn đề thi tiếp theo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

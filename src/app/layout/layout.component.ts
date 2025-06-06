@@ -23,7 +23,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.appModeSubscription = this.appModeService.appMode$.subscribe(mode => {
       this.currentAppMode = mode;
-      this.showHeader = mode !== 'idle';
+      // this.showHeader = mode !== 'idle';
+      this.showHeader = true;
       this.cdRef.detectChanges(); // Quan trọng để cập nhật view
     });
   }

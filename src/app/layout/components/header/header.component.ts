@@ -57,6 +57,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           navigationPath = '/writing'; 
           console.warn('Writing mode navigation from header not implemented yet.');
           break;
+        case 'reading_test':
+          navigationPath = '/reading/test'; 
+          console.warn('reading test mode navigation from header not implemented yet.');
+          break;
       }
       if (navigationPath !== '/' || (navigationPath === '/' && mode === 'idle')) {
          this.router.navigate([navigationPath]);

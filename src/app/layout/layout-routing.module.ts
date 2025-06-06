@@ -7,6 +7,7 @@ import { AudioPlayerComponent } from '../shared/components/app-audio-player/app-
 import { ListeningAudioComponent } from '../shared/components/listening-audio/listening-audio.component';
 import { SpeakingComponent } from '../shared/components/speaking/speaking.component';
 import { WritingComponent } from '../shared/components/writing/writing.component';
+import { ReadingTestComponent } from '../shared/components/reading-test/reading-test.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: 'welcome', component: WelcomeComponent },
       { path: 'listening/test', component: ListeningTestComponent },
+      { path: 'reading/test', component: ReadingTestComponent },
       { path: 'listening/audio', component: ListeningAudioComponent },
       { path: 'speaking', component: SpeakingComponent },
       { path: 'writing', component: WritingComponent },

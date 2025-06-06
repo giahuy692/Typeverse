@@ -9,7 +9,6 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 
-import { ListeningTestComponent } from '../shared/components/listening-test/listening-test.component'; 
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -24,7 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     LayoutRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
 })
 export class LayoutModule { }

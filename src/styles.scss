@@ -9,10 +9,45 @@
 
 body {
   background-color: #111827; // thậm chí còn tối hơn
-  color: #f3f4f6;  // slate-100
-}
-
-span,p {
   color: #f3f4f6; // slate-100
 }
 
+span,
+p {
+  color: #f3f4f6; // slate-100
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(rgb(209 213 219), 0.5);
+}

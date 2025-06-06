@@ -3,7 +3,7 @@
     <h1 class="title">Typeverse</h1>
   </div>
 
-  <nav class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full shadow-inner">
+  <nav class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full shadow-inner" *ngIf="currentAppMode !== 'idle'">
     <button (click)="changeAppMode('listening_test')" [ngClass]="{
       'bg-indigo-600 text-white shadow': currentAppMode === 'listening_test',
       'text-gray-600 hover:bg-gray-200': currentAppMode !== 'listening_test'
@@ -30,6 +30,13 @@
       'text-gray-600 hover:bg-gray-200': currentAppMode !== 'writing'
     }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
       ✍️ Passive Writing
+    </button>
+
+    <button (click)="changeAppMode('reading_test')" [ngClass]="{
+      'bg-emerald-600 text-white shadow': currentAppMode === 'reading_test',
+      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'reading_test'
+    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
+      ✍️ Passive reading test
     </button>
   </nav>
 

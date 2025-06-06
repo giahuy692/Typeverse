@@ -1,1 +1,456 @@
-<p>reading-test works!</p>
+<!-- reading-test.component.html -->
+<div class="font-['Inter'] relative min-h-screen bg-gray-900 text-gray-100 flex flex-col">
+  <!-- User Message Display -->
+  <div *ngIf="userMessage" class="fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 text-white max-w-sm break-words"
+    [ngClass]="{
+         'bg-green-500': messageType === 'success',
+         'bg-red-500': messageType === 'error',
+         'bg-yellow-500': messageType === 'warning'
+       }">
+    {{ userMessage }}
+    <button (click)="clearUserMessage()" class="ml-4 font-bold text-lg align-top">&times;</button>
+  </div>
+
+  <!-- Start Screen -->
+  <div *ngIf="currentState === TestStateEnum.StartScreen"
+    class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+    <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl text-center w-full max-w-lg">
+      <h2 class="text-sm font-medium text-gray-400">Aptis General Practice Test</h2>
+      <h1 class="text-3xl sm:text-4xl font-bold text-purple-400 mt-2 mb-6">Reading</h1>
+
+      <div class="my-6">
+        <label for="examSelect" class="block text-sm font-medium text-gray-300 mb-2">Chọn đề thi:</label>
+        <select id="examSelect" name="selectedExam" [(ngModel)]="selectedExamIndex"
+          (change)="onExamSelectionChange($event)"
+          class="w-full p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:focus:border-purple-500 bg-gray-700 text-gray-100">
+          <option *ngFor="let exam of allExamFiles; let i = index" [value]="i">
+            {{ exam.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
+        <div class="text-center sm:text-left">
+          <p class="text-xs text-gray-500">Số lượng câu hỏi</p>
+          <p class="text-lg font-semibold text-gray-300">{{ currentExamQuestionCountOnStartScreen }}</p>
+        </div>
+        <div class="text-center sm:text-left">
+          <p class="text-xs text-gray-500">Thời gian cho phép</p>
+          <p class="text-lg font-semibold text-gray-300">{{ allExamFiles[selectedExamIndex]?.timeAllowedMinutes || 'N/A'
+            }} phút</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-400 mb-8">Đây là bài thực hành cho phần thi đọc Aptis General. Nhấn vào nút dưới đây
+        để bắt đầu.</p>
+      <button (click)="goToInstructions()"
+        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+        Bắt đầu làm bài
+      </button>
+    </div>
+  </div>
+
+  <!-- Instructions Screen -->
+  <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
+    class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+    <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-2xl">
+      <h1 class="text-xl sm:text-2xl font-bold text-purple-400 mb-4 text-center">Hướng dẫn làm bài đọc Aptis General
+      </h1>
+      <h2 class="text-lg font-semibold text-gray-300 mb-6 text-center">Đề thi: {{ allExamFiles[selectedExamIndex]?.name
+        || 'Đang chọn...' }}</h2>
+      <div class="text-gray-300 space-y-3 text-sm sm:text-base leading-relaxed">
+        <p>Bài thi có <strong>{{ allExamFiles[selectedExamIndex]?.questionCount || 'N/A' }} phần</strong>.</p>
+        <p>Bạn có <strong>{{ allExamFiles[selectedExamIndex]?.timeAllowedMinutes || 'N/A' }} phút</strong> để hoàn thành
+          bài thi.</p>
+        <p>Khi bạn nhấn nút <strong>'Tiếp theo'</strong>, bài thi sẽ bắt đầu.</p>
+      </div>
+      <p class="mt-10 text-sm text-gray-400">Chúc bạn may mắn!</p>
+      <div class="mt-8 text-right">
+        <button (click)="startTest()"
+          class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 sm:px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+          Tiếp theo &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test In Progress Screen -->
+  <div *ngIf="currentState === TestStateEnum.TestInProgress"
+    class="font-['Inter'] min-h-screen bg-[#161d29] text-gray-100 flex flex-col justify-between">
+    <!-- Main container -->
+    <div class="flex-grow flex items-center justify-center py-8 px-2">
+      <div class="w-full bg-[#202738] rounded-2xl shadow-2xl px-8 py-10">
+
+        <!-- Tiêu đề và số câu -->
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <div class="text-xl font-bold text-white">Reading</div>
+            <div class="text-lg font-semibold text-purple-300">Câu {{ currentQuestionIndex + 1 }} / {{ questions.length
+              }}</div>
+          </div>
+          <div>
+            <!-- <span class="block text-xs text-gray-400">{{ timerDisplay }}</span> -->
+          </div>
+        </div>
+
+        <!-- Nội dung câu hỏi theo type -->
+        <ng-container [ngSwitch]="currentQuestion?.type">
+          <!-- Type 5: Email fill-in-the-blanks -->
+          <ng-container *ngSwitchCase="5">
+            <div>
+              <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+              <div class="bg-[#232c41] rounded-lg p-6">
+                <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3 mb-2">
+                  <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
+                  <select
+                    class="min-w-[120px] bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                    <option value="">-- Chọn --</option>
+                    <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Câu hỏi reorder (type 6) dùng click để chọn/chuyển -->
+          <div *ngSwitchCase="6" class="w-full mx-auto">
+            <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+            <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+
+            <div class="flex gap-8">
+              <!-- Cột trái: slot thứ tự -->
+              <div class="flex-1 bg-[#232c41] p-6 rounded-lg shadow-lg">
+                <div class="space-y-3">
+                  <div *ngFor="let slot of orderedSlots; let i = index" class="flex items-center gap-2">
+                    <span class="text-gray-400 min-w-[28px] font-semibold">{{ i + 1 }}.</span>
+                    <button class="w-full min-h-[40px] flex items-center rounded bg-[#1c2231] border border-gray-700
+              px-3 py-2 text-left"
+                      [ngClass]="slot ? 'text-white cursor-pointer hover:bg-red-900 hover:text-white' : 'text-gray-400 cursor-not-allowed'"
+                      (click)="removeSlot(i)" [disabled]="!slot" type="button">
+                      {{ slot?.title || '-- Chọn --' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cột phải: các câu chưa chọn -->
+              <div class="w-1/2 bg-[#181f2a] rounded-lg p-6 border border-gray-700 space-y-2 shadow-lg">
+                <button *ngFor="let choice of availableChoices" class="w-full mb-2 px-2 py-2 rounded bg-[#202738] border border-gray-700 text-left text-gray-300
+          hover:bg-purple-700 transition" (click)="chooseChoice(choice)" type="button">
+                  {{ choice.title }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Type 3: Multiple choice from text -->
+          <ng-container *ngSwitchCase="3">
+            <div>
+              <div class="title-question">
+                <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+                <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+              </div>
+              <div class="bg-[#232c41] rounded-lg p-6 space-y-4">
+                <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3">
+                  <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
+                  <select
+                    class="min-w-[120px] bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                    <option value="">-- Chọn --</option>
+                    <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Type 4: Heading Matching -->
+          <ng-container *ngSwitchCase="4">
+            <div>
+              <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#232c41] p-6 rounded-lg">
+                <!-- Cột 1: đoạn văn -->
+                <div class="space-y-4">
+                  <div *ngFor="let child of currentQuestion.childs; let idx = index"
+                    class="bg-[#202738] rounded-lg p-4 border border-gray-700">
+                    <div class="font-medium text-gray-200">Đoạn {{ idx + 1 }}</div>
+                    <div class="text-gray-400 text-sm mt-2">{{ child.title }}</div>
+                  </div>
+                </div>
+                <!-- Cột 2: dropdown đáp án -->
+                <div class="space-y-4">
+                  <div *ngFor="let child of currentQuestion.childs; let idx = index"
+                    class="bg-[#202738] rounded-lg p-4 border border-gray-700 flex flex-col gap-2 items-start">
+                    <div class="font-medium text-gray-200 mb-1">Đáp án đoạn {{ idx + 1 }}</div>
+                    <select
+                      class="bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                      <option value="">-- Chọn heading --</option>
+                      <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <!-- Không hỗ trợ loại khác -->
+          <ng-container *ngSwitchDefault>
+            <div class="flex flex-col items-center justify-center py-24">
+              <div class="bg-[#232c41] border-2 border-red-500 px-8 py-6 rounded-xl shadow-lg">
+                <div class="text-2xl font-bold text-red-400 mb-2">
+                  Không hỗ trợ loại câu hỏi này!
+                </div>
+                <div class="text-gray-200 text-lg mb-2">
+                  Hiện tại, hệ thống chỉ hỗ trợ một số dạng câu hỏi phổ biến.<br>
+                  Vui lòng chọn đề khác hoặc liên hệ kỹ thuật nếu đây là lỗi.
+                </div>
+                <button
+                  class="mt-2 px-5 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white font-semibold shadow transition"
+                  (click)="goToStartScreen()">
+                  Quay về trang chọn đề
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer cố định (điều hướng) -->
+  <footer *ngIf="currentState === TestStateEnum.TestInProgress"
+    class="w-full fixed bottom-0 left-0 z-30 bg-[#161d29] border-t border-gray-700 py-3 px-5 flex items-center justify-between"
+    style="min-height:52px;">
+    <div class="flex items-center space-x-2">
+      <button
+        class="w-9 h-9 flex items-center justify-center bg-[#232c41] rounded-lg border border-gray-700 focus:outline-none"
+        title="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 text-gray-300" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-width="2" d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </button>
+      <button
+        class="w-9 h-9 flex items-center justify-center bg-[#232c41] rounded-lg border border-gray-700 focus:outline-none"
+        title="Help">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 text-gray-300" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path stroke="currentColor" stroke-width="2"
+            d="M9.09 9a3 3 0 0 1 5.82 0c0 1.05-.48 2.02-1.32 2.6l-.66.47a2 2 0 0 0-.8 1.6v.33M12 17h.01" />
+        </svg>
+      </button>
+      <button
+        class="w-9 h-9 flex items-center justify-center bg-[#232c41] rounded-lg border border-gray-700 focus:outline-none"
+        title="Accessibility">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 text-gray-300" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-width="2"
+            d="M12 7v.01M7 12h10M5.93 17.07A10 10 0 1 1 18.07 6.93 10 10 0 0 1 5.93 17.07z" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex gap-3">
+      <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0"
+        class="px-7 py-2 rounded-lg bg-gray-700 text-gray-100 font-semibold hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed">
+        Trước
+      </button>
+      <button *ngIf="currentQuestionIndex < questions.length - 1" (click)="nextQuestion()"
+        class="px-7 py-2 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 transition">
+        Sau
+      </button>
+      <button *ngIf="currentQuestionIndex === questions.length - 1" (click)="finishTest()"
+        class="px-7 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700 transition">
+        Nộp bài
+      </button>
+    </div>
+  </footer>
+
+
+
+  <!-- Results Screen -->
+  <div *ngIf="currentState === TestStateEnum.ResultsScreen" class="max-w-5xl mx-auto my-8">
+    <div *ngFor="let q of questions; let idx = index" class="rounded-lg p-5 mb-6 shadow border-2">
+      <div class="text-gray-200 mb-2" [innerHTML]="q.title"></div>
+      <ng-container [ngSwitch]="q?.type">
+        <!-- Type 5: Email fill-in-the-blanks -->
+        <ng-container *ngSwitchCase="5">
+          <div>
+            <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="q.title"></div>
+            <div *ngIf="q.explain" class="text-gray-400 mb-3">{{ q.explain }}</div>
+            <div class="bg-[#232c41] rounded-lg p-6">
+              <div *ngFor="let child of q.childs" class="flex items-center gap-3 mb-2">
+                <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
+                <span class="text-base text-green-200 border border-green-500/80 px-2 py-1 rounded-sm"
+                  *ngIf="getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose">Đáp án đúng: {{
+                  getCorrectAnswer(child).answer }}</span>
+                <select
+                  class="min-w-[120px] bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  [ngModel]="getSelectedAnswer(child)" disabled="true" [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
+                  <option value="">-- Chọn --</option>
+                  <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Câu hỏi reorder (type 6) dùng click để chọn/chuyển -->
+        <div *ngSwitchCase="6" class="w-full mx-auto">
+          <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+          <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+
+          <div class="flex gap-8">
+            <!-- Cột trái: slot thứ tự -->
+            <div class="flex-1 bg-[#232c41] p-6 rounded-lg shadow-lg">
+              <div class="space-y-3">
+                <div *ngFor="let slot of q.userOrder; let i = index" class="flex items-center gap-2">
+                  <span class="text-gray-400 min-w-[28px] font-semibold">{{ i + 1 }}.</span>
+                  <div
+                    class="w-full min-h-[40px] flex items-center rounded bg-[#1c2231] border border-gray-700 px-3 py-2 text-left"
+                    [ngClass]="{
+                          'bg-green-700 text-white border-green-400': q.userOrder?.[i]?.title === q.answer?.[i]?.title,
+                          'bg-red-700 text-white border-red-400': q.userOrder?.[i]?.title !== q.answer?.[i]?.title
+                        }" innerHTML="{{ q.userOrder?.[i]?.title || '-- Chưa chọn --' }}">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Cột phải: các câu chưa chọn -->
+            <div class="w-1/2 bg-[#181f2a] rounded-lg p-6 border border-gray-700 space-y-2 shadow-lg">
+              <button *ngFor="let choice of q.answer" class="w-full mb-2 px-2 py-2 rounded bg-[#202738] border border-gray-700 text-left text-gray-300
+          hover:bg-purple-700 transition" type="button" [innerHTML]="choice.title">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type 3: Multiple choice from text -->
+        <ng-container *ngSwitchCase="3">
+          <div>
+            <div class="title-question">
+              <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain">
+              </div>
+            </div>
+            <div class="bg-[#232c41] rounded-lg p-6 space-y-4">
+              <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3">
+                <span class="flex-1 text-base text-gray-200" [innerHTML]="child.title"></span>
+                <div
+                  class="w-[363px] bg-[#202738] rounded-lg p-4 border border-gray-700 flex flex-col gap-2 items-start">
+                  <select [ngModel]="getSelectedAnswer(child)" class="bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 
+                    w-full focus:outline-none focus:ring-2 focus:ring-purple-500" [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
+                    <option value="">-- Chọn --</option>
+                    <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                  </select>
+                  <br />
+                  <span class="mt-2 text-base text-green-200 px-2 py-1 rounded-sm text-wrap"
+                    *ngIf="getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose">Đáp án đúng: {{
+                    getCorrectAnswer(child).answer }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Type 4: Heading Matching -->
+        <ng-container *ngSwitchCase="4">
+          <div>
+            <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
+            <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#232c41] p-6 rounded-lg">
+              <!-- Cột 1: đoạn văn -->
+              <div class="space-y-4">
+                <div *ngFor="let child of currentQuestion.childs; let idx = index"
+                  class="bg-[#202738] rounded-lg p-4 border border-gray-700">
+                  <div class="font-medium text-gray-200">Đoạn {{ idx + 1 }}</div>
+                  <div class="text-gray-400 text-sm mt-2" [innerHTML]="child.title"></div>
+                </div>
+              </div>
+              <!-- Cột 2: dropdown đáp án -->
+              <div class="space-y-4">
+                <div *ngFor="let child of currentQuestion.childs; let idx = index"
+                  class="bg-[#202738] rounded-lg p-4 border border-gray-700 flex flex-col gap-2 items-start">
+                  <div class="font-medium text-gray-200 mb-1">Đáp án đoạn {{ idx + 1 }}</div>
+                  <select class="bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 
+                    w-full focus:outline-none focus:ring-2 focus:ring-purple-500" [ngModel]="getSelectedAnswer(child)"
+                    [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
+                    <option value="">-- Chọn heading --</option>
+                    <option *ngFor="let ans of child.answer" [value]="ans.answer">{{ ans.answer }}</option>
+                  </select>
+                  <br />
+                  <span class="mt-2 text-base text-green-200 px-2 py-1 rounded-sm text-wrap"
+                    *ngIf="getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose">Đáp án đúng: {{
+                    getCorrectAnswer(child).answer }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+
+        <!-- Không hỗ trợ loại khác -->
+        <ng-container *ngSwitchDefault>
+          <div class="flex flex-col items-center justify-center py-24">
+            <div class="bg-[#232c41] border-2 border-red-500 px-8 py-6 rounded-xl shadow-lg">
+              <div class="text-2xl font-bold text-red-400 mb-2">
+                Không hỗ trợ loại câu hỏi này!
+              </div>
+              <div class="text-gray-200 text-lg mb-2">
+                Hiện tại, hệ thống chỉ hỗ trợ một số dạng câu hỏi phổ biến.<br>
+                Vui lòng chọn đề khác hoặc liên hệ kỹ thuật nếu đây là lỗi.
+              </div>
+              <button
+                class="mt-2 px-5 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white font-semibold shadow transition"
+                (click)="goToStartScreen()">
+                Quay về trang chọn đề
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+    </div>
+    <!-- Nút quay lại chọn đề ở cuối -->
+    <div
+      class="w-full fixed bottom-0 left-0 z-30 bg-[#161d29] border-t border-gray-700 py-3 px-5 flex items-center justify-between">
+      <div class="flex items-center space-x-6 text-base">
+        <ng-container *ngIf="{ correct: getCorrectSmallQuestionsCount(),
+                total: getTotalSmallQuestionsCount() } as stat">
+          <div class="flex items-center gap-4">
+            <span class="text-green-400 font-bold text-lg">{{ stat.correct }}</span>
+            <span class="text-gray-400">/</span>
+            <span class="text-white font-bold text-lg">{{ stat.total }}</span>
+            <span class="text-gray-400 ml-1">câu</span>
+          </div>
+          <!-- Có thể bổ sung quy đổi điểm/cấp bậc -->
+        </ng-container>
+      </div>
+      <button (click)="goToStartScreen()"
+        class="ml-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Quay về giao diện chọn đề
+      </button>
+    </div>
+  </div>
+
+
+
+</div>

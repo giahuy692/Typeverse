@@ -33,6 +33,9 @@ export class WelcomeComponent implements OnInit {
       case 'listening_audio':
         navigationPath = '/listening/audio';
         break;
+      case 'reading_test':
+        navigationPath = '/reading/test';
+        break;
       case 'speaking':
         navigationPath = '/speaking';
         break;

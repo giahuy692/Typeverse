@@ -21,7 +21,6 @@ import { HttpClientModule } from '@angular/common/http'; // Thêm HttpClientModu
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule ,
-    
   ],
   bootstrap: [AppComponent]
 })

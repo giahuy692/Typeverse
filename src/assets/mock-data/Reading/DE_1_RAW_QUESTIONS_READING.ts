@@ -14,14 +14,14 @@ export const DE_1_RAW_QUESTIONS_READING = [
         id: 2114,
         skill_id: 5,
         type: 5,
-        title: 'I&rsquo;ve just come back from my trip and I really__you',
+        title: 'I\'ve just come back from my trip and I really__you',
         explain: 'miss',
         audio_url: null,
         answer: [
           {
             answer: 'miss',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'love',
@@ -43,14 +43,14 @@ export const DE_1_RAW_QUESTIONS_READING = [
         id: 2115,
         skill_id: 5,
         type: 5,
-        title: 'I__you by phone yesterday but couldn&rsquo;t reach you.',
+        title: 'I__you by phone yesterday but couldn\'t reach you.',
         explain: 'called',
         audio_url: null,
         answer: [
           {
             answer: 'called',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'send',
@@ -84,7 +84,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'ready',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'going',
@@ -101,7 +101,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
         id: 2117,
         skill_id: 5,
         type: 5,
-        title: 'I can&rsquo;t wait to__you soon and catch up',
+        title: 'I can\'t wait to__you soon and catch up',
         explain: 'meet',
         audio_url: null,
         answer: [
@@ -118,7 +118,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'meet',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -130,14 +130,14 @@ export const DE_1_RAW_QUESTIONS_READING = [
         id: 2118,
         skill_id: 5,
         type: 5,
-        title: 'Let&rsquo;s go out for__tomorrow night when you&rsquo;re free',
+        title: 'Let\'s go out for__tomorrow night when you\'re free',
         explain: 'dinner',
         audio_url: null,
         answer: [
           {
             answer: 'dinner',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'morning',
@@ -274,7 +274,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -291,7 +291,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
         id: 2050,
         skill_id: 5,
         type: 3,
-        title: 'Who can&rsquo;t help because of busy life?',
+        title: 'Who can\'t help because of busy life?',
         explain:
           '<p><strong>I just have too much work that I don&#39;t have much free time for myself. This tight&nbsp;schedule makes it impossible for me to join in the park cleaning. I work all week,&nbsp;and the only time I go out is on weekends with my family. We usually visit the park&nbsp;to play games and take a walk. I am relieved to hear that the park will be cleaned&nbsp;by the children volunteering from the school nearby. I believe these experiences&nbsp;will benefit them in the future, helping them sharpen skills needed for their future&nbsp;careers.</strong></p>',
         audio_url: null,
@@ -309,7 +309,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -344,7 +344,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -379,7 +379,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -414,7 +414,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -449,7 +449,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -484,7 +484,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Person C',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Person D',
@@ -553,7 +553,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Factors Contributing to Inactivity',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -594,7 +594,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'The Situation Has the Potential to Become Worse',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The Success of a Simple Idea',
@@ -650,7 +650,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'The Success of a Simple Idea',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The Situation Has the Potential to Become Worse',
@@ -681,7 +681,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'The Wider Effects of Regular Exercise',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Ways in Which Environment Can Influence Behaviour',
@@ -757,7 +757,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Ways in Which Environment Can Influence Behaviour',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -778,7 +778,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'A Design for Exercise and for Study',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The Success of a Simple Idea',
@@ -849,7 +849,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
           {
             answer: 'Achieving the Right Balance',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The Success of a Simple Idea',
