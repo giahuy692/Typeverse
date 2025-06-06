@@ -361,14 +361,22 @@ export class ReadingTestComponent implements OnInit {
 
   initClickToAssignQuestion(currentQuestion: any) {
     const slotCount = currentQuestion.answer.length;
-    if (
-      !(currentQuestion.orderedSlots && currentQuestion.orderedSlots.length > 0)
-    ) {
+    if (!(currentQuestion.userOrder && currentQuestion.userOrder.length > 0)) {
       this.orderedSlots = Array(slotCount).fill(this.EMPTY_SLOT);
     }
-    this.availableChoices = currentQuestion.answer.map((item: any) => ({
-      ...item,
-    }));
+    // Xáo trộn answer rồi clone cho availableChoices
+    this.availableChoices = this.shuffleArray(currentQuestion.answer).map(
+      (item: any) => ({ ...item })
+    );
+  }
+
+  shuffleArray<T>(array: T[]): T[] {
+    const arr = [...array]; // clone để không phá mảng gốc
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   /**
