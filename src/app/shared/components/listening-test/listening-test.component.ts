@@ -1,24 +1,21 @@
 // listening.component.ts
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { DE_2_RAW_QUESTIONS } from 'src/assets/mock-data/DE_2_RAW_QUESTIONS';
-import { DE_3_RAW_QUESTIONS } from 'src/assets/mock-data/DE_3_RAW_QUESTIONS';
-import { DE_4_RAW_QUESTIONS } from 'src/assets/mock-data/DE_4_RAW_QUESTIONS';
-import { DE_5_RAW_QUESTIONS } from 'src/assets/mock-data/DE_5_RAW_QUESTIONS';
-import { DE_6_RAW_QUESTIONS } from 'src/assets/mock-data/DE_6_RAW_QUESTIONS';
-import { DE_7_RAW_QUESTIONS } from 'src/assets/mock-data/DE_7_RAW_QUESTIONS';
-import { DE_8_RAW_QUESTIONS } from 'src/assets/mock-data/DE_8_RAW_QUESTIONS';
-import { DE_9_RAW_QUESTIONS } from 'src/assets/mock-data/DE_9_RAW_QUESTIONS';
-import { DE_10_RAW_QUESTIONS } from 'src/assets/mock-data/DE_10_RAW_QUESTIONS';
-import { DE_11_RAW_QUESTIONS } from 'src/assets/mock-data/DE_11_RAW_QUESTIONS';
-import { DE_12_RAW_QUESTIONS } from 'src/assets/mock-data/DE_12_RAW_QUESTIONS';
-import { DE_13_RAW_QUESTIONS } from 'src/assets/mock-data/DE_13_RAW_QUESTIONS';
-import { DE_14_RAW_QUESTIONS } from 'src/assets/mock-data/DE_14_RAW_QUESTIONS';
-import { DE_15_RAW_QUESTIONS } from 'src/assets/mock-data/DE_15_RAW_QUESTIONS';
-import { DE_1_RAW_QUESTIONS } from 'src/assets/mock-data/DE_1_RAW_QUESTIONS';
 import { Router } from '@angular/router'; // Import Router for navigation
+import { DE_10_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_10_RAW_QUESTIONS_LISTENING';
+import { DE_11_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_11_RAW_QUESTIONS_LISTENING';
+import { DE_12_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_12_RAW_QUESTIONS_LISTENING';
+import { DE_13_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_13_RAW_QUESTIONS_LISTENING';
+import { DE_14_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_14_RAW_QUESTIONS_LISTENING';
+import { DE_15_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_15_RAW_QUESTIONS_LISTENING';
+import { DE_1_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_1_RAW_QUESTIONS_LISTENING';
+import { DE_2_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_2_RAW_QUESTIONS_LISTENING';
+import { DE_3_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_3_RAW_QUESTIONS_LISTENING';
+import { DE_4_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_4_RAW_QUESTIONS_LISTENING';
+import { DE_5_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_5_RAW_QUESTIONS_LISTENING';
+import { DE_6_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_6_RAW_QUESTIONS_LISTENING';
+import { DE_7_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_7_RAW_QUESTIONS_LISTENING';
+import { DE_8_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_8_RAW_QUESTIONS_LISTENING';
+import { DE_9_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_9_RAW_QUESTIONS_LISTENING';
 
 // ENUMS
 export enum TestState {
@@ -187,7 +184,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   audioPlayer = new Audio();
   isPlayingAudio: boolean = false;
   readonly maxAudioPlays: number = 2;
-  readonly baseUrl = 'https://chungchigiaoduc.vn';
+  // readonly baseUrl = 'https://chungchigiaoduc.vn';
 
   userMessage: string | null = null;
   messageType: 'success' | 'error' | 'warning' = 'success';
@@ -213,21 +210,21 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   prepareExamFileList(): void {
     this.allExamFiles = [
-      { name: "Đề thi 1", fileName: "Listening Đề 1.json", rawQuestionList: DE_1_RAW_QUESTIONS },
-      { name: "Đề thi 2", fileName: "Listening Đề 2.json", rawQuestionList: DE_2_RAW_QUESTIONS },
-      { name: "Đề thi 3", fileName: "Listening Đề 3.json", rawQuestionList: DE_3_RAW_QUESTIONS },
-      { name: "Đề thi 4", fileName: "Listening Đề 4.json", rawQuestionList: DE_4_RAW_QUESTIONS },
-      { name: "Đề thi 5", fileName: "Listening Đề 5.json", rawQuestionList: DE_5_RAW_QUESTIONS },
-      { name: "Đề thi 6", fileName: "Listening Đề 6.json", rawQuestionList: DE_6_RAW_QUESTIONS },
-      { name: "Đề thi 7", fileName: "Listening Đề 7.json", rawQuestionList: DE_7_RAW_QUESTIONS },
-      { name: "Đề thi 8", fileName: "Listening Đề 8.json", rawQuestionList: DE_8_RAW_QUESTIONS },
-      { name: "Đề thi 9", fileName: "Listening Đề 9.json", rawQuestionList: DE_9_RAW_QUESTIONS },
-      { name: "Đề thi 10", fileName: "Listening Đề 10.json", rawQuestionList: DE_10_RAW_QUESTIONS },
-      { name: "Đề thi 11", fileName: "Listening Đề 11.json", rawQuestionList: DE_11_RAW_QUESTIONS },
-      { name: "Đề thi 12", fileName: "Listening Đề 12.json", rawQuestionList: DE_12_RAW_QUESTIONS },
-      { name: "Đề thi 13", fileName: "Listening Đề 13.json", rawQuestionList: DE_13_RAW_QUESTIONS },
-      { name: "Đề thi 14", fileName: "Listening Đề 14.json", rawQuestionList: DE_14_RAW_QUESTIONS },
-      { name: "Đề thi 15", fileName: "Listening Đề 15.json", rawQuestionList: DE_15_RAW_QUESTIONS },
+      { name: "Đề thi 1", fileName: "Listening Đề 1.json", rawQuestionList: DE_1_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 2", fileName: "Listening Đề 2.json", rawQuestionList: DE_2_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 3", fileName: "Listening Đề 3.json", rawQuestionList: DE_3_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 4", fileName: "Listening Đề 4.json", rawQuestionList: DE_4_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 5", fileName: "Listening Đề 5.json", rawQuestionList: DE_5_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 6", fileName: "Listening Đề 6.json", rawQuestionList: DE_6_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 7", fileName: "Listening Đề 7.json", rawQuestionList: DE_7_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 8", fileName: "Listening Đề 8.json", rawQuestionList: DE_8_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 9", fileName: "Listening Đề 9.json", rawQuestionList: DE_9_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 10", fileName: "Listening Đề 10.json", rawQuestionList: DE_10_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 11", fileName: "Listening Đề 11.json", rawQuestionList: DE_11_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 12", fileName: "Listening Đề 12.json", rawQuestionList: DE_12_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 13", fileName: "Listening Đề 13.json", rawQuestionList: DE_13_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 14", fileName: "Listening Đề 14.json", rawQuestionList: DE_14_RAW_QUESTIONS_LISTENING },
+      { name: "Đề thi 15", fileName: "Listening Đề 15.json", rawQuestionList: DE_15_RAW_QUESTIONS_LISTENING },
     ];
      this.allExamFiles.forEach((exam) => {
         if (exam.rawQuestionList && exam.rawQuestionList.length > 0) {
@@ -275,7 +272,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     const questionLabels = ['A', 'B', 'C', 'D', 'E'];
     const parsed: QuestionUnion[] = rawQuestions.map((rq, index) => {
       const userFriendlyId = `Câu ${rq.sort_by !== undefined ? rq.sort_by : index + 1}`;
-      const commonAudioUrl = rq.audio_url ? this.baseUrl + rq.audio_url : undefined;
+      const commonAudioUrl = rq.audio_url ? rq.audio_url : undefined;
       const cleanHtml = (htmlString: string | null | undefined): string => htmlString ? htmlString.replace(/<[^>]*>/g, '').trim() : '';
 
       switch (rq.type) {
@@ -289,7 +286,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             return { label, text: ans.answer };
           });
           return {
-            id: rq.id, displayType: QuestionDisplayType.MCQ, questionText: cleanHtml(rq.title), audioUrl: this.baseUrl + rq.audio_url,
+            id: rq.id, displayType: QuestionDisplayType.MCQ, questionText: cleanHtml(rq.title), audioUrl: rq.audio_url,
             options: optionsMCQ, playCount: 0, isBookmarked: false, correctAnswerLabel: correctAnswerLabelMCQ, userFriendlyId, isAnswered: false,
             userSelectedAnswer: undefined // Initialize user's selected answer
           } as QuestionMCQ;
@@ -307,7 +304,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             }) : [];
             return {
               id: child.id, questionText: cleanHtml(child.title), options: subOptions, correctAnswerLabel: correctSubAnswerLabel,
-              isBookmarked: false, isAnswered: false, audioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined, playCount: 0,
+              isBookmarked: false, isAnswered: false, audioUrl: child.audio_url ?  child.audio_url : undefined, playCount: 0,
               userSelectedAnswer: undefined // Initialize
             };
           });
@@ -323,7 +320,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
             const childOptions: DropdownOption[] = child.answer!.map(ans => ({ text: ans.answer }));
             const correctOpt = child.answer!.find(ans => ans.correct === 1 || ans.is_correct === 1);
             return {
-              id: child.id, promptText: cleanHtml(child.title), dropdownAudioUrl: child.audio_url ? this.baseUrl + child.audio_url : undefined,
+              id: child.id, promptText: cleanHtml(child.title), dropdownAudioUrl: child.audio_url ? child.audio_url : undefined,
               options: childOptions, correctOptionText: correctOpt ? correctOpt.answer : '',
               isBookmarked: false, isAnswered: false, userSelectedAnswer: undefined, playCount: 0,  // Initialize
             };

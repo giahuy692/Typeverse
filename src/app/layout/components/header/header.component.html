@@ -1,44 +1,51 @@
 <header class="header">
-  <div class="flex items-center gap-2 cursor-pointer" (click)="changeAppMode('idle')"> <img src="assets/images/logo.gif" alt="Logo Typeverse" class="w-8 h-8" />
-    <h1 class="title">Typeverse</h1>
+  <div class="flex items-center gap-3 cursor-pointer group" (click)="changeAppMode('idle')">
+    <img src="assets/images/logo.gif" alt="Logo Typeverse"
+      class="w-10 h-10 rounded-full border-2 border-purple-500 shadow group-hover:scale-110 transition" />
+    <h1
+      class="text-logo text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent tracking-tight drop-shadow">
+      Typeverse
+    </h1>
   </div>
 
-  <nav class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full shadow-inner" *ngIf="currentAppMode !== 'idle'">
+  <nav class="flex items-center gap-1 bg-[#232c41]/90 px-2 py-1 rounded-xl shadow border border-[#2b3350]"
+    *ngIf="currentAppMode !== 'idle'">
     <button (click)="changeAppMode('listening_test')" [ngClass]="{
-      'bg-indigo-600 text-white shadow': currentAppMode === 'listening_test',
-      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'listening_test'
-    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
-      🎧 Passive listening test
+      'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow scale-100': currentAppMode === 'listening_test',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'listening_test'
+    }" class="px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-150">
+      🎧 Listening test
     </button>
 
     <button (click)="changeAppMode('listening_audio')" [ngClass]="{
-      'bg-indigo-600 text-white shadow': currentAppMode === 'listening_audio',
-      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'listening_audio'
-    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
-      🎧 Listening audio
+      'bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow scale-100': currentAppMode === 'listening_audio',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'listening_audio'
+    }" class="px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-150">
+      🎧 Audio
     </button>
 
     <button (click)="changeAppMode('speaking')" [ngClass]="{
-      'bg-orange-500 text-white shadow': currentAppMode === 'speaking',
-      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'speaking'
-    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
-      🎤 Passive Speaking
+      'bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow scale-100': currentAppMode === 'speaking',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'speaking'
+    }" class="px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-150">
+      🎤 Speaking
     </button>
 
     <button (click)="changeAppMode('writing')" [ngClass]="{
-      'bg-emerald-600 text-white shadow': currentAppMode === 'writing',
-      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'writing'
-    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
-      ✍️ Passive Writing
+      'bg-gradient-to-r from-emerald-600 to-cyan-500 text-white shadow scale-100': currentAppMode === 'writing',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'writing'
+    }" class="px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-150">
+      ✍️ Writing
     </button>
 
     <button (click)="changeAppMode('reading_test')" [ngClass]="{
-      'bg-emerald-600 text-white shadow': currentAppMode === 'reading_test',
-      'text-gray-600 hover:bg-gray-200': currentAppMode !== 'reading_test'
-    }" class="px-4 py-1 rounded-full text-sm font-semibold transition">
-      ✍️ Passive reading test
+      'bg-gradient-to-r from-purple-600 to-emerald-500 text-white shadow scale-100': currentAppMode === 'reading_test',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'reading_test'
+    }" class="px-4 py-1 rounded-lg text-sm font-semibold transition-all duration-150">
+      📖 Reading
     </button>
   </nav>
+
 
   <div class="header-actions">
     <button class="settings-btn" (click)="openSettingsDrawer()">⚙️ Cài đặt</button>
