@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WRITING_PROMPTS } from 'src/assets/mock-data/writing-prompts';
+import { WRITING_PROMPTS, WritingPrompt } from 'src/assets/mock-data/writing-prompts';
 // Import mảng template. Đổi đường dẫn cho đúng project bạn!
 
 @Component({
@@ -8,9 +8,9 @@ import { WRITING_PROMPTS } from 'src/assets/mock-data/writing-prompts';
   styleUrls: ['./writing.component.scss'],
 })
 export class WritingComponent implements OnInit {
-  templates: { title: string; content: string }[] = WRITING_PROMPTS;
+  templates: WritingPrompt[] = WRITING_PROMPTS;
   selectedTemplateIdx = 0;
-  showTemplate = true;
+  showTemplate = false;
   userInput = '';
   compareHtml = '';
   correctChars = 0;

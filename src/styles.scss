@@ -29,26 +29,28 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
-/* width */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-  background-color: transparent;
+  width: 8px;
+  height: 8px;
+  background: transparent;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
-  border-radius: 2px;
+  background: transparent;
+  border-radius: 4px;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(209 213 219);
-  border-radius: 2px;
+  background: linear-gradient(180deg, #a259ff 0%, #ffc845 100%);
+  border-radius: 4px;
+  min-height: 40px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #b884fd 0%, #ffe080 100%);
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(rgb(209 213 219), 0.5);
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a259ff #232c41;
 }
+

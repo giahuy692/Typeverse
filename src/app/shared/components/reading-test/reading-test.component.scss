@@ -1,8 +1,13 @@
-ng-deep app-reading-test {
+::ng-deep app-reading-test {
+  
   :host {
     display: block;
     background: #161c27; // Màu nền ngoài cùng (dark)
     min-height: 100vh;
+  }
+
+  .main {
+    height: calc(100vh - 72px) !important;
   }
 
   .reading-question-card {

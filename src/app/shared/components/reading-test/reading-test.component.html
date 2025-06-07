@@ -1,5 +1,5 @@
 <!-- reading-test.component.html -->
- <div id="top"></div>
+<div id="top"></div>
 <div class="font-['Inter'] relative h-fit bg-gray-900 text-gray-100 flex flex-col">
   <!-- User Message Display -->
   <div *ngIf="userMessage" class="fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 text-white max-w-sm break-words"
@@ -14,7 +14,7 @@
 
   <!-- Start Screen -->
   <div *ngIf="currentState === TestStateEnum.StartScreen"
-    class="flex flex-col items-center justify-center h-fit p-4 sm:p-8">
+    class="main flex flex-col items-center justify-center h-fit p-4 sm:p-8 m-auto">
     <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl text-center w-full max-w-lg">
       <h2 class="text-sm font-medium text-gray-400">Aptis General Practice Test</h2>
       <h1 class="text-3xl sm:text-4xl font-bold text-purple-400 mt-2 mb-6">Reading</h1>
@@ -52,7 +52,7 @@
 
   <!-- Instructions Screen -->
   <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
-    class="flex flex-col items-center justify-center h-fit p-4 sm:p-8">
+    class="main m-auto flex flex-col items-center justify-center h-fit p-4 sm:p-8">
     <div class="bg-gray-800 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-2xl">
       <h1 class="text-xl sm:text-2xl font-bold text-purple-400 mb-4 text-center">Hướng dẫn làm bài đọc Aptis General
       </h1>
@@ -76,7 +76,7 @@
 
   <!-- Test In Progress Screen -->
   <div *ngIf="currentState === TestStateEnum.TestInProgress"
-    class="font-['Inter'] h-fit max-w-5xl mx-auto my-8 text-gray-100 flex flex-col justify-between">
+    class="main m-auto font-['Inter'] h-fit max-w-5xl mx-auto my-8 text-gray-100 flex flex-col justify-between">
     <!-- Main container -->
     <div class="flex-grow flex items-center justify-center py-8 px-2">
       <div class="w-full bg-[#202738] rounded-2xl shadow-2xl px-8 py-10">
@@ -103,7 +103,8 @@
                 <span class="font-medium block mb-2">{{currentQuestion.tip}}</span>
               </p-popover> -->
               <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
-              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain"></div>
+              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain">
+              </div>
               <div class="bg-[#232c41] rounded-lg p-6">
                 <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3 mb-2">
                   <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
@@ -132,7 +133,8 @@
                     <button class="w-full min-h-[40px] flex items-center rounded bg-[#1c2231] border border-gray-700
               px-3 py-2 text-left"
                       [ngClass]="slot ? 'text-white cursor-pointer hover:bg-red-900 hover:text-white' : 'text-gray-400 cursor-not-allowed'"
-                      (click)="removeSlot(i)" [disabled]="!slot" type="button" [innerHTML]="slot?.title || '-- Chọn --'">
+                      (click)="removeSlot(i)" [disabled]="!slot" type="button"
+                      [innerHTML]="slot?.title || '-- Chọn --'">
                       <!-- {{ slot?.title || '-- Chọn --' }} -->
                     </button>
                   </div>

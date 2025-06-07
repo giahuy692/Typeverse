@@ -10,6 +10,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { SharedModule } from '../shared/shared.module';
+import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     HeaderComponent,
     ThemeToggleComponent,
     WelcomeComponent,
+    SidebarMenuComponent,
   ],
   imports: [
     CommonModule,
