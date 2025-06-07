@@ -1,86 +1,53 @@
-<!-- src/app/writing/writing.component.html -->
-<div
-  class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 selection:bg-indigo-500 selection:text-white font-sans">
-  <header class="text-center mb-8">
-    <h1 class="text-4xl font-bold text-indigo-400 drop-shadow-lg">✍️ Luyện Viết</h1>
-    <p class="text-xl text-slate-400 mt-2">Cải thiện tốc độ và độ chính xác của bạn.</p>
-  </header>
+<div class="max-w-xl mx-auto p-5 rounded-2xl bg-[#232c41] shadow-lg text-white space-y-5 my-4">
+  <h2 class="text-xl font-bold mb-2 tracking-wide text-center text-purple-300">Luyện Gõ Template Writing</h2>
 
-  <main
-    class="w-full max-w-4xl bg-slate-800 p-8 rounded-2xl shadow-2xl space-y-6 border border-slate-700 backdrop-blur-sm bg-opacity-70">
-    <!-- Metrics Display -->
-    <div class="flex justify-between items-center text-slate-300 text-lg font-semibold mb-4">
-      <span>WPM: <span class="text-indigo-400 text-2xl">{{ writingWPM.toFixed(0) }}</span></span>
-      <span>Accuracy: <span class="text-green-400 text-2xl">{{ writingAccuracy.toFixed(2) }}%</span></span>
-      <span>Thời gian: <span class="text-yellow-400 text-2xl">{{ elapsedTime }}s</span></span>
-      <span>Bài tập: <span class="text-white text-2xl">{{ currentPromptIndex + 1 }}/{{ writingPrompts.length
-          }}</span></span>
+  <!-- Chọn template -->
+  <div class="flex gap-2 items-center">
+    <select [(ngModel)]="selectedTemplateIdx" (change)="onTemplateChange()" class="flex-1 bg-[#1c2231] rounded p-2 text-white focus:outline-none">
+      <option *ngFor="let t of templates; let i = index" [ngValue]="i">{{ t.title }}</option>
+    </select>
+    <button (click)="randomTemplate()" class="px-3 py-1 rounded bg-cyan-700 hover:bg-cyan-800 text-white text-sm font-semibold">🔄 Random</button>
+  </div>
+
+  <!-- Hiện/ẩn/copy mẫu -->
+  <div class="flex gap-2 items-center text-gray-400 text-xs">
+    <button (click)="toggleShow()" class="hover:text-purple-400">
+      <span *ngIf="showTemplate">🙈 Ẩn mẫu</span>
+      <span *ngIf="!showTemplate">👁 Hiện mẫu</span>
+    </button>
+    <button (click)="copyTemplate()" class="hover:text-blue-300">📋 Copy</button>
+  </div>
+
+  <!-- Nội dung mẫu -->
+  <div *ngIf="showTemplate" class="bg-[#22283b] rounded p-3 mb-1 text-base text-purple-100 whitespace-pre-line min-h-[60px]">
+    {{ templates[selectedTemplateIdx]?.content }}
+  </div>
+
+  <!-- So sánh real-time -->
+  <div class="bg-[#181f2a] rounded p-3 mb-1 text-base font-mono min-h-[60px] whitespace-pre-line"
+       [innerHTML]="compareHtml"></div>
+
+  <!-- Vùng tập gõ -->
+  <textarea
+    [(ngModel)]="userInput"
+    (input)="compareInput()"
+    [readonly]="finished"
+    rows="5"
+    class="w-full bg-[#1c2231] text-white p-3 rounded-lg focus:outline-none border border-[#2c3452] shadow-sm"
+    placeholder="Bắt đầu gõ template này ở đây..."></textarea>
+
+  <!-- Thống kê kết quả + nút -->
+  <div class="flex flex-col sm:flex-row justify-between items-center text-xs gap-2">
+    <div>
+      <span class="text-green-400">Đúng: {{ correctChars }}</span> /
+      <span class="text-red-400">Tổng: {{ totalChars }}</span> |
+      Độ chính xác: <span [ngClass]="accuracy >= 90 ? 'text-green-400' : 'text-yellow-300'">{{ accuracy }}%</span>
+      <span *ngIf="finished">| Tốc độ: <span class="text-cyan-300">{{ wpm }}</span> WPM</span>
     </div>
-
-    <!-- Tiêu đề của bài viết mẫu -->
-    <h2 class="text-2xl font-semibold text-white text-center mb-4">{{ currentPrompt?.title }}</h2>
-
-    <!-- Hidden Input for Typing - Input này sẽ không hiển thị, chỉ dùng để bắt sự kiện gõ phím -->
-    <input #typingInput type="text" class="hidden-input" (keydown)="onKeyDown($event)" autocomplete="off"
-      autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="-1" aria-hidden="true" />
-
-    <!-- Prompt Display Area - Hiển thị từng ký tự của văn bản mẫu -->
-    <div #promptDisplay
-      class="prompt-display bg-slate-700 p-6 rounded-lg shadow-inner text-2xl leading-relaxed font-mono overflow-y-auto h-48 cursor-text"
-      tabindex="0" (click)="typingInput.focus()">
-      <ng-container *ngFor="let char of promptCharacters; let i = index">
-        <span [class.current-char]="i === currentCharacterIndex"
-          [class.correct]="typedCharacters[i] === char && i < currentCharacterIndex"
-          [class.incorrect]="typedCharacters[i] !== char && i < currentCharacterIndex && typedCharacters[i] !== ''"
-          [class.to-type]="i >= currentCharacterIndex"
-          [class.current-word-highlight]="i >= currentWordStartIndex && i < currentWordEndIndex && i >= currentCharacterIndex"
-          class="inline-block transition-colors duration-50" [ngClass]="'char-' + i">
-          {{ char === ' ' ? '&nbsp;' : char }}
-        </span>
-      </ng-container>
-      <!-- Blinking Cursor -->
-      <span class="blinking-cursor" [style.left.px]="0" [style.top.px]="0"></span>
+    <div class="flex gap-2">
+      <button *ngIf="!finished" (click)="finish()" class="px-4 py-1 rounded bg-green-700 hover:bg-green-800 text-white">Kết thúc</button>
+      <button *ngIf="finished" (click)="startOver()" class="px-4 py-1 rounded bg-purple-700 hover:bg-purple-800 text-white">Gõ lại</button>
+      <button *ngIf="finished" (click)="nextTemplate()" class="px-4 py-1 rounded bg-cyan-700 hover:bg-cyan-800 text-white">Template tiếp</button>
     </div>
-
-    <!-- Controls -->
-    <div class="flex justify-center gap-4 mt-6">
-      <button (click)="prevPrompt()"
-        class="bg-slate-700 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-slate-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-        [disabled]="currentPromptIndex === 0">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-arrow-left">
-          <path d="m12 19-7-7 7-7" />
-          <path d="M19 12H5" />
-        </svg>
-        Trước
-      </button>
-      <button (click)="resetWriting()"
-        class="bg-orange-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-rotate-ccw">
-          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.76 2.75L3 8" />
-          <path d="M3 3v5h5" />
-        </svg>
-        Gõ lại
-      </button>
-      <button (click)="nextPrompt()"
-        class="bg-indigo-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-        Tiếp
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-arrow-right">
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-  </main>
-
-  <!-- Toast -->
-  <div *ngIf="showToast"
-    class="fixed bottom-6 right-6 bg-blue-600/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50 transition-all duration-300">
-    {{ toastMessage }}
   </div>
 </div>
