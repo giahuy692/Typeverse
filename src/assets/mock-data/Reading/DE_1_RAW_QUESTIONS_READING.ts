@@ -156,6 +156,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Tôi NHỚ bạn - tôi sễ GỌI cho bạn - SẲN SÀNG - GẶP bạn - và đi ĂN TỐI cùng bạn'
   },
   {
     id: 116,
@@ -197,6 +198,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
     ],
     sort_by: 2,
     childs: [],
+    tip: 'ĐẦU TIÊN - khi đi ăn MISTAKES - NHỚ - dơ TAY lên - để CHECK in, gọi món'
   },
   {
     id: 117,
@@ -240,6 +242,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
     ],
     sort_by: 3,
     childs: [],
+    tip: 'ĐẦU TIÊN khi học võ - bước MỘT BƯỚC - bạn NÉ - bạn CAN - bạn WAY'
   },
   {
     id: 1449,
@@ -498,6 +501,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Người B: là người ĐẸP, THƯ GIÃN và GIÚP ĐỠ NGƯỜI <br> Người D: CẦN SẠCH SẼ và HÉP BẦN',
   },
   {
     id: 1457,
@@ -868,5 +872,6 @@ export const DE_1_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'FACTORS - có cái SÍT DU - có Ý TƯỞNG - KINH NGHIỆM/HOẠT ĐỘNG - BẰNG CÁCH - HỌC - ĐÚNG'
   },
 ];

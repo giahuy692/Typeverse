@@ -503,4 +503,9 @@ export class ReadingTestComponent implements OnInit {
       return { score: 26 + (correctSmallAnswers - 13) * 2, level: 'B1' };
     return { score: 0, level: 'Below B1' };
   }
+
+  scrollTo(target: string) {
+    const el = document.getElementById(target);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
 }

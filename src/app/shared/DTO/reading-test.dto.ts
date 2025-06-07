@@ -16,6 +16,7 @@ export type ReadingQuestion = {
     sort_by: number;
     childs: ReadingChild[] | [];
     userOrder?: ReadingChildAnswer[];
+    tip: string;
 };
 
 export type ReadingChild = {
@@ -31,6 +32,7 @@ export type ReadingChild = {
     maximum_number: number;
     seconds_max: number;
     userOrder?: ReadingChildAnswer[];
+    tip?: string;
 };
 
 export type ReadingChildAnswer = {

@@ -1,4 +1,5 @@
 <!-- reading-test.component.html -->
+ <div id="top"></div>
 <div class="font-['Inter'] relative h-fit bg-gray-900 text-gray-100 flex flex-col">
   <!-- User Message Display -->
   <div *ngIf="userMessage" class="fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 text-white max-w-sm break-words"
@@ -74,7 +75,7 @@
   </div>
 
   <!-- Test In Progress Screen -->
-  <div *ngIf="currentState === TestStateEnum.TestInProgress" id="top"
+  <div *ngIf="currentState === TestStateEnum.TestInProgress"
     class="font-['Inter'] h-fit max-w-5xl mx-auto my-8 text-gray-100 flex flex-col justify-between">
     <!-- Main container -->
     <div class="flex-grow flex items-center justify-center py-8 px-2">
@@ -97,8 +98,12 @@
           <!-- Type 5: Email fill-in-the-blanks -->
           <ng-container *ngSwitchCase="5">
             <div>
+              <!-- <p-button (click)="op.toggle($event)" icon="pi pi-info-alt" label="Tip" />
+              <p-popover #op>
+                <span class="font-medium block mb-2">{{currentQuestion.tip}}</span>
+              </p-popover> -->
               <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
-              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain"></div>
               <div class="bg-[#232c41] rounded-lg p-6">
                 <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3 mb-2">
                   <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
@@ -166,7 +171,7 @@
           </ng-container>
 
           <!-- Type 4: Heading Matching -->
-          <ng-container *ngSwitchCase="4" id="bottom">
+          <ng-container *ngSwitchCase="4">
             <div>
               <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
               <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
@@ -441,24 +446,30 @@
           <!-- Có thể bổ sung quy đổi điểm/cấp bậc -->
         </ng-container>
       </div>
-      <a href="#top"
-        class="ml-auto bg-secondary-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
-        ⬆️
-      </a>
-      <a href="#bottom"
-        class="ml-auto bg-secondary-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
-        ⬇️
-      </a>
-      <button (click)="goToStartScreen()"
-        class="ml-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
-        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-        Quay về giao diện chọn đề
-      </button>
+      <div class="ml-auto flex flex-gap-3 items-center">
+        <button (click)="scrollTo('top')"
+          class="ml-auto border border-gray-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          ⬆️
+        </button>
+        <div class="px-2"></div>
+        <button (click)="scrollTo('bottom')"
+          class="ml-auto border border-gray-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          ⬇️
+        </button>
+        <div class="px-2"></div>
+        <button (click)="goToStartScreen()"
+          class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Quay về giao diện chọn đề
+        </button>
+      </div>
     </div>
   </div>
 
 
 
 </div>
+
+<div id="bottom"></div>

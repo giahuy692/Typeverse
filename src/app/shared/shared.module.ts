@@ -11,9 +11,6 @@ import { SpeakingComponent } from './components/speaking/speaking.component';
 import { ReadingTestComponent } from './components/reading-test/reading-test.component';
 import { ListeningTestComponent } from './components/listening-test/listening-test.component';
 
-import {MatSelectModule} from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -27,9 +24,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     FormsModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    DragDropModule
   ],
   exports: [
     AudioPlayerComponent,
