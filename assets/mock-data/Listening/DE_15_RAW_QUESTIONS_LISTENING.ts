@@ -592,6 +592,7 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Both: Những người biết CẢM NHẬN ÂM NHẠC và THƯỞNG THỨC ÂM NHẠC <br/> Man: đại học NGÔN NGỮ'
   },
   {
     id: 1176,

@@ -156,6 +156,7 @@ export const DE_12_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'dọn SẠCH - SÂN - mới enjoy - LÀM VIỆC được - rồi ĐỌC SÁCH'
   },
   {
     id: 907,
@@ -199,6 +200,7 @@ export const DE_12_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'TRƯỚC KHI VIẾT - NHỚ LƯU - DANH SÁCH CỦA BẤT KÌ CUỐN SÁCH NÀO - KHI HOÀN THÀNH VIẾT - GỬI BÁO CÁO CỦA BẠN đi'
   },
   {
     id: 908,
@@ -238,6 +240,7 @@ export const DE_12_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN PASS TAĐR - chạy lên LẦU 3 - SHOW PASS CỦA BẠN - NV sẽ biết được SỐ ghế - TÌM GHẾ CHO BẠN'
   },
   {
     id: 909,
@@ -866,5 +869,6 @@ export const DE_12_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'sự MỚI lạ - của THIÊN NHIÊN - là có CÔNG NGHỆ - HÀNH TRÌNH - KHÔNG - THIẾU - DETERMINATION'
   },
 ];
