@@ -526,6 +526,7 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'THƯ GIẢN - rồi HỌC - HÁT - SAU khi THỨC DẠY'
   },
   {
     id: 1017,
@@ -659,6 +660,7 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Man: tên là Continu và là người giỏi công nghê <br/> both: ở SA TIS <br/> Woman: làm việc an ninh'
   },
   {
     id: 1022,
@@ -734,6 +736,7 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'KHÔNG CÓ THÔNG BÁO MEDIA - TÌM CÂU TRẢ LỜI'
   },
   {
     id: 1025,
@@ -808,5 +811,6 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Mantain - changing'
   },
 ];

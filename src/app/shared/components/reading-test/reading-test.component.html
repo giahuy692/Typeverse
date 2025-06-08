@@ -91,6 +91,17 @@
           <div>
             <!-- <span class="block text-xs text-gray-400">{{ timerDisplay }}</span> -->
           </div>
+          <div>
+            <div class="relative group inline-block">
+              <button
+                class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105">
+                Xem tip  
+              </button>
+              <div [innerHTML]="currentQuestion.tip"
+                class="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute w-96 mt-2 bg-[#232c41] rounded-lg p-6 text-white border border-gray-300 rounded-lg shadow-lg py-2 z-10 right-0">
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Nội dung câu hỏi theo type -->
@@ -98,12 +109,10 @@
           <!-- Type 5: Email fill-in-the-blanks -->
           <ng-container *ngSwitchCase="5">
             <div>
-              <!-- <p-button (click)="op.toggle($event)" icon="pi pi-info-alt" label="Tip" />
-              <p-popover #op>
-                <span class="font-medium block mb-2">{{currentQuestion.tip}}</span>
-              </p-popover> -->
+
               <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
               <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain">
+
               </div>
               <div class="bg-[#232c41] rounded-lg p-6">
                 <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3 mb-2">

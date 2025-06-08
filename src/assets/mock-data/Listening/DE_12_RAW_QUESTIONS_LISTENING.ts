@@ -525,6 +525,7 @@ export const DE_12_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'XEM PHIM - VỚI BẠN BÈ - HOÀN THÀNH BÀI TẬP - TÌM THÔNG TIN'
   },
   {
     id: 943,
@@ -658,6 +659,7 @@ export const DE_12_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Both: Những người biết CẢM NHẬN ÂM NHẠC và THƯỞNG THỨC ÂM NHẠC <br/> Man: đại học NGÔN NGỮ'
   },
   {
     id: 948,

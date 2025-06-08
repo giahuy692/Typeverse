@@ -156,7 +156,7 @@ export const DE_1_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
-    tip: 'Tôi NHỚ bạn - tôi sễ GỌI cho bạn - SẲN SÀNG - GẶP bạn - và đi ĂN TỐI cùng bạn'
+    tip: 'Tôi NHỚ bạn - tôi sẽ GỌI cho bạn - SẲN SÀNG - GẶP bạn - và đi ĂN TỐI cùng bạn'
   },
   {
     id: 116,

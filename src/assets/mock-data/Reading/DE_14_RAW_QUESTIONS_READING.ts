@@ -143,6 +143,7 @@ export const DE_14_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'CHỈ - CHÚ - ÁT - SĂM - GIVE'
   },
   {
     id: 1055,
@@ -180,6 +181,7 @@ export const DE_14_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip:'KHI ANH CÒN TRẺ -ANH ẤY vẫn còn SOON - anh ấy QUYẾT ĐỊNH - TRỞ THÀNH - người GIÀU và THÀNH CÔNG'
   },
   {
     id: 1056,
@@ -216,6 +218,7 @@ export const DE_14_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'DÙNG CHÌA KHÓA - NẾU BẠN MẤT khóa - HỎI TÊN CỦA BẠN - và THẺ CMND - COPY THẺ MỚI'
   },
   {
     id: 1057,
@@ -795,5 +798,6 @@ export const DE_14_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Có nhiều LOẠI - check VARIOUS - cho THỰC PHẨM  - NÔNG NGHIỆP - CỦA CHÚNG TÔI/CHIA SẼ - SỨC KHỎE - và CUỘC SỐNG'
   },
 ];

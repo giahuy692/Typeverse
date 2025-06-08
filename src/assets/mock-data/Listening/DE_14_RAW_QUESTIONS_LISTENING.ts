@@ -520,6 +520,7 @@ export const DE_14_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'XEM PHIM - VỚI BẠN BÈ - HOÀN THÀNH BÀI TẬP - TÌM THÔNG TIN'
   },
   {
     id: 1098,

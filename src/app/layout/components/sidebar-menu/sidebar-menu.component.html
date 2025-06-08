@@ -1,37 +1,24 @@
 <nav class="flex flex-col gap-2 py-8 px-3">
-  <button
-    (click)="changeMode('listening_test')"
-    [ngClass]="{
-      'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow scale-100': currentAppMode === 'listening_test',
-      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'listening_test'
-    }"
-    class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎧 Listening test</button>
-  <button
-    (click)="changeMode('listening_audio')"
-    [ngClass]="{
+  <button (click)="changeMode('listening_audio')" [ngClass]="{
       'bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow scale-100': currentAppMode === 'listening_audio',
       'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'listening_audio'
-    }"
-    class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎧 Audio</button>
-  <button
-    (click)="changeMode('speaking')"
-    [ngClass]="{
+    }" class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎧 Audio</button>
+  <button (click)="changeMode('speaking')" [ngClass]="{
       'bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow scale-100': currentAppMode === 'speaking',
       'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'speaking'
-    }"
-    class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎤 Speaking</button>
-  <button
-    (click)="changeMode('writing')"
-    [ngClass]="{
+    }" class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎤 Speaking</button>
+  <button (click)="changeMode('writing')" [ngClass]="{
       'bg-gradient-to-r from-emerald-600 to-cyan-500 text-white shadow scale-100': currentAppMode === 'writing',
       'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'writing'
-    }"
-    class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">✍️ Writing</button>
-  <button
-    (click)="changeMode('reading_test')"
-    [ngClass]="{
+    }" class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">✍️ Writing</button>
+  <button (click)="changeMode('listening_test')" [ngClass]="{
+      'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow scale-100': currentAppMode === 'listening_test',
+      'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'listening_test'
+    }" class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">🎧 Listening
+    test</button>
+  <button (click)="changeMode('reading_test')" [ngClass]="{
       'bg-gradient-to-r from-purple-600 to-emerald-500 text-white shadow scale-100': currentAppMode === 'reading_test',
       'bg-[#202738] text-gray-300 hover:bg-[#262c44] hover:text-white': currentAppMode !== 'reading_test'
-    }"
-    class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">📖 Reading</button>
+    }" class="text-start px-4 py-2 rounded-lg text-base font-semibold transition-all duration-150">📖 Reading
+    Test</button>
 </nav>
