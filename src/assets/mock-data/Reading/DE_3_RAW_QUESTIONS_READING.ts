@@ -154,7 +154,8 @@ export const DE_3_RAW_QUESTIONS_READING = [
                         "maximum_number": 0,
                         "seconds_max": 0
                     }
-                ]
+                ],
+                tip: 'Ba lần - sờ tay mà - NGHĨ - CHẬM - TRƯỚC'
             },
             {
                 "id": 224,
@@ -186,7 +187,8 @@ export const DE_3_RAW_QUESTIONS_READING = [
                     }
                 ],
                 "sort_by": 0,
-                "childs": []
+                "childs": [],
+                tip: 'DI CHUYỂN CHẬM - THỜI GIAN DELAY đến - BUỔI CHIỀU - về NHÀ'
             },
             {
                 "id": 225,
@@ -218,7 +220,8 @@ export const DE_3_RAW_QUESTIONS_READING = [
                     }
                 ],
                 "sort_by": 0,
-                "childs": []
+                "childs": [],
+              tip: 'KHI CÒN TRẺ - BẠN THÂN CỦA ANH ẤY - TRỞ THÀNH VỢ ANH ẤY - tên là CHANG - đến từ USA'
             },
             {
                 "id": 226,
@@ -833,6 +836,7 @@ export const DE_3_RAW_QUESTIONS_READING = [
                         "maximum_number": 0,
                         "seconds_max": 0
                     }
-                ]
+                ],
+              tip: 'Europr - fashion - ăn chay - khác với - me cha<del>nics</del> - đi CHỢ - đi EVENTS'
             }
         ]
