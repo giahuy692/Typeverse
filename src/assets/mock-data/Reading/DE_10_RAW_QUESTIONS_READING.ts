@@ -156,6 +156,7 @@ export const DE_10_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'đi làm MUỘN - trễ CUỘC HỌP - VÌ cần đến CÔNG VIÊN - tìm CỬA HÀNG - bán đồ NẤU ĂN'
   },
   {
     id: 752,
@@ -198,6 +199,7 @@ export const DE_10_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI ANH ẤY CÒN TRẺ - anh ấy ĐÃ BẮT ĐẦU - XÂY DỰNG - CÁC SỰ KIỆN - cho các CÔNG TY LỚN'
   },
   {
     id: 753,
@@ -232,6 +234,7 @@ export const DE_10_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'CHỌN MỘT NƠI - ĐẶT nó vào - ĐẨY - 1 LẦN - còn lại tùy vào ĐK THỜI TIẾT'
   },
   {
     id: 754,
@@ -860,5 +863,6 @@ export const DE_10_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'CÁC HOẠT ĐỘNG - TỐT - TUYỆT VỜI - là CÁCH - để TẠO ra - CẢM XÚC - WELL'
   },
 ];
