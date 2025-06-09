@@ -156,6 +156,7 @@ export const DE_5_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'từ NHÀ - LÁI xe - chở bạn - đi CÔNG VIÊN - bạn ấy rất DỄ THƯƠNG'
   },
   {
     id: 378,
@@ -197,6 +198,7 @@ export const DE_5_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'TẤT CẢ những gì BẠN CẦN - là 1 củ KHOAI GIÀ - ĐA SẮC MÀU - NƠI NHIỀU NẮNG - KHOAI sẽ LỚN lên'
   },
   {
     id: 379,
@@ -236,6 +238,7 @@ export const DE_5_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN XUẤT HIỆN - CO LÉT BẢN ĐỒ - đi THEO BẢN ĐỒ - TRỞ VỀ VĂN PHÒNG - QUAY VỀ nhà'
   },
   {
     id: 380,
@@ -864,5 +867,6 @@ export const DE_5_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'GIẢI PHÁP cho - dòng TIỀN - QUAN TRỌNG nhất - sự TỰ DO - LỢI ÍCH - THỬ THÁCH - đối với DANH NGHIỆP'
   },
 ];
