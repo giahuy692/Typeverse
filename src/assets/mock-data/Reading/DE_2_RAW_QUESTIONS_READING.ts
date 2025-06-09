@@ -156,6 +156,7 @@ export const DE_2_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Live - Share - class - drive - cook'
   },
   {
     id: 144,
@@ -194,6 +195,7 @@ export const DE_2_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'ĐẦU TIÊN - KHI đặt MÁY IN ở một NƠI cố định - NGUỒN được bật lên - MÁY IN đã SẲN SÀNG - nhớ bỏ GIẤY vào TRƯỚC khi dùng'
   },
   {
     id: 146,
@@ -235,6 +237,7 @@ export const DE_2_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN ĐẾN - ĐI VÀO BỆNH VIỆN - TRONG TÒA NHÀ - NHÌN THẤY HÌNH ẢNH - CÁC HOẠT ĐỘNG của bệnh viện'
   },
   {
     id: 147,
@@ -864,5 +867,6 @@ export const DE_2_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'AI - ĐẦU TIÊN - CUỐI CÙNG - HEO - ĂN CÁM - bị LESS - HỎI TẠI SAO?'
   },
 ];
