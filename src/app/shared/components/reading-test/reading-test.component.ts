@@ -144,6 +144,7 @@ export class ReadingTestComponent implements OnInit {
   finishTest() {
     this.calculateResults();
     this.currentState = TestStateEnum.ResultsScreen;
+    console.log(this.questions);
   }
 
   goToStartScreen() {

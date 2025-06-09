@@ -91,11 +91,11 @@
           <div>
             <!-- <span class="block text-xs text-gray-400">{{ timerDisplay }}</span> -->
           </div>
-          <div>
+          <div class="tip">
             <div class="relative group inline-block">
               <button
                 class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105">
-                Xem tip  
+                Xem tip
               </button>
               <div [innerHTML]="currentQuestion.tip"
                 class="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute w-96 mt-2 bg-[#232c41] rounded-lg p-6 text-white border border-gray-300 rounded-lg shadow-lg py-2 z-10 right-0">
@@ -290,7 +290,20 @@
   <!-- Results Screen -->
   <div *ngIf="currentState === TestStateEnum.ResultsScreen" class="max-w-5xl mx-auto my-8">
     <div *ngFor="let q of questions; let idx = index" class="rounded-lg p-5 mb-6 shadow border-2">
-      <div class="text-gray-200 mb-2" [innerHTML]="q.title"></div>
+      <div class="container-title flex justify-between">
+        <div class="text-gray-200 mb-2" [innerHTML]="q.title"></div>
+        <div class="tip">
+          <div class="relative group inline-block">
+            <button
+              class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105">
+              Xem tip
+            </button>
+            <div [innerHTML]="currentQuestion.tip"
+              class="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute w-96 mt-2 bg-[#232c41] rounded-lg p-6 text-white border border-gray-300 rounded-lg shadow-lg py-2 z-10 right-0">
+            </div>
+          </div>
+        </div>
+      </div>
       <ng-container [ngSwitch]="q?.type">
         <!-- Type 5: Email fill-in-the-blanks -->
         <ng-container *ngSwitchCase="5">
@@ -319,8 +332,8 @@
 
         <!-- Câu hỏi reorder (type 6) dùng click để chọn/chuyển -->
         <div *ngSwitchCase="6" class="w-full mx-auto">
-          <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
-          <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+          <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="q.title"></div>
+          <div *ngIf="q.explain" class="text-gray-400 mb-3">{{ q.explain }}</div>
 
           <div class="flex gap-8">
             <!-- Cột trái: slot thứ tự -->
@@ -354,12 +367,12 @@
         <ng-container *ngSwitchCase="3">
           <div>
             <div class="title-question">
-              <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
-              <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3" [innerHTML]="currentQuestion.explain">
+              <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="q.title"></div>
+              <div *ngIf="q.explain" class="text-gray-400 mb-3" [innerHTML]="q.explain">
               </div>
             </div>
             <div class="bg-[#232c41] rounded-lg p-6 space-y-4">
-              <div *ngFor="let child of currentQuestion.childs" class="flex items-center gap-3">
+              <div *ngFor="let child of q.childs" class="flex items-center gap-3">
                 <span class="flex-1 text-base text-gray-200" [innerHTML]="child.title"></span>
                 <div
                   class="w-[363px] bg-[#202738] rounded-lg p-4 border border-gray-700 flex flex-col gap-2 items-start">
@@ -384,12 +397,12 @@
         <!-- Type 4: Heading Matching -->
         <ng-container *ngSwitchCase="4">
           <div>
-            <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="currentQuestion.title"></div>
-            <div *ngIf="currentQuestion.explain" class="text-gray-400 mb-3">{{ currentQuestion.explain }}</div>
+            <div class="font-semibold text-lg mb-2 text-gray-50" [innerHTML]="q.title"></div>
+            <div *ngIf="q.explain" class="text-gray-400 mb-3">{{ q.explain }}</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#232c41] p-6 rounded-lg">
               <!-- Cột 1: đoạn văn -->
               <div class="space-y-4">
-                <div *ngFor="let child of currentQuestion.childs; let idx = index"
+                <div *ngFor="let child of q.childs; let idx = index"
                   class="bg-[#202738] rounded-lg p-4 border border-gray-700">
                   <div class="font-medium text-gray-200">Đoạn {{ idx + 1 }}</div>
                   <div class="text-gray-400 text-sm mt-2" [innerHTML]="child.title"></div>
