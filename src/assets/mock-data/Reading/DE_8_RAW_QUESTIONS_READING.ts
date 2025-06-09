@@ -156,6 +156,7 @@ export const DE_8_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'EARLY - LĂN - LÊ - trên XE HƠI - lúc NGỦ'
   },
   {
     id: 526,
@@ -198,6 +199,7 @@ export const DE_8_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI CÒN TRẺ - anh ấy THAM GIA CLB BÓNG ĐÁ - là 1 TÀI NĂNG trẻ - anh chuyền từ pháp đến ITALY và SPAIN - để trở thành QUẢN LÝ của CLB bóng đá'
   },
   {
     id: 527,
@@ -241,6 +243,7 @@ export const DE_8_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI CÒN TRẺ - cô ấy CẢI THIỆN KỸ NĂNG tốt - và LÀM VIỆC CHĂM CHỈ - nên được MỜI vào TEAM CỦA CHÚNG TÔI - SAU nhiều năm'
   },
   {
     id: 528,
@@ -869,5 +872,6 @@ export const DE_8_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'đi DU LỊCH - cần một ít MAY MẮN - trên con xe WINNER phong trần - CẦN - E<del>ear</del>NING - em CHAM<del>pion</del> - cho TIỀN'
   },
 ];
