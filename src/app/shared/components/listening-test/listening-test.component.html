@@ -9,29 +9,18 @@
 
       <div class="my-6">
         <label for="examSelect" class="block text-sm font-medium text-purple-400 mb-2">Chọn đề thi:</label>
-        <select id="examSelect" name="selectedExam" [(ngModel)]="selectedExamIndex"
+        <select id="examSelect" name="selectedExam" [ngModel]="selectedExamIndex" (ngModelChange)="onExamSelectionChange($event)"
           class="w-full p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200">
           <option *ngFor="let exam of allExamFiles; let i = index" [value]="i">
             Đề thi {{ i + 1 }}
           </option>
         </select>
-        <p-dropdown 
-          [options]="allExamFiles" 
-          [(ngModel)]="selectedExamIndex" 
-          optionLabel="name" 
-          placeholder="Select a City" />
-          <ng-template let-exam pTemplate="selectedItem">
-            <div class="w-full p-3 bg-none border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200"
-            >
-              <div>{{ exam.name }}</div>
-            </div>
-        </ng-template>
       </div>
 
-      <!-- <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
         <div class="text-center sm:text-left">
           <p class="text-xs text-purple-400">Số lượng câu hỏi</p>
-          <p class="text-lg font-semibold text-gray-200">{{ currentExamQuestionCountOnStartScreen }}</p>
+          <p class="text-lg font-semibold text-gray-200">{{ listQuestion.length }}</p>
         </div>
         <div class="text-center sm:text-left">
           <p class="text-xs text-purple-400">Thời gian cho phép</p>
@@ -43,18 +32,17 @@
       <button (click)="goToInstructions()"
         class="w-full bg-purple-700 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
         Bắt đầu làm bài
-      </button> -->
+      </button>
     </div>
   </div>
 
   <!-- Instructions Screen -->
-  <!-- <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
+  <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
     class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
     <div class="bg-[#232945] p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-2xl border border-[#232945]">
       <h1 class="text-xl sm:text-2xl font-bold text-purple-400 mb-4 text-center">Hướng dẫn làm bài nghe Aptis General
       </h1>
-      <h2 class="text-lg font-semibold text-gray-300 mb-6 text-center">Đề thi: {{ allExamFiles[selectedExamIndex]?.name
-        || 'Đang chọn...' }}</h2>
+      <h2 class="text-lg font-semibold text-gray-300 mb-6 text-center">Đề thi: {{ allExamFiles[selectedExamIndex].name || 'Đang chọn...' }}</h2>
       <div class="text-gray-300 space-y-3 text-sm sm:text-base leading-relaxed">
         <p>Bạn sẽ nghe các đoạn ghi âm cho bài thi đã chọn.</p>
         <p>Nhấn vào nút <strong>PLAY</strong> để nghe mỗi đoạn ghi âm.</p>
@@ -63,38 +51,25 @@
       </div>
       <p class="mt-10 text-sm text-purple-400">Khi bạn nhấn nút 'Tiếp theo', bài thi sẽ bắt đầu.</p>
       <div class="mt-8 text-right">
-        <button (click)="startTest()"
+        <button (click)="onStartTest()"
           class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-6 sm:px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
           Tiếp theo &rarr;
         </button>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <!-- Test In Progress -->
-  <!-- <div *ngIf="currentState === TestStateEnum.TestInProgress && currentQuestion"
+  <div *ngIf="currentState === TestStateEnum.TestInProgress && currentQuestion"
     class="flex flex-col min-h-screen bg-[#181d2f]">
     <div
       class="bg-[#1a1f33] shadow-md p-3 sm:p-4 flex justify-between items-center sticky top-0 z-10 border-b border-gray-700">
       <div>
         <h1 class="text-lg sm:text-xl font-semibold text-purple-400">Listening - {{
           allExamFiles[selectedExamIndex]?.name }}</h1>
-        <p class="text-xs sm:text-sm text-purple-400">{{ currentQuestion.userFriendlyId }} / {{
-          getTotalScorableQuestions() }}</p>
+        <p class="text-xs sm:text-sm text-purple-400">{{ selectedExamIndex + 1 }} / {{listQuestion.length }} câu hỏi</p>
       </div>
       <div class="flex items-center space-x-3 sm:space-x-4">
-        <button (click)="toggleBookmark()" [title]="currentQuestion.isBookmarked ? 'Bỏ đánh dấu' : 'Đánh dấu'"
-          class="p-2 border border-gray-700 rounded-md hover:bg-[#242e47] focus:outline-none focus:ring-2 focus:ring-purple-600">
-          <svg *ngIf="!currentQuestion.isBookmarked" class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
-          </svg>
-          <svg *ngIf="currentQuestion.isBookmarked" class="w-5 h-5 text-purple-400" fill="currentColor"
-            viewBox="0 0 20 20">
-            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
-          </svg>
-        </button>
         <div class="text-right">
           <p class="text-xs text-purple-400">Thời gian còn lại</p>
           <p class="text-base sm:text-lg font-bold text-purple-400">{{ timeRemaining }}</p>
@@ -104,57 +79,44 @@
 
     <div class="flex-grow p-4 sm:p-8 overflow-y-auto">
       <div class="bg-[#232945] p-4 sm:p-6 rounded-lg shadow-lg max-w-3xl mx-auto border border-gray-700">
-        <div [ngSwitch]="currentQuestion.displayType">
+        <div [ngSwitch]="currentQuestion.type">
 
-          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.MCQ">
-            <div *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.MCQ && currentQuestion as qMCQ">
-              <p class="mb-5 sm:mb-6 text-sm sm:text-base text-purple-400 leading-relaxed">{{ qMCQ.questionText }}</p>
-              <div class="mb-6 flex col-5 items-center gap-2" *ngIf="qMCQ.audioUrl">
+          <ng-container *ngSwitchCase="1">
+              <p class="mb-5 sm:mb-6 text-sm sm:text-base text-purple-400 leading-relaxed" [innerHTML]="currentQuestion.title"></p>
+              <div class="mb-6 flex col-5 items-center gap-2" *ngIf="currentQuestion.audio_url">
                 <button (click)="playMainAudio()"
-                  [disabled]="qMCQ.playCount >= maxAudioPlays && isPlayingAudio && audioPlayer.src !== qMCQ.audioUrl"
+                  [disabled]="currentQuestion.playCount >= maxAudioPlays && isPlayingAudio && audioPlayer.src !== currentQuestion.audio_url"
                   class="px-4 py-2 bg-slate-200 hover:bg-purple-600 text-slate-700 rounded-md flex items-center">
-                  <svg *ngIf="!(isPlayingAudio && audioPlayer.src === qMCQ.audioUrl)" class="w-5 h-5 mr-2"
+                  <svg *ngIf="!(isPlayingAudio && audioPlayer.src === currentQuestion.audio_url)" class="w-5 h-5 mr-2"
                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z">
                     </path>
                   </svg>
-                  <svg *ngIf="isPlayingAudio && audioPlayer.src === qMCQ.audioUrl" class="w-5 h-5 mr-2"
+                  <svg *ngIf="isPlayingAudio && audioPlayer.src === currentQuestion.audio_url" class="w-5 h-5 mr-2"
                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z">
                     </path>
                   </svg>
-                  {{ (isPlayingAudio && audioPlayer.src === qMCQ.audioUrl) ? 'Dừng' : 'Phát Audio' }}
-                  <span class="ml-2 text-xs text-black">({{ qMCQ.playCount }}/{{ maxAudioPlays }} lượt)</span>
+                  {{ (isPlayingAudio && audioPlayer.src === currentQuestion.audio_url) ? 'Dừng' : 'Phát Audio' }}
+                  <span class="ml-2 text-xs text-black">({{ currentQuestion.playCount }}/{{ maxAudioPlays }} lượt)</span>
                 </button>
-                <span *ngIf="qMCQ.playCount >= maxAudioPlays && !(isPlayingAudio && audioPlayer.src === qMCQ.audioUrl)"
+                <span *ngIf="currentQuestion.playCount >= maxAudioPlays && !(isPlayingAudio && audioPlayer.src === currentQuestion.audio_url)"
                   class="text-red-500 text-xs mt-1 border border-red-600 rounded px-4 py-2">Hết lượt nghe.</span>
               </div>
               <div class="space-y-3">
-                <div *ngFor="let option of qMCQ.options" (click)="selectOption(option.label)"
-                  class="flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer" [ngClass]="{
-                       'hover:border-purple-600': !qMCQ.isAnswered,
-                       'border-green-500 text-green-900': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                       'border-red-500 text-red-700': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                       'border-gray-300': !qMCQ.isAnswered,
-                       'cursor-not-allowed opacity-75': qMCQ.isAnswered
-                     }" [class.pointer-events-none]="qMCQ.isAnswered">
+                <div *ngFor="let option of currentQuestion.answer; let i = index" (click)="selectOption(option)"
+                  class="flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer hover:border-purple-600">
                   <div
                     class="w-8 h-8 flex items-center justify-center border rounded-md mr-3 sm:mr-4 font-semibold text-sm"
-                    [ngClass]="{
-                         'bg-green-500 text-white border-green-500': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                         'bg-red-500 text-white border-red-500': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                         'bg-purple-600 text-white border-purple-600': !qMCQ.isAnswered && qMCQ.selectedAnswerLabel === option.label,
-                         'border-gray-400 text-purple-400': !qMCQ.isAnswered && qMCQ.selectedAnswerLabel !== option.label
-                       }">{{ option.label }}</div>
-                  <span class="text-sm sm:text-base">{{ option.text }}</span>
+                      >{{ getOptionLetter(i) }}</div>
+                  <span class="text-sm sm:text-base"  [innerHTML]="option.answer"></span>
                 </div>
               </div>
-            </div>
           </ng-container>
 
-          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.GroupedMCQ">
+          <!-- <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.GroupedMCQ">
             <div
               *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.GroupedMCQ && currentQuestion as qGroupedMCQ">
               <div [innerHTML]="qGroupedMCQ.mainInstruction"
@@ -224,9 +186,9 @@
                 </div>
               </div>
             </div>
-          </ng-container>
+          </ng-container> -->
 
-          <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.DropdownMatch">
+          <!-- <ng-container *ngSwitchCase="QuestionDisplayTypeEnum.DropdownMatch">
             <div
               *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.DropdownMatch && currentQuestion as qDropdownMatch">
               <div [innerHTML]="qDropdownMatch.mainInstruction"
@@ -291,19 +253,19 @@
                     subQ.correctOptionText }}</span></p>
               </div>
             </div>
-          </ng-container>
+          </ng-container> -->
 
           <div *ngSwitchDefault>
             <ng-container
-              *ngIf="currentQuestion.displayType === QuestionDisplayTypeEnum.Unsupported && currentQuestion as qUnsupported">
-              <p class="text-red-500 font-semibold">Loại câu hỏi này (Type {{qUnsupported.rawType}}) chưa được hỗ trợ
+              *ngIf="0">
+              <p class="text-red-500 font-semibold">Loại câu hỏi này chưa được hỗ trợ
                 hiển thị.</p>
-              <p class="text-purple-400 text-sm">{{ qUnsupported.title }}</p>
+              <!-- <p class="text-purple-400 text-sm">{{ qUnsupported.title }}</p> -->
             </ng-container>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- Footer -->
     <!-- <div
