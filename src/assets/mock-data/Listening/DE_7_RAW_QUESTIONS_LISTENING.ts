@@ -11,17 +11,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Goes picnic',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Goes for a walk',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Goes to the beach',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -40,17 +40,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Clothes',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Candles',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Mugs',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Glasses',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Books',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Jacket',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Fruit',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Milk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Chocolates',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -125,17 +125,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Milk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Medicine',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Water',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -153,17 +153,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At the park',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At the mall',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At the marketplace',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -182,17 +182,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The doors',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The drawer',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'The handles',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -210,17 +210,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Sick',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Happy',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Tired',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -239,17 +239,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Warm and dry',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Cold and wet',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Hot and sunny',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -268,17 +268,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'by train',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'by bus',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'by car',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -297,17 +297,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'In the afternoon',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In the evening',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In the morning',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -326,17 +326,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'By bike',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'By bus',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'On foot',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -354,17 +354,17 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Above a restaurant',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Next to the park',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Opposite the hotel',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],

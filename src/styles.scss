@@ -7,6 +7,10 @@
 @import './assets/scss/main.scss';
 @import './assets/scss/_typography.scss';
 
+// primeng
+@import "primeng/resources/themes/arya-purple/theme.css";
+@import "primeng/resources/primeng.css";
+
 body {
   background-color: #111827; // thậm chí còn tối hơn
   color: #f3f4f6; // slate-100

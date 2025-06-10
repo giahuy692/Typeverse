@@ -11,17 +11,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Platform 5',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Platform 2',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Platform 8',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -40,17 +40,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'She works irregular hours',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'She works from 9 to 5',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: "She doesn't work on weekends",
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -69,17 +69,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Talk to the principal',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Arrange private classes for his son',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Enroll him in summer school',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -98,17 +98,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Attended a party',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Stayed at home',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Went hiking',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -127,17 +127,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'He drives',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He takes the bus',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He walks',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -155,17 +155,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Eggs',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Bread',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Milk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -183,17 +183,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Science',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'History',
-        is_correct: 0,
+        correct: 0,
         choose: true,
       },
       {
         answer: 'Art',
-        is_correct: 1,
+        correct: 1,
         choose: false,
       },
     ],
@@ -212,17 +212,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Camping',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Traveled abroad',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Went to the beach',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -241,17 +241,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'It’s faster than flying',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'It’s practical',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'It’s cheaper than biking',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -270,17 +270,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On the first floor',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'In the basement',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'On the third floor',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -299,17 +299,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At the downtown market',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At the mall',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At a new shopping center',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -328,17 +328,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Transportation problems',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Bad weather',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Not enough people',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -357,17 +357,17 @@ export const DE_5_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Become a writer',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Become a chef again',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Start teaching history again',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],

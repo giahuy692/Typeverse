@@ -11,6 +11,8 @@ import { SpeakingComponent } from './components/speaking/speaking.component';
 import { ReadingTestComponent } from './components/reading-test/reading-test.component';
 import { ListeningTestComponent } from './components/listening-test/listening-test.component';
 
+import { DropdownModule } from 'primeng/dropdown';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { ListeningTestComponent } from './components/listening-test/listening-te
   imports: [
     CommonModule,
     FormsModule,
+    DropdownModule
   ],
   exports: [
     AudioPlayerComponent,

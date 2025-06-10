@@ -11,17 +11,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Two pounds fifty',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'One pound fifty',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Three pounds fifty',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -39,17 +39,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '1:15 p.m',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '2:00 p.m',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '12:30 p.m',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '45 minutes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '15 minutes',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '30 minutes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Over 30,000 copies',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Over 300,000 copies',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Over 3,000 copies',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -126,17 +126,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'ask for a favor',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'say thank you',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'suggest a meeting',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -155,17 +155,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Stay at home',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Make plans later',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Go to the movie',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -184,17 +184,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Have meeting without him',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Cancel the meeting',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Continue to waiting for him',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -213,17 +213,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'to become famous',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'to earn much money',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'to help people',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -242,17 +242,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Drink tea',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Have coffee',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Have lunch',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -271,17 +271,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'have some quiet time',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'to go to work early',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'to take care of children',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -300,17 +300,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The mountain scenes',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Fight scenes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Racing scenes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -329,17 +329,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Similar interests',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Similar personalities',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Similar appearance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -358,17 +358,17 @@ export const DE_9_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On the Mountain Boat',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'On the beach Boat',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'On the River Boat',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],

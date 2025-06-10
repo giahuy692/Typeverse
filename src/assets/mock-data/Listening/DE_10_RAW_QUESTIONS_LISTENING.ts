@@ -11,17 +11,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Her weekend plans',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Her journey to work',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Her favorite hobby',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -40,17 +40,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On the left of the square',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Behind the square',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In front of the square',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -69,17 +69,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The south',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'The east',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The north',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Engineer',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Doctor',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Teacher',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -125,17 +125,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The boys’ and the girls’ team',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The girls’ team',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Sue and Lily',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -154,17 +154,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Wednesday afternoon',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Friday evening',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Monday morning',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -183,17 +183,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'He enjoy the food there',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He enjoys the people there',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He enjoys his job there',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -212,17 +212,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'By the hotel’s side entrance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Behind the hotel’s main entrance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'By the hotel’s main entrance',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -241,17 +241,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '21',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '20',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '22',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -270,17 +270,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Buy in bulk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Use the public transport',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Put money into the bank',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -299,17 +299,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Organize the documents',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Set up the chairs',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Order the food',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -328,17 +328,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Drawing',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Playing sports',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Watching movies',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -357,17 +357,17 @@ export const DE_10_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'a new library',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'a sports field',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'the performance space',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],

@@ -10,15 +10,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '10 minutes',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: '15 minutes',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: '20 minutes',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 1,
@@ -36,15 +39,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '6:40',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: '7:00',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: '9:20',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 2,
@@ -61,15 +67,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At school',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'By the park',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'In the cafe',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 3,
@@ -86,15 +95,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At the hospital',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'At the Main Street',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'At the traffic lights',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
     ],
     sort_by: 4,
@@ -112,15 +124,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '135 pounds',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: '155 pounds',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: '145 pounds',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 5,
@@ -138,15 +153,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'A museum',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'A cinema',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'A department store',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
     ],
     sort_by: 6,
@@ -163,15 +181,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'An electrician',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'A teacher',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'An engineer',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 7,
@@ -188,15 +209,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'To help people',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'To make a lot of money',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'To make his family proud',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 8,
@@ -213,15 +237,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'A necklace',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'A wallet',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'A bag',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
     ],
     sort_by: 9,
@@ -239,15 +266,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Miss Brown',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'Miss Taylor',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'Mr. Styles',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 10,
@@ -265,15 +295,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Because of its color',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'Because of its size',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'Because of its pattern',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 11,
@@ -291,15 +324,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The service is slow',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
       {
         answer: 'The food is delicious',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'The price is cheap',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
     ],
     sort_by: 12,
@@ -317,15 +353,18 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'In a museum',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'At school',
-        is_correct: 0,
+        correct: 0,
+        choose: false,
       },
       {
         answer: 'In a townhouse',
-        is_correct: 1,
+        correct: 1,
+        choose: false,
       },
     ],
     sort_by: 13,
@@ -355,18 +394,22 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'To relax',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'While studying',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While singing',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'After waking up',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -387,18 +430,22 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'After waking up',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While singing',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While studying',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'To relax',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -419,18 +466,22 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'To relax',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While studying',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While singing',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'After waking up',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -451,18 +502,22 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'After waking up',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'While singing',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'While studying',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'To relax',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -495,14 +550,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Man',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Woman',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'Both',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -522,14 +580,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Woman',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Man',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Both',
             correct: 1,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -549,14 +610,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Woman',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Man',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'Both',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -576,14 +640,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Man',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Woman',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'Both',
             correct: 1,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -592,7 +659,6 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
-    tip: 'Both: Những người biết CẢM NHẬN ÂM NHẠC và THƯỞNG THỨC ÂM NHẠC <br/> Man: đại học NGÔN NGỮ'
   },
   {
     id: 1176,
@@ -617,14 +683,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'It focuses solely on historical landmarks.',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'It creates an adventure',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'It is difficult to navigate.',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -644,14 +713,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'It is suitable for particular generations.',
             correct: 1,
+            choose: false,
           },
           {
             answer: 'It is outdated and irrelevant',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'It caters only to seasoned travelers',
             correct: 0,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -684,14 +756,17 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'It is more of a textbook than a biography',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'It is focused on technical details',
             correct: 0,
+            choose: false,
           },
           {
             answer: 'It is exciting to read',
             correct: 1,
+            choose: false,
           },
         ],
         sort_by: 0,

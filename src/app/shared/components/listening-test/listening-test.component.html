@@ -1,15 +1,5 @@
 <div class="font-['Inter'] bg-[#181d2f] min-h-screen text-gray-200 relative">
 
-  <!-- Notification -->
-  <div *ngIf="userMessage" class="fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 max-w-sm break-words" [ngClass]="{
-         'bg-green-600 text-white': messageType === 'success',
-         'bg-red-600 text-white': messageType === 'error',
-         'bg-yellow-600 text-black': messageType === 'warning'
-       }">
-    {{ userMessage }}
-    <button (click)="clearUserMessage()" class="ml-4 font-bold text-lg align-top">&times;</button>
-  </div>
-
   <!-- Start Screen -->
   <div *ngIf="currentState === TestStateEnum.StartScreen"
     class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
@@ -20,15 +10,25 @@
       <div class="my-6">
         <label for="examSelect" class="block text-sm font-medium text-purple-400 mb-2">Chọn đề thi:</label>
         <select id="examSelect" name="selectedExam" [(ngModel)]="selectedExamIndex"
-          (change)="onExamSelectionChange($event)"
           class="w-full p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200">
           <option *ngFor="let exam of allExamFiles; let i = index" [value]="i">
-            {{ exam.name }}
+            Đề thi {{ i + 1 }}
           </option>
         </select>
+        <p-dropdown 
+          [options]="allExamFiles" 
+          [(ngModel)]="selectedExamIndex" 
+          optionLabel="name" 
+          placeholder="Select a City" />
+          <ng-template let-exam pTemplate="selectedItem">
+            <div class="w-full p-3 bg-none border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200"
+            >
+              <div>{{ exam.name }}</div>
+            </div>
+        </ng-template>
       </div>
 
-      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
+      <!-- <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 my-8 text-left">
         <div class="text-center sm:text-left">
           <p class="text-xs text-purple-400">Số lượng câu hỏi</p>
           <p class="text-lg font-semibold text-gray-200">{{ currentExamQuestionCountOnStartScreen }}</p>
@@ -43,12 +43,12 @@
       <button (click)="goToInstructions()"
         class="w-full bg-purple-700 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
         Bắt đầu làm bài
-      </button>
+      </button> -->
     </div>
   </div>
 
   <!-- Instructions Screen -->
-  <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
+  <!-- <div *ngIf="currentState === TestStateEnum.InstructionsScreen"
     class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
     <div class="bg-[#232945] p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-2xl border border-[#232945]">
       <h1 class="text-xl sm:text-2xl font-bold text-purple-400 mb-4 text-center">Hướng dẫn làm bài nghe Aptis General
@@ -69,10 +69,10 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Test In Progress -->
-  <div *ngIf="currentState === TestStateEnum.TestInProgress && currentQuestion"
+  <!-- <div *ngIf="currentState === TestStateEnum.TestInProgress && currentQuestion"
     class="flex flex-col min-h-screen bg-[#181d2f]">
     <div
       class="bg-[#1a1f33] shadow-md p-3 sm:p-4 flex justify-between items-center sticky top-0 z-10 border-b border-gray-700">
@@ -83,17 +83,6 @@
           getTotalScorableQuestions() }}</p>
       </div>
       <div class="flex items-center space-x-3 sm:space-x-4">
-        <!-- <div>
-            <div class="relative group inline-block">
-              <button
-                class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105">
-                Xem tip  
-              </button>
-              <div [innerHTML]="currentQuestion.tip"
-                class="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute w-96 mt-2 bg-[#232c41] rounded-lg p-6 text-white border border-gray-300 rounded-lg shadow-lg py-2 z-10 right-0">
-              </div>
-            </div>
-          </div> -->
         <button (click)="toggleBookmark()" [title]="currentQuestion.isBookmarked ? 'Bỏ đánh dấu' : 'Đánh dấu'"
           class="p-2 border border-gray-700 rounded-md hover:bg-[#242e47] focus:outline-none focus:ring-2 focus:ring-purple-600">
           <svg *ngIf="!currentQuestion.isBookmarked" class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor"
@@ -146,16 +135,16 @@
                 <div *ngFor="let option of qMCQ.options" (click)="selectOption(option.label)"
                   class="flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer" [ngClass]="{
                        'hover:border-purple-600': !qMCQ.isAnswered,
-                       'border-green-500 text-green-900': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.is_correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                       'border-red-500 text-red-700': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.is_correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
+                       'border-green-500 text-green-900': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
+                       'border-red-500 text-red-700': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
                        'border-gray-300': !qMCQ.isAnswered,
                        'cursor-not-allowed opacity-75': qMCQ.isAnswered
                      }" [class.pointer-events-none]="qMCQ.isAnswered">
                   <div
                     class="w-8 h-8 flex items-center justify-center border rounded-md mr-3 sm:mr-4 font-semibold text-sm"
                     [ngClass]="{
-                         'bg-green-500 text-white border-green-500': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.is_correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
-                         'bg-red-500 text-white border-red-500': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.is_correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
+                         'bg-green-500 text-white border-green-500': qMCQ.isAnswered && (qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
+                         'bg-red-500 text-white border-red-500': qMCQ.isAnswered && !(qMCQ.userSelectedAnswer?.correct === 1 || qMCQ.userSelectedAnswer?.correct === 1) && qMCQ.selectedAnswerLabel === option.label,
                          'bg-purple-600 text-white border-purple-600': !qMCQ.isAnswered && qMCQ.selectedAnswerLabel === option.label,
                          'border-gray-400 text-purple-400': !qMCQ.isAnswered && qMCQ.selectedAnswerLabel !== option.label
                        }">{{ option.label }}</div>
@@ -218,15 +207,15 @@
                   <div *ngFor="let option of subQ.options" (click)="selectOption(option.label, subQ.id)"
                     class="flex items-center p-3 border rounded-lg cursor-pointer" [ngClass]="{
                            'hover:border-purple-600': !subQ.isAnswered,
-                           'border-green-500 text-green-900': subQ.isAnswered && (subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
-                           'border-red-500 text-red-700': subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
+                           'border-green-500 text-green-900': subQ.isAnswered && (subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
+                           'border-red-500 text-red-700': subQ.isAnswered && !(subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
                            'border-gray-300': !subQ.isAnswered,
                            'cursor-not-allowed opacity-75': subQ.isAnswered
                          }" [class.pointer-events-none]="subQ.isAnswered">
                     <div class="w-7 h-7 flex items-center justify-center border rounded-md mr-3 font-semibold text-xs"
                       [ngClass]="{
-                             'bg-green-500 text-white border-green-500': subQ.isAnswered && (subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
-                             'bg-red-500 text-white border-red-500': subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
+                             'bg-green-500 text-white border-green-500': subQ.isAnswered && (subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
+                             'bg-red-500 text-white border-red-500': subQ.isAnswered && !(subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1) && subQ.selectedAnswerLabel === option.label,
                              'bg-purple-600 text-white border-purple-600': !subQ.isAnswered && subQ.selectedAnswerLabel === option.label,
                              'border-gray-400 text-purple-400': !subQ.isAnswered && subQ.selectedAnswerLabel !== option.label
                            }">{{ option.label }}</div>
@@ -290,14 +279,14 @@
                   (change)="handleDropdownChange($event, subQ.id)" [disabled]="subQ.isAnswered"
                   class="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                   [ngClass]="{
-                                'border-green-500 bg-green-50 text-green-900': subQ.isAnswered && (subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1),
-                                'border-red-500 bg-red-50 text-red-700': subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1),
+                                'border-green-500 bg-green-50 text-green-900': subQ.isAnswered && (subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1),
+                                'border-red-500 bg-red-50 text-red-700': subQ.isAnswered && !(subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1),
                                 'border-gray-300': !subQ.isAnswered
                             }">
                   <option [ngValue]="undefined" disabled selected>-- Chọn đáp án --</option>
                   <option *ngFor="let opt of subQ.options" [value]="opt.text">{{ opt.text }}</option>
                 </select>
-                <p *ngIf="subQ.isAnswered && !(subQ.userSelectedAnswer?.is_correct === 1 || subQ.userSelectedAnswer?.correct === 1)"
+                <p *ngIf="subQ.isAnswered && !(subQ.userSelectedAnswer?.correct === 1 || subQ.userSelectedAnswer?.correct === 1)"
                   class="text-xs text-purple-400 mt-1">Đáp án đúng: <span class="font-semibold text-green-600">{{
                     subQ.correctOptionText }}</span></p>
               </div>
@@ -314,10 +303,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Footer -->
-    <div
+    <!-- <div
       class="bg-[#1a1f33] shadow-upward p-3 sm:p-4 flex justify-between items-center sticky bottom-0 z-10 border-t border-gray-700">
       <div class="flex space-x-1 sm:space-x-2">
         <button title="Menu"
@@ -356,10 +345,10 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Results Screen -->
-  <div *ngIf="currentState === TestStateEnum.ResultsScreen"
+  <!-- <div *ngIf="currentState === TestStateEnum.ResultsScreen"
     class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
     <div class="bg-[#232945] p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-4xl text-gray-200 border border-gray-700">
       <h2 class="text-2xl sm:text-3xl font-bold text-purple-400 mb-6 text-center">Kết Quả Bài Thi Nghe</h2>
@@ -385,7 +374,6 @@
           <div *ngIf="question.displayType !== QuestionDisplayTypeEnum.Unsupported"
             class="p-4 border border-gray-700 rounded-lg shadow-sm" [ngClass]="getQuestionResultClasses(question)">
             <p class="font-semibold mb-2 text-purple-600">Câu hỏi {{ i + 1 }}:</p>
-            <!-- ... giữ nguyên logic và binding Angular cho từng loại câu hỏi ... -->
           </div>
         </ng-container>
       </div>
@@ -396,5 +384,5 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

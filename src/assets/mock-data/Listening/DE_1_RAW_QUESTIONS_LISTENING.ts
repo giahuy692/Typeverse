@@ -11,17 +11,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '4250 pounds',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '3550 pounds',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '3250 pounds',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -40,17 +40,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'quarter to eight',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'half past seven',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'quarter past seven',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '301020',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '201030',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '102030',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Black',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Blue',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Green',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -126,17 +126,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Pick up her kids',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Hang out with friends',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Stay late at the office',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -154,17 +154,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'To suggest a drink',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'To arrange meeting',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'To say hello',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -182,17 +182,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Go cycling',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Go picnic',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Go for a walk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -211,17 +211,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The computer',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'A large stone',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Her mother',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -239,17 +239,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Fireworks performance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Singing from orchestra',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The city’s favorite group',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -268,17 +268,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'shopping',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'photography',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'walking',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -297,17 +297,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Thin',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Curly hair',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Short',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -325,17 +325,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At the station',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At the university',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At the park',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -354,17 +354,17 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Teacher and student',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Best friends',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Mother and daughter',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],

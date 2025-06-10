@@ -11,17 +11,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '£1.50 (One pounds fifty)',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '£3.50 (Three pounds fifty)',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '£2.50 (Two pounds fifty)',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -40,17 +40,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'In the evenings',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In the afternoons',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'In the mornings',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -69,17 +69,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Green',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Blue',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Red',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Outside the shop',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'In the garden',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At home',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -126,17 +126,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '8 o’clock',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '6 o’clock',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '7 o’clock',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -155,17 +155,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On Friday morning',
-        is_correct: 0,
+        correct: 0,
         choose: true,
       },
       {
         answer: 'On Saturday morning',
-        is_correct: 1,
+        correct: 1,
         choose: false,
       },
       {
         answer: 'On Thursday morning',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -184,17 +184,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'They both had blue eyes.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'They were both thin',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'They both had long hair',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -213,17 +213,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '9,000',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '10,000',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '8,000',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -242,17 +242,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Math classes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'History classes',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Geography classes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -271,17 +271,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '6 p.m',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '11 p.m',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '1 p.m',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -300,17 +300,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Goes running',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Meets his client',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Cycles home',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -329,17 +329,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Write another thesis',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Tutor another student',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Speak at a conference',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -358,17 +358,17 @@ export const DE_3_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Going to the theatre',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Playing chess with her cousin',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Reading books',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],

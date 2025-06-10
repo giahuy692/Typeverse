@@ -10,17 +10,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'At 9.45',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At 9.30',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'At 9:15',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -39,17 +39,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '1500 years',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '2500 years',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '3500 years',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'One o’clock',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Two o’clock',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: "Three o'clock",
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'long and white',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'long and red',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'black and white',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -125,17 +125,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'To study at college',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'To work in business',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'To become a teacher',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -154,17 +154,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'he was very strict',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'he didn’t like her',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'he taught her a lot',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -183,17 +183,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'go to the theater and play sports',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Read books and paint',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Watch movies and go shopping',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -212,17 +212,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Tea',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Juice',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Coffee',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -241,17 +241,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'the cave',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'the beach',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'the mountains',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -270,17 +270,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Fires in the countryside',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Smokes from factories',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Vehicles on the roads',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -299,17 +299,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'next to the gift shop',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'opposite the gift shop',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'behind the gift shop',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -327,17 +327,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On Tuesday',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'On Sunday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'On Saturday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -356,17 +356,17 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'On Thursday morning',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'On Thursday afternoon',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'On Tuesday morning',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],

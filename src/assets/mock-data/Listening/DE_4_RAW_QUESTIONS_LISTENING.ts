@@ -10,17 +10,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'at 8 am on Sunday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'at 9 am on Sunday',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'at 10 am on Saturday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -39,17 +39,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'at 9.15',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'at 11.15',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'at 10.15',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Two',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Three',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'One',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Request a transfer',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Seek a new job',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Raise the salary',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -126,17 +126,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'He bought a new car.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He lost his driving license',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'He has to drive to work',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -155,17 +155,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Migrate to a new place',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Building nests',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Stay together for group protection',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -184,17 +184,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Plays football',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Swimming',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Running',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -213,17 +213,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Drinks',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Food',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Salads',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -242,17 +242,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: "by the hotel's main entrance",
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: "by the hotel's side entrance",
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'behind the hotel’s main entrance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -271,17 +271,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Engine failure',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Poor weather conditions',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Delay at transit spot',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -300,17 +300,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Furniture',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Floor',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Architecture',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -329,17 +329,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'In the east',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'In the west',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In the south',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -357,17 +357,17 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Saturday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Friday',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Tuesday',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],

@@ -10,17 +10,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '150 pounds',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '250 pounds',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '350 pounds',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -39,17 +39,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'green',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'blue',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'black',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -68,17 +68,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'quarter to eight',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'quarter past seven',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'half past seven',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -97,17 +97,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Best friends',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Mother and daughter',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Teacher and student',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -125,17 +125,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Special offers',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'City’s favorite group',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'A surprise performance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -153,17 +153,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Beer',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Water',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Iced tea',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -181,17 +181,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Go picnic',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Go for a walk',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Go cycling',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -209,17 +209,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'To say hello',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'To suggest a drink',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'To arrange meeting',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -238,17 +238,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Curly hair',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Tall',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Short',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -267,17 +267,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Mirror',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Where to buy a new table',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'The furniture',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -296,17 +296,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'A large stone',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Her mother',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The computer',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -325,17 +325,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Pick up her kids',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Hang out with friends',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Stay late at the office',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -353,17 +353,17 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '102030',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '201030',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '301020',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -526,7 +526,6 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
-    tip: 'THƯ GIẢN - rồi HỌC - HÁT - SAU khi THỨC DẠY'
   },
   {
     id: 1017,
@@ -660,7 +659,6 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
-    tip: 'Man: tên là Continu và là người giỏi công nghê <br/> both: ở SA TIS <br/> Woman: làm việc an ninh'
   },
   {
     id: 1022,
@@ -736,7 +734,6 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
-    tip: 'KHÔNG CÓ THÔNG BÁO MEDIA - TÌM CÂU TRẢ LỜI'
   },
   {
     id: 1025,
@@ -811,6 +808,5 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
-    tip: 'Mantain - changing'
   },
 ];

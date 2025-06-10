@@ -10,17 +10,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: '7 PM',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: '5 PM',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: '6 PM',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -38,17 +38,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'She is young',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'She will be wearing red coat',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'They have similar characters',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -67,17 +67,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Spend too much on clothes.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Save for emergencies',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Ask for more money',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -96,17 +96,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Reads books.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Goes to the gym.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Plays football.',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -125,17 +125,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Cooks dinner',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Goes for a walk.',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Plays video games.',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -153,17 +153,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Phone',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Wallet',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Car',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -182,17 +182,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'A suit for the office',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'A pair of shoes',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'A T-shirt',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -210,17 +210,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'In an apartment',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'In a town hall',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'In a small village',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -239,17 +239,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'The instruments',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'The words',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'The cover art',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
@@ -268,17 +268,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Bedroom',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Bathroom',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Kitchen',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -297,17 +297,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Math',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Science',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Computer',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -326,17 +326,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'A dance performance',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'A big celebration',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'A surprise performance',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
     ],
@@ -354,17 +354,17 @@ export const DE_6_RAW_QUESTIONS_LISTENING = [
     answer: [
       {
         answer: 'Mice',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
       {
         answer: 'Fish',
-        is_correct: 1,
+        correct: 1,
         choose: true,
       },
       {
         answer: 'Insects',
-        is_correct: 0,
+        correct: 0,
         choose: false,
       },
     ],
