@@ -166,6 +166,7 @@ export const DE_4_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'ờ GẦN - BẠN THÂN - tôi được THỰC HÀNH - ĐỌC sách - BÚT/SỔ'
   },
   {
     id: 298,
@@ -206,6 +207,7 @@ export const DE_4_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN ĐẾN - được cập thẻ có GIỜ, NGÀY rõ ràng - VUI LÒNG HIỂN THỊ - TRƯỚC khi BẠN RỜI ĐI - MÁY sẽ đọc chúng'
   },
   {
     id: 299,
@@ -242,6 +244,7 @@ export const DE_4_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI NGHE CHUÔNG - TÌM LỐI EXIT - mở CỬA RA - sẽ nhìn THẤY BIỂN - hãy chạy ra BÊN NGOÀI'
   },
   {
     id: 300,
@@ -835,5 +838,6 @@ export const DE_4_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'anh LONG - có KINH NGHIỆM - bịa LÝ DO - cho việc trễ THỜI GIAN - nhưng KHÓ KHĂN nhất - là LÝ DO cấm CƠM<del>promise</del>'
   },
 ];

@@ -156,6 +156,7 @@ export const DE_6_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'ờ GẦN - BẠN THÂN - tôi được THỰC HÀNH - ĐỌC sách - BÚT'
   },
   {
     id: 452,
@@ -199,6 +200,7 @@ export const DE_6_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'ĐẦU TIÊN - CHỌN ĐÚNG NƠI - là QUAN TRỌNG nhất - và phải GẦN TRƯỜNG và CÔNG VIÊN - đó là YÊU CẦU tối thiểu khi tìm trọ'
   },
   {
     id: 453,
@@ -241,6 +243,7 @@ export const DE_6_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'ĐẦU TIÊN - khi còn TRẺ - anh ấy còn SOON - sau khi NỔI TIẾNG - anh ẤY đi DU LỊCH'
   },
   {
     id: 454,
@@ -870,5 +873,6 @@ export const DE_6_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'KHÁCH HÀNG - uống COFFE - tên HABIT - LEM - REM - cà phê tốt cho SỨC KHỎE - CHẤT LƯỢNG'
   },
 ];

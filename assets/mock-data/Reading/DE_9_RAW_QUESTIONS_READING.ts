@@ -158,6 +158,7 @@ export const DE_9_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Thằng Tí THÂN THIỆN, rủ bạn ĐI BỘ, nó đi TRƯỚC, NÓI hoài, mà chẳng ai chịu đi CÙNG NHAU.'
   },
   {
     id: 676,
@@ -201,6 +202,7 @@ export const DE_9_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'Mở MỘT CỬA SỔ -  CỬA SỔ ĐÓ ĐƯỢC MỞ RA - KÉO VÀ THẢ FILE vào - BẤM SUBMIT - CUỐI CÙNG kiểm tra EMAIL'
   },
   {
     id: 677,
@@ -241,6 +243,7 @@ export const DE_9_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN XUẤT HIỆN - BẠN ĐƯỢC CHÀO ĐÓN - vào SỰ KIỆN - NẾU BẠN THÍCH - hãy đặt CÂU HỎI'
   },
   {
     id: 678,
@@ -869,5 +872,6 @@ export const DE_9_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'KHÁCH HÀNG - uống COFFE - tên HABIT - LEM - REM - cà phê tốt cho SỨC KHỎE - CHẤT LƯỢNG'
   },
 ];
