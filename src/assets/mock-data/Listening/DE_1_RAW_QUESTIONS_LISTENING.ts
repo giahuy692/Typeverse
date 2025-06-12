@@ -576,6 +576,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Đi xe đạp - chạy bộ - đi bộ - cưỡi ngựa'
   },
   {
     id: 1701,
@@ -720,6 +721,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Cả 2 đều có kỹ năng và còn trẻ <br/> Người đàn ông suy nghĩ rất nhiều'
   },
   {
     id: 1443,
@@ -801,6 +803,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Công việc khác - Nghe nhạc'
   },
   {
     id: 1446,
@@ -882,5 +885,6 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Maintain - Changing'
   },
 ];

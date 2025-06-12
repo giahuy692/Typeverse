@@ -724,6 +724,7 @@ export const DE_2_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Cả hai đều là phụ nữ và còn trẻ - Người phụ nữ trên Chang - Người đàn ông: đáp án còn lại'
   },
   {
     id: 191,
@@ -806,6 +807,7 @@ export const DE_2_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Tạo bài viết - seek advice'
   },
   {
     id: 194,
@@ -888,5 +890,6 @@ export const DE_2_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip:'Singing - Have been Successful'
   },
 ];
