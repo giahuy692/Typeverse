@@ -7,7 +7,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: Good morning, everyone. This is an important announcement about a change in the train schedule. The train to London will now leave at 9:15, not 9:30 as planned. Please listen carefully to this information. If you are taking this train, please go to Platform 3 now. Thank you for your attention, and have a good day',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/Gas7OI5JzkkKaz3VjHcUwED6wjB2ZyKG2S0FKeo1.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/Gas7OI5JzkkKaz3VjHcUwED6wjB2ZyKG2S0FKeo1.mp3',
     answer: [
       {
         answer: 'At 9.45',
@@ -22,7 +24,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'At 9:15',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 0,
@@ -37,12 +39,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Welcome to Rock City, everyone! I&#39;m excited to show you around this amazing place. Rock City has a very long and interesting history. People first started living here about 1500 years ago. Can you believe how old that is? It&#39;s older than many famous cities in the world! The city got its name because of all the big rocks you can see around us. Over time, people built houses and roads between these rocks. Today, we can still see many old buildings from long ago.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/et8o3NDgcGRa3t6Iha3aEpuryFt3lH6SjhR26uUL.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/et8o3NDgcGRa3t6Iha3aEpuryFt3lH6SjhR26uUL.mp3',
     answer: [
       {
         answer: '1500 years',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: '2500 years',
@@ -67,7 +71,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Girl: Hi John, this is Sarah calling. I&#39;m leaving you a message about our meeting today. I know we said we&#39;d meet at two, but something&#39;s come up. Can we change the time to three o&#39;clock instead? I&#39;ll be at the usual coffee shop at three. Please call me back if this doesn&#39;t work for you',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/x933ljK3675x3cevK5XYJhBUqdJe1Mqh71GS8UoW.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/x933ljK3675x3cevK5XYJhBUqdJe1Mqh71GS8UoW.mp3',
     answer: [
       {
         answer: 'One o’clock',
@@ -82,7 +88,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: "Three o'clock",
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 0,
@@ -97,7 +103,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Girl: I want to tell you about something special I just bought. It&#39;s a beautiful dress. The dress is long and red, just like a sunset! I feel so happy when I wear it. The fabric is soft, and it flows nicely when I walk. I can wear it to a party or a nice dinner. I love my new dress!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/L9yVNFruHl6NadGeM4o9eoQ3pbmZHhL3eTvvaXIa.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/L9yVNFruHl6NadGeM4o9eoQ3pbmZHhL3eTvvaXIa.mp3',
     answer: [
       {
         answer: 'long and white',
@@ -107,7 +115,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'long and red',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'black and white',
@@ -126,7 +134,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: Welcome, how may I help you? Man: Yes, I would like to have some advice for my future job. I majored in Mathematics. Is there anything that I could do? Woman: Well there are a variety of career paths you can take, let say becoming a teacher, a businessman, or continue to study higher to become a researcher. Man: I have a friend who also majors in Mathematics and he is now a businessman with his own company. I guess that would be my choice then. I am not suitable to become a teacher since I think I am a bit impatient.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/wLJG3DqmKNyXorJNN7A8qnfaaa6VuP8PKE9UqC3w.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/wLJG3DqmKNyXorJNN7A8qnfaaa6VuP8PKE9UqC3w.mp3',
     answer: [
       {
         answer: 'To study at college',
@@ -136,7 +146,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'To work in business',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'To become a teacher',
@@ -156,7 +166,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: You know, I want to talk about my old manager, George. He was a very smart man, and he taught me a lot about work. I remember the first time I joined the team; he showed me how to do my job well. George was not very strict, but he had high expectations. I learned to be better because of him. Overall, I am thankful for his guidance and support during my early days',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/3utjdn27xuEz5VAC8EKyoi0dBR9fE4ujvsE7gItt.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/3utjdn27xuEz5VAC8EKyoi0dBR9fE4ujvsE7gItt.mp3',
     answer: [
       {
         answer: 'he was very strict',
@@ -171,7 +183,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'he taught her a lot',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 0,
@@ -186,12 +198,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: In my free time, I love to go to the theater. There is something magical about watching a live performance. It makes me feel alive and happy. I also enjoy playing sports with my friends. We have so much fun together, whether it&rsquo;s soccer or basketball. These activities help me relax and make my days brighter',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/v07lgH34TxcRkDV7aJz7n83aiSv3e7lkOWgHuFan.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/v07lgH34TxcRkDV7aJz7n83aiSv3e7lkOWgHuFan.mp3',
     answer: [
       {
         answer: 'go to the theater and play sports',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Read books and paint',
@@ -216,12 +230,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: When it comes to lunch, I have a simple pleasure: I really enjoy a warm cup of tea. It&rsquo;s my favorite drink to have while I eat. I find it calming, and it makes my meal feel special. Sometimes people ask me why I don&rsquo;t choose coffee or juice, but for me, tea is just perfect. It warms my heart and gives me a moment to relax',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/29syi5s5z6WbdpcnFA92hzeSDbqdgVwwswn5M5mp.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/29syi5s5z6WbdpcnFA92hzeSDbqdgVwwswn5M5mp.mp3',
     answer: [
       {
         answer: 'Tea',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Juice',
@@ -246,7 +262,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: I&#39;m so excited about my upcoming holiday! I&#39;ve been thinking about where to go for a long time. Some of my friends suggested going to a nice beach. Others talked about exploring interesting caves. But I&#39;ve made up my mind - I&#39;m going to the mountains! The mountains are so beautiful with their green forests. I can&#39;t wait to breathe the fresh air up there. They are perfect for relaxing and enjoying nature.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/4BOZFsvf6icx1Hk2503CXAEg9E0kM3xOHFx6utqN.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/4BOZFsvf6icx1Hk2503CXAEg9E0kM3xOHFx6utqN.mp3',
     answer: [
       {
         answer: 'the cave',
@@ -261,7 +279,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'the mountains',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 0,
@@ -276,12 +294,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'I really like living in the countryside. There are many green fields, tall trees, and small rivers. The air usually smells fresh and clean. But sometimes, the air becomes dirty and hard to breathe. Many people think cars on the roads make the air bad. Others say the smoke from big factories is the problem. These things can make the air dirty, but in the countryside, there&#39;s a bigger issue. Farmers often start fires to clean their fields. They burn old plants and grass. These fires make a lot of smoke that goes into the air. It&#39;s sad because the smoke can hurt animals and make people sick. We need to find better ways to clean fields without using fire.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/iGxYsIuhJ7sBENtvofCwmD1p7ZV8I2Gz8c8AANq4.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/iGxYsIuhJ7sBENtvofCwmD1p7ZV8I2Gz8c8AANq4.mp3',
     answer: [
       {
         answer: 'Fires in the countryside',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Smokes from factories',
@@ -306,7 +326,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: Hey, are you free for coffee later? I found a great new place in town. It&#39;s not hard to find at all. You know the big gift shop on Main Street? Well, the coffee shop is right across from it. Just look for the gift shop, then cross the street. You&#39;ll see the coffee shop right there, opposite the gift shop. They have amazing pastries too. Let&#39;s meet there at 3 PM, okay?',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/05VGKVqiOM6nNShCaYOOFaBa0yfqmTrj1trlDYr8.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/05VGKVqiOM6nNShCaYOOFaBa0yfqmTrj1trlDYr8.mp3',
     answer: [
       {
         answer: 'next to the gift shop',
@@ -316,7 +338,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'opposite the gift shop',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'behind the gift shop',
@@ -335,12 +357,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: Hey there! I&#39;ve been thinking we should get together soon to discuss our upcoming project. I know weekends are usually good for meetings, but this time they&#39;re a bit tricky. Saturday is out because I&#39;ve got a family event all day. And Sunday? Well, I usually use that day to catch up on rest and prepare for the week ahead. So, I was wondering if we could meet on Tuesday instead, it works really well for me. What do you think about that?',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/ytjt8NpL35kGOx1RcArCgGn0CyqUWqy60kWb1VPZ.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/ytjt8NpL35kGOx1RcArCgGn0CyqUWqy60kWb1VPZ.mp3',
     answer: [
       {
         answer: 'On Tuesday',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'On Sunday',
@@ -365,12 +389,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: Hi Professor Smith, this is John calling about our meeting for the assignment. I wanted to confirm our appointment time. I know we discussed a few options earlier. At first, I thought we agreed on Tuesday morning, but then I remembered that doesn&#39;t work with your schedule. Then I considered Thursday afternoon, but I have another class then. So, I&#39;m pretty sure we settled on Thursday morning at 10 AM in your office. That&#39;s what I have written down. I&#39;ll bring my draft and notes for the project. If I&#39;ve got the day or time wrong, or if you need me to bring anything else, please let me know. Looking forward to discussing the assignment with you. Have a great day!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/U15bjzILdCYiE2imEkFIiAlZURBeIwiXeCP2fyIr.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/U15bjzILdCYiE2imEkFIiAlZURBeIwiXeCP2fyIr.mp3',
     answer: [
       {
         answer: 'On Thursday morning',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'On Thursday afternoon',
@@ -394,6 +420,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       '<strong>Four people are talking about Shopping online. Complete the sentences below.</strong>',
     explain: null,
     playCount: 0,
+    my_answer: '',
     audio_url: null,
     answer: null,
     sort_by: 0,
@@ -406,7 +433,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'You know what I love about online shopping? The fact that I don&rsquo;t even need to leave my house. I can be sitting in my pajamas, sipping coffee, and boom &mdash;whatever I want is on its way. It&rsquo;s like magic, or, well, just modern convenience. No more carrying heavy bags or struggling with parking. The delivery driver brings it right to my doorstep, and all I have to do is click a button. Sometimes, I even forget I ordered something, and it&rsquo;s like a little surprise when it shows up. It&rsquo;s almost too easy&mdash;almost',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening8/LFXIIh0ChbWcUltZBzcTr3rbLzWsZ9ov3SWIyZrU.mp3',
         answer: [
           {
@@ -422,7 +450,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'it saves time',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'it has more choices',
@@ -443,7 +471,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'What really gets me excited is how reasonable the price can be. Like, have you ever compared the prices? Online stores are practically giving stuff away compared to what you&#39;d pay in-store. And the sales? The discount codes? Half the time, I find a deal without even trying. Plus, I can shop around different sites to get the best price without moving an inch. Add in free shipping, and it&rsquo;s a no brainer. I mean, why would I go to a store and pay more when I can get it for less, right?',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening8/59jDxAJgu9WbZx8rK38IgED7QubW4TZBTXlv7stw.mp3',
         answer: [
           {
@@ -454,7 +483,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'it is cheaper',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'it saves time',
@@ -480,13 +509,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'I swear, I don&rsquo;t know how people used to spend hours in malls. You can get lost in there, wandering around, dealing with lines. With online shopping, it&rsquo;s like time stretches out in your favor. I can find what I want in minutes, and then I&rsquo;m done&mdash;back to whatever I was doing. No driving, no waiting for the fitting rooms, none of that hassle. Time is money, right? And online shopping just gives me so much more of it to spend on the things that actually matter to me.',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening8/QUvlU1RbrpQVOJSvsU4l5qFlnNtGSNL8OVvHp657.mp3',
         answer: [
           {
             answer: 'products are delivered',
             correct: 0,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'it is cheaper',
@@ -517,7 +547,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'The selection online? It&rsquo;s insane! You walk into a store and, sure, they&rsquo;ve got a couple racks of things, but online? It&rsquo;s like you&rsquo;re stepping into the biggest mall in the world. You can find anything&mdash;stuff you didn&rsquo;t even know existed. And if one site doesn&rsquo;t have your size or style, there&rsquo;s a hundred more that do. No need to settle for whatever happens to be on the shelves. It&rsquo;s all there, just waiting for you to find it. And the niche stuff? That&rsquo;s where online really shines.',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening8/6Ig82GIGKQPCFOhEynlb2rjGWmuiLPGlVyo3rMJt.mp3',
         answer: [
           {
@@ -528,7 +559,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'it has more choices',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'it is cheaper',
@@ -556,7 +587,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to two people discussing Audition. Read the opinions below and decide whose opinion matches the statements, the man, the woman, or both the man and the woman. You can listen to the discussion twice.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/IkMVRGKqdRC2gGfHeiRuaVDaOrLTV8pHjZFq7QMl.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/IkMVRGKqdRC2gGfHeiRuaVDaOrLTV8pHjZFq7QMl.mp3',
     answer: null,
     sort_by: 0,
     childs: [
@@ -568,12 +601,13 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: You know, I&rsquo;ve always believed that auditions are the most important part of an actor&rsquo;s career. I mean, that&rsquo;s where the magic happens. It doesn&rsquo;t matter how great you are in rehearsals or even in the final performance, if you can&rsquo;t nail that audition, you&rsquo;re not getting anywhere.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Woman',
@@ -599,12 +633,13 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: That&rsquo;s true, but whether it&rsquo;s a strong script or a weak one, they still have to nail that first audition to even get the chance to perform, right?',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Woman',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Man',
@@ -631,7 +666,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: I agree with that. But I also think there&rsquo;s a huge difference between theater acting and screen acting. The two require completely different skill sets. In theater, you&rsquo;ve got to project and be larger than life, whereas on screen, it&rsquo;s all about subtlety, keeping everything smaller and more contained.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Woman',
@@ -646,7 +682,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Both',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -662,7 +698,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: Right, and that&rsquo;s why actors deserve as much praise as possible. They&rsquo;re constantly shifting between styles and adapting to new roles. It&rsquo;s tough! Woman: Couldn&rsquo;t agree more. I mean, whether it&rsquo;s theater or film, acting is such an emotional and demanding job. Encouragement and praise go a long way. They need to feel appreciated for all the work they put in.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
@@ -677,7 +714,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Both',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -695,7 +732,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to a city planner talk at a press conference about a Regional Development Planning and answer the questions below.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/HCQQoWjvI3IDTcSKnOlVqGmjJEgJmFZwszI1awq3.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/HCQQoWjvI3IDTcSKnOlVqGmjJEgJmFZwszI1awq3.mp3',
     answer: null,
     sort_by: 0,
     childs: [
@@ -708,7 +747,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'However, I will acknowledge that one of the main criticisms we&#39;ve received is that our plan doesn&#39;t provide enough alternatives to driving. This is a valid concern, and I want to assure you that we&#39;re taking it seriously. We&#39;re actively exploring additional options to diversify our transportation network and reduce reliance on personal vehicles.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'It is too expensive to implement the plan',
@@ -718,7 +758,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: "It doesn't provide enough alternatives to driving",
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'It places too much emphasis on public transportation.',
@@ -740,12 +780,13 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'The real challenge we&#39;re anticipating, and the one we&#39;re preparing for most diligently, is the likelihood of resistance from local communities. Change can be difficult, and we understand that. That&#39;s why we&#39;re committed to extensive community engagement, transparent communication, and working closely with neighborhood representatives to address concerns and incorporate local feedback.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'It is likely to meet resistance from local communities',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer:
@@ -774,7 +815,9 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to a critic talk about a New series and answer the questions below.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening8/3I7Qcj1n3i7U7MRZZHuVnFOEKWs93g4ibB8cLDEI.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening8/3I7Qcj1n3i7U7MRZZHuVnFOEKWs93g4ibB8cLDEI.mp3',
     answer: null,
     sort_by: 0,
     childs: [
@@ -787,7 +830,8 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'You can often judge a movie based on its script. A poorly written script feels amateurish and detracts from the overall experience. While the storyline might be decent, with elements of humor and well-developed character backgrounds, the relationships between the two main characters can feel forced due to unnatural dialogue.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'The plot is overly complicated',
@@ -797,7 +841,7 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'The dialogues seems unrealistic',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: "The characters' backgrounds are not explored.",
@@ -818,13 +862,14 @@ export const DE_8_RAW_QUESTIONS_LISTENING = [
         explain:
           'The pressure to create short yet captivating storylines has led to many films being rejected by publishers or receiving low ratings from critics and viewers. While innovation is important, it should not come at the expense of a well-crafted script that forms the backbone of a compelling movie.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer:
               'The new industry demand is negatively influencing script production',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The humor is poorly executed',

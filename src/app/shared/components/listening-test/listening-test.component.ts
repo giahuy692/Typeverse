@@ -45,6 +45,8 @@ class DTOQuestion {
   skill_id?: number;
   playCount: number = 0;
   tip?: string;
+  isAnswered?: boolean = false;
+  my_answer?: DTOAnswer;
 }
 
 class ExamFileEntry {
@@ -65,9 +67,11 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   allExamFiles: ExamFileEntry[] = [];
   selectedExamIndex: number = 0;
+  currentQuestionIndex: number = 0;
 
   listQuestion: DTOQuestion[] = [];
   currentQuestion: DTOQuestion = new DTOQuestion();
+  currentExam: ExamFileEntry = new ExamFileEntry();
 
   totalTimeInSeconds: number = 40 * 60;
   timeRemaining: string = '40:00';
@@ -124,54 +128,82 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   onStartTest(): void {
     this.currentState = TestState.TestInProgress;
     this.currentQuestion = this.listQuestion[0];
+    this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+    this.currentExam = this.allExamFiles[0];
+    this.currentQuestionIndex = 0;
     this.startOverallTimer();
+
+    this.correctAnswersCount = 0;
+    this.incorrectAnswersCount = 0;
+    this.unansweredCount = 0;
   }
 
   /** Hàm xử lý chọn đề thi
    */
   onExamSelectionChange(index: number): void {
     this.selectedExamIndex = index;
+    this.currentExam = this.allExamFiles[index];
     this.listQuestion = this.allExamFiles[index].listQuestion;
   }
 
-  selectOption(answer: DTOAnswer): void {}
+  selectOption(answer: DTOAnswer, listAnswer: DTOAnswer[] | null): void {
+    answer.choose = true;
+    this.currentQuestion.isAnswered = true;
+
+    listAnswer?.forEach((item) => {
+      if (item !== answer) {
+        item.choose = false;
+      }
+    });
+  }
 
   getOptionLetter(i: number): string {
     // 65 là mã ASCII của 'A'
     return String.fromCharCode(65 + i);
   }
 
-  //   loadQuestion(index: number): void {
-  //     if (index >= 0 && index < this.questions.length) {
-  //       this.currentQuestion = this.questions[index];
-  //       this.isPlayingAudio = false;
-  //       if (this.audioPlayer) this.audioPlayer.pause();
-  //     }
+  shuffleArray<T>(array: DTOAnswer[] | null): DTOAnswer[] | null {
+    const result = array?.slice(); // copy mảng để không ảnh hưởng tham chiếu gốc
+    if (!result) {
+      return null;
+    }
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+
+  // loadQuestion(index: number): void {
+  //   if (index >= 0 && index < this.questions.length) {
+  //     this.currentQuestion = this.questions[index];
+  //     this.isPlayingAudio = false;
+  //     if (this.audioPlayer) this.audioPlayer.pause();
   //   }
+  // }
 
-  //   nextQuestion(): void {
-  //     this.clearUserMessage();
-  //     // Ensure current question's answer is recorded before moving
-  //     this.recordCurrentQuestionAnswer();
+  nextQuestion(): void {
+    this.clearUserMessage();
 
-  //     if (this.currentQuestionIndex < this.questions.length - 1) {
-  //       this.currentQuestionIndex++;
-  //       this.loadQuestion(this.currentQuestionIndex);
-  //     } else {
-  //       this.finishTest(); // Auto-submit when reaching the end
-  //     }
-  //   }
+    if (this.currentQuestionIndex < this.listQuestion.length - 1) {
+      this.currentQuestionIndex++;
+      this.currentQuestion = this.listQuestion[this.currentQuestionIndex];
+      this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+    } else {
+      this.finishTest(); // Auto-submit when reaching the end
+    }
+  }
 
-  //   previousQuestion(): void {
-  //     this.clearUserMessage();
-  //     // Ensure current question's answer is recorded before moving
-  //     this.recordCurrentQuestionAnswer();
+  previousQuestion(): void {
+    this.clearUserMessage();
 
-  //     if (this.currentQuestionIndex > 0) {
-  //       this.currentQuestionIndex--;
-  //       this.loadQuestion(this.currentQuestionIndex);
-  //     }
-  //   }
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+      this.currentQuestion = this.listQuestion[this.currentQuestionIndex];
+      this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+    }
+  }
 
   //   toggleBookmark(): void {
   //     if (this.currentQuestion) {
@@ -243,10 +275,6 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     clearInterval(this.timerInterval); // Dừng bộ đếm thời gian
     this.audioPlayer.pause(); // Dừng bất kỳ âm thanh nào đang phát
 
-    // Đảm bảo các câu trả lời của câu hỏi cuối cùng được ghi lại và đánh giá
-    // this.recordCurrentQuestionAnswer(); // Logic này đã có, giữ nguyên
-
-    this.prepareFlatResultItems(); // NEW: Chuẩn bị danh sách phẳng cho màn hình kết quả
     this.calculateResults(); // Tính toán số câu đúng/sai/chưa trả lời
     this.currentState = TestState.ResultsScreen; // Chuyển trạng thái sang màn hình kết quả
     this.cdRef.detectChanges(); // Đảm bảo UI được cập nhật
@@ -273,10 +301,6 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   }
 
   calculateResults(): void {
-    this.correctAnswersCount = 0;
-    this.incorrectAnswersCount = 0;
-    this.unansweredCount = 0;
-
     // Duyệt qua mảng flatResultItems đã chuẩn bị
     // this.flatResultItems.forEach(item => {
     //   if (item.isAnswered) {
@@ -357,6 +381,27 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     }
   }
 
+  getSelectedAnswerValue(answers: DTOAnswer[] | null): string | null {
+    console.log(answers);
+    if (answers) {
+      const chosen = answers.find((a) => a.choose);
+      return chosen ? chosen.answer : '';
+    }
+    return '';
+  }
+
+  //Hàm đánh giá màu (đúng/sai)
+  getRightAnswer(listAnswer: DTOAnswer[] | null): DTOAnswer | null {
+    if (listAnswer) {
+      for (const item of listAnswer) {
+        if (item.correct == 1) {
+          return item;
+        }
+      }
+    }
+    return null;
+  }
+
   //   playSubQuestionAudio(subQuestion: SubQuestionMCQ | SubQuestionDropdown): void {
   //     this.clearUserMessage();
   //     let audioUrlToPlay: string | undefined;
@@ -410,32 +455,29 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   //   }
 
   ngOnDestroy(): void {
-    // clearInterval(this.timerInterval);
-    // if (this.audioPlayer) {
-    //   this.audioPlayer.pause();
-    //   this.audioPlayer.removeAttribute('src');
-    //   this.audioPlayer.load();
-    // }
+    clearInterval(this.timerInterval);
+    if (this.audioPlayer) {
+      this.audioPlayer.pause();
+      this.audioPlayer.removeAttribute('src');
+      this.audioPlayer.load();
+    }
   }
 
-  //   // New method to navigate back to the start screen
-  //   goToStartScreen(): void {
-  //     // Reset component state for a new test if necessary
-  //     this.currentState = TestState.StartScreen;
-  //     this.questions = []; // Clear questions
-  //     this.currentQuestionIndex = 0;
-  //     this.audioPlayer.pause();
-  //     this.audioPlayer.removeAttribute('src');
-  //     this.audioPlayer.load();
-  //     this.correctAnswersCount = 0;
-  //     this.incorrectAnswersCount = 0;
-  //     this.unansweredCount = 0;
-  //     clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
-  //     this.timeRemaining = '40:00'; // Reset display timer
-  //     this.userMessage = null; // Clear any messages
-  //     this.cdRef.detectChanges();
-  //     this.flatResultItems = []; // Reset mảng kết quả phẳng
-  //   }
+    // New method to navigate back to the start screen
+    goToStartScreen(): void {
+      // Reset component state for a new test if necessary
+      this.currentState = TestState.StartScreen;
+      this.currentQuestionIndex = 0;
+      this.audioPlayer.pause();
+      this.audioPlayer.removeAttribute('src');
+      this.audioPlayer.load();
+      this.correctAnswersCount = 0;
+      this.incorrectAnswersCount = 0;
+      this.unansweredCount = 0;
+      clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+      this.timeRemaining = '40:00'; // Reset display timer
+      this.cdRef.detectChanges();
+    }
 
   //   // Helper method to determine the overall styling for a question in results
   //   getQuestionResultClasses(question: QuestionUnion): { [key: string]: boolean } {

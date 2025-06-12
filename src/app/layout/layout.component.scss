@@ -1,6 +1,7 @@
 ::ng-deep app-layout {
+    overflow: hidden;
+    min-height: 100vh;
     .layout-wrapper {
-        // min-height: 100vh;
         // background-color: #f9fafb;
         // color: #111827;
 
@@ -10,9 +11,9 @@
         // padding: 2rem;
         // max-width: 1280px;
         margin: 0 auto;
-        height: calc(100vh - 90px);
-        overflow-y: auto;
-        scroll-behavior: smooth;
+        // height: calc(100vh - 90px);
+        // overflow-y: auto;
+        // scroll-behavior: smooth;
     }
 
 }

@@ -1,54 +1,7 @@
-// ::ng-deep app-listening-test {
-//     select,option{
-//         color: #000;
-//     }
-//     // listening.component.scss
-//     /* Sử dụng font Inter toàn cục nếu chưa được cấu hình trong tailwind.config.js hoặc styles.scss */
+::ng-deep app-listening-test {
+    .body{
+        height: calc(100vh - 80px - 72px);
+        overflow-y: auto;
+    }
 
-
-//     /* Tailwind CSS sẽ xử lý hầu hết các kiểu. File này có thể dùng cho các tùy chỉnh phức tạp hơn
-//    hoặc các kiểu không dễ dàng thực hiện bằng utility classes của Tailwind. */
-
-//     /* Kiểu cho bóng đổ hướng lên trên cho footer, nếu cần */
-//     .shadow-upward {
-//         box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-//     }
-
-//     /* Đảm bảo component chiếm toàn bộ chiều cao nếu nó là root component của một route */
-//     :host {
-//         display: block;
-//         /* min-height: 100vh; */
-//         /* Có thể cần nếu component này là một trang đầy đủ */
-//     }
-
-//     :host {
-//         display: block;
-//         min-height: 100vh;
-//         background: linear-gradient(to bottom right, #1a202c, #2d3748);
-//         font-family: 'Inter', sans-serif;
-//       }
-      
-//       button {
-//         transition: all 0.3s ease-in-out;
-//         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//       }
-      
-//       button:hover {
-//         transform: translateY(-2px);
-//         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-//       }
-      
-//       button:active {
-//         transform: translateY(0);
-//         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//       }
-
-// }
-
-// /* Căn chỉnh cho màn hình bắt đầu và hướng dẫn để chúng luôn ở giữa và chiếm toàn bộ màn hình */
-// app-listening > div[ngIf="currentState === TestStateEnum.StartScreen"],
-// app-listening > div[ngIf="currentState === TestStateEnum.InstructionsScreen"] {
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh; /* Đảm bảo các màn hình này chiếm toàn bộ chiều cao viewport */
-// }
+}

@@ -8,7 +8,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Hey, I just wanted to tell you about my new car! It&#39;s a small one, perfect for my needs. I got it for a great price&mdash;only 3,250 pounds! Can you believe it? I was looking at bigger models too, but they were way more expensive, around 3,550 pounds or even 4,250 pounds. I&#39;m really happy with my choice!.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/6IvHKoJeZ5CQMbbBYvHX1kjj7aiUQ5mzVZ5Kbjz7.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/6IvHKoJeZ5CQMbbBYvHX1kjj7aiUQ5mzVZ5Kbjz7.mp3',
     answer: [
       {
         answer: '4250 pounds',
@@ -23,7 +25,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: '3250 pounds',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 1,
@@ -38,12 +40,14 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Hi Rose. It&rsquo;s Ahmed, what time should we meet for dinner tonight? How about we meet at quarter past seven instead? Oh wait, I just remembered&mdash;I have a meeting ending at a half past seven. Let&rsquo;s make it quarter to eight instead so we could have 15 minutes to travel. Does that work for you?',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/iyjgjjpcWrwnBTjj7HROpGxmnayTP7c3R3msD0Zm.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/iyjgjjpcWrwnBTjj7HROpGxmnayTP7c3R3msD0Zm.mp3',
     answer: [
       {
         answer: 'quarter to eight',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'half past seven',
@@ -67,7 +71,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Hello, I need to call the teleshop for some information. My phone is not working. Can you remind me of the number? I think it starts with 20 or 10 or 30 something. Is it 102030 or 301020? No, wait! I remember now - it&#39;s 201030! I really need to order that new gadget. Thanks for your help!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/jmCuzzZabs52105wZg7tmxTmA9V3PEbxoJQfDaIS.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/jmCuzzZabs52105wZg7tmxTmA9V3PEbxoJQfDaIS.mp3',
     answer: [
       {
         answer: '301020',
@@ -77,7 +83,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: '201030',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: '102030',
@@ -97,12 +103,14 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: Hello, I would like to buy a top, please. Woman: Sure, do you have anything particular in mind? Man: I like the design of that green one over there. Do you have it in blue? Woman: Maybe. What size are you? Man: I am wearing large. Woman: Let me see. Ohh. We have that one in blue but small. The red and black ones, however, are available in large. Man: Red is not my cup of tea. Well, I will go with the other option then.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/GUddydqVIyq4olNF3814h8DndTzu335DRBG2HpTc.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/GUddydqVIyq4olNF3814h8DndTzu335DRBG2HpTc.mp3',
     answer: [
       {
         answer: 'Black',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Blue',
@@ -127,7 +135,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Anna: Hey Max, it&rsquo;s Anna. I want to ask you for a favor this afternoon. I have to stay late at the office to finish some work. Could you please pick up my kids from school? After that, I know you&rsquo;ll want to hang out with your friends, so feel free to take them along. I really appreciate your help!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/sUkmBCEoo0U3gAylNyebDLfNLcNdSk75YsWm7FNc.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/sUkmBCEoo0U3gAylNyebDLfNLcNdSk75YsWm7FNc.mp3',
     answer: [
       {
         answer: 'Pick up her kids',
@@ -142,7 +152,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'Stay late at the office',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 5,
@@ -156,12 +166,14 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Hi James, it&rsquo;s Vincent. I just want to check in and see how you&rsquo;re doing. It&rsquo;s been a while since we last caught up! How about we grab a drink later? I know a great new place that has very nice tea. You should definitely try it next time you visit me. Text me back!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/8zPN5w9x8cbBf8UBaGmxgZ6UcxdX48znIk80eJaG.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/8zPN5w9x8cbBf8UBaGmxgZ6UcxdX48znIk80eJaG.mp3',
     answer: [
       {
         answer: 'To suggest a drink',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'To arrange meeting',
@@ -185,12 +197,14 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: Last year, I had an amazing trip! One of the best things I enjoyed was going cycling in the countryside. The views were stunning, and it felt great to be outdoors. I also went for a walk a few times, but cycling really allowed me to explore more areas. We even had a picnic one day, which was lovely too!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/JIFmYEGzrdnRY54gprpvEfAMGzJfXFy4jxL4KL3f.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/JIFmYEGzrdnRY54gprpvEfAMGzJfXFy4jxL4KL3f.mp3',
     answer: [
       {
         answer: 'Go cycling',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Go picnic',
@@ -215,7 +229,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: I&rsquo;ve always loved science, but there was a moment that really encouraged me to become a scientist. I remember when I was a child, I found a large stone during a school trip. It sparked my curiosity about geology. My mother also inspired me to explore my interests in science. Of course, I use the computer a lot now for my research, but that stone was the beginning.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/hdFNa43sJ7I8W0txCgYFDhJJQI5OzqaR2p1fJ692.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/hdFNa43sJ7I8W0txCgYFDhJJQI5OzqaR2p1fJ692.mp3',
     answer: [
       {
         answer: 'The computer',
@@ -225,7 +241,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'A large stone',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Her mother',
@@ -244,7 +260,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: I can&rsquo;t wait for the concert this weekend! It&rsquo;s going to be such an exciting event. The highlight ending will be the city&rsquo;s favorite group performing on stage. I&rsquo;ve heard they have some amazing songs planned. There will also be a fireworks performance to celebrate before that, and I&rsquo;m sure the orchestra will do some singing as well. It&rsquo;s going to be a night to remember!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/alcxu2tctYkBiOcWIQx3BaDH848w5c4aLHJ8puRv.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/alcxu2tctYkBiOcWIQx3BaDH848w5c4aLHJ8puRv.mp3',
     answer: [
       {
         answer: 'Fireworks performance',
@@ -259,7 +277,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'The city’s favorite group',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 9,
@@ -274,7 +292,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: On our family trip last summer, we had such a great time! My wife really enjoys photography. So, when we went walking together in the parks, she spent a lot of time taking pictures of the beautiful landscapes. Well, at least she is not crazy about shopping.',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/uyOpO1PF9EdzXleHw2urZJhU1GWIS7C38nsdxJ34.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/uyOpO1PF9EdzXleHw2urZJhU1GWIS7C38nsdxJ34.mp3',
     answer: [
       {
         answer: 'shopping',
@@ -284,7 +304,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'photography',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'walking',
@@ -304,7 +324,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Jana: Hey, could you do me a favor? My sister is waiting outside, and I need you to give her my book. She&rsquo;s the one who is short and has straight hair, so you can&rsquo;t miss her. I also think she&rsquo;s wearing a blue jacket today. If you see her, just hand it to her, and I&rsquo;ll be so grateful. Thanks for helping me out!&quot;',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/bK2Gk5Y3TVU6vwCoto7z2idYB7C7vJ76yRCrQ2c7.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/bK2Gk5Y3TVU6vwCoto7z2idYB7C7vJ76yRCrQ2c7.mp3',
     answer: [
       {
         answer: 'Thin',
@@ -319,7 +341,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'Short',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 11,
@@ -333,7 +355,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Man: Hi, it&#39;s me! I wanted to confirm where we&rsquo;re meeting today. I thought we agreed to meet at the park, right? It&rsquo;s a nice place to relax and catch up. The station would be too crowded, and the university is a bit far for me. Let&rsquo;s stick to the park so we can enjoy the weather. What time should I meet you there?',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/7jNZOckyleEiuePr01tGEb9xgDzt92gWJ18W0EI0.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/7jNZOckyleEiuePr01tGEb9xgDzt92gWJ18W0EI0.mp3',
     answer: [
       {
         answer: 'At the station',
@@ -348,7 +372,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'At the park',
         correct: 1,
-        choose: true,
+        choose: false,
       },
     ],
     sort_by: 12,
@@ -363,7 +387,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
     explain:
       'Woman: I just got back from an amazing vacation with Lisa! We&rsquo;ve been friends for years, and this trip really brought us closer. I can&rsquo;t imagine going with anyone else. Some people think we look like mother and daughter because we care for each other so much, but it&rsquo;s really just best friends hanging out!',
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/NVXoYb5I98PP8ZcsXOftYgKww0Ejo1wPf65FNSt3.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/NVXoYb5I98PP8ZcsXOftYgKww0Ejo1wPf65FNSt3.mp3',
     answer: [
       {
         answer: 'Teacher and student',
@@ -373,7 +399,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       {
         answer: 'Best friends',
         correct: 1,
-        choose: true,
+        choose: false,
       },
       {
         answer: 'Mother and daughter',
@@ -392,6 +418,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       '<strong>Four people are talking about their exercise preferences. Complete the sentence below.</strong>',
     explain: null,
     playCount: 0,
+    my_answer: '',
     audio_url: null,
     answer: null,
     sort_by: 14,
@@ -404,13 +431,14 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Person A: I&rsquo;ve always been drawn to outdoor activities, especially those that get my heart racing. While some of my friends prefer running or hiking, I find nothing more exciting than mountain biking. I love the challenge of rough terrains and feeling the wind rush by as I go downhill. It&rsquo;s also a great way to explore nature and stay fit. I try to hit the trails at least a few times a month because it&rsquo;s such a thrilling experience for me. It&rsquo;s become my go-to form of exercise whenever I have the time.',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening1/lCeBInwPOb87t82bABtKQoj6tLJLjpsu4yyGVSCh.mp3',
         answer: [
           {
             answer: 'Mountain biking',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Going for a run',
@@ -441,7 +469,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Person B: When it comes to staying active, I&rsquo;ve tried lots of different things. But I&rsquo;ve found that I get the most out of a good jog. It&rsquo;s a great way to keep my energy levels up, and I enjoy how it clears my mind. I usually jog around the park or along the river near my home. It&rsquo;s not too fast, but it still gets my heart pumping and helps me unwind. I try to fit it into my routine as often as I can, even if it&rsquo;s just for 20 minutes. (jog = running)',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening1/ZRzOWW9tQuKgna7z7Ti0ixY45g801eOGUNVOPWuQ.mp3',
         answer: [
           {
@@ -452,7 +481,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Going for a run',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Walking',
@@ -478,7 +507,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Person C: I prefer something more low-key and calming when it comes to exercise. I&rsquo;m not really into intense activities like running or biking. Instead, I find walking to be the perfect balance for me. It allows me to relax while still staying active. Whether it&#39;s in the park or just around my neighborhood, I try to get my steps in every day. It&rsquo;s also a nice way to clear my head after a long day at work.',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening1/QfHPe142wP4VJ9avOoOPZcWiRyhQoUX0ZpEsdDxj.mp3',
         answer: [
           {
@@ -494,7 +524,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Walking',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Horse riding',
@@ -515,7 +545,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Person D: I&rsquo;ve been involved in different sports over the years, but one thing that stands out for me is horse riding. There&rsquo;s something about being with horses that feels both calming and exciting. Riding through open fields or along forest paths is an amazing way to stay active. It&rsquo;s not just a workout, but also a chance to connect with animals and nature. I try to go riding whenever I have a free weekend&mdash;it&rsquo;s definitely my favorite way to keep fit.',
         playCount: 0,
-    audio_url:
+        my_answer: '',
+        audio_url:
           '/assets/audios/Listening1/eo5dJq4L3HAFaWlw65eNCZsOeM6tuUcuVmWHEowK.mp3',
         answer: [
           {
@@ -536,7 +567,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Mountain biking',
             correct: 0,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -554,7 +585,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to two people discussing the Internet. Read the opinions below and decide whose opinion matches the statements, the man, the woman, or both the man and the woman. You can listen to the discussion twice.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/LkmEphhP0XRoqNTvOmGfizG5p9OAGpIemVkZ2Y96.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/LkmEphhP0XRoqNTvOmGfizG5p9OAGpIemVkZ2Y96.mp3',
     answer: null,
     sort_by: 15,
     childs: [
@@ -566,7 +599,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Woman: You know, I really feel there&rsquo;s too much information on the Internet. It can be overwhelming sometimes. It&rsquo;s hard to know what&rsquo;s credible.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
@@ -576,7 +610,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Woman',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Both',
@@ -597,7 +631,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: Honestly, I think it&rsquo;s more about how we search for information. Finding what we need online requires certain skills. We need to know how to filter through all that content.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
@@ -612,7 +647,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Both',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -628,12 +663,13 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Man: And I believe the Internet affects the way we think. With so much information available, we often skim rather than think deeply about topics.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'Woman',
@@ -659,7 +695,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Woman: That&rsquo;s an interesting point. I hadn&rsquo;t thought about that. But I do see how the constant scrolling and quick answers can make young people less patient.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Man',
@@ -674,7 +711,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'Both',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -692,7 +729,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to an announcer talking about a newly released novel and answer the questions below.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/cL4lVRbOBKU4A6ylgrkjVtE3wGr9SRoj5pgzcC5E.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/cL4lVRbOBKU4A6ylgrkjVtE3wGr9SRoj5pgzcC5E.mp3',
     answer: null,
     sort_by: 16,
     childs: [
@@ -704,7 +743,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Announcer: Good evening, everyone! Today, we&rsquo;re excited to talk about the latest novel by popular author James Parker. He is known for his softer, romantic stories like Whispers of the Heart, which have touched the hearts of many readers. However, his new novel, Shadow in the Night, is quite different.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'It is less famous than his earlier works',
@@ -719,7 +759,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'It is different from his earlier works',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -736,7 +776,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'While many readers are excited about this new direction, I believe it&rsquo;s important for Parker to pay attention to the critics&rsquo; advice as he works on his next book. Their feedback can help him improve his writing and find the right balance between romance and thrill that fans appreciate. Stay tuned for more updates on this talented author!',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'The writer should continue to write this genre',
@@ -746,7 +787,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'He should listen to critics before writing his next work',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'The writer should go back to his original genre',
@@ -769,7 +810,9 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
       '<strong>Listen to an expert talking about professionalism and answer the questions below.</strong>',
     explain: null,
     playCount: 0,
-    audio_url: '/assets/audios/Listening1/2Z8nUJC8scQ8md9VwwOIImf6EWsq1CmlX4gV2GCo.mp3',
+    my_answer: '',
+    audio_url:
+      '/assets/audios/Listening1/2Z8nUJC8scQ8md9VwwOIImf6EWsq1CmlX4gV2GCo.mp3',
     answer: null,
     sort_by: 17,
     childs: [
@@ -781,7 +824,8 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'Good morning, everyone! Today, I want to talk about professionalism and how it has changed over the years. To be seen as a professional, it&rsquo;s essential to be friendly, open-minded, and willing to help others. An optimistic attitude not only makes a good impression but also creates a better work environment.',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'To create good working environment',
@@ -796,7 +840,7 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
           {
             answer: 'To maintain positive attitude',
             correct: 1,
-            choose: true,
+            choose: false,
           },
         ],
         sort_by: 0,
@@ -813,12 +857,13 @@ export const DE_1_RAW_QUESTIONS_LISTENING = [
         explain:
           'As we continue to evolve in our careers, we must embrace these changes and redefine what it means to be a professional. By doing so, we can better meet the needs of our diverse workplaces and succeed in today&rsquo;s fast-paced world. Thank you!',
         playCount: 0,
-    audio_url: null,
+        my_answer: '',
+        audio_url: null,
         answer: [
           {
             answer: 'Our definition of it is changing',
             correct: 1,
-            choose: true,
+            choose: false,
           },
           {
             answer: 'It is the same of 40 years ago',
