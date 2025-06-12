@@ -69,9 +69,21 @@
       <button (click)="playQuestionAgain()" title="Replay" class="text-slate-400 hover:text-white transition">
         <i class="ph ph-arrow-counter-clockwise text-lg"></i>
       </button>
-      <button class="bg-[#8db9ca] border-white px-4 py-1 rounded text-white"
-        title="{{showAnswer ? 'Hiện câu trả lời':'Ẩn câu trả lời'}}" (click)="showAnswer = !showAnswer">{{showAnswer ?
-        '👁️‍🗨️' : '🗨️'}}</button>
+      <div class="flex gap-x-[10px]">
+        <button (click)="shuffleQuestions()"
+          class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded shadow font-semibold transition">
+          🎲 Xáo trộn câu hỏi
+        </button>
+
+        <!-- Nút mở Drawer -->
+        <button (click)="showDrawer = true"
+          class="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded shadow">
+          📋 Xem danh sách câu hỏi
+        </button>
+        <button class="bg-[#8db9ca] border-white px-4 py-2 rounded text-white"
+          title="{{showAnswer ? 'Hiện câu trả lời':'Ẩn câu trả lời'}}" (click)="showAnswer = !showAnswer">{{showAnswer ?
+          '👁️‍🗨️' : '🗨️'}}</button>
+      </div>
     </div>
     <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide">
       {{ currentQuestion?.question }}
@@ -123,4 +135,41 @@
 <div *ngIf="showToast" [@toastAnim]
   class="fixed bottom-6 right-6 bg-primary/80 text-white px-4 py-2 rounded shadow-lg text-sm z-50">
   {{ toastMessage }}
+</div>
+
+
+<!-- Overlay mờ -->
+<div *ngIf="showDrawer" (click)="showDrawer = false"
+  class="absolute inset-0 bg-black bg-opacity-60 z-40 transition-opacity"></div>
+
+<!-- Drawer panel -->
+<div *ngIf="showDrawer"
+  class="absolute top-0 right-0 w-[340px] max-w-full h-full bg-[#171e2e] border-l border-[#334155] z-50
+         shadow-[0_0_30px_0_rgba(31,41,55,0.5)] rounded-l-xl transition-transform duration-300
+         flex flex-col"
+  [ngClass]="{'translate-x-0': showDrawer, 'translate-x-full': !showDrawer}">
+  <!-- Header -->
+  <div class="flex justify-between items-center p-4 bg-[#20293c] border-b border-[#334155]">
+    <span class="font-bold text-lg text-indigo-200">Danh sách câu hỏi</span>
+    <button (click)="showDrawer = false" class="text-slate-400 hover:text-red-400 text-2xl px-2">&times;</button>
+  </div>
+  <!-- Danh sách câu hỏi -->
+  <div class="p-4 space-y-2 overflow-y-auto flex-1">
+    <div *ngFor="let q of data; let i = index"
+      (click)="goToQuestion(i); showDrawer = false"
+      class="cursor-pointer flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent
+            transition group"
+      [ngClass]="{
+        'bg-indigo-700 text-white shadow border-indigo-500 font-bold': i === currentIndex,
+        'text-slate-300 hover:bg-indigo-800 hover:text-white': i !== currentIndex
+      }">
+      <span class="w-8 h-8 flex items-center justify-center rounded-full 
+                   bg-indigo-600 group-hover:bg-indigo-800 text-white font-bold transition">
+        {{ i + 1 }}
+      </span>
+      <span class="truncate text-base leading-tight" [title]="q.question">
+        {{ q.question || 'Câu hỏi ' + (i + 1) }}
+      </span>
+    </div>
+  </div>
 </div>

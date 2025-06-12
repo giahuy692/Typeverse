@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
@@ -7,7 +14,7 @@ import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 @Component({
   selector: 'app-listening-audio',
   templateUrl: './listening-audio.component.html',
-  styleUrls: ['./listening-audio.component.scss']
+  styleUrls: ['./listening-audio.component.scss'],
 })
 export class ListeningAudioComponent implements OnInit, OnDestroy {
   data: DTOListQuestion[] = LIST_QUESTIONS;
@@ -15,7 +22,9 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
   answerAudio!: HTMLAudioElement;
-  backgroundMusic: HTMLAudioElement = new Audio('assets/music/Chìm Sâu - RPT MCK.mp3');
+  backgroundMusic: HTMLAudioElement = new Audio(
+    'assets/music/Chìm Sâu - RPT MCK.mp3'
+  );
   backgroundMuted = false;
 
   isPlaying = true;
@@ -27,7 +36,13 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   audioVolume = 0.5;
 
   repeatMode: '1' | '3' | '5' | '10' | 'infinite' = '3'; // Mặc định 3 lần
-  readonly repeatOptions: Array<'1' | '3' | '5' | '10' | 'infinite'> = ['1', '3', '5', '10', 'infinite'];
+  readonly repeatOptions: Array<'1' | '3' | '5' | '10' | 'infinite'> = [
+    '1',
+    '3',
+    '5',
+    '10',
+    'infinite',
+  ];
   repeatCount = 0;
   isRandomMode: boolean = false; // Mặc định Sequential
 
@@ -40,7 +55,10 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   private animationFrameId: number | null = null;
   private destroy$ = new Subject<void>();
 
-  constructor(private cd: ChangeDetectorRef, private appModeService: AppModeService) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private appModeService: AppModeService
+  ) {}
 
   ngOnInit() {
     const savedVolume = localStorage.getItem('audioVolume');
@@ -111,7 +129,8 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
           return;
         }
       } else {
-        const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+        const randomIndex =
+          availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
         this.currentIndex = randomIndex;
         this.playedIndexes.push(randomIndex);
       }
@@ -148,7 +167,8 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
         this.resetDogPosition();
 
         this.repeatCount++;
-        const repeatLimit = this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
+        const repeatLimit =
+          this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
 
         if (this.repeatCount < repeatLimit) {
           this.playQuestionAgain();
@@ -300,5 +320,40 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
 
   get repeatLimit(): number {
     return this.repeatMode === 'infinite' ? Infinity : Number(this.repeatMode);
+  }
+
+  shuffleQuestions(): void {
+    // Thuật toán Fisher-Yates chuẩn
+    for (let i = this.data.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.data[i], this.data[j]] = [this.data[j], this.data[i]];
+    }
+    this.prevAudio();
+  }
+
+  showDrawer: boolean = false
+  goToQuestion(idx: number): void {
+    if (idx >= 0 && idx < this.data.length) {
+      // Dừng audio hiện tại
+      if (this.answerAudio) {
+        this.answerAudio.pause();
+        this.answerAudio.currentTime = 0;
+      }
+      this.currentIndex = idx;
+      // Tạo audio mới cho câu hỏi này
+      if (this.data[idx]?.audioQuestion) {
+        this.answerAudio = new Audio(this.data[idx].audioQuestion);
+        this.answerAudio.volume = this.audioVolume ?? 1;
+        this.answerAudio.onended = () => {
+          this.isPlaying = false;
+          this.repeatCount++;
+          if (this.repeatCount < this.repeatLimit) {
+            setTimeout(() => this.toggleAnswerAudio(), 350);
+          }
+        };
+      }
+      this.isPlaying = false;
+      this.repeatCount = 0;
+    }
   }
 }

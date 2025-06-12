@@ -509,4 +509,32 @@ export class ReadingTestComponent implements OnInit {
     const el = document.getElementById(target);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
+
+  goToNextExam(): void {
+    // Tăng chỉ số đề hoặc quay lại đề đầu nếu hết danh sách
+    if (this.selectedExamIndex < this.allExamFiles.length - 1) {
+      this.selectedExamIndex++;
+    } else {
+      // Nếu đã đến đề cuối, có thể disable nút hoặc quay lại đề đầu, tùy ý
+      this.selectedExamIndex = 0;
+    }
+
+    // Reset index và câu hỏi hiện tại
+    this.currentQuestionIndex = 0;
+
+    // Reset các biến state đặc biệt theo type câu hỏi
+    this.orderedSlots = []; // nếu có kéo thả/thứ tự
+    this.availableChoices = []; // nếu có choices riêng biệt
+    // Reset đáp án đã chọn, timer, hoặc các state khác (nếu có)
+    // this.userAnswers = []; // nếu bạn quản lý đáp án theo dạng này
+
+    // Nếu có các trạng thái như kết quả, message, tip... cũng reset về mặc định
+    this.userMessage = '';
+
+    // Đưa giao diện về màn hình hướng dẫn trước khi vào test
+    this.currentState = this.TestStateEnum.InstructionsScreen;
+
+    // Nếu có scroll hoặc các hiệu ứng khác, reset vị trí (nếu cần)
+    this.scrollTo('top');
+  }
 }

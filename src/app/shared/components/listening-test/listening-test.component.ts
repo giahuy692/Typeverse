@@ -128,7 +128,9 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
   onStartTest(): void {
     this.currentState = TestState.TestInProgress;
     this.currentQuestion = this.listQuestion[0];
-    this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+    this.currentQuestion.answer = this.shuffleArray(
+      this.currentQuestion.answer
+    );
     this.currentExam = this.allExamFiles[0];
     this.currentQuestionIndex = 0;
     this.startOverallTimer();
@@ -157,6 +159,20 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     });
   }
 
+  goToNextExam() {
+    if (this.selectedExamIndex < this.allExamFiles.length - 1) {
+      this.selectedExamIndex++;
+      this.currentExam = this.allExamFiles[this.selectedExamIndex];
+      this.listQuestion = this.currentExam.listQuestion;
+      this.currentQuestionIndex = 0;
+      this.currentQuestion = this.listQuestion[0];
+      // Reset trạng thái: về hướng dẫn hoặc start
+      this.currentState = this.TestStateEnum.InstructionsScreen;
+      // Reset thêm các biến khác nếu cần (timer, đáp án đã chọn, audio, ...)
+    }
+  }
+
+
   getOptionLetter(i: number): string {
     // 65 là mã ASCII của 'A'
     return String.fromCharCode(65 + i);
@@ -174,7 +190,6 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     return result;
   }
 
-
   // loadQuestion(index: number): void {
   //   if (index >= 0 && index < this.questions.length) {
   //     this.currentQuestion = this.questions[index];
@@ -189,7 +204,9 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     if (this.currentQuestionIndex < this.listQuestion.length - 1) {
       this.currentQuestionIndex++;
       this.currentQuestion = this.listQuestion[this.currentQuestionIndex];
-      this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+      this.currentQuestion.answer = this.shuffleArray(
+        this.currentQuestion.answer
+      );
     } else {
       this.finishTest(); // Auto-submit when reaching the end
     }
@@ -201,7 +218,9 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
       this.currentQuestion = this.listQuestion[this.currentQuestionIndex];
-      this.currentQuestion.answer = this.shuffleArray(this.currentQuestion.answer);
+      this.currentQuestion.answer = this.shuffleArray(
+        this.currentQuestion.answer
+      );
     }
   }
 
@@ -463,21 +482,21 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
     }
   }
 
-    // New method to navigate back to the start screen
-    goToStartScreen(): void {
-      // Reset component state for a new test if necessary
-      this.currentState = TestState.StartScreen;
-      this.currentQuestionIndex = 0;
-      this.audioPlayer.pause();
-      this.audioPlayer.removeAttribute('src');
-      this.audioPlayer.load();
-      this.correctAnswersCount = 0;
-      this.incorrectAnswersCount = 0;
-      this.unansweredCount = 0;
-      clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
-      this.timeRemaining = '40:00'; // Reset display timer
-      this.cdRef.detectChanges();
-    }
+  // New method to navigate back to the start screen
+  goToStartScreen(): void {
+    // Reset component state for a new test if necessary
+    this.currentState = TestState.StartScreen;
+    this.currentQuestionIndex = 0;
+    this.audioPlayer.pause();
+    this.audioPlayer.removeAttribute('src');
+    this.audioPlayer.load();
+    this.correctAnswersCount = 0;
+    this.incorrectAnswersCount = 0;
+    this.unansweredCount = 0;
+    clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+    this.timeRemaining = '40:00'; // Reset display timer
+    this.cdRef.detectChanges();
+  }
 
   //   // Helper method to determine the overall styling for a question in results
   //   getQuestionResultClasses(question: QuestionUnion): { [key: string]: boolean } {

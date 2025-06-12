@@ -68,7 +68,7 @@
     <div
       class="bg-[#1a1f33] shadow-md p-3 sm:p-4 flex justify-between items-center sticky top-0 z-10 border-b border-gray-700">
       <div>
-        <h1 class="text-lg sm:text-xl font-semibold text-purple-400">Listening - {{ currentExam.name }}</h1>
+        <h1 class="text-lg sm:text-xl font-semibold text-purple-400">Listening - {{ allExamFiles[selectedExamIndex].name }}</h1>
         <p class="text-xs sm:text-base text-purple-400">{{ currentQuestionIndex + 1 }} / {{listQuestion.length }} câu
           hỏi
         </p>
@@ -433,7 +433,7 @@
                       {{ answer.answer }}
                     </option>
                   </select>
-                  <span class="p-3 border border-green-600 rounded-lg"> Đáp án: {{
+                  <span class="p-3 border border-green-600 rounded-lg" *ngIf="getRightAnswer(questionChild.answer)?.answer != questionChild.my_answer"> Đáp án: {{
                     getRightAnswer(questionChild.answer)?.answer }}</span>
                 </div>
               </div>
@@ -575,6 +575,13 @@
       <button (click)="goToStartScreen()"
         class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
         Quay về giao diện chọn đề thi tiếp theo
+      </button>
+    </div>
+
+        <div class="text-center" *ngIf="currentState === TestStateEnum.ResultsScreen && selectedExamIndex < allExamFiles.length - 1">
+      <button (click)="goToNextExam()"
+        class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+        Đề tiếp theo
       </button>
     </div>
   </div>

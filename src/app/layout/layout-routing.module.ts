@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ListeningTestComponent } from '../shared/components/listening-test/listening-test.component';
-import { AudioPlayerComponent } from '../shared/components/app-audio-player/app-audio-player.component';
 import { ListeningAudioComponent } from '../shared/components/listening-audio/listening-audio.component';
 import { SpeakingComponent } from '../shared/components/speaking/speaking.component';
 import { WritingComponent } from '../shared/components/writing/writing.component';
