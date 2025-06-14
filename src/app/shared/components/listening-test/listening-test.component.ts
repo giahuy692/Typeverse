@@ -176,6 +176,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
       this.incorrectAnswersCount = 0;
       this.unansweredCount = 0;
       clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+      this.totalTimeInSeconds = 40 * 60;
       this.timeRemaining = '40:00'; // Reset display timer
       this.cdRef.detectChanges();
     }
@@ -198,6 +199,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
       this.incorrectAnswersCount = 0;
       this.unansweredCount = 0;
       clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+      this.totalTimeInSeconds = 40 * 60;
       this.timeRemaining = '40:00'; // Reset display timer
       this.cdRef.detectChanges();
     }

@@ -566,6 +566,8 @@ export class ReadingTestComponent implements OnInit {
 
     // Nếu có scroll hoặc các hiệu ứng khác, reset vị trí (nếu cần)
     this.scrollTo('top');
+    this.timeRemaining = '36:00';
+    this.totalTimeInSeconds = 36 * 60;
     this.startOverallTimer();
   }
 

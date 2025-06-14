@@ -141,6 +141,7 @@ export const DE_13_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Anh LONG - ĐẾC THÈM Copy - vì BẬN - tán ChịLIÊN'
   },
   {
     id: 981,
@@ -179,6 +180,7 @@ export const DE_13_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'CHẠM vào MÀN HÌNH - CHỌN - ENTER - mở Light SHOW - KẾT THÚC'
   },
   {
     id: 982,
@@ -217,6 +219,7 @@ export const DE_13_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'PASS bài TEST xe hơi - nhưng KHÔNG CÓ XE - KHI - có NGƯỜI GỌI cho tôi - tôi ĐỒNG Ý NGAY'
   },
   {
     id: 983,
@@ -768,5 +771,6 @@ export const DE_13_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Rapper Subui - xin chào MỌI NGƯỜI - ở Towards - TỰ DO - KHÁC VỚI - NHIỆM VỤ - của các NGƯỜI MẪU'
   },
 ];
