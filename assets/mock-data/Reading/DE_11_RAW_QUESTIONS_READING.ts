@@ -159,6 +159,7 @@ export const DE_11_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'mua CỬA SỔ - ở CHỢ - được tặng BÁNH - MUA đồ - lại còn được tặng vé XEM PHIM'
   },
   {
     id: 833,
@@ -200,6 +201,7 @@ export const DE_11_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'đến CÔNG VIÊN - gặp NHỮNG NGƯỜI CHẠY BỘ - CHỤP HÌNH - CÁC NHÂN VIÊN - và THAM GIA hoạt động'
   },
   {
     id: 834,
@@ -866,5 +868,6 @@ export const DE_11_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'ĐỒ ĂN TRUNG QUỐC - PHI LỚN - đắt đỏ - NẤU - ĂN - ở nhà cái CHANG - ở tháp ÉP PHEN'
   },
 ];
