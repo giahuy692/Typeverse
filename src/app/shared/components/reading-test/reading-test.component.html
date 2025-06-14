@@ -76,7 +76,23 @@
 
   <!-- Test In Progress Screen -->
   <div *ngIf="currentState === TestStateEnum.TestInProgress"
-    class="main m-auto font-['Inter'] h-fit max-w-5xl mx-auto my-8 text-gray-100 flex flex-col justify-between">
+    class="main m-auto font-['Inter'] h-fit max-w-5xl mx-auto mb-8 text-gray-100 flex flex-col justify-between">
+
+    <div
+      class="bg-[#1a1f33] shadow-md p-3 sm:p-4 flex justify-between items-center sticky top-0 z-10 border-b border-gray-700">
+      <div>
+        <h1 class="text-lg sm:text-xl font-semibold text-purple-400">Reading: {{allExamFiles[selectedExamIndex]?.name}}</h1>
+        <p class="text-xs sm:text-base text-purple-400">
+          Câu {{ currentQuestionIndex + 1 }} / {{ questions.length }} câu hỏi
+        </p>
+      </div>
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <div class="text-right">
+          <p class="text-xs text-purple-400">Thời gian còn lại</p>
+          <p class="text-base sm:text-lg font-bold text-purple-400">{{ timeRemaining }}</p>
+        </div>
+      </div>
+    </div>
     <!-- Main container -->
     <div class="flex-grow flex items-center justify-center py-8 px-2">
       <div class="w-full bg-[#202738] rounded-2xl shadow-2xl px-8 py-10">
@@ -84,12 +100,7 @@
         <!-- Tiêu đề và số câu -->
         <div class="flex justify-between items-center mb-6">
           <div>
-            <div class="text-xl font-bold text-white">Reading: {{allExamFiles[selectedExamIndex]?.name}}</div>
-            <div class="text-lg font-semibold text-purple-300">Câu {{ currentQuestionIndex + 1 }} / {{ questions.length
-              }}</div>
-          </div>
-          <div>
-            <!-- <span class="block text-xs text-gray-400">{{ timerDisplay }}</span> -->
+           
           </div>
           <div class="tip">
             <div class="relative group inline-block">
@@ -470,27 +481,26 @@
           <!-- Có thể bổ sung quy đổi điểm/cấp bậc -->
         </ng-container>
       </div>
-      <div class="ml-auto flex flex-gap-3 items-center">
+      <div class="ml-auto flex flex-gap-3 items-center gap-x-[10px]">
         <button (click)="scrollTo('top')"
-          class="ml-auto border border-gray-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          class="px-7 py-2 rounded-lg bg-gray-700 text-gray-100 font-semibold hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed">
           ⬆️
         </button>
-        <div class="px-2"></div>
         <button (click)="scrollTo('bottom')"
-          class="ml-auto border border-gray-600 hover:bg-secondary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          class="px-7 py-2 rounded-lg bg-gray-700 text-gray-100 font-semibold hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed">
           ⬇️
         </button>
-        <div class="px-2"></div>
         <button (click)="goToStartScreen()"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
-          <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Quay về giao diện chọn đề
+          class="border hover:bg-purple-700 text-white font-semibold px-7 py-2 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
+          Chọn đề thi
         </button>
-        <button (click)="goToNextExam()"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 flex items-center gap-2">
-          Đề tiếp theo &rarr;
+        <button (click)="goToPreviousExam()"  *ngIf="currentState === TestStateEnum.ResultsScreen && selectedExamIndex > 0"
+          class="px-7 py-2 rounded-lg bg-gray-700 text-gray-100 font-semibold hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed">
+          Đề trước đó
+        </button>
+        <button (click)="goToNextExam()" *ngIf="currentState === TestStateEnum.ResultsScreen && selectedExamIndex < allExamFiles.length - 1"
+          class="px-7 py-2 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 transition">
+          Đề tiếp theo
         </button>
       </div>
     </div>

@@ -169,9 +169,39 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
       // Reset trạng thái: về hướng dẫn hoặc start
       this.currentState = this.TestStateEnum.InstructionsScreen;
       // Reset thêm các biến khác nếu cần (timer, đáp án đã chọn, audio, ...)
+      this.audioPlayer.pause();
+      this.audioPlayer.removeAttribute('src');
+      this.audioPlayer.load();
+      this.correctAnswersCount = 0;
+      this.incorrectAnswersCount = 0;
+      this.unansweredCount = 0;
+      clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+      this.timeRemaining = '40:00'; // Reset display timer
+      this.cdRef.detectChanges();
     }
   }
 
+  goToPreviousExam() {
+    if (this.selectedExamIndex > 0) {
+      this.selectedExamIndex--;
+      this.currentExam = this.allExamFiles[this.selectedExamIndex];
+      this.listQuestion = this.currentExam.listQuestion;
+      this.currentQuestionIndex = 0;
+      this.currentQuestion = this.listQuestion[0];
+      // Reset trạng thái: về hướng dẫn hoặc start
+      this.currentState = this.TestStateEnum.InstructionsScreen;
+      // Reset thêm các biến khác nếu cần (timer, đáp án đã chọn, audio, ...)
+      this.audioPlayer.pause();
+      this.audioPlayer.removeAttribute('src');
+      this.audioPlayer.load();
+      this.correctAnswersCount = 0;
+      this.incorrectAnswersCount = 0;
+      this.unansweredCount = 0;
+      clearInterval(this.timerInterval); // Stop timer if it's still running for some reason
+      this.timeRemaining = '40:00'; // Reset display timer
+      this.cdRef.detectChanges();
+    }
+  }
 
   getOptionLetter(i: number): string {
     // 65 là mã ASCII của 'A'
