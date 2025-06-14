@@ -237,6 +237,7 @@ export const DE_11_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'tới TRƯỜNG CAO ĐẲNG - HỎI - MÁY TÍNH - MƯỢN - VỀ NHÀ'
   },
   {
     id: 835,

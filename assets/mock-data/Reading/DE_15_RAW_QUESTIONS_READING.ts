@@ -141,6 +141,7 @@ export const DE_15_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Chắt - Tư - Át - Xăm - Gầy'
   },
   {
     id: 1134,
@@ -178,6 +179,7 @@ export const DE_15_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: '1933 - nhiều người - Hoàn THÀNH khóa học - về CHINA - 1980s'
   },
   {
     id: 1135,
@@ -215,6 +217,7 @@ export const DE_15_RAW_QUESTIONS_READING = [
     ],
     sort_by: 0,
     childs: [],
+    tip: 'KHI BẠN ĐẾN - được cập thẻ có GIỜ, NGÀY rõ ràng - VUI LÒNG HIỂN THỊ - TRƯỚC khi BẠN RỜI ĐI - MÁY sẽ đọc chúng'
   },
   {
     id: 1136,
@@ -767,5 +770,6 @@ export const DE_15_RAW_QUESTIONS_READING = [
         seconds_max: 0,
       },
     ],
+    tip: 'anh LONG - có KINH NGHIỆM - bịa LÝ DO - cho việc trễ THỜI GIAN - nhưng KHÓ KHĂN nhất - là LÝ DO cấm CƠM<del>promise</del>'
   },
 ];
