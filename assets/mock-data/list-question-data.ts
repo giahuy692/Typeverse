@@ -63,7 +63,7 @@ export const LIST_QUESTIONS: DTOListQuestion[] = [
     orderBy: 6,
     question: 'A gift you received',
     answer:
-      'It is my smartphone. I got it as a gift in 2022. It’s very useful. I use it to listen to music, play games, and study online. I use it every day. I love it very much.',
+      'It’s my smartphone. I got it in 2022 as a gift. I use it every day. It helps me a lot. I listen to music, play games, and study online with it. I really like it.',
     audioQuestion: 'assets/audios/a_gift_you_received.mp3',
     audioListen: 'assets/audios/answer_a_gift_you_received.mp3',
   },

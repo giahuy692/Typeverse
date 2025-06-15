@@ -575,6 +575,7 @@ export const DE_13_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Thư gian - khi học bài - hát - sau khi thức dậy'
   },
   {
     id: 1017,

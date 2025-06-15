@@ -575,6 +575,7 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Thư gian - khi học bài - hát - sau khi thức dậy'
   },
   {
     id: 1171,
@@ -719,6 +720,7 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Cả hai: là người cảm xúc và cảm thụ âm nhạc<br/>- Người phụ nữ: xinh <br/>- Người đàn ông: có ngôn ngữ'
   },
   {
     id: 1176,
@@ -799,39 +801,40 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'creates - suitable'
   },
   {
-    id: 1179,
-    skill_id: 66,
+    id: 877,
+    skill_id: 50,
     type: 2,
     title:
-      '<strong>A reviewer discussing a book about the life of a scientist. Choose the corrects answer.</strong>',
+      '<strong>Listen to a reviewer discussing a book about the life of a scientist and answer the questions below.</strong>',
     explain: null,
     playCount: 0,
     my_answer: '',
     audio_url:
-      '/assets/audios/Listening15/Sf3Vrg1XivGNcNfF1aoJlB0Z0NH8Aa4eAJx65Y5j.mp3',
+      '/assets/audios/Listening11/uS1cKnMBP0VRJqCazbuw5KiCTO3Y7oRwXdQ72jl3.mp3',
     answer: null,
-    sort_by: 17,
+    sort_by: 0,
     childs: [
       {
-        id: 1180,
-        skill_id: 66,
+        id: 878,
+        skill_id: 50,
         type: 2,
         title: 'What does the speaker say about the way of writing?',
         explain:
-          'Reviewer: Today, I want to share my thoughts on a fascinating book about the life of renowned scientist Dr. Emily Carter. One of the standout features of this book is that the way of writing is exciting for readers. The author has a talent for bringing complex scientific concepts to life, making it an engaging experience.',
+          'Reviewer: Today, I want to share my thoughts on a fascinating book about the life of renowned scientist Dr. Emily Carter. One of the standout features of this book is that the way of writing is exciting for readers. The author has a talent for bringing complex scientific concepts to life, making it an engaging experience',
         playCount: 0,
         my_answer: '',
         audio_url: null,
         answer: [
           {
-            answer: 'It is more of a textbook than a biography',
+            answer: 'It is focused on technical details',
             correct: 0,
             choose: false,
           },
           {
-            answer: 'It is focused on technical details',
+            answer: 'It is more of a textbook than a biography',
             correct: 0,
             choose: false,
           },
@@ -842,10 +845,44 @@ export const DE_15_RAW_QUESTIONS_LISTENING = [
           },
         ],
         sort_by: 0,
-        parent_id: 1179,
+        parent_id: 877,
+        maximum_number: 0,
+        seconds_max: 0,
+      },
+      {
+        id: 879,
+        skill_id: 50,
+        type: 2,
+        title:
+          'What does the speaker say about the overall content of the book?',
+        explain:
+          'Overall, I&rsquo;d say it has been written for a general audience. The author&rsquo;s aim seems to be to inspire curiosity about science and encourage readers from all backgrounds to appreciate the contributions of Dr. Carter. Unlike other works that are only suitable for experts in the field, this book truly welcomes everyone to explore the life of an extraordinary scientist.',
+        playCount: 0,
+        my_answer: '',
+        audio_url: null,
+        answer: [
+          {
+            answer: 'It has been written for a general audience',
+            correct: 1,
+            choose: false,
+          },
+          {
+            answer: 'It lacks engaging storytelling',
+            correct: 0,
+            choose: false,
+          },
+          {
+            answer: 'It is only suitable for experts in the field',
+            correct: 0,
+            choose: false,
+          },
+        ],
+        sort_by: 0,
+        parent_id: 877,
         maximum_number: 0,
         seconds_max: 0,
       },
     ],
+    tip:'Đọc sách rất thú vị - Has been hoặc general'
   },
 ];

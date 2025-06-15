@@ -551,6 +551,7 @@ export const DE_14_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Xem film - với bạn bè - hoàn tất bài tập - tìm thông tin'
   },
   {
     id: 1098,
@@ -690,6 +691,7 @@ export const DE_14_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Woman: change - Both: Place - Man: share beuty'
   },
   {
     id: 1103,
@@ -768,6 +770,7 @@ export const DE_14_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'flexible - mistakes'
   },
   {
     id: 1106,
@@ -847,5 +850,6 @@ export const DE_14_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'unrealistic - negatively'
   },
 ];

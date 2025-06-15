@@ -718,6 +718,7 @@ export const DE_12_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'Cả hai: là người cảm xúc và cảm thụ âm nhạc<br/>- Người phụ nữ: xinh <br/>- Người đàn ông: có ngôn ngữ'
   },
   {
     id: 948,
