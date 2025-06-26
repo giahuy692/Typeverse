@@ -724,6 +724,7 @@ export const DE_11_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'woman: rành CÔNG NGHỆ nhưng KHÔNG CÓ MÁY TÍNH<br/>Man: có nhiều THÔNG TIN CÔNG NGHÊ<br/>both: NÊN BẢO VỆ bản thân'
   },
   {
     id: 874,

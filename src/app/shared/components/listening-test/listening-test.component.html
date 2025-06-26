@@ -13,7 +13,7 @@
           (ngModelChange)="onExamSelectionChange($event)"
           class="w-full p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200">
           <option *ngFor="let exam of allExamFiles; let i = index" [value]="i">
-            Đề thi {{ i + 1 }}
+            {{ exam.name || 'Đang chọn...' }}
           </option>
         </select>
       </div>
@@ -87,7 +87,7 @@
         <div [ngSwitch]="currentQuestion.type">
 
           <ng-container *ngSwitchCase="1">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-6 gap-x-[20px]">
               <p class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed"
                 [innerHTML]="currentQuestion.title"></p>
               <div class="tip">
@@ -143,7 +143,7 @@
           <ng-container *ngSwitchCase="3">
             <div>
 
-              <div class="flex justify-between items-center mb-6">
+              <div class="flex justify-between items-center mb-6 gap-x-[20px]">
                 <div [innerHTML]="currentQuestion.title"
                   class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed prose"></div>
                 <div class="tip">
@@ -202,7 +202,7 @@
           </ng-container>
 
           <ng-container *ngSwitchCase="2">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-6 gap-x-[20px]">
               <div [innerHTML]="currentQuestion.title"
                 class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed prose"></div>
               <div class="tip">
@@ -322,7 +322,7 @@
             <ng-container *ngSwitchCase="1">
               <h2 class="font-bold text-white border-t">Câu hỏi {{ i + 1 }}</h2>
 
-              <div class="flex justify-between items-center mb-6">
+              <div class="flex justify-between items-center mb-6 gap-x-[20px]">
                 <p class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed"
                   [innerHTML]="question.title"></p>
                 <div class="tip">
@@ -378,7 +378,7 @@
 
             <ng-container *ngSwitchCase="3">
               <h2 class="font-bold text-white border-t">Câu hỏi {{ i + 1 }}</h2>
-              <div class="flex justify-between items-center mb-6">
+              <div class="flex justify-between items-center mb-6 gap-x-[20px]">
                 <div [innerHTML]="currentQuestion.title"
                   class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed prose"></div>
                 <div class="tip">
@@ -443,7 +443,7 @@
 
             <ng-container *ngSwitchCase="2">
               <h2 class="font-bold text-white border-t">Câu hỏi {{ i + 1 }}</h2>
-              <div class="flex justify-between items-center mb-6">
+              <div class="flex justify-between items-center mb-6 gap-x-[20px]">
                 <div [innerHTML]="currentQuestion.title"
                   class="mb-5 sm:mb-6 text-base sm:text-base text-purple-400 leading-relaxed prose"></div>
                 <div class="tip">

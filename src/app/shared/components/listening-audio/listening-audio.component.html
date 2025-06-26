@@ -1,4 +1,94 @@
-<div class="mx-auto px-4 py-6 space-y-6 text-gray-900 font-sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="main-container">
+  <header>
+    <h1>MẸO NÓI VIẾT CHUẨN</h1>
+    <p>Tổng số câu: <strong>{{data.length}}</strong></p>
+  </header>
+
+  <main>
+    <table class="questions-table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Câu hỏi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index">
+          <td *ngIf="ques.question != currentQuestion?.question"># {{i}}</td>
+          <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
+          <td>{{ques.question}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="image-container" *ngIf="currentQuestion?.img">
+      <img src="{{currentQuestion?.img}}">
+    </div>
+
+    <div class="subtitle-container">
+      <div class="subtitle-header" (click)="showAnswer = !showAnswer">
+        <span>Phụ đề</span>
+        <i class="fas {{showAnswer ?
+          'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+      </div>
+      <div class="subtitle-body" *ngIf="showAnswer">
+        <p>{{currentQuestion?.answer}}</p>
+      </div>
+    </div>
+
+    <div class="audio-player">
+      <!-- <div class="progress-bar-container mb-3">
+        <span>{{answerCurrentTime}}</span>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <span>{{answerDuration}}</span>
+      </div> -->
+      <div class="progress-bar-container mb-3">
+        <span>{{ answerCurrentTime }}</span>
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="(answerCurrentTime / answerDuration) * 100">
+          </div>
+        </div>
+        <span>{{ answerDuration }}</span>
+      </div>
+      <div class="player-controls">
+        <i class="fas {{ beepEnabled ? 'fa-bell' : 'fa-bell-slash' }}" (click)="beepEnabled = !beepEnabled;"> </i>
+        <i class="fas {{ backgroundMuted ? 'fa-volume-down' : 'fa-volume-up' }}" (click)="toggleBackgroundMute()"></i>
+        <i class="fas fa-backward-step" (click)="prevAudio()"></i>
+        <button class="play-pause-btn" [disabled]="!answerAudio" (click)="toggleAnswerAudio()">
+          <i class="fas {{ answerAudio?.paused ? 'fa-play' : 'fa-pause' }}"></i>
+        </button>
+        <i class="fas fa-forward-step" (click)="nextAudio()"></i>
+        <i class="fas fa-sync-alt"></i>
+        <i class="fas fa-random" (click)="shuffleQuestions()"></i>
+
+      </div>
+      <div class="flex items-center gap-2 justify-center mb-3">
+        <div class="flex items-center gap-2 text-sm text-slate-300">
+          <select id="playMode" [(ngModel)]="isRandomMode"
+            class="bg-slate-800 text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-500">
+            <option [ngValue]="false">Sequential</option>
+            <option [ngValue]="true">Random</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-slate-300">
+          <select id="repeatMode" [(ngModel)]="repeatMode"
+            class="bg-slate-800 text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-500">
+            <option value="1">1 times</option>
+            <option value="3">3 times</option>
+            <option value="5">5 times</option>
+            <option value="10">10 times</option>
+            <option value="infinite">Infinite</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<div class="mx-auto px-4 py-6 space-y-6 text-gray-900 font-sans" *ngIf="false">
   <h1 class="text-white text-2xl font-bold text-center">🎧 Listening Practice</h1>
 
   <div class="bg-primary p-4 rounded-xl shadow border flex flex-col gap-4">
@@ -143,11 +233,9 @@
   class="absolute inset-0 bg-black bg-opacity-60 z-40 transition-opacity"></div>
 
 <!-- Drawer panel -->
-<div *ngIf="showDrawer"
-  class="absolute top-0 right-0 w-[340px] max-w-full h-full bg-[#171e2e] border-l border-[#334155] z-50
+<div *ngIf="showDrawer" class="absolute top-0 right-0 w-[340px] max-w-full h-full bg-[#171e2e] border-l border-[#334155] z-50
          shadow-[0_0_30px_0_rgba(31,41,55,0.5)] rounded-l-xl transition-transform duration-300
-         flex flex-col"
-  [ngClass]="{'translate-x-0': showDrawer, 'translate-x-full': !showDrawer}">
+         flex flex-col" [ngClass]="{'translate-x-0': showDrawer, 'translate-x-full': !showDrawer}">
   <!-- Header -->
   <div class="flex justify-between items-center p-4 bg-[#20293c] border-b border-[#334155]">
     <span class="font-bold text-lg text-indigo-200">Danh sách câu hỏi</span>
@@ -155,11 +243,8 @@
   </div>
   <!-- Danh sách câu hỏi -->
   <div class="p-4 space-y-2 overflow-y-auto flex-1">
-    <div *ngFor="let q of data; let i = index"
-      (click)="goToQuestion(i); showDrawer = false"
-      class="cursor-pointer flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent
-            transition group"
-      [ngClass]="{
+    <div *ngFor="let q of data; let i = index" (click)="goToQuestion(i); showDrawer = false" class="cursor-pointer flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent
+            transition group" [ngClass]="{
         'bg-indigo-700 text-white shadow border-indigo-500 font-bold': i === currentIndex,
         'text-slate-300 hover:bg-indigo-800 hover:text-white': i !== currentIndex
       }">

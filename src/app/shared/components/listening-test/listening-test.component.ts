@@ -1,6 +1,7 @@
 // listening.component.ts
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router for navigation
+import { ALL_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/all-listening-questions';
 import { DE_10_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_10_RAW_QUESTIONS_LISTENING';
 import { DE_11_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_11_RAW_QUESTIONS_LISTENING';
 import { DE_12_RAW_QUESTIONS_LISTENING } from 'src/assets/mock-data/Listening/DE_12_RAW_QUESTIONS_LISTENING';
@@ -46,7 +47,7 @@ class DTOQuestion {
   playCount: number = 0;
   tip?: string;
   isAnswered?: boolean = false;
-  my_answer?: DTOAnswer;
+  my_answer?: string;
 }
 
 class ExamFileEntry {
@@ -100,6 +101,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   prepareExamFileList(): void {
     this.allExamFiles = [
+      { name: 'Tất cả câu hỏi của tất cả đề', listQuestion: ALL_RAW_QUESTIONS_LISTENING },
       { name: 'Đề thi 1', listQuestion: DE_1_RAW_QUESTIONS_LISTENING },
       { name: 'Đề thi 2', listQuestion: DE_2_RAW_QUESTIONS_LISTENING },
       { name: 'Đề thi 3', listQuestion: DE_3_RAW_QUESTIONS_LISTENING },
@@ -232,7 +234,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   nextQuestion(): void {
     this.clearUserMessage();
-
+    this.audioPlayer.pause();
     if (this.currentQuestionIndex < this.listQuestion.length - 1) {
       this.currentQuestionIndex++;
       this.currentQuestion = this.listQuestion[this.currentQuestionIndex];
@@ -246,6 +248,7 @@ export class ListeningTestComponent implements OnInit, OnDestroy {
 
   previousQuestion(): void {
     this.clearUserMessage();
+    this.audioPlayer.pause();
 
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;

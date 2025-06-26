@@ -20,6 +20,7 @@ import { DE_12_RAW_QUESTIONS_READING } from 'src/assets/mock-data/Reading/DE_12_
 import { DE_13_RAW_QUESTIONS_READING } from 'src/assets/mock-data/Reading/DE_13_RAW_QUESTIONS_READING';
 import { DE_14_RAW_QUESTIONS_READING } from 'src/assets/mock-data/Reading/DE_14_RAW_QUESTIONS_READING';
 import { DE_15_RAW_QUESTIONS_READING } from 'src/assets/mock-data/Reading/DE_15_RAW_QUESTIONS_READING';
+import { ALL_RAW_QUESTIONS_READING } from 'src/assets/mock-data/Reading/all-reading-questions';
 
 /**
  * Enum cho trạng thái luồng bài test
@@ -62,6 +63,7 @@ export class ReadingTestComponent implements OnInit {
   }
 
   examSources: any = {
+    16: ALL_RAW_QUESTIONS_READING,
     1: DE_1_RAW_QUESTIONS_READING,
     2: DE_2_RAW_QUESTIONS_READING,
     3: DE_3_RAW_QUESTIONS_READING,
@@ -83,13 +85,13 @@ export class ReadingTestComponent implements OnInit {
    * Nạp toàn bộ đề thi (giả định đã build sẵn export default trong từng file .ts)
    */
   loadAllExams() {
-    const examCount = 15;
+    const examCount = 16;
     this.allExamFiles = [];
     for (let i = 1; i <= examCount; i++) {
       this.allExamFiles.push({
         name: `Đề ${i}`,
         questions: this.examSources[i],
-        questionCount: 5,
+        questionCount: this.examSources[i].length,
         timeAllowedMinutes: 36,
       });
     }
