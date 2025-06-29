@@ -4,7 +4,9 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
@@ -50,8 +52,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   answerDuration = 0;
   answerProgress = 0;
 
-  @ViewChild('dog', { static: false }) dogEl?: ElementRef<HTMLImageElement>; // Nếu vẫn dùng dog animation
-
+  @ViewChildren('questionRow') questionRows!: QueryList<ElementRef>;
   private animationFrameId: number | null = null;
   private destroy$ = new Subject<void>();
 
@@ -140,11 +141,12 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
         this.currentIndex = 0;
       }
     }
-
+    
     this.resetAudio();
     const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.play();
+    this.scrollActiveRowIntoView();
 
     this.audio.onended = () => {
       if (audioFile.audioListen) {
@@ -164,7 +166,6 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       this.answerAudio.onended = () => {
         this.showEffect = false;
         this.answerProgress = 0;
-        this.resetDogPosition();
 
         this.repeatCount++;
         const repeatLimit =
@@ -215,29 +216,21 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       if (this.currentIndex < 0) {
         this.currentIndex = this.data.length - 1;
       }
-
+      
       this.resetAudio();
       const audioFile = this.data[this.currentIndex];
       this.audio = new Audio(audioFile.audioQuestion);
       this.audio.play();
-
+      
       this.audio.onended = () => {
         if (audioFile.audioListen) {
           this.playAnswerAudio(audioFile.audioListen);
         }
       };
     }
+    this.scrollActiveRowIntoView();
   }
 
-  resetDogPosition() {
-    if (this.dogEl?.nativeElement) {
-      const el = this.dogEl.nativeElement;
-      el.style.transition = 'none';
-      el.style.left = '0%';
-      el.offsetHeight;
-      el.style.transition = 'left 0.06s linear';
-    }
-  }
 
   private resetAudio() {
     if (this.audio) {
@@ -255,7 +248,6 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     }
 
     this.answerProgress = 0;
-    this.resetDogPosition();
   }
 
   ngOnDestroy(): void {
@@ -304,7 +296,6 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
 
         if (current >= duration && duration > 0) {
           this.answerProgress = 0;
-          this.resetDogPosition();
         }
       }
       this.animationFrameId = requestAnimationFrame(update);
@@ -335,46 +326,58 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.prevAudio();
   }
 
-  showDrawer: boolean = false
+  showDrawer: boolean = false;
   /**
- * Chuyển đến câu hỏi được chọn và phát ngay.
- * Sau khi phát xong câu trả lời, nếu `isPlaying` vẫn true
- * thì sẽ tiếp tục phát câu tiếp theo theo luồng tự động.
- */
-public goToQuestion(idx: number): void {
-  // 1. Kiểm tra chỉ số
-  if (idx < 0 || idx >= this.data.length) return;
+   * Chuyển đến câu hỏi được chọn và phát ngay.
+   * Sau khi phát xong câu trả lời, nếu `isPlaying` vẫn true
+   * thì sẽ tiếp tục phát câu tiếp theo theo luồng tự động.
+   */
+  public goToQuestion(idx: number): void {
+    // 1. Kiểm tra chỉ số
+    if (idx < 0 || idx >= this.data.length) return;
 
-  // 2. Dừng & reset mọi audio đang phát
-  this.resetAudio();
-  this.repeatCount = 0;
+    // 2. Dừng & reset mọi audio đang phát
+    this.resetAudio();
+    this.repeatCount = 0;
 
-  // 3. Cập nhật câu hỏi hiện tại
-  this.currentIndex = idx;
+    // 3. Cập nhật câu hỏi hiện tại
+    this.currentIndex = idx;
+    this.scrollActiveRowIntoView();
 
-  // 4. Bật lại luồng phát tự động
-  this.isPlaying = true;
+    // 4. Bật lại luồng phát tự động
+    this.isPlaying = true;
 
-  // 5. Lấy thông tin file audio của câu hỏi
-  const audioFile = this.data[this.currentIndex];
-  if (!audioFile?.audioQuestion) return;
+    // 5. Lấy thông tin file audio của câu hỏi
+    const audioFile = this.data[this.currentIndex];
+    if (!audioFile?.audioQuestion) return;
 
-  // 6. Tạo và phát audio câu hỏi
-  this.audio = new Audio(audioFile.audioQuestion);
-  this.audio.volume = this.audioVolume;
-  this.audio.onended = () => {
-    if (audioFile.audioListen) {
-      // Phát audio đáp án sau khi audio câu hỏi kết thúc
-      this.playAnswerAudio(audioFile.audioListen);
-    } else {
-      // Không có audio đáp án thì next luôn
-      if (this.isPlaying) {
-        setTimeout(() => this.nextAudio(), 350);
+    // 6. Tạo và phát audio câu hỏi
+    this.audio = new Audio(audioFile.audioQuestion);
+    this.audio.volume = this.audioVolume;
+    this.audio.onended = () => {
+      if (audioFile.audioListen) {
+        // Phát audio đáp án sau khi audio câu hỏi kết thúc
+        this.playAnswerAudio(audioFile.audioListen);
+      } else {
+        // Không có audio đáp án thì next luôn
+        if (this.isPlaying) {
+          setTimeout(() => this.nextAudio(), 350);
+        }
       }
+    };
+
+    this.audio.play().catch((err) => console.error('Lỗi phát audio:', err));
+  }
+
+  private scrollActiveRowIntoView() {
+    if (!this.questionRows || !this.questionRows.length) return;
+    // lấy index hiện tại
+    const row = this.questionRows.toArray()[this.currentIndex];
+    if (row && row.nativeElement) {
+      row.nativeElement.scrollIntoView({
+        block: 'center',
+        behavior: 'smooth',
+      });
     }
-  };
-
-  this.audio.play().catch(err => console.error('Lỗi phát audio:', err));
-}
-
+  }
 }

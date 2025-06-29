@@ -6,24 +6,29 @@
   </header>
 
   <main>
-    <table class="questions-table">
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>Câu hỏi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index" (click)="goToQuestion(i);">
-          <td *ngIf="ques.question != currentQuestion?.question"># {{i}}</td>
-          <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
-          <td>{{ques.question}}</td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div class="flex align-center justify-between">
+      <div class="questions-container">
+      <table class="questions-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Câu hỏi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr #questionRow [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index"
+            (click)="goToQuestion(i);">
+            <td *ngIf="ques.question != currentQuestion?.question"># {{i + 1}}</td>
+            <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
+            <td>{{ques.question}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="image-container" *ngIf="currentQuestion?.img">
-      <img src="{{currentQuestion?.img}}" onerror="this.src=''">
+        <img src="{{currentQuestion?.img}}" onerror="this.src='../../../../assets/images/logo.gif';"
+          alt="Image for {{currentQuestion?.question}}" class="question-image">
+      </div>
     </div>
 
     <div class="subtitle-container">
