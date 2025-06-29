@@ -23,7 +23,7 @@
     </table>
 
     <div class="image-container" *ngIf="currentQuestion?.img">
-      <img src="{{currentQuestion?.img}}">
+      <img src="{{currentQuestion?.img}}" onerror="this.src=''">
     </div>
 
     <div class="subtitle-container">
