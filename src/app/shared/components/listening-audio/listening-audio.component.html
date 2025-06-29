@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index">
+        <tr [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index" (click)="goToQuestion(i);">
           <td *ngIf="ques.question != currentQuestion?.question"># {{i}}</td>
           <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
           <td>{{ques.question}}</td>

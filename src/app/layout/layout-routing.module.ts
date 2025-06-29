@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: 'writing', component: WritingComponent },
 
       // Route mặc định cho layout, sẽ điều hướng đến 'welcome'
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '', redirectTo: 'listening/test', pathMatch: 'full' },
     ],
   },
 ];

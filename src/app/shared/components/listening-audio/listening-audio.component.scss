@@ -63,7 +63,8 @@ body {
 
 .main-container {
     width: 100%;
-    max-width: 900px;
+    height: calc(100vh - 74px);
+    overflow-y: auto;
     background-color: var(--container-bg-color);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

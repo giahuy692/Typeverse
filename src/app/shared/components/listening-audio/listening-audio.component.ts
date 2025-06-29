@@ -10,6 +10,7 @@ import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
 import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
+import { listAptisSpeaking } from 'src/assets/mock-data/speaking-practise';
 
 @Component({
   selector: 'app-listening-audio',
@@ -17,7 +18,7 @@ import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
   styleUrls: ['./listening-audio.component.scss'],
 })
 export class ListeningAudioComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = LIST_QUESTIONS;
+  data: DTOListQuestion[] = listAptisSpeaking;
   currentIndex = 0;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
@@ -332,28 +333,38 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   }
 
   showDrawer: boolean = false
-  goToQuestion(idx: number): void {
-    if (idx >= 0 && idx < this.data.length) {
-      // Dừng audio hiện tại
-      if (this.answerAudio) {
-        this.answerAudio.pause();
-        this.answerAudio.currentTime = 0;
-      }
-      this.currentIndex = idx;
-      // Tạo audio mới cho câu hỏi này
-      if (this.data[idx]?.audioQuestion) {
-        this.answerAudio = new Audio(this.data[idx].audioQuestion);
-        this.answerAudio.volume = this.audioVolume ?? 1;
-        this.answerAudio.onended = () => {
-          this.isPlaying = false;
-          this.repeatCount++;
-          if (this.repeatCount < this.repeatLimit) {
-            setTimeout(() => this.toggleAnswerAudio(), 350);
-          }
-        };
-      }
-      this.isPlaying = false;
-      this.repeatCount = 0;
-    }
-  }
+  /**
+ * Chuyển đến câu hỏi được chọn và phát ngay.
+ * Sau khi phát xong câu trả lời, nếu `isPlaying` vẫn true
+ * thì sẽ tiếp tục phát câu tiếp theo theo luồng tự động.
+ */
+public goToQuestion(idx: number): void {
+  // 1. Kiểm tra chỉ số
+  if (idx < 0 || idx >= this.data.length) return;
+
+  // 2. Dừng & reset mọi audio đang phát
+  this.resetAudio();
+  this.repeatCount = 0;
+
+  // 3. Cập nhật câu hỏi hiện tại
+  this.currentIndex = idx;
+
+  // 4. Bật lại luồng phát tự động
+  this.isPlaying = true;
+
+  // 5. Lấy thông tin file audio của câu hỏi
+  const audioFile = this.data[this.currentIndex];
+  if (!audioFile?.audioQuestion) return;
+
+  // 6. Tạo và phát audio câu hỏi
+  this.audio = new Audio(audioFile.audioQuestion);
+  this.audio.volume = this.audioVolume;
+  this.audio.play().catch(err => console.error('Lỗi khi phát câu hỏi:', err));
+
+  // 7. Khi audio câu hỏi kết thúc
+  this.audio.onended = () => {
+    this.nextAudio()
+  };
+}
+
 }

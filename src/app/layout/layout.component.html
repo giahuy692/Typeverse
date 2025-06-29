@@ -10,8 +10,8 @@
     <!-- Main Content nằm bên phải sidebar, chiếm phần còn lại -->
     <main class="flex-1 flex flex-col">
       <section class="flex-1 flex flex-col">
-        <app-welcome *ngIf="currentAppMode === 'idle'"></app-welcome>
-        <router-outlet *ngIf="currentAppMode !== 'idle'"></router-outlet>
+        <!-- <app-welcome *ngIf="currentAppMode === 'idle'"></app-welcome> -->
+        <router-outlet></router-outlet>
       </section>
     </main>
   </div>
