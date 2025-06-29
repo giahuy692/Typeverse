@@ -9,7 +9,7 @@ import {
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
-import { listQuestion } from 'src/assets/mock-data/speaking-practise';
+import { speakinglist } from 'src/assets/mock-data/speaking-practise';
 
 @Component({
   selector: 'app-listening-audio',
@@ -17,11 +17,11 @@ import { listQuestion } from 'src/assets/mock-data/speaking-practise';
   styleUrls: ['./listening-audio.component.scss'],
 })
 export class ListeningAudioComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = listQuestion;
-  currentIndex = 0;
+  data: DTOListQuestion[] = speakinglist;
+  currentIndex = -1; // Bắt đầu từ -1 để nextAudio sẽ tăng lên 0 đầu tiên
   playedIndexes: number[] = [];
-  audio!: HTMLAudioElement;
-  answerAudio!: HTMLAudioElement;
+  audio: HTMLAudioElement | null = null;
+  answerAudio: HTMLAudioElement | null = null;
   backgroundMusic: HTMLAudioElement = new Audio(
     'assets/music/Chìm Sâu - RPT MCK.mp3'
   );
@@ -243,11 +243,15 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     if (this.audio) {
       this.audio.pause();
       this.audio.currentTime = 0;
+      this.audio.onended = null;
+      this.audio = null;
     }
 
     if (this.answerAudio) {
       this.answerAudio.pause();
       this.answerAudio.currentTime = 0;
+      this.answerAudio.onended = null;
+      this.answerAudio = null;
     }
 
     this.answerProgress = 0;
@@ -358,12 +362,19 @@ public goToQuestion(idx: number): void {
   // 6. Tạo và phát audio câu hỏi
   this.audio = new Audio(audioFile.audioQuestion);
   this.audio.volume = this.audioVolume;
-  this.audio.play().catch(err => console.error('Lỗi khi phát câu hỏi:', err));
-
-  // 7. Khi audio câu hỏi kết thúc
   this.audio.onended = () => {
-    this.nextAudio()
+    if (audioFile.audioListen) {
+      // Phát audio đáp án sau khi audio câu hỏi kết thúc
+      this.playAnswerAudio(audioFile.audioListen);
+    } else {
+      // Không có audio đáp án thì next luôn
+      if (this.isPlaying) {
+        setTimeout(() => this.nextAudio(), 350);
+      }
+    }
   };
+
+  this.audio.play().catch(err => console.error('Lỗi phát audio:', err));
 }
 
 }

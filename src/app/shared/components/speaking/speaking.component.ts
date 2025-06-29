@@ -1,10 +1,9 @@
 // src/app/speaking/speaking.component.ts
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { interval, Subject, Subscription, takeUntil, timer } from 'rxjs';
-import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { AppModeService } from '../../services/app-mode.service';
-import { listQuestion } from 'src/assets/mock-data/speaking-practise';
+import { speakinglist } from 'src/assets/mock-data/speaking-practise';
 
 @Component({
   selector: 'app-speaking',
@@ -12,7 +11,7 @@ import { listQuestion } from 'src/assets/mock-data/speaking-practise';
   styleUrls: ['./speaking.component.scss'],
 })
 export class SpeakingComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = listQuestion;
+  data: DTOListQuestion[] = speakinglist;
   currentIndex = 0;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;

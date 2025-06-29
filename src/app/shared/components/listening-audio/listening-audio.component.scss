@@ -44,26 +44,9 @@
     --active-row-bg: #E7F0FE;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
 .main-container {
     width: 100%;
-    height: calc(100vh - 74px);
+    // height: calc(100vh - 74px);
     overflow-y: auto;
     background-color: var(--container-bg-color);
     border-radius: 12px;
@@ -78,6 +61,7 @@ body {
 
 header {
     margin-bottom: 24px;
+        align-self: flex-start;
 }
 
 header h1 {
