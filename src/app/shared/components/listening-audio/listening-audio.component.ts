@@ -9,7 +9,7 @@ import {
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
-import { listAptisSpeaking } from 'dist/typeverse/assets/mock-data/speaking-practise';
+import { listQuestion } from 'src/assets/mock-data/speaking-practise';
 
 @Component({
   selector: 'app-listening-audio',
@@ -17,7 +17,7 @@ import { listAptisSpeaking } from 'dist/typeverse/assets/mock-data/speaking-prac
   styleUrls: ['./listening-audio.component.scss'],
 })
 export class ListeningAudioComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = listAptisSpeaking;
+  data: DTOListQuestion[] = listQuestion;
   currentIndex = 0;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
