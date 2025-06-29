@@ -9,8 +9,7 @@ import {
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
-import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
-import { listAptisSpeaking } from 'src/assets/mock-data/speaking-practise';
+import { listAptisSpeaking } from 'dist/typeverse/assets/mock-data/speaking-practise';
 
 @Component({
   selector: 'app-listening-audio',

@@ -38,10 +38,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
    * @param mode Chế độ mới ('listening', 'speaking', 'writing').
    */
   changeAppMode(mode: AppMode): void {
-    if (this.currentAppMode === mode) { // Nếu nhấn vào nút đang active -> quay về Welcome
-      this.appModeService.setMode('idle');
-      this.router.navigate(['/welcome']); // Điều hướng về trang welcome
-    } else {
+    // if (this.currentAppMode === mode) { // Nếu nhấn vào nút đang active -> quay về Welcome
+    //   this.appModeService.setMode('idle');
+    //   this.router.navigate(['/welcome']); // Điều hướng về trang welcome
+    // } else {
       this.appModeService.setMode(mode);
       let navigationPath = '/';
       switch (mode) {
@@ -67,7 +67,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       if (navigationPath !== '/' || (navigationPath === '/' && mode === 'idle')) {
          this.router.navigate([navigationPath]);
       }
-    }
+    // }
   }
 
 

@@ -3,8 +3,7 @@
   <app-header *ngIf="showHeader"></app-header>
   <div class="flex flex-1">
     <!-- Sidebar luôn sát trái, chiếm full height của content bên dưới header -->
-    <aside class="w-56 bg-[#202738] border-r border-[#232c41] shadow-lg flex-shrink-0 flex flex-col"
-    *ngIf="currentAppMode !== 'idle'">
+    <aside class="w-56 bg-[#202738] border-r border-[#232c41] shadow-lg flex-shrink-0 flex flex-col">
       <app-sidebar-menu [currentAppMode]="currentAppMode" (modeChange)="changeAppMode($event)"></app-sidebar-menu>
     </aside>
     <!-- Main Content nằm bên phải sidebar, chiếm phần còn lại -->
