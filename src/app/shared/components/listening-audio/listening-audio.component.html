@@ -8,24 +8,24 @@
   <main>
     <div class="flex align-center justify-between">
       <div class="questions-container">
-      <table class="questions-table">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Câu hỏi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr #questionRow [class.active]="ques.question == currentQuestion?.question" *ngFor="let ques of data; let i = index"
-            (click)="goToQuestion(i);">
-            <td *ngIf="ques.question != currentQuestion?.question"># {{i + 1}}</td>
-            <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
-            <td>{{ques.question}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="image-container" *ngIf="currentQuestion?.img">
+        <table class="questions-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Câu hỏi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr #questionRow [class.active]="ques.question == currentQuestion?.question"
+              *ngFor="let ques of data; let i = index" (click)="goToQuestion(i);">
+              <td *ngIf="ques.question != currentQuestion?.question"># {{i + 1}}</td>
+              <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
+              <td>{{ques.question}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="image-container" *ngIf="currentQuestion?.img">
         <img src="{{currentQuestion?.img}}" onerror="this.src='../../../../assets/images/logo.gif';"
           alt="Image for {{currentQuestion?.question}}" class="question-image">
       </div>
@@ -59,8 +59,38 @@
         <span>{{ answerDuration }}</span>
       </div>
       <div class="player-controls">
-        <i class="fas {{ beepEnabled ? 'fa-bell' : 'fa-bell-slash' }}" (click)="beepEnabled = !beepEnabled;"> </i>
-        <i class="fas {{ backgroundMuted ? 'fa-volume-down' : 'fa-volume-up' }}" (click)="toggleBackgroundMute()"></i>
+        <i class="fas {{ beepEnabled ? 'fa-bell' : 'fa-bell-slash' }}" (click)="beepEnabled = !beepEnabled;" [ngClass]="{
+          'text-yellow-600 hover:text-yellow-700': !beepEnabled,
+          'text-green-600 hover:text-green-700': beepEnabled
+        }"> </i>
+        <div class="volume-container">
+          <div class="volume-button">
+            <i class="fas {{ backgroundMuted ? 'fa-volume-mute' : 'fa-volume-up' }}" (click)="toggleBackgroundMute()"
+              [ngClass]="{
+          'text-yellow-600 hover:text-yellow-700': backgroundMuted,
+          'text-green-600 hover:text-green-700': !backgroundMuted
+        }"></i>
+          </div>
+
+          <div class="volume-slider">
+            <input type="range" min="0" max="1" step="0.05" [value]="backgroundMusic.volume"
+              (input)="updateBackgroundVolume($any($event.target).value)" class="w-full accent-indigo-300">
+          </div>
+        </div>
+        <div class="volume-container">
+          <div class="volume-button">
+            <i class="fas {{ answerAudio?.paused ? 'fa-microphone-alt-slash' : 'fa-microphone-alt' }}"
+              (click)="toggleAnswerAudio()" [ngClass]="{
+          'text-yellow-600 hover:text-yellow-700': answerAudio?.paused,
+          'text-green-600 hover:text-green-700': !answerAudio?.paused
+        }"></i>
+          </div>
+
+          <div class="volume-slider">
+            <input type="range" min="0" max="1" step="0.05" [value]="audioVolume"
+              (input)="updateAudioVolume($any($event.target).value)" class="w-full accent-blue-500">
+          </div>
+        </div>
         <i class="fas fa-backward-step" (click)="prevAudio()"></i>
         <button class="play-pause-btn" [disabled]="!answerAudio" (click)="toggleAnswerAudio()">
           <i class="fas {{ answerAudio?.paused ? 'fa-play' : 'fa-pause' }}"></i>

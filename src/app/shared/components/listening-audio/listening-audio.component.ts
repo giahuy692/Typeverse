@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   QueryList,
@@ -65,7 +66,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     const savedVolume = localStorage.getItem('audioVolume');
     this.audioVolume = savedVolume ? parseFloat(savedVolume) : 0.5;
     this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.1;
+    this.backgroundMusic.volume = 0.05; // Mặc định âm lượng nhạc nền
 
     // Bắt đầu chế độ nghe ngay khi component được tải
     this.startListening();
@@ -75,7 +76,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.appModeService.setMode('listening_audio'); // Đảm bảo AppModeService biết chế độ hiện tại
     this.playSequence(); // Bắt đầu phát audio ngay lập tức
     if (!this.backgroundMuted) {
-      this.backgroundMusic.play();
+      this.backgroundMusic.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
     }
   }
 
@@ -84,7 +89,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     if (this.backgroundMuted) {
       this.backgroundMusic.pause();
     } else {
-      this.backgroundMusic.play();
+      this.backgroundMusic.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
     }
   }
 
@@ -145,7 +154,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.resetAudio();
     const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
-    this.audio.play();
+    this.audio.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
     this.scrollActiveRowIntoView();
 
     this.audio.onended = () => {
@@ -159,7 +172,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     const startAnswer = () => {
       this.answerAudio = new Audio(filePath);
       this.answerAudio.volume = this.audioVolume;
-      this.answerAudio.play();
+      this.answerAudio.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
       this.trackAnswerProgress();
       this.showEffect = true;
 
@@ -197,7 +214,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.resetAudio();
     this.audio = new Audio(question.audioQuestion);
     this.audio.volume = this.audioVolume;
-    this.audio.play();
+    this.audio.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
 
     this.audio.onended = () => {
       if (question.audioListen) {
@@ -220,7 +241,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       this.resetAudio();
       const audioFile = this.data[this.currentIndex];
       this.audio = new Audio(audioFile.audioQuestion);
-      this.audio.play();
+      this.audio.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
       
       this.audio.onended = () => {
         if (audioFile.audioListen) {
@@ -267,7 +292,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   public toggleAnswerAudio(): void {
     if (!this.answerAudio) return;
     if (this.answerAudio.paused) {
-      this.answerAudio.play();
+      this.answerAudio.play().catch(err => {
+  if (err.name !== 'AbortError') {
+    console.error('Audio play error:', err);
+  }
+});;
     } else {
       this.answerAudio.pause();
     }
@@ -379,5 +408,13 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
         behavior: 'smooth',
       });
     }
+  }
+
+    @HostListener('window:beforeunload')
+  beforeUnloadHandler() {
+    // Tắt hết audio ngay trước khi reload
+    if (this.audio)        this.audio.pause();
+    if (this.answerAudio)  this.answerAudio.pause();
+    this.backgroundMusic.pause();
   }
 }

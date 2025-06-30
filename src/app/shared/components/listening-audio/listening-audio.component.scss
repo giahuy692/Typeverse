@@ -259,4 +259,38 @@
         background-color: var(--primary-color);
         border-radius: 3px;
     }
+
+    .volume-container {
+        position: relative; // để .volume-slider tuyệt đối so với container
+        display: inline-block; // chỉ chiếm đúng kích thước nút
+
+        .volume-slider {
+            display: none; // mặc định ẩn
+            position: absolute;
+            bottom: 100%; // nằm ngay trên icon
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+
+            input[type="range"] {
+                /* biến thanh ngang thành dọc */
+                -webkit-appearance: slider-vertical;
+                /* WebKit */
+                writing-mode: bt-lr;
+                /* IE */
+                width: 8px;
+                /* bề ngang thanh dọc */
+                height: 100px;
+                /* chiều cao thanh dọc */
+                margin: 0;
+                /* kéo sát container */
+                cursor: pointer;
+            }
+        }
+
+        &:hover .volume-slider {
+            display: block; // khi hover vào bất cứ đâu trong .volume-container
+        }
+    }
+
 }
