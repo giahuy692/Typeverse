@@ -154,6 +154,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.resetAudio();
     const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
+    this.audio.volume = this.audioVolume;
     this.audio.play().catch(err => {
   if (err.name !== 'AbortError') {
     console.error('Audio play error:', err);
@@ -241,6 +242,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       this.resetAudio();
       const audioFile = this.data[this.currentIndex];
       this.audio = new Audio(audioFile.audioQuestion);
+      this.audio.volume = this.audioVolume;
       this.audio.play().catch(err => {
   if (err.name !== 'AbortError') {
     console.error('Audio play error:', err);
