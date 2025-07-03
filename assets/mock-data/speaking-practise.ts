@@ -8,6 +8,7 @@ export const speakinglist: DTOListQuestion[] = [
     answer: `This is an interesting question, let me answer it.
 My name is Huy. I am a web developer and I live in Vietnam. I am friendly, hardworking, and I enjoy learning new things. In my free time, I like playing games and listening to music with my friends at home. It is interesting. It helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau1.mp3',
+    audioTV: 'assets/audios/speaking/tv-1.mp3',
     img: `assets/images/Audio/1`
   },
   {
@@ -17,6 +18,7 @@ My name is Huy. I am a web developer and I live in Vietnam. I am friendly, hardw
     answer: `This is an interesting question, let me give my answer.
 I am a responsible and creative person. I like to help others and I enjoy working in a team. I often spend my free time reading books or playing games with my brother. It helps gain more knowledge. It is useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau2.mp3',
+    audioTV: 'assets/audios/speaking/tv-2.mp3',
     img: `assets/images/Audio/2`
   },
   {
@@ -26,6 +28,7 @@ I am a responsible and creative person. I like to help others and I enjoy workin
     answer: `This is an interesting question, let me answer it.
 My best friend is Minh. He is very kind and funny. We often play football together in the park after school. I feel happy when I am with him because it helps relax and reduce stress. He is a good friend and always supports me. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau3.mp3',
+    audioTV: 'assets/audios/speaking/tv-3.mp3',
     img: `assets/images/Audio/3`
   },
   {
@@ -35,6 +38,7 @@ My best friend is Minh. He is very kind and funny. We often play football togeth
     answer: `This is an interesting question, let me answer it.
 My favorite family is my own family. We live together in a small house in the city. We often have dinner and watch TV together. I feel delighted to be with my family because it is interesting and it helps me relax. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau4.mp3',
+    audioTV: 'assets/audios/speaking/tv-4.mp3',
     img: `assets/images/Audio/4`
   },
   {
@@ -44,6 +48,7 @@ My favorite family is my own family. We live together in a small house in the ci
     answer: `This is an interesting question, let me answer it.
 My family has four people: my parents, my younger brother, and me. We live in Hanoi. We like to spend time together at home, such as having meals and sharing stories. It helps gain more experience. I feel very happy and safe with my family. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau5.mp3',
+    audioTV: 'assets/audios/speaking/tv-5.mp3',
     img: `assets/images/Audio/5`
   },
   {
@@ -53,6 +58,7 @@ My family has four people: my parents, my younger brother, and me. We live in Ha
     answer: `This is an interesting question, let me give my answer.
 No, I do not have a large family. My family is quite small with four members: my parents, my younger brother, and me. We live together in an apartment. We are very close and often help each other. It is interesting and it helps me gain more knowledge about life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau6.mp3',
+    audioTV: 'assets/audios/speaking/tv-6.mp3',
     img: `assets/images/Audio/6`
   },
   {
@@ -62,6 +68,7 @@ No, I do not have a large family. My family is quite small with four members: my
     answer: `This is an interesting question, let me answer it.
 I want to describe my mother. She is a teacher and a kind person. She always helps me with my studies and supports me when I have problems. I feel happy and lucky to have her in my family. She is interesting and helps me gain more knowledge. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau7.mp3',
+    audioTV: 'assets/audios/speaking/tv-7.mp3',
     img: `assets/images/Audio/7`
   },
   {
@@ -71,6 +78,7 @@ I want to describe my mother. She is a teacher and a kind person. She always hel
     answer: `This is an interesting question, let me answer it.
 I live in a small but comfortable apartment with my family. My favorite room is my bedroom because it is quiet and tidy. I like to study and relax here every day. It is useful for my life and helps me feel happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau8.mp3',
+    audioTV: 'assets/audios/speaking/tv-8.mp3',
     img: `assets/images/Audio/8`
   },
   {
@@ -80,6 +88,7 @@ I live in a small but comfortable apartment with my family. My favorite room is 
     answer: `This is an interesting question, let me answer it.
 I live in a small but comfortable apartment with my family. My favorite room is my bedroom because it is quiet and tidy. I like to study and relax here every day. It is useful for my life and helps me feel happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau9.mp3',
+    audioTV: 'assets/audios/speaking/tv-9.mp3',
     img: `assets/images/Audio/9`
   },
   {
@@ -89,6 +98,7 @@ I live in a small but comfortable apartment with my family. My favorite room is 
     answer: `This is an interesting question, let me answer it.
 I live in a small but comfortable apartment with my family. My favorite room is my bedroom because it is quiet and tidy. I like to study and relax here every day. It is useful for my life and helps me feel happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau10.mp3',
+    audioTV: 'assets/audios/speaking/tv-10.mp3',
     img: `assets/images/Audio/10`
   },
   {
@@ -98,6 +108,7 @@ I live in a small but comfortable apartment with my family. My favorite room is 
     answer: `This is an interesting question, let me give my answer.
 A famous place in my country is Ha Long Bay. It is very beautiful and many tourists visit every year. I first saw it when my school organized a trip there. It was an amazing experience, and I learned many new things. It is interesting and helps me gain more knowledge. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau11.mp3',
+    audioTV: 'assets/audios/speaking/tv-11.mp3',
     img: `assets/images/Audio/11`
   },
   {
@@ -107,6 +118,7 @@ A famous place in my country is Ha Long Bay. It is very beautiful and many touri
     answer: `This is an interesting question, let me answer it.
 My first school was a small primary school near my house. The teachers were kind and my classmates were friendly. I learned many new things and had lots of fun every day. It helps me gain more knowledge and experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau12.mp3',
+    audioTV: 'assets/audios/speaking/tv-12.mp3',
     img: `assets/images/Audio/12`
   },
   {
@@ -116,6 +128,7 @@ My first school was a small primary school near my house. The teachers were kind
     answer: `This is an interesting question, let me answer it.
 I enjoy living in the city because it is convenient and modern, but sometimes I would like to live in the countryside where life is peaceful and quiet. Both places have good things. Living in the countryside helps me relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau13.mp3',
+    audioTV: 'assets/audios/speaking/tv-13.mp3',
     img: `assets/images/Audio/13`
   },
   {
@@ -125,6 +138,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     answer: `This is an interesting question, let me answer it.
 I enjoy living in the city because it is convenient and modern, but sometimes I would like to live in the countryside where life is peaceful and quiet. Both places have good things. Living in the countryside helps me relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau14.mp3',
+    audioTV: 'assets/audios/speaking/tv-14.mp3',
     img: `assets/images/Audio/14`
   },
   {
@@ -133,6 +147,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     question: `What do you like to do in your free time?`,
     answer: `In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau15.mp3',
+    audioTV: 'assets/audios/speaking/tv-15.mp3',
     img: `assets/images/Audio/15`
   },
   {
@@ -141,6 +156,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     question: `What do you find relaxing?`,
     answer: `In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau16.mp3',
+    audioTV: 'assets/audios/speaking/tv-16.mp3',
     img: `assets/images/Audio/16`
   },
   {
@@ -149,6 +165,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     question: `How do you relax in the evening?`,
     answer: `In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau17.mp3',
+    audioTV: 'assets/audios/speaking/tv-17.mp3',
     img: `assets/images/Audio/17`
   },
   {
@@ -157,6 +174,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     question: `What activities do you usually do with your friends?`,
     answer: `In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau18.mp3',
+    audioTV: 'assets/audios/speaking/tv-18.mp3',
     img: `assets/images/Audio/18`
   },
   {
@@ -165,6 +183,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     question: `Please tell me what you do at the weekend.`,
     answer: `In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau19.mp3',
+    audioTV: 'assets/audios/speaking/tv-19.mp3',
     img: `assets/images/Audio/19`
   },
   {
@@ -174,6 +193,7 @@ I enjoy living in the city because it is convenient and modern, but sometimes I 
     answer: `This is an interesting question, let me answer it.
 In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau20.mp3',
+    audioTV: 'assets/audios/speaking/tv-20.mp3',
     img: `assets/images/Audio/20`
   },
   {
@@ -183,6 +203,7 @@ In my free time, I like listening to music, reading books, and playing games wit
     answer: `This is an interesting question, let me answer it.
 In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau21.mp3',
+    audioTV: 'assets/audios/speaking/tv-21.mp3',
     img: `assets/images/Audio/21`
   },
   {
@@ -192,6 +213,7 @@ In my free time, I like listening to music, reading books, and playing games wit
     answer: `This is an interesting question, let me answer it.
 In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau22.mp3',
+    audioTV: 'assets/audios/speaking/tv-22.mp3',
     img: `assets/images/Audio/22`
   },
   {
@@ -201,6 +223,7 @@ In my free time, I like listening to music, reading books, and playing games wit
     answer: `This is an interesting question, let me answer it.
 In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau23.mp3',
+    audioTV: 'assets/audios/speaking/tv-23.mp3',
     img: `assets/images/Audio/23`
   },
   {
@@ -210,6 +233,7 @@ In my free time, I like listening to music, reading books, and playing games wit
     answer: `This is an interesting question, let me answer it.
 In my free time, I like listening to music, reading books, and playing games with my friends at home or in the park. These activities help me relax and reduce stress after a busy day. Sometimes, in the evening or on the weekend, I go out with my friends to eat or walk around the city. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau24.mp3',
+    audioTV: 'assets/audios/speaking/tv-24.mp3',
     img: `assets/images/Audio/24`
   },
   {
@@ -219,6 +243,7 @@ In my free time, I like listening to music, reading books, and playing games wit
     answer: `This is an interesting question, let me give my answer.
 Next weekend, I plan to go on a short trip with my family to the countryside. We will visit my grandparents and enjoy the fresh air. In the future, I also want to travel more and explore different places. Next summer, I hope to go on holiday to the beach with my friends. These plans help me feel excited and happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau25.mp3',
+    audioTV: 'assets/audios/speaking/tv-25.mp3',
     img: `assets/images/Audio/25`
   },
   {
@@ -228,6 +253,7 @@ Next weekend, I plan to go on a short trip with my family to the countryside. We
     answer: `This is an interesting question, let me give my answer.
 Next weekend, I plan to go on a short trip with my family to the countryside. We will visit my grandparents and enjoy the fresh air. In the future, I also want to travel more and explore different places. Next summer, I hope to go on holiday to the beach with my friends. These plans help me feel excited and happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau26.mp3',
+    audioTV: 'assets/audios/speaking/tv-26.mp3',
     img: `assets/images/Audio/26`
   },
   {
@@ -237,6 +263,7 @@ Next weekend, I plan to go on a short trip with my family to the countryside. We
     answer: `This is an interesting question, let me give my answer.
 Next weekend, I plan to go on a short trip with my family to the countryside. We will visit my grandparents and enjoy the fresh air. In the future, I also want to travel more and explore different places. Next summer, I hope to go on holiday to the beach with my friends. These plans help me feel excited and happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau27.mp3',
+    audioTV: 'assets/audios/speaking/tv-27.mp3',
     img: `assets/images/Audio/27`
   },
   {
@@ -246,6 +273,7 @@ Next weekend, I plan to go on a short trip with my family to the countryside. We
     answer: `This is an interesting question, let me answer it.
 Yes, I like shopping because it is interesting and helps me relax after studying hard. I also enjoy walking in the park with my friends because it is good for my health and helps reduce stress. My favorite season is autumn because the weather is cool and comfortable. I love listening to pop music because it makes me feel happy and energetic. These activities are useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau28.mp3',
+    audioTV: 'assets/audios/speaking/tv-28.mp3',
     img: `assets/images/Audio/28`
   },
   {
@@ -255,6 +283,7 @@ Yes, I like shopping because it is interesting and helps me relax after studying
     answer: `This is an interesting question, let me answer it.
 Yes, I like shopping because it is interesting and helps me relax after studying hard. I also enjoy walking in the park with my friends because it is good for my health and helps reduce stress. My favorite season is autumn because the weather is cool and comfortable. I love listening to pop music because it makes me feel happy and energetic. These activities are useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau29.mp3',
+    audioTV: 'assets/audios/speaking/tv-29.mp3',
     img: `assets/images/Audio/29`
   },
   {
@@ -264,6 +293,7 @@ Yes, I like shopping because it is interesting and helps me relax after studying
     answer: `This is an interesting question, let me answer it.
 Yes, I like shopping because it is interesting and helps me relax after studying hard. I also enjoy walking in the park with my friends because it is good for my health and helps reduce stress. My favorite season is autumn because the weather is cool and comfortable. I love listening to pop music because it makes me feel happy and energetic. These activities are useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau30.mp3',
+    audioTV: 'assets/audios/speaking/tv-30.mp3',
     img: `assets/images/Audio/30`
   },
   {
@@ -273,6 +303,7 @@ Yes, I like shopping because it is interesting and helps me relax after studying
     answer: `This is an interesting question, let me answer it.
 Yes, I like shopping because it is interesting and helps me relax after studying hard. I also enjoy walking in the park with my friends because it is good for my health and helps reduce stress. My favorite season is autumn because the weather is cool and comfortable. I love listening to pop music because it makes me feel happy and energetic. These activities are useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau31.mp3',
+    audioTV: 'assets/audios/speaking/tv-31.mp3',
     img: `assets/images/Audio/31`
   },
   {
@@ -282,6 +313,7 @@ Yes, I like shopping because it is interesting and helps me relax after studying
     answer: `This is an interesting question, let me answer it.
 For the rest of today, I will finish my homework and help my parents with some housework. In the evening, I plan to relax by listening to music or watching a movie with my family. These activities help me feel happy and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau32.mp3',
+    audioTV: 'assets/audios/speaking/tv-32.mp3',
     img: `assets/images/Audio/32`
   },
   {
@@ -291,6 +323,7 @@ For the rest of today, I will finish my homework and help my parents with some h
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was yesterday. I watched a cooking show with my family at home after dinner. The program was fun and showed how to make easy meals. I felt happy because it helps me relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau33.mp3',
+    audioTV: 'assets/audios/speaking/tv-33.mp3',
     img: `assets/images/Audio/33`
   },
   {
@@ -300,6 +333,7 @@ As I can remember, it was yesterday. I watched a cooking show with my family at 
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was last weekend. I visited my best friend at his house. We talked, played games, and had dinner together. I felt very happy because it is interesting and helps me relax after a busy week. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau34.mp3',
+    audioTV: 'assets/audios/speaking/tv-34.mp3',
     img: `assets/images/Audio/34`
   },
   {
@@ -309,6 +343,7 @@ As I can remember, it was last weekend. I visited my best friend at his house. W
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was last month. I went to the cinema with my friends to watch an action movie. The film was exciting and we laughed a lot. I felt happy because it helps me reduce stress and enjoy life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau35.mp3',
+    audioTV: 'assets/audios/speaking/tv-35.mp3',
     img: `assets/images/Audio/35`
   },
   {
@@ -318,6 +353,7 @@ As I can remember, it was last month. I went to the cinema with my friends to wa
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was this morning. I walked from the school gate to the exam room with my classmates. We followed the signs, talked a bit to relax, and then entered the room together. I felt a bit nervous but happy because I was ready. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau36.mp3',
+    audioTV: 'assets/audios/speaking/tv-36.mp3',
     img: `assets/images/Audio/36`
   },
   {
@@ -327,6 +363,7 @@ As I can remember, it was this morning. I walked from the school gate to the exa
     answer: `This is an interesting question, let me answer it.
 My favorite food is pho, which is a noodle soup from Vietnam. It has beef, noodles, and fresh herbs. I love eating pho with my family at a small restaurant. It is interesting. It helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau37.mp3',
+    audioTV: 'assets/audios/speaking/tv-37.mp3',
     img: `assets/images/Audio/37`
   },
   {
@@ -336,6 +373,7 @@ My favorite food is pho, which is a noodle soup from Vietnam. It has beef, noodl
     answer: `This is an interesting question, let me answer it.
 The food in my country is very tasty and diverse. We have many famous dishes like pho, banh mi, and spring rolls. Vietnamese food uses lots of fresh vegetables and herbs. Eating these foods is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau38.mp3',
+    audioTV: 'assets/audios/speaking/tv-38.mp3',
     img: `assets/images/Audio/38`
   },
   {
@@ -345,6 +383,7 @@ The food in my country is very tasty and diverse. We have many famous dishes lik
     answer: `This is an interesting question, let me give my answer.
 Spending time with my family and friends makes me happy. I also feel happy when I listen to music, read books, or play games. These things help relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau39.mp3',
+    audioTV: 'assets/audios/speaking/tv-39.mp3',
     img: `assets/images/Audio/39`
   },
   {
@@ -354,6 +393,7 @@ Spending time with my family and friends makes me happy. I also feel happy when 
     answer: `This is an interesting question, let me answer it.
 My favorite dish is fried rice. It is made with rice, eggs, vegetables, and sometimes chicken or shrimp. I like it because it is delicious and easy to cook. I feel happy when I eat this dish with my family. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau40.mp3',
+    audioTV: 'assets/audios/speaking/tv-40.mp3',
     img: `assets/images/Audio/40`
   },
   {
@@ -363,6 +403,7 @@ My favorite dish is fried rice. It is made with rice, eggs, vegetables, and some
     answer: `This is an interesting question, let me answer it.
 My favorite dish to cook is fried noodles. I can make it quickly with eggs and vegetables. I often cook this dish for my family at home. It helps me gain more experience and makes my family happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau41.mp3',
+    audioTV: 'assets/audios/speaking/tv-41.mp3',
     img: `assets/images/Audio/41`
   },
   {
@@ -372,6 +413,7 @@ My favorite dish to cook is fried noodles. I can make it quickly with eggs and v
     answer: `This is an interesting question, let me answer it.
 I like eating spring rolls because they are tasty and healthy. I often eat them with my family on weekends. It is interesting and helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau42.mp3',
+    audioTV: 'assets/audios/speaking/tv-42.mp3',
     img: `assets/images/Audio/42`
   },
   {
@@ -381,6 +423,7 @@ I like eating spring rolls because they are tasty and healthy. I often eat them 
     answer: `This is an interesting question, let me answer it.
 As I can remember, the first time I cooked a meal was last year. I made noodles and eggs for my family. Everyone enjoyed the food and I felt happy and proud. It helps me gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau43.mp3',
+    audioTV: 'assets/audios/speaking/tv-43.mp3',
     img: `assets/images/Audio/43`
   },
   {
@@ -390,6 +433,7 @@ As I can remember, the first time I cooked a meal was last year. I made noodles 
     answer: `This is an interesting question, let me answer it.
 As I can remember, last month I cooked fried rice for my family at home. They liked the taste and said it was delicious. I felt happy and relaxed. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau44.mp3',
+    audioTV: 'assets/audios/speaking/tv-44.mp3',
     img: `assets/images/Audio/44`
   },
   {
@@ -399,6 +443,7 @@ As I can remember, last month I cooked fried rice for my family at home. They li
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was last night. I watched a travel show on TV with my parents. The program showed beautiful places in Vietnam. I felt happy because it helps me relax. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau45.mp3',
+    audioTV: 'assets/audios/speaking/tv-45.mp3',
     img: `assets/images/Audio/45`
   },
   {
@@ -408,6 +453,7 @@ As I can remember, it was last night. I watched a travel show on TV with my pare
     answer: `This is an interesting question, let me answer it.
 As I can remember, I went to the cinema with my friends last week. We watched an action movie together. I felt happy and excited. It helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau46.mp3',
+    audioTV: 'assets/audios/speaking/tv-46.mp3',
     img: `assets/images/Audio/46`
   },
   {
@@ -417,6 +463,7 @@ As I can remember, I went to the cinema with my friends last week. We watched an
     answer: `This is an interesting question, let me answer it.
 Yes, I can play the guitar. I learned to play it by myself at home. Sometimes I play music with my friends. It is interesting and helps me relax. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau47.mp3',
+    audioTV: 'assets/audios/speaking/tv-47.mp3',
     img: `assets/images/Audio/47`
   },
   {
@@ -426,6 +473,7 @@ Yes, I can play the guitar. I learned to play it by myself at home. Sometimes I 
     answer: `This is an interesting question, let me answer it.
 As I can remember, it was this morning. I walked from the school gate to the exam room with my classmates. We followed the signs and talked together. I felt a bit nervous but also ready. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau48.mp3',
+    audioTV: 'assets/audios/speaking/tv-48.mp3',
     img: `assets/images/Audio/48`
   },
   {
@@ -435,6 +483,7 @@ As I can remember, it was this morning. I walked from the school gate to the exa
     answer: `This is an interesting question, let me answer it.
 My favourite place is the city park near my home. I often go there with my friends to walk and play games. The park is green, clean, and peaceful. It helps me relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau49.mp3',
+    audioTV: 'assets/audios/speaking/tv-49.mp3',
     img: `assets/images/Audio/49`
   },
   {
@@ -444,6 +493,7 @@ My favourite place is the city park near my home. I often go there with my frien
     answer: `This is an interesting question, let me give my answer.
 My favourite movie is "Avengers." It is an action film with many heroes and exciting stories. I enjoy watching it with my friends at home. The movie is interesting and helps me relax after studying. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau50.mp3',
+    audioTV: 'assets/audios/speaking/tv-50.mp3',
     img: `assets/images/Audio/50`
   },
   {
@@ -453,6 +503,7 @@ My favourite movie is "Avengers." It is an action film with many heroes and exci
     answer: `This is an interesting question, let me answer it.
 As I can remember, yesterday I studied in the morning and then went out with my friends in the afternoon. We played games and ate ice cream together. I felt happy because it helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau51.mp3',
+    audioTV: 'assets/audios/speaking/tv-51.mp3',
     img: `assets/images/Audio/51`
   },
   {
@@ -462,6 +513,7 @@ As I can remember, yesterday I studied in the morning and then went out with my 
     answer: `This is an interesting question, let me give my answer.
 Football is the most popular sport in my country. Many people also like badminton and volleyball. I often play football with my friends at school or in the park. Playing sports is interesting and good for health. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau52.mp3',
+    audioTV: 'assets/audios/speaking/tv-52.mp3',
     img: `assets/images/Audio/52`
   },
   {
@@ -471,6 +523,7 @@ Football is the most popular sport in my country. Many people also like badminto
     answer: `This is an interesting question, let me answer it.
 On a typical day, I get up early, have breakfast, and go to school. In the afternoon, I do my homework and help my parents. In the evening, I relax by listening to music or watching TV. It helps me feel happy and reduces stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau53.mp3',
+    audioTV: 'assets/audios/speaking/tv-53.mp3',
     img: `assets/images/Audio/53`
   },
   {
@@ -482,6 +535,7 @@ They are wearing casual clothes looking at the table, I saw them sitting and enj
 Looking at their faces, they are all smiling happily, so I suppose that they are on cloud nine.  
 The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
     audioListen: 'assets/audios/speaking/dapancau54.mp3',
+    audioTV: 'assets/audios/speaking/tv-54.mp3',
     img: `assets/images/Audio/54.png`
   },
   {
@@ -491,6 +545,7 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     answer: `This is an interesting question, let me answer it.
 These days, it is not very difficult for young people to learn to cook because they can watch cooking videos on the internet. There are many easy recipes and tips online. Young people can also learn from their family members at home. Cooking is interesting and helps gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau55.mp3',
+    audioTV: 'assets/audios/speaking/tv-55.mp3',
     img: `assets/images/Audio/54.png`
   },
   {
@@ -500,6 +555,7 @@ These days, it is not very difficult for young people to learn to cook because t
     answer: `This is an interesting question, let me answer it.
 As I can remember, the last time I went out to eat was last weekend. I went to a restaurant with my family. We enjoyed delicious food and talked together. I felt happy because eating out helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau56.mp3',
+    audioTV: 'assets/audios/speaking/tv-56.mp3',
     img: `assets/images/Audio/54.png`
   },
   {
@@ -510,6 +566,7 @@ As I can remember, the last time I went out to eat was last weekend. I went to a
 Looking at their faces, they are all smiling happily , so I suppose that they are on cloud nine.  
 The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
     audioListen: 'assets/audios/speaking/dapancau57.mp3',
+    audioTV: 'assets/audios/speaking/tv-57.mp3',
     img: `assets/images/Audio/57.png`
   },
   {
@@ -519,6 +576,7 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     answer: `This is an interesting question, let me answer it.
 Yes, I think it is very important for parents to play with their children. Playing together helps parents and children understand each other better. It also helps children feel happy and loved. It is interesting and useful for family life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau58.mp3',
+    audioTV: 'assets/audios/speaking/tv-58.mp3',
     img: `assets/images/Audio/57.png`
   },
   {
@@ -528,6 +586,7 @@ Yes, I think it is very important for parents to play with their children. Playi
     answer: `This is an interesting question, let me give my answer.
 Parents and children can spend time together by playing games, cooking meals, watching TV, or going for a walk. They can also talk and share stories after dinner. These activities help relax and make the family happier. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau59.mp3',
+    audioTV: 'assets/audios/speaking/tv-59.mp3',
     img: `assets/images/Audio/57.png`
   },
   {
@@ -536,6 +595,7 @@ Parents and children can spend time together by playing games, cooking meals, wa
     question: `Describe the picture?`,
     answer: `Looking at the picture, I can see some people in a bus. A girl is standing while the others are sitting. The girl is wearing glasses with curly hair. She is looking outside the bus. All the people here are quiet. I really like this picture because it makes me remember my school days. I used to go to school by bus.`,
     audioListen: 'assets/audios/speaking/dapancau60.mp3',
+    audioTV: 'assets/audios/speaking/tv-60.mp3',
     img: `assets/images/Audio/60.png`
   },
   {
@@ -545,6 +605,7 @@ Parents and children can spend time together by playing games, cooking meals, wa
     answer: `This is an interesting question, let me answer it.
 I usually use public transport two or three times a week. I take the bus to school and sometimes to visit my friends. It is useful for my life and helps protect the environment. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau61.mp3',
+    audioTV: 'assets/audios/speaking/tv-61.mp3',
     img: `assets/images/Audio/60.png`
   },
   {
@@ -554,6 +615,7 @@ I usually use public transport two or three times a week. I take the bus to scho
     answer: `This is an interesting question, let me give my answer.
 No, I don’t think people need to use public transport more because sometimes it is slow and crowded. For some people, using their own motorbike or car is more convenient. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau62.mp3',
+    audioTV: 'assets/audios/speaking/tv-62.mp3',
     img: `assets/images/Audio/60.png`
   },
   {
@@ -565,6 +627,7 @@ Outside, there are a lot of trees and the weather is nice for outdoor activities
 Looking at their faces, they are all smiling happily, so I suppose that they are on cloud nine.  
 The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
     audioListen: 'assets/audios/speaking/dapancau63.mp3',
+    audioTV: 'assets/audios/speaking/tv-63.mp3',
     img: `assets/images/Audio/63.png`
   },
   {
@@ -574,6 +637,7 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     answer: `This is an interesting question, let me answer it.
 As I can remember, the last time I traveled in a car was last weekend. I went to visit my grandparents with my family. We drove for about two hours and talked together during the trip. I felt happy because it helps relax and brings us closer. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau64.mp3',
+    audioTV: 'assets/audios/speaking/tv-64.mp3',
     img: `assets/images/Audio/63.png`
   },
   {
@@ -583,6 +647,7 @@ As I can remember, the last time I traveled in a car was last weekend. I went to
     answer: `This is an interesting question, let me give my answer.
 There are some ways people can overcome a long journey. Firstly, people can listen to music or podcasts. Secondly, they can read books or watch movies. Thirdly, they can sleep or talk with friends. These activities are interesting and help relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau65.mp3',
+    audioTV: 'assets/audios/speaking/tv-65.mp3',
     img: `assets/images/Audio/63.png`
   },
   {
@@ -591,6 +656,7 @@ There are some ways people can overcome a long journey. Firstly, people can list
     question: `Describe the picture?`,
     answer: `Looking at the picture, I can see there are three boys playing soccer on a grassy field. They are wearing different colored T-shirts and shorts, the boy in the purple T-shirt is kicking the ball to the goal, while the boy in the blue T-shirt is trying to stop him. The sky is clear and sunny, and there are some trees and buildings in the background. The photo reminds me of my childhood since I used to play football with my best friends.`,
     audioListen: 'assets/audios/speaking/dapancau66.mp3',
+    audioTV: 'assets/audios/speaking/tv-66.mp3',
     img: `assets/images/Audio/66.png`
   },
   {
@@ -600,6 +666,7 @@ There are some ways people can overcome a long journey. Firstly, people can list
     answer: `This is an interesting question, let me answer it.
 In our free time, my family and I like to have dinner together, watch TV, or go for a walk in the park. Sometimes we play games or cook meals at home. These activities help us relax, feel happy, and understand each other better. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau67.mp3',
+    audioTV: 'assets/audios/speaking/tv-67.mp3',
     img: `assets/images/Audio/66.png`
   },
   {
@@ -609,6 +676,7 @@ In our free time, my family and I like to have dinner together, watch TV, or go 
     answer: `This is an interesting question, let me give my answer.
 Yes, I think today’s parents should spend more quality time with their children. Spending time together helps children feel loved and supported. It is important because it makes the family happier and helps children grow better. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau68.mp3',
+    audioTV: 'assets/audios/speaking/tv-68.mp3',
     img: `assets/images/Audio/66.png`
   },
   {
@@ -617,6 +685,7 @@ Yes, I think today’s parents should spend more quality time with their childre
     question: `Describe this picture.`,
     answer: `Looking at the picture, I can see so many people: some men and some women. They are discussing something in a meeting room. They look so professional in their formal clothes. In the middle I’m impressed by the man. He is so handsome, and he looks like my boss. In the background , I can see a large table with many chairs. The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
     audioListen: 'assets/audios/speaking/dapancau69.mp3',
+    audioTV: 'assets/audios/speaking/tv-69.mp3',
     img: `assets/images/Audio/69.png`
   },
   {
@@ -626,6 +695,7 @@ Yes, I think today’s parents should spend more quality time with their childre
     answer: `This is an interesting question, let me answer it.
 As I can remember, the last time I gave a presentation was last month at school. I presented a project about technology in front of my class and teacher. At first, I felt a bit nervous, but after a few minutes, I became more confident and finished my talk well. It was interesting and helped me gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau70.mp3',
+    audioTV: 'assets/audios/speaking/tv-70.mp3',
     img: `assets/images/Audio/69.png`
   },
   {
@@ -635,6 +705,7 @@ As I can remember, the last time I gave a presentation was last month at school.
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, people are scared of making mistakes in front of others. Secondly, they may feel nervous when many people are watching. Thirdly, some people are not confident with their speaking skills. Public speaking is difficult for many, but it helps gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau71.mp3',
+    audioTV: 'assets/audios/speaking/tv-71.mp3',
     img: `assets/images/Audio/69.png`
   },
   {
@@ -643,6 +714,7 @@ There are some reasons. Firstly, people are scared of making mistakes in front o
     question: `Describe the picture`,
     answer: `Looking at the picture, I can see three people, two men and a woman standing outside a building. The woman looks beautiful. She is interviewing a man. I guess she is a reporter. The man is wearing a suit so I think he is a businessman. There is a cameraman behind them. The weather in this picture is very nice. It’s sunny`,
     audioListen: 'assets/audios/speaking/dapancau72.mp3',
+    audioTV: 'assets/audios/speaking/tv-72.mp3',
     img: `assets/images/Audio/72.png`
   },
   {
@@ -652,6 +724,7 @@ There are some reasons. Firstly, people are scared of making mistakes in front o
     answer: `This is an interesting question, let me answer it.
 I prefer watching news on TV because it is faster and more convenient. I can see videos and listen to the news at the same time. Watching news helps me relax and keep up with important events. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau73.mp3',
+    audioTV: 'assets/audios/speaking/tv-73.mp3',
     img: `assets/images/Audio/72.png`
   },
   {
@@ -661,6 +734,7 @@ I prefer watching news on TV because it is faster and more convenient. I can see
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, watching the news helps people know what is happening in the world. Secondly, it helps them stay safe and make good decisions. Thirdly, it is interesting and useful for daily life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau74.mp3',
+    audioTV: 'assets/audios/speaking/tv-74.mp3',
     img: `assets/images/Audio/72.png`
   },
   {
@@ -673,6 +747,7 @@ In the second picture, I can see a group of people standing on a mountain. They 
 The common topic of the two pictures is travel and spending time in nature. The difference is that one is at the sea, and the other is in the mountains.
 I prefer the first picture because I like going to the beach with my family.`,
     audioListen: 'assets/audios/speaking/dapancau75.mp3',
+    audioTV: 'assets/audios/speaking/tv-75.mp3',
     img: `assets/images/Audio/75.png`
   },
   {
@@ -682,6 +757,7 @@ I prefer the first picture because I like going to the beach with my family.`,
     answer: `This is an interesting question, let me answer it.
 I prefer going to the beach because I enjoy swimming and playing in the sand with my family. The weather is usually sunny and makes me feel happy. It is interesting. It helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau76.mp3',
+    audioTV: 'assets/audios/speaking/tv-76.mp3',
     img: `assets/images/Audio/75.png`
   },
   {
@@ -691,6 +767,7 @@ I prefer going to the beach because I enjoy swimming and playing in the sand wit
     answer: `This is an interesting question, let me give my answer.
 People can protect the beach and the mountain by not throwing rubbish, cleaning up after themselves, and not picking plants. If we visit with our friends or family, we should always respect nature. Protecting these places is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau77.mp3',
+    audioTV: 'assets/audios/speaking/tv-77.mp3',
     img: `assets/images/Audio/75.png`
   },
   {
@@ -703,6 +780,7 @@ In the second picture, there is a person walking alone in the desert. The sand i
 The common topic of the two pictures is nature. The difference is that one is a snowy pine forest and the other is a hot desert.
 I prefer the first picture because I like the cold and the beautiful trees.`,
     audioListen: 'assets/audios/speaking/dapancau78.mp3',
+    audioTV: 'assets/audios/speaking/tv-78.mp3',
     img: `assets/images/Audio/78.png`
   },
   {
@@ -712,6 +790,7 @@ I prefer the first picture because I like the cold and the beautiful trees.`,
     answer: `This is an interesting question, let me answer it.
 People who live in the pine forest are usually used to cold weather and enjoy being close to nature. In the desert, people are strong and can live in hot and dry conditions. They often build simple houses and wear special clothes to protect themselves. It is interesting. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau79.mp3',
+    audioTV: 'assets/audios/speaking/tv-79.mp3',
     img: `assets/images/Audio/78.png`
   },
   {
@@ -721,6 +800,7 @@ People who live in the pine forest are usually used to cold weather and enjoy be
     answer: `This is an interesting question, let me answer it.
 I prefer the pine forest because I like cool weather and walking among the trees. It helps me relax and reduce stress. I feel happy and comfortable in the forest. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau80.mp3',
+    audioTV: 'assets/audios/speaking/tv-80.mp3',
     img: `assets/images/Audio/78.png`
   },
   {
@@ -733,6 +813,7 @@ In the second picture, there is a man playing tennis on a court. He is holding a
 The common topic of the two pictures is playing sports. The difference is that one is basketball for people in wheelchairs and the other is tennis for able-bodied people.
 I prefer the first picture because it shows that everyone can enjoy sports.`,
     audioListen: 'assets/audios/speaking/dapancau81.mp3',
+    audioTV: 'assets/audios/speaking/tv-81.mp3',
     img: `assets/images/Audio/81.png`
   },
   {
@@ -742,6 +823,7 @@ I prefer the first picture because it shows that everyone can enjoy sports.`,
     answer: `This is an interesting question, let me answer it.
 I prefer to play tennis because I enjoy running and hitting the ball. Tennis helps me relax and keep fit. I feel happy when I play with my friends. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau82.mp3',
+    audioTV: 'assets/audios/speaking/tv-82.mp3',
     img: `assets/images/Audio/81.png`
   },
   {
@@ -751,6 +833,7 @@ I prefer to play tennis because I enjoy running and hitting the ball. Tennis hel
     answer: `This is an interesting question, let me give my answer.
 Yes, I think playing sports is for everyone, no matter their age or abilities. Sports help people stay healthy, make friends, and feel happy. It is interesting and useful for life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau83.mp3',
+    audioTV: 'assets/audios/speaking/tv-83.mp3',
     img: `assets/images/Audio/81.png`
   },
   {
@@ -763,6 +846,7 @@ In the second picture, there is a man waiting for a train at the station. He is 
 The common topic of the two pictures is traveling. The difference is the means of transport: one is by plane and the other is by train.
 I prefer the second picture because I like traveling by train.`,
     audioListen: 'assets/audios/speaking/dapancau84.mp3',
+    audioTV: 'assets/audios/speaking/tv-84.mp3',
     img: `assets/images/Audio/84.png`
   },
   {
@@ -772,6 +856,7 @@ I prefer the second picture because I like traveling by train.`,
     answer: `This is an interesting question, let me answer it.
 I prefer traveling by train because it is comfortable and I can see beautiful views from the window. It is also safer and cheaper than flying. Traveling by train helps me relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau85.mp3',
+    audioTV: 'assets/audios/speaking/tv-85.mp3',
     img: `assets/images/Audio/84.png`
   },
   {
@@ -781,6 +866,7 @@ I prefer traveling by train because it is comfortable and I can see beautiful vi
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, traveling by plane is expensive. Secondly, some people are afraid of flying. Thirdly, going to the airport takes a lot of time. Traveling by train or bus is easier for many people. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau86.mp3',
+    audioTV: 'assets/audios/speaking/tv-86.mp3',
     img: `assets/images/Audio/84.png`
   },
     {
@@ -793,6 +879,7 @@ In the second picture, I see a man cycling alone on a road surrounded by trees. 
 The common topic of the two pictures is doing outdoor sports. The difference is that one is a team sport and the other is an individual sport.
 I prefer the first picture because I like doing sports with my friends.`,
     audioListen: 'assets/audios/speaking/dapancau87.mp3',
+    audioTV: 'assets/audios/speaking/tv-87.mp3',
     img: `assets/images/Audio/87.png`
   },
   {
@@ -802,6 +889,7 @@ I prefer the first picture because I like doing sports with my friends.`,
     answer: `This is an interesting question, let me answer it.
 Rowing is difficult because it needs teamwork, strong arms, and good coordination. It can be dangerous on fast water. Cycling is hard because you need to be fit, have strong legs, and be careful of traffic or long distances. Both sports are interesting and help improve health. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau88.mp3',
+    audioTV: 'assets/audios/speaking/tv-88.mp3',
     img: `assets/images/Audio/87.png`
   },
   {
@@ -811,6 +899,7 @@ Rowing is difficult because it needs teamwork, strong arms, and good coordinatio
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, team sports help people make friends and work together. Secondly, playing in a team is more fun and motivating. Thirdly, people feel happy when they share success with others. Team sports help relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau89.mp3',
+    audioTV: 'assets/audios/speaking/tv-89.mp3',
     img: `assets/images/Audio/87.png`
   },
   {
@@ -823,6 +912,7 @@ In the second picture, I see two people sitting on a train, talking and drinking
 The common topic of the two pictures is traveling. The difference is one is traveling by car, and the other is by train.
 I prefer the second picture because I like relaxing on the train.`,
     audioListen: 'assets/audios/speaking/dapancau90.mp3',
+    audioTV: 'assets/audios/speaking/tv-90.mp3',
     img: `assets/images/Audio/90.png`
   },
   {
@@ -832,6 +922,7 @@ I prefer the second picture because I like relaxing on the train.`,
     answer: `This is an interesting question, let me answer it.
 Traveling by car is comfortable and flexible because you can go anywhere and stop when you want. Traveling by train is safe, fast, and you can relax or sleep during the journey. Both ways are interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau91.mp3',
+    audioTV: 'assets/audios/speaking/tv-91.mp3',
     img: `assets/images/Audio/90.png`
   },
   {
@@ -841,6 +932,7 @@ Traveling by car is comfortable and flexible because you can go anywhere and sto
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, trains are comfortable and you don’t have to drive. Secondly, you can enjoy beautiful views from the window. Thirdly, traveling by train is safe and relaxing. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau92.mp3',
+    audioTV: 'assets/audios/speaking/tv-92.mp3',
     img: `assets/images/Audio/90.png`
   },
   {
@@ -853,6 +945,7 @@ In the second picture, there is a man and a woman in a restaurant. A waiter is s
 The common topic of the two pictures is eating a meal. The difference is that one is a simple meal, and the other is in a fancy restaurant.
 I prefer the first picture because I like eating in a comfortable place.`,
     audioListen: 'assets/audios/speaking/dapancau93.mp3',
+    audioTV: 'assets/audios/speaking/tv-93.mp3',
     img: `assets/images/Audio/93.png`
   },
   {
@@ -862,6 +955,7 @@ I prefer the first picture because I like eating in a comfortable place.`,
     answer: `This is an interesting question, let me answer it.
 Eating in the first place is relaxed and friendly, you can talk and feel at home. Eating in the second place is more special and formal, you can try different dishes and enjoy good service. Both are interesting and help me relax. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau94.mp3',
+    audioTV: 'assets/audios/speaking/tv-94.mp3',
     img: `assets/images/Audio/94.png`
   },
   {
@@ -871,6 +965,7 @@ Eating in the first place is relaxed and friendly, you can talk and feel at home
     answer: `This is an interesting question, let me give my answer.
 I think eating at home or in a simple place is healthier because you can choose fresh food and cook it yourself. In restaurants, some dishes may have more oil or sugar. Eating healthy food helps me feel better and reduces stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau95.mp3',
+    audioTV: 'assets/audios/speaking/tv-95.mp3',
     img: `assets/images/Audio/95.png`
   },
   {
@@ -883,6 +978,7 @@ In the second picture, I see a young girl playing outdoors in a playground. She 
 The common topic is activities for children. The difference is that one is learning in a museum, and the other is playing outside.
 I prefer the second picture because I like playing outdoors.`,
     audioListen: 'assets/audios/speaking/dapancau96.mp3',
+    audioTV: 'assets/audios/speaking/tv-96.mp3',
     img: `assets/images/Audio/96.png`
   },
   {
@@ -892,6 +988,7 @@ I prefer the second picture because I like playing outdoors.`,
     answer: `This is an interesting question, let me answer it.
 I think young children should join outdoor activities because they can move, have fun, and make friends. Playing outdoors helps them stay healthy and feel happy. It is interesting and helps reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau97.mp3',
+    audioTV: 'assets/audios/speaking/tv-97.mp3',
     img: `assets/images/Audio/96.png`
   },
   {
@@ -901,6 +998,7 @@ I think young children should join outdoor activities because they can move, hav
     answer: `This is an interesting question, let me give my answer.
 There are some reasons. Firstly, learning through play makes children feel happy and excited. Secondly, it helps them remember things better and use their creativity. Thirdly, children can learn social skills and teamwork. Learning through play is interesting and useful for their life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau98.mp3',
+    audioTV: 'assets/audios/speaking/tv-98.mp3',
     img: `assets/images/Audio/96.png`
   },
   {
@@ -913,6 +1011,7 @@ In the second picture, there is a woman sitting at home and reading something on
 The common topic of the two pictures is reading books. The difference is one is reading a printed book, and the other is reading an e-book.
 I prefer the first picture because I like going to the library.`,
     audioListen: 'assets/audios/speaking/dapancau99.mp3',
+    audioTV: 'assets/audios/speaking/tv-99.mp3',
     img: `assets/images/Audio/99.png`
   },
   {
@@ -922,6 +1021,7 @@ I prefer the first picture because I like going to the library.`,
     answer: `This is an interesting question, let me answer it.
 I prefer reading printed books because I like the feeling of turning real pages. Printed books help me focus better and protect my eyes. Reading books is interesting and helps me relax. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau100.mp3',
+    audioTV: 'assets/audios/speaking/tv-100.mp3',
     img: `assets/images/Audio/99.png`
   },
   {
@@ -931,6 +1031,7 @@ I prefer reading printed books because I like the feeling of turning real pages.
     answer: `This is an interesting question, let me give my answer.
 Yes, technology affects the way we read books. Now, people can read e-books on their phones or computers. It is more convenient and saves space, but some people still like printed books. Technology makes reading easier and more interesting. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau101.mp3',
+    audioTV: 'assets/audios/speaking/tv-101.mp3',
     img: `assets/images/Audio/99.png`
   },
   {
@@ -940,6 +1041,7 @@ Yes, technology affects the way we read books. Now, people can read e-books on t
     answer: `This is an interesting question, let me answer it.
 As I can remember, last year I watched a skydiving show on TV. People jumped out of a plane and opened their parachutes high in the sky. They looked very brave and excited. It is interesting. It helps gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau102.mp3',
+    audioTV: 'assets/audios/speaking/tv-102.mp3',
     img: `assets/images/Audio/102`
   },
   {
@@ -949,6 +1051,7 @@ As I can remember, last year I watched a skydiving show on TV. People jumped out
     answer: `This is an interesting question, let me give my answer.
 I feel skydiving is exciting but also a bit scary. If I have a chance, I want to try it because it helps relax and reduce stress. Watching people do extreme sports makes me feel happy and interested. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau103.mp3',
+    audioTV: 'assets/audios/speaking/tv-103.mp3',
     img: `assets/images/Audio/103`
   },
   {
@@ -958,6 +1061,7 @@ I feel skydiving is exciting but also a bit scary. If I have a chance, I want to
     answer: `This is an interesting question, let me answer it.
 I think only adults should be allowed to play extreme sports because these sports are dangerous. Adults are stronger and can take care of themselves better than children. It is useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau104.mp3',
+    audioTV: 'assets/audios/speaking/tv-104.mp3',
     img: `assets/images/Audio/104`
   },
   {
@@ -967,6 +1071,7 @@ I think only adults should be allowed to play extreme sports because these sport
     answer: `This is an interesting question, let me answer it.
 As I can remember, last year I was very worried about my final exam. My family and friends encouraged me and said I could do it. Thanks to them, I tried my best and passed the exam. I felt happy and grateful. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau105.mp3',
+    audioTV: 'assets/audios/speaking/tv-105.mp3',
     img: `assets/images/Audio/105`
   },
   {
@@ -976,6 +1081,7 @@ As I can remember, last year I was very worried about my final exam. My family a
     answer: `This is an interesting question, let me give my answer.
 I feel very happy and excited when someone does something I enjoy. It helps me feel loved and relaxed. It is interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau106.mp3',
+    audioTV: 'assets/audios/speaking/tv-106.mp3',
     img: `assets/images/Audio/106`
   },
   {
@@ -985,6 +1091,7 @@ I feel very happy and excited when someone does something I enjoy. It helps me f
     answer: `This is an interesting question, let me answer it.
 There are some ways to motivate others. Firstly, we can give them kind words and encouragement. Secondly, we can help them when they have problems. Thirdly, we can share our experiences. These ways are interesting and help people feel happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau107.mp3',
+    audioTV: 'assets/audios/speaking/tv-107.mp3',
     img: `assets/images/Audio/107`
   },
   {
@@ -994,6 +1101,7 @@ There are some ways to motivate others. Firstly, we can give them kind words and
     answer: `This is an interesting question, let me answer it.
 As I can remember, the first time I used the internet was when I was in grade 6. I used it to look for information for my homework with my brother at home. I felt excited and surprised. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau108.mp3',
+    audioTV: 'assets/audios/speaking/tv-108.mp3',
     img: `assets/images/Audio/108`
   },
   {
@@ -1003,6 +1111,7 @@ As I can remember, the first time I used the internet was when I was in grade 6.
     answer: `This is an interesting question, let me give my answer.
 I feel the internet is useful and interesting. It helps me learn new things, relax, and connect with my friends. Sometimes, I feel happy and relaxed when I watch videos or listen to music online. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau109.mp3',
+    audioTV: 'assets/audios/speaking/tv-109.mp3',
     img: `assets/images/Audio/109`
   },
   {
@@ -1012,6 +1121,7 @@ I feel the internet is useful and interesting. It helps me learn new things, rel
     answer: `This is an interesting question, let me answer it.
 Yes, people nowadays use the Internet a lot. It is important for work, study, and entertainment. Using the Internet helps people gain more knowledge and stay connected. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau110.mp3',
+    audioTV: 'assets/audios/speaking/tv-110.mp3',
     img: `assets/images/Audio/110`
   },
   {
@@ -1021,6 +1131,7 @@ Yes, people nowadays use the Internet a lot. It is important for work, study, an
     answer: `This is an interesting question, let me answer it.
 As I can remember, last month I worked with my classmates on a science project. We shared ideas and finished the project together at school. I felt happy because working in a team helps me gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau111.mp3',
+    audioTV: 'assets/audios/speaking/tv-111.mp3',
     img: `assets/images/Audio/111`
   },
   {
@@ -1030,6 +1141,7 @@ As I can remember, last month I worked with my classmates on a science project. 
     answer: `This is an interesting question, let me give my answer.
 I feel working in a team is interesting and useful. It helps me learn from others, share ideas, and finish work faster. I feel happy when I work with my friends. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau112.mp3',
+    audioTV: 'assets/audios/speaking/tv-112.mp3',
     img: `assets/images/Audio/112`
   },
   {
@@ -1039,6 +1151,7 @@ I feel working in a team is interesting and useful. It helps me learn from other
     answer: `This is an interesting question, let me answer it.
 There are some reasons. Firstly, a successful team has good communication. Secondly, members help and respect each other. Thirdly, everyone works hard together. These things help the team achieve their goals. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau113.mp3',
+    audioTV: 'assets/audios/speaking/tv-113.mp3',
     img: `assets/images/Audio/113`
   },
   {
@@ -1048,6 +1161,7 @@ There are some reasons. Firstly, a successful team has good communication. Secon
     answer: `This is an interesting question, let me answer it.
 As I can remember, I achieved my goal when I passed the entrance exam to university. I studied hard every day with my friends at home. I felt proud and very happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau114.mp3',
+    audioTV: 'assets/audios/speaking/tv-114.mp3',
     img: `assets/images/Audio/114`
   },
   {
@@ -1057,6 +1171,7 @@ As I can remember, I achieved my goal when I passed the entrance exam to univers
     answer: `This is an interesting question, let me give my answer.
 I feel very happy and proud when I achieve my goal. It helps me relax and makes me want to try harder in the future. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau115.mp3',
+    audioTV: 'assets/audios/speaking/tv-115.mp3',
     img: `assets/images/Audio/115`
   },
   {
@@ -1066,6 +1181,7 @@ I feel very happy and proud when I achieve my goal. It helps me relax and makes 
     answer: `This is an interesting question, let me answer it.
 There are some ways. Firstly, people need to work hard and never give up. Secondly, they should make a clear plan. Thirdly, they should ask for help when needed. These ways help people succeed. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau116.mp3',
+    audioTV: 'assets/audios/speaking/tv-116.mp3',
     img: `assets/images/Audio/116`
   },
   {
@@ -1075,6 +1191,7 @@ There are some ways. Firstly, people need to work hard and never give up. Second
     answer: `This is an interesting question, let me answer it.
 As I can remember, I was extremely busy last week when I had many tests at school. I studied all day and finished my homework late at night. I felt tired but also proud because I finished everything. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau117.mp3',
+    audioTV: 'assets/audios/speaking/tv-117.mp3',
     img: `assets/images/Audio/117`
   },
   {
@@ -1084,6 +1201,7 @@ As I can remember, I was extremely busy last week when I had many tests at schoo
     answer: `This is an interesting question, let me give my answer.
 I felt very tired and stressed when I was busy, but I also felt happy after I finished my work. It helps me gain more experience. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau118.mp3',
+    audioTV: 'assets/audios/speaking/tv-118.mp3',
     img: `assets/images/Audio/118`
   },
   {
@@ -1093,6 +1211,7 @@ I felt very tired and stressed when I was busy, but I also felt happy after I fi
     answer: `This is an interesting question, let me answer it.
 I think if people worked less, their life would be better because they would have more time to relax and spend with family. It helps relax and reduce stress. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau119.mp3',
+    audioTV: 'assets/audios/speaking/tv-119.mp3',
     img: `assets/images/Audio/119`
   },
   {
@@ -1102,6 +1221,7 @@ I think if people worked less, their life would be better because they would hav
     answer: `This is an interesting question, let me answer it.
 As I can remember, last month I joined a school competition for the first time. I was nervous at first, but I tried my best and won a small prize. My friends and family were proud of me. I felt very happy. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau120.mp3',
+    audioTV: 'assets/audios/speaking/tv-120.mp3',
     img: `assets/images/Audio/120`
   },
   {
@@ -1111,6 +1231,7 @@ As I can remember, last month I joined a school competition for the first time. 
     answer: `This is an interesting question, let me give my answer.
 I felt very happy and proud because I could do something difficult. It helps me gain more experience and makes me more confident. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau121.mp3',
+    audioTV: 'assets/audios/speaking/tv-121.mp3',
     img: `assets/images/Audio/121`
   },
   {
@@ -1120,6 +1241,7 @@ I felt very happy and proud because I could do something difficult. It helps me 
     answer: `This is an interesting question, let me answer it.
 There are some ways to face challenges. Firstly, people should stay positive and never give up. Secondly, they can ask for help from family or friends. Thirdly, learning from mistakes can make them stronger. These things are interesting and useful for my life. Here is my answer.`,
     audioListen: 'assets/audios/speaking/dapancau122.mp3',
+    audioTV: 'assets/audios/speaking/tv-122.mp3',
     img: `assets/images/Audio/122`
   },
 ];
