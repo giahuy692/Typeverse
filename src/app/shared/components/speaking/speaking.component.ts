@@ -158,9 +158,9 @@ export class SpeakingComponent implements OnInit, OnDestroy {
   }
 
   private startCountdown() {
-    this.countdown = 30; // 30 giây cho chế độ nói
+    this.countdown = 60; // 30 giây cho chế độ nói
     this.isCountdown = true;
-    const total = 30;
+    const total = 60;
 
     this.countdownSub = interval(1000)
       .pipe(takeUntil(this.destroy$), takeUntil(timer(total * 1000 + 100)))
