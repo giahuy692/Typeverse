@@ -29,6 +29,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     'assets/music/Chìm Sâu - RPT MCK.mp3'
   );
   backgroundMuted = false;
+  translateTV: boolean = false;
 
   isPlaying = true;
   showEffect = false;
@@ -164,7 +165,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
 
     this.audio.onended = () => {
       if (audioFile.audioListen) {
-        this.playAnswerAudio(audioFile.audioListen);
+        this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
       }
     };
   }
@@ -251,7 +252,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       
       this.audio.onended = () => {
         if (audioFile.audioListen) {
-          this.playAnswerAudio(audioFile.audioListen);
+          this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
         }
       };
     }
@@ -388,7 +389,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.audio.onended = () => {
       if (audioFile.audioListen) {
         // Phát audio đáp án sau khi audio câu hỏi kết thúc
-        this.playAnswerAudio(audioFile.audioListen);
+        this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
       } else {
         // Không có audio đáp án thì next luôn
         if (this.isPlaying) {

@@ -4,5 +4,6 @@ export interface DTOListQuestion {
   question: string;
   answer: string;
   audioListen: string;
+  audioTV: string;
   img?: string;
 }
