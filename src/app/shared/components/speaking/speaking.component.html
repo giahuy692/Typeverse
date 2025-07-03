@@ -58,7 +58,7 @@
             {{ currentQuestion?.question }}
         </div>
         <div class="image-container" *ngIf="currentQuestion?.img">
-            <img src="{{currentQuestion?.img}}" onerror="this.src='../../../../assets/logo.gif';"
+            <img src="{{currentQuestion?.img}}"
                 alt="Image for {{currentQuestion?.question}}" class="question-image">
         </div>
         <div *ngIf="showAnswer"
