@@ -25,13 +25,11 @@
           </tbody>
         </table>
       </div>
-      
     </div>
 
     <div class="subtitle-container">
-      <div class="image-container pt-2" *ngIf="currentQuestion?.img">
-        <img src="{{currentQuestion?.img}}"
-          alt="Image for {{currentQuestion?.question}}" class="question-image">
+      <div class="image-container pt-4" *ngIf="currentQuestion?.img">
+        <img src="{{currentQuestion?.img}}" alt="Image for {{currentQuestion?.question}}" class="question-image">
       </div>
       <div class="subtitle-header" (click)="showAnswer = !showAnswer">
         <span>Phụ đề</span>
@@ -97,6 +95,7 @@
           <i class="fas {{ answerAudio?.paused ? 'fa-play' : 'fa-pause' }}"></i>
         </button>
         <i class="fas fa-forward-step" (click)="nextAudio()"></i>
+        <i class="fas fa-sync-alt"></i>
         <i title="chuyển bản dịch tiếng việt" (click)="translateTV = !translateTV">{{translateTV ? 'TV' : 'EN'}}</i>
         <i class="fas fa-random" (click)="shuffleQuestions()"></i>
 

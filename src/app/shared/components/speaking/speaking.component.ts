@@ -12,7 +12,7 @@ import { speakinglist } from 'src/assets/mock-data/speaking-practise';
 })
 export class SpeakingComponent implements OnInit, OnDestroy {
   data: DTOListQuestion[] = speakinglist;
-  currentIndex = 0;
+  currentIndex = -1;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
 
