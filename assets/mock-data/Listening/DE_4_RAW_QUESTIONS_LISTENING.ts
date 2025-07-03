@@ -723,6 +723,8 @@ export const DE_4_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+
+    tip: 'Người đàn ông nói đầu tiên: w - b - m - m'
   },
   {
     id: 339,

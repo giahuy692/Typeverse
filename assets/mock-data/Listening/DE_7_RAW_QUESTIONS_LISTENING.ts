@@ -720,6 +720,7 @@ export const DE_7_RAW_QUESTIONS_LISTENING = [
         seconds_max: 0,
       },
     ],
+    tip: 'người phụ nữ nói đầu tiên: w - b - w -  m'
   },
   {
     id: 567,
