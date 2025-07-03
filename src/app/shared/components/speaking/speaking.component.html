@@ -54,11 +54,15 @@
                 (click)="showAnswer = !showAnswer">{{showAnswer ?
                 '👁️‍🗨️' : '🗨️'}}</button>
         </div>
-        <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide">
+        <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide text-lg">
             {{ currentQuestion?.question }}
         </div>
+        <div class="image-container" *ngIf="currentQuestion?.img">
+            <img src="{{currentQuestion?.img}}" onerror="this.src='../../../../assets/logo.gif';"
+                alt="Image for {{currentQuestion?.question}}" class="question-image">
+        </div>
         <div *ngIf="showAnswer"
-            class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-sm leading-relaxed">
+            class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed">
             {{ currentQuestion?.answer }}
         </div>
 

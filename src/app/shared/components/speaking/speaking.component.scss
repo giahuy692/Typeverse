@@ -1,16 +1,47 @@
-::ng-deep app-speaking{
-    /* src/app/speaking/speaking.component.scss */
-/* Có thể giữ nguyên các animation và style cho #dog nếu bạn muốn dùng lại */
-#dog {
-  transition: left 0.06s linear;
-}
-@keyframes fade-in-out {
-  0% { opacity: 0; transform: translateY(20px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-10px); }
-}
-.animate-fade-in-out {
-  animation: fade-in-out 2.5s ease-in-out forwards;
-}
+::ng-deep app-speaking {
+
+  /* src/app/speaking/speaking.component.scss */
+  /* Có thể giữ nguyên các animation và style cho #dog nếu bạn muốn dùng lại */
+  #dog {
+    transition: left 0.06s linear;
+  }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in-out {
+    animation: fade-in-out 2.5s ease-in-out forwards;
+  }
+
+  .image-container {
+    max-width: 200px;
+    width: 100%;
+    margin-bottom: 24px;
+    margin: 0 auto;
+    margin: auto;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
 }
