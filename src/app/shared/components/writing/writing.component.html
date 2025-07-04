@@ -1,55 +1,15 @@
-<div class="max-w-xl mx-auto p-5 rounded-2xl bg-[#232c41] shadow-lg text-white space-y-5 my-4">
-  <h2 class="text-xl font-bold mb-2 tracking-wide text-center text-purple-300">Luyện Gõ Template Writing</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="main-container">
 
-  <!-- Chọn template -->
-  <div class="flex gap-2 items-center">
-    <select [(ngModel)]="selectedTemplateIdx" (change)="onTemplateChange()"
-      class="flex-1 bg-[#1c2231] rounded p-2 text-white focus:outline-none">
-      <option *ngFor="let t of templates; let i = index" [ngValue]="i">{{ t.title }}</option>
-    </select>
-    <button (click)="randomTemplate()"
-      class="px-3 py-1 rounded bg-cyan-700 hover:bg-cyan-800 text-white text-sm font-semibold">🔄 Random</button>
-  </div>
-
-  <!-- Hiện/ẩn/copy mẫu -->
-  <div class="flex gap-2 items-center text-gray-400 text-xs">
-    <button (click)="toggleShow()" class="hover:text-purple-400">
-      <span *ngIf="showTemplate">🙈 Ẩn bản dịch</span>
-      <span *ngIf="!showTemplate">👁 Hiện bản dịch</span>
-    </button>
-    <button (click)="copyTemplate()" class="hover:text-blue-300">📋 Copy</button>
-  </div>
-
-    <!-- Nội dung mẫu -->
-    <div *ngIf="showTemplate && templates[selectedTemplateIdx]?.contentVN"
-      class="bg-[#22283b] rounded p-3 mb-1 text-base text-purple-100 whitespace-pre-line min-h-[60px]"
-      [innerHTML]="templates[selectedTemplateIdx]?.contentVN">
+  <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all m-5"
+    *ngFor="let a of data" >
+    <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide text-lg">
+      {{ a.question }}
     </div>
-
-    <!-- So sánh real-time -->
-    <div class="bg-[#181f2a] rounded p-3 mb-1 text-base font-mono min-h-[60px] whitespace-pre-line"
-      [innerHTML]="compareHtml"></div>
-
-  <!-- Vùng tập gõ -->
-  <textarea [(ngModel)]="userInput" (input)="compareInput()" [readonly]="finished" rows="5"
-    class="w-full bg-[#1c2231] text-white p-3 rounded-lg focus:outline-none border border-[#2c3452] shadow-sm"
-    placeholder="Bắt đầu gõ template này ở đây..."></textarea>
-
-  <!-- Thống kê kết quả + nút -->
-  <div class="flex flex-col sm:flex-row justify-between items-center text-xs gap-2">
     <div>
-      <span class="text-green-400">Đúng: {{ correctChars }}</span> /
-      <span class="text-red-400">Tổng: {{ totalChars }}</span> |
-      Độ chính xác: <span [ngClass]="accuracy >= 90 ? 'text-green-400' : 'text-yellow-300'">{{ accuracy }}%</span>
-      <span *ngIf="finished">| Tốc độ: <span class="text-cyan-300">{{ wpm }}</span> WPM</span>
-    </div>
-    <div class="flex gap-2">
-      <button *ngIf="!finished" (click)="finish()"
-        class="px-4 py-1 rounded bg-green-700 hover:bg-green-800 text-white">Kết thúc</button>
-      <button *ngIf="finished" (click)="startOver()"
-        class="px-4 py-1 rounded bg-purple-700 hover:bg-purple-800 text-white">Gõ lại</button>
-      <button *ngIf="finished" (click)="nextTemplate()"
-        class="px-4 py-1 rounded bg-cyan-700 hover:bg-cyan-800 text-white">Template tiếp</button>
+      <div class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed flex-grow-1">
+        {{ a.answer }}
+      </div>
     </div>
   </div>
 </div>
