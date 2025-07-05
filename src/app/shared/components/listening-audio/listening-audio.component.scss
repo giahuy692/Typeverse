@@ -84,6 +84,8 @@
         display: block;
         height: 127px;
         overflow-y: auto;
+        flex: 1;
+    padding-left: 71px;
 
         .questions-table {
             width: 100%;
@@ -169,7 +171,7 @@
     }
 
     .image-container {
-        max-width: 456px;
+        max-width: 335px;
         width: 100%;
         margin-bottom: 24px;
         margin: 0 auto;
@@ -182,6 +184,9 @@
         }
     }
 
+    .content-container{
+        width: 100%;
+    }
 
     .subtitle-container {
         border: 1px solid var(--border-color);
@@ -189,6 +194,9 @@
         margin: 24px 0;
         width: 100%;
         border-top: 1px solid var(--primary-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .subtitle-header {
@@ -198,9 +206,11 @@
         padding: 12px 16px;
         font-weight: 500;
         cursor: pointer;
+        width: 100%;
     }
 
     .subtitle-body {
+        width: 100%;
         padding: 0 16px 16px;
         font-size: 15px;
         line-height: 1.6;

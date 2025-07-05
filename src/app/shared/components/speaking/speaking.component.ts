@@ -4,6 +4,7 @@ import { interval, Subject, Subscription, takeUntil, timer } from 'rxjs';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { AppModeService } from '../../services/app-mode.service';
 import { speakinglist } from 'src/assets/mock-data/speaking-practise';
+import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 
 @Component({
   selector: 'app-speaking',
@@ -11,7 +12,7 @@ import { speakinglist } from 'src/assets/mock-data/speaking-practise';
   styleUrls: ['./speaking.component.scss'],
 })
 export class SpeakingComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = speakinglist;
+  data: DTOListQuestion[] = LIST_QUESTIONS;
   currentIndex = -1;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;

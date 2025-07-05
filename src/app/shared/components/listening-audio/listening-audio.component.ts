@@ -78,11 +78,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.appModeService.setMode('listening_audio'); // Đảm bảo AppModeService biết chế độ hiện tại
     this.playSequence(); // Bắt đầu phát audio ngay lập tức
     if (!this.backgroundMuted) {
-      this.backgroundMusic.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+      this.backgroundMusic.play().catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Audio play error:', err);
+        }
+      });
     }
   }
 
@@ -91,11 +91,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     if (this.backgroundMuted) {
       this.backgroundMusic.pause();
     } else {
-      this.backgroundMusic.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+      this.backgroundMusic.play().catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Audio play error:', err);
+        }
+      });
     }
   }
 
@@ -123,6 +123,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   }
 
   public nextAudio(): void {
+    this.resetAudio();
     if (!this.isPlaying || this.data.length === 0) return;
     this.repeatCount = 0; // Reset repeatCount khi chuyển câu mới
 
@@ -152,21 +153,22 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
         this.currentIndex = 0;
       }
     }
-    
-    this.resetAudio();
+
     const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.volume = this.audioVolume;
-    this.audio.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+    this.audio.play().catch((err) => {
+      if (err.name !== 'AbortError') {
+        console.error('Audio play error:', err);
+      }
+    });
     this.scrollActiveRowIntoView();
 
     this.audio.onended = () => {
       if (audioFile.audioListen) {
-        const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+        const answerAudioPath = this.translateTV
+          ? audioFile.audioTV
+          : audioFile.audioListen;
         if (answerAudioPath) {
           this.playAnswerAudio(answerAudioPath);
         }
@@ -178,11 +180,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     const startAnswer = () => {
       this.answerAudio = new Audio(filePath);
       this.answerAudio.volume = this.audioVolume;
-      this.answerAudio.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+      this.answerAudio.play().catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Audio play error:', err);
+        }
+      });
       this.trackAnswerProgress();
       this.showEffect = true;
 
@@ -220,11 +222,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.resetAudio();
     this.audio = new Audio(question.audioQuestion);
     this.audio.volume = this.audioVolume;
-    this.audio.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+    this.audio.play().catch((err) => {
+      if (err.name !== 'AbortError') {
+        console.error('Audio play error:', err);
+      }
+    });
 
     this.audio.onended = () => {
       if (question.audioListen) {
@@ -243,20 +245,22 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       if (this.currentIndex < 0) {
         this.currentIndex = this.data.length - 1;
       }
-      
+
       this.resetAudio();
       const audioFile = this.data[this.currentIndex];
       this.audio = new Audio(audioFile.audioQuestion);
       this.audio.volume = this.audioVolume;
-      this.audio.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
-      
+      this.audio.play().catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Audio play error:', err);
+        }
+      });
+
       this.audio.onended = () => {
         if (audioFile.audioListen) {
-          const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+          const answerAudioPath = this.translateTV
+            ? audioFile.audioTV
+            : audioFile.audioListen;
           if (answerAudioPath) {
             this.playAnswerAudio(answerAudioPath);
           }
@@ -265,7 +269,6 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     }
     this.scrollActiveRowIntoView();
   }
-
 
   private resetAudio() {
     if (this.audio) {
@@ -302,11 +305,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   public toggleAnswerAudio(): void {
     if (!this.answerAudio) return;
     if (this.answerAudio.paused) {
-      this.answerAudio.play().catch(err => {
-  if (err.name !== 'AbortError') {
-    console.error('Audio play error:', err);
-  }
-});;
+      this.answerAudio.play().catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Audio play error:', err);
+        }
+      });
     } else {
       this.answerAudio.pause();
     }
@@ -394,7 +397,9 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.volume = this.audioVolume;
     this.audio.onended = () => {
-      const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+      const answerAudioPath = this.translateTV
+        ? audioFile.audioTV
+        : audioFile.audioListen;
       if (answerAudioPath) {
         // Phát audio đáp án sau khi audio câu hỏi kết thúc
         this.playAnswerAudio(answerAudioPath);
@@ -421,11 +426,11 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     }
   }
 
-    @HostListener('window:beforeunload')
+  @HostListener('window:beforeunload')
   beforeUnloadHandler() {
     // Tắt hết audio ngay trước khi reload
-    if (this.audio)        this.audio.pause();
-    if (this.answerAudio)  this.answerAudio.pause();
+    if (this.audio) this.audio.pause();
+    if (this.answerAudio) this.answerAudio.pause();
     this.backgroundMusic.pause();
   }
 }

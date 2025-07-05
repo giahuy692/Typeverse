@@ -57,13 +57,14 @@
         <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide text-lg">
             {{ currentQuestion?.question }}
         </div>
-        <div class="image-container" *ngIf="currentQuestion?.img">
-            <img src="{{currentQuestion?.img}}"
-                alt="Image for {{currentQuestion?.question}}" class="question-image">
-        </div>
-        <div *ngIf="showAnswer"
-            class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed">
-            {{ currentQuestion?.answer }}
+        <div class="flex justify-between align-center gap-x-4">
+            <div class="image-container" *ngIf="currentQuestion?.img">
+                <img src="{{currentQuestion?.img}}"
+                    alt="Image for {{currentQuestion?.question}}" class="question-image">
+            </div>
+            <div *ngIf="showAnswer"
+                class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed w-[100%]" [innerHTML]="currentQuestion?.answer">
+            </div>
         </div>
 
         <div class="flex justify-between items-center pt-4">
