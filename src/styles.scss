@@ -34,27 +34,21 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  background: transparent;
+  width: 8px !important;
+  height: 8px !important;
+  background: transparent !important;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 4px;
+  background: transparent !important;
+  border-radius: 4px !important;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #a259ff 0%, #ffc845 100%);
-  border-radius: 4px;
-  min-height: 40px;
-  transition: background 0.2s;
+  background: linear-gradient(180deg, #a259ff 0%, #ffc845 100%) !important;
+  border-radius: 4px !important;
+  min-height: 40px !important;
+  transition: background 0.2s !important;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #b884fd 0%, #ffe080 100%);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #a259ff #232c41;
+  background: linear-gradient(180deg, #b884fd 0%, #ffe080 100%) !important;
 }
 

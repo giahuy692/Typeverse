@@ -1,31 +1,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="main-container">
-  <header>
-    <h1>MẸO NÓI VIẾT CHUẨN</h1>
-    <p>Tổng số câu: <strong>{{data.length}}</strong></p>
-  </header>
+  <div class="flex align-center justify-between header-container items-center">
+    <header>
+      <h1>MẸO NÓI VIẾT CHUẨN</h1>
+      <p>Tổng số câu: <strong>{{data.length}}</strong></p>
+    </header>
+    <div class="questions-container">
+      <table class="questions-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Câu hỏi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr #questionRow [class.active]="ques.orderBy == currentQuestion?.orderBy"
+            *ngFor="let ques of data; let i = index" (click)="goToQuestion(i);">
+            <td *ngIf="ques.orderBy != currentQuestion?.orderBy"># {{i + 1}}</td>
+            <td *ngIf="ques.orderBy == currentQuestion?.orderBy"><i class="fas fa-volume-up"></i></td>
+            <td>{{ques.question}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 
   <main>
-    <div class="flex align-center justify-between">
-      <div class="questions-container">
-        <table class="questions-table">
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Câu hỏi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr #questionRow [class.active]="ques.question == currentQuestion?.question"
-              *ngFor="let ques of data; let i = index" (click)="goToQuestion(i);">
-              <td *ngIf="ques.question != currentQuestion?.question"># {{i + 1}}</td>
-              <td *ngIf="ques.question == currentQuestion?.question"><i class="fas fa-volume-up"></i></td>
-              <td>{{ques.question}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+
 
     <div class="subtitle-container">
       <div class="image-container pt-4" *ngIf="currentQuestion?.img">

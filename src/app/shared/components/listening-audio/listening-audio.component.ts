@@ -13,6 +13,7 @@ import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { Subject } from 'rxjs';
 import { AppModeService } from '../../services/app-mode.service';
 import { speakinglist } from 'src/assets/mock-data/speaking-practise';
+import { LIST_QUESTIONS } from 'src/assets/mock-data/list-question-data';
 
 @Component({
   selector: 'app-listening-audio',
@@ -20,7 +21,7 @@ import { speakinglist } from 'src/assets/mock-data/speaking-practise';
   styleUrls: ['./listening-audio.component.scss'],
 })
 export class ListeningAudioComponent implements OnInit, OnDestroy {
-  data: DTOListQuestion[] = speakinglist;
+  data: DTOListQuestion[] = LIST_QUESTIONS;
   currentIndex = -1; // Bắt đầu từ -1 để nextAudio sẽ tăng lên 0 đầu tiên
   playedIndexes: number[] = [];
   audio: HTMLAudioElement | null = null;
@@ -165,7 +166,10 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
 
     this.audio.onended = () => {
       if (audioFile.audioListen) {
-        this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
+        const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+        if (answerAudioPath) {
+          this.playAnswerAudio(answerAudioPath);
+        }
       }
     };
   }
@@ -252,7 +256,10 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
       
       this.audio.onended = () => {
         if (audioFile.audioListen) {
-          this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
+          const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+          if (answerAudioPath) {
+            this.playAnswerAudio(answerAudioPath);
+          }
         }
       };
     }
@@ -387,9 +394,10 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.volume = this.audioVolume;
     this.audio.onended = () => {
-      if (audioFile.audioListen) {
+      const answerAudioPath = this.translateTV ? audioFile.audioTV : audioFile.audioListen;
+      if (answerAudioPath) {
         // Phát audio đáp án sau khi audio câu hỏi kết thúc
-        this.playAnswerAudio(this.translateTV ? audioFile.audioTV : audioFile.audioListen);
+        this.playAnswerAudio(answerAudioPath);
       } else {
         // Không có audio đáp án thì next luôn
         if (this.isPlaying) {
