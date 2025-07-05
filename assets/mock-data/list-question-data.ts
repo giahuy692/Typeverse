@@ -4,12 +4,14 @@ export const LIST_QUESTIONS: DTOListQuestion[] = [
   {
     orderBy: 54,
     audioQuestion: 'assets/audios/speaking/cau54.mp3',
-    question: `Describe the picture?`,
+    question: `Describe the picture? (54)`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see there are five people, two men and three women. I guess they are a group because they talked to each other very happily.  
-They are wearing casual clothes looking at the table, I saw them sitting and enjoying a lot of food so I guess they are at a restaurant.  
-Looking at their faces, they are all smiling happily, so I suppose that they are on cloud nine.  
-The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
+    answer: `This is a beautiful picture, let me talk about it. <br/>
+In this picture, I can see five people, a group of friends. <br/>
+They are eating at a restaurant. They are happy. <br/>
+They are good-looking. <br/>
+I can see many dishes on the table and some plants in the background. <br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau54.mp3',
     audioTV: 'assets/audios/speaking/tv-54.mp3',
     img: `assets/images/Audio/54.png`,
@@ -19,9 +21,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau57.mp3',
     question: `Describe the picture?`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see a family. There are three people in this family. They are dad, mom and their son. They are all wearing casual clothes. The boy is lying on his mom’s lap while she is reading the book, maybe the dad is eating his breakfast.  
-Looking at their faces, they are all smiling happily , so I suppose that they are on cloud nine.  
-The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
+    answer: `This is a beautiful picture, let me talk about it. <br/>
+In this picture, I can see three people, a family.<br/>
+They are relaxing at home reading and resting. They are happy.<br/>
+They are good-looking.<br/>
+I can see the woman is reading a book, the child is sleeping on her lap, and the man is sitting at a table in the background drinking from a cup.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau57.mp3',
     audioTV: 'assets/audios/speaking/tv-57.mp3',
     img: `assets/images/Audio/57.png`,
@@ -31,7 +36,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau60.mp3',
     question: `Describe the picture?`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see some people in a bus. A girl is standing while the others are sitting. The girl is wearing glasses with curly hair. She is looking outside the bus. All the people here are quiet. I really like this picture because it makes me remember my school days. I used to go to school by bus.`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see six people, a group of commuters.<br/>
+They are traveling on a bus. They look focused.<br/>
+They are good-looking.<br/>
+I can see a young woman standing and holding the overhead rail, several passengers seated on blue seats, and windows showing the city outside.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau60.mp3',
     audioTV: 'assets/audios/speaking/tv-60.mp3',
     img: `assets/images/Audio/60.png`,
@@ -41,10 +51,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau63.mp3',
     question: `Describe the picture?`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see there are five people in this family. They are a man , a woman and three children. I think they are sitting in a car because he is driving it. I guess that they are going on a holiday, maybe to the beach.  
-Outside, there are a lot of trees and the weather is nice for outdoor activities.  
-Looking at their faces, they are all smiling happily, so I suppose that they are on cloud nine.  
-The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see five people, a family.<br/>
+They are traveling in a car. They are happy.<br/>
+They are good-looking.<br/>
+I can see the mother and father wearing seat belts in the front seats, three children in the back, and colorful beach toys behind them.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau63.mp3',
     audioTV: 'assets/audios/speaking/tv-63.mp3',
     img: `assets/images/Audio/63.png`,
@@ -54,7 +66,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau66.mp3',
     question: `Describe the picture?`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see there are three boys playing soccer on a grassy field. They are wearing different colored T-shirts and shorts, the boy in the purple T-shirt is kicking the ball to the goal, while the boy in the blue T-shirt is trying to stop him. The sky is clear and sunny, and there are some trees and buildings in the background. The photo reminds me of my childhood since I used to play football with my best friends.`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see three boys, a group of children.<br/>
+They are playing soccer on a grass field. They are focused.<br/>
+They are good-looking.<br/>
+I can see a soccer ball at their feet, a net in the background, and green grass all around.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau66.mp3',
     audioTV: 'assets/audios/speaking/tv-66.mp3',
     img: `assets/images/Audio/66.png`,
@@ -64,7 +81,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau69.mp3',
     question: `Describe this picture.`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see so many people: some men and some women. They are discussing something in a meeting room. They look so professional in their formal clothes. In the middle I’m impressed by the man. He is so handsome, and he looks like my boss. In the background , I can see a large table with many chairs. The photo is really beautiful, so I believe that it was taken by a professional photographer.`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see seven people, a group of coworkers.<br/>
+They are having a meeting in an office. They are focused.<br/>
+They are good-looking.<br/>
+I can see a long table, laptops, notebooks, water bottles and a whiteboard behind the presenter.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau69.mp3',
     audioTV: 'assets/audios/speaking/tv-69.mp3',
     img: `assets/images/Audio/69.png`,
@@ -74,7 +96,13 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau72.mp3',
     question: `Describe the picture`,
     answerTV: `${2}`,
-    answer: `Looking at the picture, I can see three people, two men and a woman standing outside a building. The woman looks beautiful. She is interviewing a man. I guess she is a reporter. The man is wearing a suit so I think he is a businessman. There is a cameraman behind them. The weather in this picture is very nice. It’s sunny`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see three people, a group of professionals.<br/>
+They are conducting an interview outdoors. The reporter is holding a microphone, the interviewee is speaking, and the cameraman is filming with a video camera and light.<br/>
+They are focused.<br/>
+They are good-looking.<br/>
+I can see trees and buildings in the background.<br/>
+I like the picture because it makes me feel comfortable.`,
     audioListen: 'assets/audios/speaking/dapancau72.mp3',
     audioTV: 'assets/audios/speaking/tv-72.mp3',
     img: `assets/images/Audio/72.png`,
@@ -84,11 +112,12 @@ The photo is really beautiful, so I believe that it was taken by a professional 
     audioQuestion: 'assets/audios/speaking/cau75.mp3',
     question: `Describe the picture`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see a family playing together on the beach. The parents and their child are building sandcastles and having fun in the sun.
-In the second picture, I can see a group of people standing on a mountain. They are enjoying the fresh air and looking at the amazing view of the mountains and clouds.
-The common topic of the two pictures is travel and spending time in nature. The difference is that one is at the sea, and the other is in the mountains.
-I prefer the first picture because I like going to the beach with my family.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see three people, a family, playing on the beach with sand toys. The weather is sunny.<br/>
+In the second picture, I can see a group of hikers standing on a mountain. The weather is clear and cool.<br/>
+The common is nature.<br/>
+The difference is beach and mountain.<br/>
+I prefer the first picture because I like spending time with my family.`,
     audioListen: 'assets/audios/speaking/dapancau75.mp3',
     audioTV: 'assets/audios/speaking/tv-75.mp3',
     img: `assets/images/Audio/75.png`,
@@ -98,11 +127,12 @@ I prefer the first picture because I like going to the beach with my family.`,
     audioQuestion: 'assets/audios/speaking/cau78.mp3',
     question: `Describe this picture`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see a person standing in a pine forest. The ground is covered with snow, and the weather looks cold.
-In the second picture, there is a person walking alone in the desert. The sand is yellow and the weather is hot and sunny.
-The common topic of the two pictures is nature. The difference is that one is a snowy pine forest and the other is a hot desert.
-I prefer the first picture because I like the cold and the beautiful trees.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see one person standing in a snowy forest. The weather is cold.<br/>
+In the second picture, I can see one person walking on sand dunes in a desert. The weather is sunny and hot.<br/>
+The common is nature.<br/>
+The difference is snowy forest and desert.<br/>
+I prefer the first picture because I like cold weather.`,
     audioListen: 'assets/audios/speaking/dapancau78.mp3',
     audioTV: 'assets/audios/speaking/tv-78.mp3',
     img: `assets/images/Audio/78.png`,
@@ -112,25 +142,42 @@ I prefer the first picture because I like the cold and the beautiful trees.`,
     audioQuestion: 'assets/audios/speaking/cau81.mp3',
     question: `Describe this picture`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see two people in wheelchairs playing basketball. They are focused and look very active.
-In the second picture, there is a man playing tennis on a court. He is holding a racket and hitting the ball.
-The common topic of the two pictures is playing sports. The difference is that one is basketball for people in wheelchairs and the other is tennis for able-bodied people.
-I prefer the first picture because it shows that everyone can enjoy sports.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see two people playing wheelchair basketball on an indoor court.<br/>
+In the second picture, I can see one person playing tennis on an outdoor court.<br/>
+The common is sports.<br/>
+The difference is wheelchair basketball and tennis.<br/>
+I prefer the second picture because I like playing tennis.`,
     audioListen: 'assets/audios/speaking/dapancau81.mp3',
     audioTV: 'assets/audios/speaking/tv-81.mp3',
     img: `assets/images/Audio/81.png`,
+  },
+  {
+    orderBy: 84,
+    audioQuestion: 'assets/audios/speaking/cau84.mp3',
+    question: `Tell me what you see in the two pictures?`,
+    answerTV: `${2}`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see one person standing in an airport terminal by a large window, watching an airplane on the runway. The weather is clear.<br/>
+In the second picture, I can see one person standing on a train platform, waiting for a train. The weather is clear.<br/>
+The common is travel.<br/>
+The difference is airport and train station.<br/>
+I prefer the first picture because I like traveling by plane.`,
+    audioListen: 'assets/audios/speaking/dapancau84.mp3',
+    audioTV: 'assets/audios/speaking/tv-84.mp3',
+    img: `assets/images/Audio/84.png`,
   },
   {
     orderBy: 87,
     audioQuestion: 'assets/audios/speaking/cau87.mp3',
     question: `Describe these two pictures`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see a group of people rowing a boat on a fast river. They are wearing helmets and working together.
-In the second picture, I see a man cycling alone on a road surrounded by trees. He looks focused and is enjoying the ride.
-The common topic of the two pictures is doing outdoor sports. The difference is that one is a team sport and the other is an individual sport.
-I prefer the first picture because I like doing sports with my friends.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see five people wearing helmets and life jackets, rafting on a river. The weather is sunny.<br/>
+In the second picture, I can see one person riding a bicycle on a tree-lined road. The weather is sunny.<br/>
+The common is outdoor activities.<br/>
+The difference is rafting and cycling.<br/>
+I prefer the first picture because I like adventurous group sports.`,
     audioListen: 'assets/audios/speaking/dapancau87.mp3',
     audioTV: 'assets/audios/speaking/tv-87.mp3',
     img: `assets/images/Audio/87.png`,
@@ -140,39 +187,60 @@ I prefer the first picture because I like doing sports with my friends.`,
     audioQuestion: 'assets/audios/speaking/cau90.mp3',
     question: `Describe these two pictures`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see a happy family traveling together by car. The father is driving and everyone is smiling.
-In the second picture, I see two people sitting on a train, talking and drinking coffee. They look comfortable and relaxed.
-The common topic of the two pictures is traveling. The difference is one is traveling by car, and the other is by train.
-I prefer the second picture because I like relaxing on the train.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see five people, a family, traveling in a car. The weather is clear.<br/>
+In the second picture, I can see two people sitting opposite each other on a train, drinking coffee. The weather is clear.<br/>
+The common is travel.<br/>
+The difference is car and train.<br/>
+I prefer the first picture because I like traveling by car with my family.`,
     audioListen: 'assets/audios/speaking/dapancau90.mp3',
     audioTV: 'assets/audios/speaking/tv-90.mp3',
     img: `assets/images/Audio/90.png`,
+  },
+  {
+    orderBy: 93,
+    audioQuestion: 'assets/audios/speaking/cau93.mp3',
+    question: `Tell me what you see in the two pictures`,
+    answerTV: `${2}`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see a man and a woman having dinner together. They are smiling and talking.<br/>
+In the second picture, I can see a couple sitting at a table while a waiter is serving them.<br/>
+The common is dining at a restaurant.<br/>
+The difference is one couple is alone, and the other is being served.<br/>
+I prefer the first picture because I like having relaxed conversations during meals.`,
+    audioListen: 'assets/audios/speaking/dapancau93.mp3',
+    audioTV: 'assets/audios/speaking/tv-93.mp3',
+    img: `assets/images/Audio/93.png`,
   },
   {
     orderBy: 96,
     audioQuestion: 'assets/audios/speaking/cau96.mp3',
     question: `Describe the pictures`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.
-In the first picture, I can see a group of children visiting a museum. They are looking at old objects and listening to a teacher or guide.
-In the second picture, I see a young girl playing outdoors in a playground. She is smiling and enjoying herself.
-The common topic is activities for children. The difference is that one is learning in a museum, and the other is playing outside.
-I prefer the second picture because I like playing outdoors.`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see a group of children and a teacher looking at displays in a museum.<br/>
+In the second picture, I can see a little girl playing at a playground.<br/>
+The common is children’s activities.<br/>
+The difference is learning and playing.<br/>
+I prefer the second picture because I like spending time outdoors.`,
     audioListen: 'assets/audios/speaking/dapancau96.mp3',
     audioTV: 'assets/audios/speaking/tv-96.mp3',
     img: `assets/images/Audio/96.png`,
   },
   {
-    orderBy: 102,
-    audioQuestion: 'assets/audios/speaking/cau102.mp3',
-    question: `Describe an extreme sport you have seen or played.`,
+    orderBy: 99,
+    audioQuestion: 'assets/audios/speaking/cau99.mp3',
+    question: `Tell me what you see from two pictures`,
     answerTV: `${2}`,
-    answer: `This is an interesting question, let me answer it.
-As I can remember, last year I watched a skydiving show on TV. People jumped out of a plane and opened their parachutes high in the sky. They looked very brave and excited. It is interesting. It helps gain more experience. Here is my answer.`,
-    audioListen: 'assets/audios/speaking/dapancau102.mp3',
-    audioTV: 'assets/audios/speaking/tv-102.mp3',
-    img: `assets/images/Audio/102`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see a woman sitting in a library and reading a book.<br/>
+In the second picture, I can see a woman sitting on a sofa and using a laptop.<br/>
+The common is studying.<br/>
+The difference is reading books and using a computer.<br/>
+I prefer the second picture because I like studying online.`,
+    audioListen: 'assets/audios/speaking/dapancau99.mp3',
+    audioTV: 'assets/audios/speaking/tv-99.mp3',
+    img: `assets/images/Audio/99.png`,
   },
   {
     orderBy: 34,
