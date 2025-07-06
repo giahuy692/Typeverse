@@ -2,6 +2,67 @@ import { DTOListQuestion } from 'src/app/shared/DTO/DTOListQuestion';
 
 export const LIST_QUESTIONS: DTOListQuestion[] = [
   {
+    orderBy: 126,
+    audioQuestion: 'assets/audios/speaking/cau126.mp3',
+    question: `What's your favorite singer?`,
+    answerTV: `${2}`,
+    answer: `This is an interesting question, let me answer it.<br/>
+My favorite singer is Taylor Swift.<br/>
+I like her voice and the way she writes her songs.<br/>
+Her music is meaningful and emotional.<br/>
+I often listen to her when I study or relax.<br/>
+I really enjoy her songs.`,
+    audioListen: 'assets/audios/speaking/dapancau126.mp3',
+    audioTV: 'assets/audios/speaking/tv-126.mp3',
+    img: `assets/images/Audio/126.png`,
+  },
+  {
+    orderBy: 125,
+    audioQuestion: 'assets/audios/speaking/cau125.mp3',
+    question: `Tell me about your first school.`,
+    answerTV: `${2}`,
+    answer: `This is an interesting question, let me answer it.<br/>
+My first school was a small primary school near my house.<br/>
+The teachers were friendly, and my classmates were nice.<br/>
+I learned many things there, like reading, writing, and drawing.<br/>
+I still remember the playground where we played every day.<br/>
+I really enjoyed my time there.`,
+    audioListen: 'assets/audios/speaking/dapancau125.mp3',
+    audioTV: 'assets/audios/speaking/tv-125.mp3',
+    img: `assets/images/Audio/125.png`,
+  },
+  {
+    orderBy: 124,
+    audioQuestion: 'assets/audios/speaking/cau124.mp3',
+    question: `Describe the picture? (124)`,
+    answerTV: `${2}`,
+    answer: `These two pictures are beautiful, let me talk about them.<br/>
+In the first picture, I can see a group of people playing football on the grass. The weather is sunny.<br/>
+In the second picture, I can see an athlete doing a high jump in a stadium. The weather is clear.<br/>
+The common is sports.<br/>
+The difference is playing football and doing high jump.<br/>
+I prefer the first picture because I like team sports.`,
+    audioListen: 'assets/audios/speaking/dapancau124.mp3',
+    audioTV: 'assets/audios/speaking/tv-124.mp3',
+    img: `assets/images/Audio/124.png`,
+  },
+
+  {
+    orderBy: 123,
+    audioQuestion: 'assets/audios/speaking/cau123.mp3',
+    question: `Describe the picture? (123)`,
+    answerTV: `${2}`,
+    answer: `This is a beautiful picture, let me talk about it.<br/>
+In this picture, I can see four people, a family.<br/>
+They are sitting on a sofa and watching something on a laptop. They are happy.<br/>
+They are good-looking.<br/>
+I can see a bright living room with big windows and a brown sofa.<br/>
+I like the picture because it makes me feel comfortable.`,
+    audioListen: 'assets/audios/speaking/dapancau123.mp3',
+    audioTV: 'assets/audios/speaking/tv-123.mp3',
+    img: `assets/images/Audio/123.png`,
+  },
+  {
     orderBy: 54,
     audioQuestion: 'assets/audios/speaking/cau54.mp3',
     question: `Describe the picture? (54)`,
@@ -19,7 +80,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 57,
     audioQuestion: 'assets/audios/speaking/cau57.mp3',
-    question: `Describe the picture?`,
+    question: `Describe the picture? (57)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it. <br/>
 In this picture, I can see three people, a family.<br/>
@@ -34,7 +95,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 60,
     audioQuestion: 'assets/audios/speaking/cau60.mp3',
-    question: `Describe the picture?`,
+    question: `Describe the picture? (60)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
 In this picture, I can see six people, a group of commuters.<br/>
@@ -49,7 +110,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 63,
     audioQuestion: 'assets/audios/speaking/cau63.mp3',
-    question: `Describe the picture?`,
+    question: `Describe the picture? (63)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
 In this picture, I can see five people, a family.<br/>
@@ -64,7 +125,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 66,
     audioQuestion: 'assets/audios/speaking/cau66.mp3',
-    question: `Describe the picture?`,
+    question: `Describe the picture? (66)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
 In this picture, I can see three boys, a group of children.<br/>
@@ -79,7 +140,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 69,
     audioQuestion: 'assets/audios/speaking/cau69.mp3',
-    question: `Describe this picture.`,
+    question: `Describe this picture. (69)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
 In this picture, I can see seven people, a group of coworkers.<br/>
@@ -94,7 +155,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 72,
     audioQuestion: 'assets/audios/speaking/cau72.mp3',
-    question: `Describe the picture`,
+    question: `Describe the picture (72)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
 In this picture, I can see three people, a group of professionals.<br/>
@@ -110,7 +171,7 @@ I like the picture because it makes me feel comfortable.`,
   {
     orderBy: 75,
     audioQuestion: 'assets/audios/speaking/cau75.mp3',
-    question: `Describe the picture`,
+    question: `Describe the picture (75)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see three people, a family, playing on the beach with sand toys. The weather is sunny.<br/>
@@ -125,7 +186,7 @@ I prefer the first picture because I like spending time with my family.`,
   {
     orderBy: 78,
     audioQuestion: 'assets/audios/speaking/cau78.mp3',
-    question: `Describe this picture`,
+    question: `Describe this picture (78)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see one person standing in a snowy forest. The weather is cold.<br/>
@@ -140,7 +201,7 @@ I prefer the first picture because I like cold weather.`,
   {
     orderBy: 81,
     audioQuestion: 'assets/audios/speaking/cau81.mp3',
-    question: `Describe this picture`,
+    question: `Describe this picture (81)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see two people playing wheelchair basketball on an indoor court.<br/>
@@ -155,7 +216,7 @@ I prefer the second picture because I like playing tennis.`,
   {
     orderBy: 84,
     audioQuestion: 'assets/audios/speaking/cau84.mp3',
-    question: `Tell me what you see in the two pictures?`,
+    question: `Tell me what you see in the two pictures? (84)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see one person standing in an airport terminal by a large window, watching an airplane on the runway. The weather is clear.<br/>
@@ -170,7 +231,7 @@ I prefer the first picture because I like traveling by plane.`,
   {
     orderBy: 87,
     audioQuestion: 'assets/audios/speaking/cau87.mp3',
-    question: `Describe these two pictures`,
+    question: `Describe these two pictures (87)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see five people wearing helmets and life jackets, rafting on a river. The weather is sunny.<br/>
@@ -185,7 +246,7 @@ I prefer the first picture because I like adventurous group sports.`,
   {
     orderBy: 90,
     audioQuestion: 'assets/audios/speaking/cau90.mp3',
-    question: `Describe these two pictures`,
+    question: `Describe these two pictures (90)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see five people, a family, traveling in a car. The weather is clear.<br/>
@@ -200,7 +261,7 @@ I prefer the first picture because I like traveling by car with my family.`,
   {
     orderBy: 93,
     audioQuestion: 'assets/audios/speaking/cau93.mp3',
-    question: `Tell me what you see in the two pictures`,
+    question: `Tell me what you see in the two pictures (93)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see a man and a woman having dinner together. They are smiling and talking.<br/>
@@ -215,7 +276,7 @@ I prefer the first picture because I like having relaxed conversations during me
   {
     orderBy: 96,
     audioQuestion: 'assets/audios/speaking/cau96.mp3',
-    question: `Describe the pictures`,
+    question: `Describe the pictures (96)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see a group of children and a teacher looking at displays in a museum.<br/>
@@ -230,7 +291,7 @@ I prefer the second picture because I like spending time outdoors.`,
   {
     orderBy: 99,
     audioQuestion: 'assets/audios/speaking/cau99.mp3',
-    question: `Tell me what you see from two pictures`,
+    question: `Tell me what you see from two pictures (99)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
 In the first picture, I can see a woman sitting in a library and reading a book.<br/>
