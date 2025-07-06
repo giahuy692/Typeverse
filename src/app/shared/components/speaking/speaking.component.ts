@@ -1,5 +1,12 @@
 // src/app/speaking/speaking.component.ts
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { interval, Subject, Subscription, takeUntil, timer } from 'rxjs';
 import { DTOListQuestion } from '../../DTO/DTOListQuestion';
 import { AppModeService } from '../../services/app-mode.service';
@@ -16,7 +23,7 @@ export class SpeakingComponent implements OnInit, OnDestroy {
   currentIndex = -1;
   playedIndexes: number[] = [];
   audio!: HTMLAudioElement;
-
+  beep = new Audio('assets/sfx/beep.mp3');
   isPlaying = true;
   beepEnabled = true;
   toastMessage = '';
@@ -28,7 +35,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
 
   countdown = 0;
   isCountdown = false;
-  isRecording = false;
   mediaRecorder?: MediaRecorder;
   recordedChunks: Blob[] = [];
   recordedAudios: { url: string; name: string }[] = [];
@@ -39,7 +45,10 @@ export class SpeakingComponent implements OnInit, OnDestroy {
   private countdownSub?: Subscription;
   private destroy$ = new Subject<void>();
 
-  constructor(private cd: ChangeDetectorRef, private appModeService: AppModeService) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private appModeService: AppModeService
+  ) {}
 
   ngOnInit() {
     const savedVolume = localStorage.getItem('audioVolume');
@@ -63,7 +72,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
     this.isPlaying = false;
     this.resetAudio();
     this.destroy$.next();
-    this.stopRecordingIfActive();
     this.isCountdown = false;
     this.countdownSub?.unsubscribe();
   }
@@ -71,6 +79,7 @@ export class SpeakingComponent implements OnInit, OnDestroy {
   public nextAudio(): void {
     if (!this.isPlaying || this.data.length === 0) return;
     this.countdown = 0; // Reset countdown mỗi khi chuyển câu hỏi
+    this.resetAudio();
 
     if (this.isRandomMode) {
       const availableIndexes = this.data
@@ -87,7 +96,8 @@ export class SpeakingComponent implements OnInit, OnDestroy {
           return;
         }
       } else {
-        const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+        const randomIndex =
+          availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
         this.currentIndex = randomIndex;
         this.playedIndexes.push(randomIndex);
       }
@@ -98,7 +108,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.resetAudio();
     const audioFile = this.data[this.currentIndex];
     this.audio = new Audio(audioFile.audioQuestion);
     this.audio.play();
@@ -114,48 +123,14 @@ export class SpeakingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const beep = new Audio('assets/sfx/beep.mp3');
-    beep.volume = this.audioVolume;
-    beep.onended = () => {
+    
+    this.beep.volume = this.audioVolume;
+    this.beep.onended = () => {
       this.startCountdown();
-      this.startRecording(); // Bắt đầu ghi âm sau beep
     };
-    beep.play().catch(() => {
+    this.beep.play().catch(() => {
       this.startCountdown();
-      this.startRecording(); // Fallback nếu play beep thất bại
     });
-  }
-
-  private startRecording(): void {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(stream => {
-        this.mediaRecorder = new MediaRecorder(stream);
-        this.recordedChunks = [];
-        this.mediaRecorder.ondataavailable = event => {
-          if (event.data.size > 0) {
-            this.recordedChunks.push(event.data);
-          }
-        };
-        this.mediaRecorder.onstop = () => {
-          const blob = new Blob(this.recordedChunks, { type: 'audio/webm' });
-          const audioURL = URL.createObjectURL(blob);
-          this.recordedAudios.push({ url: audioURL, name: `Recording ${this.recordedAudios.length + 1}` });
-          stream.getTracks().forEach(track => track.stop()); // Dừng stream
-        };
-        this.mediaRecorder.start();
-        this.isRecording = true;
-      })
-      .catch(err => {
-        console.error('Error accessing microphone:', err);
-        this.showBeepToast('Microphone access denied or error!');
-      });
-  }
-
-  private stopRecordingIfActive() {
-    if (this.mediaRecorder && this.isRecording && this.mediaRecorder.state !== 'inactive') {
-      this.mediaRecorder.stop();
-      this.isRecording = false;
-    }
   }
 
   private startCountdown() {
@@ -172,8 +147,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
         if (this.countdown <= 0) {
           this.isCountdown = false;
           this.dogProgress = 0;
-          this.resetDogPosition();
-          this.stopRecordingIfActive();
           this.countdownSub?.unsubscribe();
           this.nextAudio();
         }
@@ -185,7 +158,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
     if (!question) return;
 
     this.resetAudio();
-    this.stopRecordingIfActive(); // Dừng ghi âm nếu đang ghi
     this.countdownSub?.unsubscribe(); // Dừng countdown
     this.isCountdown = false; // Tắt hiển thị countdown
 
@@ -200,8 +172,8 @@ export class SpeakingComponent implements OnInit, OnDestroy {
 
   public prevAudio(): void {
     if (!this.isPlaying || this.data.length === 0) return;
+    this.resetAudio();
 
-    this.stopRecordingIfActive(); // Dừng ghi âm nếu đang ghi
     this.countdownSub?.unsubscribe(); // Dừng countdown
     this.isCountdown = false; // Tắt hiển thị countdown
 
@@ -213,7 +185,6 @@ export class SpeakingComponent implements OnInit, OnDestroy {
         this.currentIndex = this.data.length - 1;
       }
 
-      this.resetAudio();
       const audioFile = this.data[this.currentIndex];
       this.audio = new Audio(audioFile.audioQuestion);
       this.audio.play();
@@ -224,29 +195,18 @@ export class SpeakingComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetDogPosition() {
-    if (this.dogEl?.nativeElement) {
-      const el = this.dogEl.nativeElement;
-      el.style.transition = 'none';
-      el.style.left = '0%';
-      el.offsetHeight;
-      el.style.transition = 'left 0.06s linear';
-    }
-  }
-
   private resetAudio() {
     if (this.audio) {
       this.audio.pause();
       this.audio.currentTime = 0;
     }
-    this.dogProgress = 0; // Reset dog position on audio reset
+    this.countdownSub?.unsubscribe();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
     this.resetAudio();
-    this.stopRecordingIfActive();
     this.countdownSub?.unsubscribe();
   }
 
@@ -278,11 +238,8 @@ export class SpeakingComponent implements OnInit, OnDestroy {
     this.isCountdown = false;
     this.countdown = 0;
     this.dogProgress = 0;
-    this.resetDogPosition();
 
     this.countdownSub?.unsubscribe();
-    this.stopRecordingIfActive();
-
     this.nextAudio();
   }
 }

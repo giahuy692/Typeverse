@@ -29,6 +29,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
   backgroundMusic: HTMLAudioElement = new Audio(
     'assets/music/Chìm Sâu - RPT MCK.mp3'
   );
+  beep: HTMLAudioElement = new Audio('assets/sfx/beep.mp3');
   backgroundMuted = false;
   translateTV: boolean = false;
 
@@ -206,10 +207,9 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     };
 
     if (this.beepEnabled) {
-      const beep = new Audio('assets/sfx/beep.mp3');
-      beep.volume = 0.2;
-      beep.onended = () => startAnswer();
-      beep.play().catch(() => startAnswer());
+      this.beep.volume = 0.2;
+      this.beep.onended = () => startAnswer();
+      this.beep.play().catch(() => startAnswer());
     } else {
       startAnswer();
     }
@@ -292,6 +292,7 @@ export class ListeningAudioComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
     this.resetAudio();
+    this.beep.pause();
     this.backgroundMusic.pause();
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
