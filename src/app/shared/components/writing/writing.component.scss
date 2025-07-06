@@ -9,3 +9,17 @@
   scrollbar-width: thin;
   scrollbar-color: #6d28d9 #181f2a;
 }
+
+  .image-container {
+    max-width: 335px;
+    width: 100%;
+    margin-bottom: 24px;
+    margin: 0 auto;
+    margin: auto;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }

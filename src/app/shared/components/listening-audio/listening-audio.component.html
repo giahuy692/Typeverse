@@ -41,7 +41,7 @@
       </div>
       <div class="flex justify-between align-center gap-x-4">
         <div class="image-container" *ngIf="currentQuestion?.img">
-          <img src="{{currentQuestion?.img}}" alt="Image for {{currentQuestion?.question}}" class="question-image">
+          <img src="{{currentQuestion?.img}}" alt="Image for {{currentQuestion?.question}}" class="question-image" onerror="this.onerror=null;this.src='assets/no-image.webp';">
         </div>
         <div [style.visibility]="showAnswer ? 'visible' : 'hidden'"
           class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed w-[100%] size-fit"

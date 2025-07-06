@@ -4,12 +4,18 @@
   <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155] space-y-4 transition-all m-5"
     *ngFor="let a of data" >
     <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide text-lg">
-      {{ a.question }}
-    </div>
-    <div>
-      <div class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed flex-grow-1">
-        {{ a.answer }}
+        <div class="flex justify-between items-center">
+          {{ a?.question }}
+        </div>
       </div>
-    </div>
+      <div class="flex justify-between align-center gap-x-4">
+        <div class="image-container" *ngIf="a?.img">
+          <img src="{{a?.img}}" alt="Image for {{a?.question}}" class="question-image" onerror="this.onerror=null;this.src='assets/no-image.webp';">
+        </div>
+        <div
+          class="bg-emerald-500/5 border border-emerald-500 text-emerald-100 p-4 rounded-md text-lg leading-relaxed w-[100%] size-fit"
+          [innerHTML]="a?.answer">
+        </div>
+      </div>
   </div>
 </div>
