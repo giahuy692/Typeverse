@@ -33,7 +33,7 @@ I really enjoyed my time there.`,
   },
   {
     orderBy: 124,
-    audioQuestion: 'assets/audios/speaking/cau124.mp3',
+    audioQuestion: 'assets/audios/speaking/cau57.mp3',
     question: `Describe the picture? (124)`,
     answerTV: `${2}`,
     answer: `These two pictures are beautiful, let me talk about them.<br/>
@@ -49,7 +49,7 @@ I prefer the first picture because I like team sports.`,
 
   {
     orderBy: 123,
-    audioQuestion: 'assets/audios/speaking/cau123.mp3',
+    audioQuestion: 'assets/audios/speaking/cau57.mp3',
     question: `Describe the picture? (123)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it.<br/>
@@ -64,7 +64,7 @@ I like the picture because it makes me feel comfortable.`,
   },
   {
     orderBy: 54,
-    audioQuestion: 'assets/audios/speaking/cau54.mp3',
+    audioQuestion: 'assets/audios/speaking/cau57.mp3',
     question: `Describe the picture? (54)`,
     answerTV: `${2}`,
     answer: `This is a beautiful picture, let me talk about it. <br/>
