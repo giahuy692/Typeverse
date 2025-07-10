@@ -59,7 +59,7 @@
         <div class="bg-slate-700/40 text-white p-4 rounded-md font-medium tracking-wide text-lg">
             {{ currentQuestion?.question }}
         </div>
-        <div class="flex justify-between align-center gap-x-4">
+        <div class="flex justify-between align-center gap-4 flex-wrap">
             <div class="image-container" *ngIf="currentQuestion?.img">
                 <img src="{{currentQuestion?.img}}" alt="Image for {{currentQuestion?.question}}" class="question-image"
                     onerror="this.onerror=null;this.src='assets/no-image.webp';">

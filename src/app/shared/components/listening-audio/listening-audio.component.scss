@@ -66,6 +66,7 @@
     header {
         margin-bottom: 15px;
         align-self: flex-start;
+        flex: 1;
     }
 
     header h1 {
@@ -85,7 +86,7 @@
         height: 127px;
         overflow-y: auto;
         flex: 1;
-    padding-left: 71px;
+    // padding-left: 71px;
 
         .questions-table {
             width: 100%;

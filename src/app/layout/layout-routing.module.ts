@@ -11,7 +11,7 @@ import { ReadingTestComponent } from '../shared/components/reading-test/reading-
 const routes: Routes = [
   {
     path: '', // Path này là tương đối với path mà LayoutModule được load (trong AppRoutingModule là '')
-    component: LayoutComponent,
+    // component: LayoutComponent,
     children: [
       { path: 'welcome', component: WelcomeComponent },
       { path: 'listening/test', component: ListeningTestComponent },
