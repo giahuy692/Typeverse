@@ -130,7 +130,10 @@
                   <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
                   <select
                     class="min-w-[120px] bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)" [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
                     <option value="">-- Chọn --</option>
                     <option *ngFor="let ans of child.answer" [value]="ans.answer" [innerHTML]="ans.answer"></option>
                   </select>
@@ -152,7 +155,14 @@
                     <span class="text-gray-400 min-w-[28px] font-semibold">{{ i + 1 }}.</span>
                     <button class="w-full min-h-[40px] flex items-center rounded bg-[#1c2231] border border-gray-700
               px-3 py-2 text-left"
-                      [ngClass]="slot ? 'text-white cursor-pointer hover:bg-red-900 hover:text-white' : 'text-gray-400 cursor-not-allowed'"
+                      [ngClass]="[
+                          currentQuestion.userOrder?.[i]?.title === currentQuestion.answer?.[i]?.title
+                            ? 'bg-green-700 text-white border-green-400'
+                            : 'bg-red-700 text-white border-red-400',
+                          slot
+                            ? 'text-white cursor-pointer hover:bg-red-900 hover:text-white'
+                            : 'text-gray-400 cursor-not-allowed'
+                        ]"
                       (click)="removeSlot(i)" [disabled]="!slot" type="button"
                       [innerHTML]="slot?.title || '-- Chọn --'">
                       <!-- {{ slot?.title || '-- Chọn --' }} -->
@@ -183,7 +193,10 @@
                   <span class="flex-1 text-base text-gray-200">{{ child.title }}</span>
                   <select
                     class="min-w-[120px] bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                    [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)" [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
                     <option value="">-- Chọn --</option>
                     <option *ngFor="let ans of child.answer" [value]="ans.answer" [innerHTML]="ans.answer"></option>
                   </select>
@@ -213,7 +226,10 @@
                     <div class="font-medium text-gray-200 mb-1">Đáp án đoạn {{ idx + 1 }}</div>
                     <select
                       class="bg-[#1c2231] border border-gray-700 text-white rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
-                      [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)">
+                      [ngModel]="getSelectedAnswer(child)" (ngModelChange)="onChooseAnswer(child, $event)" [ngClass]="{
+                    'bg-green-500/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && getCorrectAnswer(child).choose,
+                    'bg-red-600/80 text-white rounded px-2 py-1': getCorrectAnswer(child).correct == 1 && !getCorrectAnswer(child).choose,
+                  }">
                       <option value="">-- Chọn heading --</option>
                       <option *ngFor="let ans of child.answer" [value]="ans.answer" [innerHTML]="ans.answer"></option>
                     </select>

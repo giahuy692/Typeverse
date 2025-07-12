@@ -129,8 +129,10 @@
               <div *ngFor="let option of currentQuestion.answer; let i = index"
                 (click)="selectOption(option,currentQuestion.answer)"
                 class="flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer hover:border-purple-600" [ngClass]="{
-                    'bg-[#c9c04a]': option.choose,
-                  }">
+                      'bg-[#c9c04a] text-white': option.correct != 1 && option.choose,
+                      'bg-green-500/80 text-white': option.correct == 1 && option.choose,
+                      'bg-red-600/80 text-white': option.correct != 1 && option.choose,
+                    }">
                 <div
                   class="w-8 h-8 flex items-center justify-center border rounded-md mr-3 sm:mr-4 font-semibold text-base"
                   [ngClass]="{ 'border-purple-600 text-purple': option.choose}">{{ getOptionLetter(i) }}</div>
@@ -187,7 +189,10 @@
                   <span class="m-0 text-base font-medium text-purple-400" [innerHTML]="questionChild.title"></span>
 
                   <select [(ngModel)]="questionChild.my_answer" id="examSelect" name="selectedExam" class=" p-3 border border-gray-600 rounded-lg shadow-sm focus:outline-none
-                          focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200">
+                          focus:ring-2 focus:ring-purple-600 focus:border-purple-400 bg-[#22263a] text-gray-200" [ngClass]="{
+                            'bg-green-500/80 text-white': getRightAnswer(questionChild.answer)?.answer == questionChild.my_answer,
+                            'bg-red-600/80 text-white': getRightAnswer(questionChild.answer)?.answer != questionChild.my_answer
+                        }">
                     <option value="">
                       -- Chọn --
                     </option>
@@ -269,8 +274,10 @@
                 <div *ngFor="let option of subQ.answer; let i = index" (click)="selectOption(option,subQ.answer)"
                   class="flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer hover:border-purple-600"
                   [ngClass]="{
-                    'bg-[#c9c04a]': option.choose,
-                  }">
+                      'bg-[#c9c04a] text-white': option.correct != 1 && option.choose,
+                      'bg-green-500/80 text-white': option.correct == 1 && option.choose,
+                      'bg-red-600/80 text-white': option.correct != 1 && option.choose,
+                    }">
                   <div
                     class="w-8 h-8 flex items-center justify-center border rounded-md mr-3 sm:mr-4 font-semibold text-base"
                     [ngClass]="{ 'border-purple-600 text-purple': option.choose}">{{ getOptionLetter(i) }}</div>

@@ -11,6 +11,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 import { SharedModule } from '../shared/shared.module';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
+import { PdfListComponent } from './components/pdf-list/pdf-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.com
     ThemeToggleComponent,
     WelcomeComponent,
     SidebarMenuComponent,
+    PdfListComponent,
   ],
   imports: [
     CommonModule,

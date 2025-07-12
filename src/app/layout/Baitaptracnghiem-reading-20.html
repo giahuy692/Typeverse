@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB">
+    <title>Baitaptracnghiem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://chungchigiaoduc.vn/font/fontawesome-5.13.1/css/all.min.css">
+    <link rel="stylesheet" href="https://chungchigiaoduc.vn/frontend/css/reset.css">
+    <link rel="stylesheet" href="https://chungchigiaoduc.vn/frontend/css/exam.css">
+    <link rel="stylesheet" type="text/css" href="https://chungchigiaoduc.vn/lib/sweetalert2/css/sweetalert2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <style>
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-item-sub {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 300px;
+        z-index: 5;
+        background-color: #f7f8fa;
+        border-radius: 5px;
+        visibility: hidden;
+        top: calc(100% + 0px);
+    }
+
+    .nav-item-sub ul {
+        list-style: unset;
+        padding: 10px 0px;
+    }
+
+    .nav-item-sub ul li a {
+        font-size: 15px;
+        color: black;
+
+        display: block;
+        padding: 5px 10px;
+
+    }
+
+    .nav-item-sub ul li a:hover {
+        background-color: white;
+    }
+
+    .nav-item-group input {
+        width: 100%;
+        border: 1px solid #cecece;
+        padding: 0px 10px;
+        font-size: 15px;
+        height: 35px;
+    }
+
+    .nav-item:hover .nav-item-sub {
+        display: block;
+        left: 0px;
+        visibility: inherit;
+        top: calc(100% - (-0px));
+    }
+
+    .navbar-brand img {
+        height: 70px;
+    }
+</style>
+<nav class="navbar header_exam navbar-expand-lg navbar-light " id="header_exam">
+    <div class="container bg-light">
+        
+                <a class="navbar-brand" href="https://chungchigiaoduc.vn">
+            <img src="https://chungchigiaoduc.vn/storage/setting/2/logo.png" alt="Logo header">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chungchigiaoduc.vn/thi">Trang chủ</a>
+                </li>
+
+                                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://chungchigiaoduc.vn/de-thi/listening-test">Listening Test</a>
+                    </li>
+                                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://chungchigiaoduc.vn/de-thi/reading-test">Reading Test</a>
+                    </li>
+                
+            </ul>
+            <form class="d-flex ms-auto btn_logout_userexam" action="https://chungchigiaoduc.vn/logout/user" method="post">
+                <input type="hidden" name="_token" value="Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB">                <button class="btn btn_search_exam text-dark" type="button">Đỗ Gia Huy</button>
+                <button class="btn btn_search_exam " type="submit">Đăng xuất</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $(".btn_logout_userexam").submit(function(e) {
+        e.preventDefault();
+        var url = ($(this).attr("action"));
+
+        Swal.fire({
+            title: 'Bạn muốn đăng xuất không ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy'
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: {
+                        _token: "Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB",
+                    },
+                    success: function(data) {
+                        if (data.success == true) {
+                            window.location.href = data.returnUrl;
+                        }
+                        window.location.reload();
+                    }
+                })
+            }
+        });
+    });
+</script>
+
+    <!-- Content -->
+    <div class="container container_exam">
+            <style>
+        body {
+            transition: all 0.3s linear;
+        }
+.exercise-desc p {
+    font-size: 15px;
+    display: block; 
+}
+        .ta-center {
+            text-align: center;
+        }
+
+        .exercise-read-box {
+            cursor: pointer;
+        }
+
+        .exercise-read-right {
+            height: 100%
+        }
+
+        .lrn_response_input .exercise-read-box {
+            margin-bottom: 0px;
+            border: 1px solid gray;
+        }
+
+        .form-reading {
+            margin-top: 85px;
+        }
+
+        .popup-menu {
+            position: fixed;
+            z-index: 999999;
+            height: 100%;
+            width: 400px;
+            top: 0;
+            left: 0;
+            background: #fff;
+            transition: all 200ms linear 0s;
+            transform: translateX(-100%);
+
+            bottom: 0;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .popup-menu.active {
+            transform: translateX(0%);
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .ai-center {
+            align-content: center;
+        }
+
+        .js-between {
+            justify-content: space-between;
+        }
+
+        .popup-menu svg {
+            height: 14px;
+        }
+
+        .popup-menu-head .popup-menu-head__title {
+            font-weight: bold;
+            font-size: 26px;
+            margin: 0px;
+            padding: 15px 20px 10px 20px;
+        }
+
+        .popup-menu-head .note {
+            padding: 0px 20px 10px 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #b0b0b0;
+        }
+
+        .popup-menu-head .note li svg {
+            margin-right: 5px;
+        }
+
+        .popup-menu-head .note li a {
+            font-size: 15px;
+        }
+
+        .popup-menu-body input {
+            width: 100%;
+            border-top: 1px solid #b0b0b0;
+            padding: 5px 10px;
+            font-size: 15px;
+            border-bottom: 1px solid #b0b0b0;
+            border-right: 0px;
+            border-left: 0px;
+        }
+
+        .popup-menu-main li a {
+            font-weight: bold;
+            font-size: 23px;
+            color: black;
+            padding: 8px 20px;
+            background-color: #eee;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .popup-menu-main li ul {
+            display: none;
+        }
+
+        .popup-menu-main li ul.active {
+            display: block;
+        }
+
+        .popup-menu-main li ul li a {
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 500;
+            background-color: #fff;
+            padding: 10px 20px;
+        }
+
+        .popup-menu-main li svg {
+            height: 19px;
+            fill: #373737;
+        }
+
+        .popup-menu-main li ul li a svg {
+            height: 15px;
+            margin-right: 1px;
+            position: relative;
+            top: -1px;
+        }
+
+        .popup-menu-main {
+            padding-top: 0px;
+            margin-top: 10px;
+            border-top: 1px solid #b0b0b0;
+        }
+
+        .popup-menu-close {
+            float: right;
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .popup-menu-close svg {
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .list-courses-control {
+            background-color: #000;
+            margin-top: 65px !important;
+            padding: 10px 15px;
+        }
+
+        .list-courses-control svg {
+            height: 24px;
+            width: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .list-courses-control svg path {
+            fill: white;
+        }
+
+        .control-title span {
+            color: white;
+            font-size: 17px;
+        }
+
+        .popup-menu-main li span {
+            position: absolute;
+            right: 0px;
+            height: 36px;
+            width: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 10px;
+        }
+
+        .popup-menu-main li {
+            position: relative;
+        }
+
+        @media (max-width: 586px) {
+            .popup-menu {
+                position: fixed;
+                z-index: 999999;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background: #fff;
+                transition: all 200ms linear 0s;
+                transform: translateX(-100%);
+                margin-bottom: 20px;
+                background-color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+
+            .list-courses-control {
+                margin-left: -12px;
+                margin-right: -12px;
+            }
+
+            .lrn_response_input span {
+                min-height: 40px;
+            }
+
+            .exercise-table .row {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+
+    <div class="popup-menu">
+        <div class="popup-menu-close control--btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                </path>
+            </svg>
+        </div>
+        
+                    <div class="popup-menu-body mt-5">
+                <ul class="popup-menu-main">
+                                            <li>
+                            <a href="javascript:void(0)" class="d-flex ai-center js-between">
+                                Listening Test
+                            </a>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
+                                </svg>
+                            </span>
+                            <ul>
+                                                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-1"
+                                               class="">
+                                                Listening 1:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-2"
+                                               class="">
+                                                Listening 2:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-3"
+                                               class="">
+                                                Listening 3:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-4"
+                                               class="">
+                                                Listening 4:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-5"
+                                               class="">
+                                                Listening 5:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-6"
+                                               class="">
+                                                Listening 6:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-7"
+                                               class="">
+                                                Listening 7:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-8"
+                                               class="">
+                                                Listening 8:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-9"
+                                               class="">
+                                                Listening 9:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-10"
+                                               class="">
+                                                Listening 10:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-11"
+                                               class="">
+                                                Listening 11:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-12"
+                                               class="">
+                                                Listening 12:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-13"
+                                               class="">
+                                                Listening 13:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-14"
+                                               class="">
+                                                Listening 14:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-15"
+                                               class="">
+                                                Listening 15:
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-nghe/listening-16"
+                                               class="">
+                                                Listening 16:
+                                            </a>
+                                        </li>
+                                                                    
+                            </ul>
+                        </li>
+                                            <li>
+                            <a href="javascript:void(0)" class="d-flex ai-center js-between">
+                                Reading Test
+                            </a>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
+                                </svg>
+                            </span>
+                            <ul>
+                                                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-1-charles-dicken-window-him"
+                                               class="">
+                                                Reading 1: CHARLES DICKEN (Window - Him)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-2-charles-dicken-window-him-rich-scientific-flying"
+                                               class="">
+                                                Reading 2: CHARLES DICKEN (Window - Him rich - Scientific - Flying)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-3-antartica-frozen-land-c-live-new-students-scientific-method-going-on-holiday"
+                                               class="">
+                                                Reading 3: Antartica - Frozen land C (Live - New students - Scientific method - Going on holiday)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-4-antartica-frozen-land-b-live-tom-satefy-thinks-competions"
+                                               class="">
+                                                Reading 4: Antartica – Frozen land B (Live - Tom - Satefy - Thinks competions)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-5-charles-dickens-b-early-key-card-tom-harper-volunterring"
+                                               class="">
+                                                Reading 5: Charles Dickens B (Early - Key card - Tom Harper - Volunterring)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-6-charles-dickens-c-the-weather-is-great-my-first-car-bettys-life-eating-and-cooking"
+                                               class="">
+                                                Reading 6: Charles Dickens C (The weather is great - My first car - Betty&#039;s life - Eating and cooking)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-7-charles-dickens-d-window-delivery-man-fire-instructions-volunteering"
+                                               class="">
+                                                Reading 7: Charles Dickens D (Window – Delivery man – Fire instructions – Volunteering)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-8-coffee-near-paper-traffic"
+                                               class="">
+                                                Reading: 8 – Coffee (Near – paper – traffic)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-9-coffee-b-near-papers-work-traffic-lights-reading-books"
+                                               class="">
+                                                Reading: 9 - Coffee B (Near – Papers work – Traffic lights – Reading books)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-10-consumer-age-b-friendly-papers-work-conference-hall-watching-tv"
+                                               class="">
+                                                Reading :10 - Consumer age B (Friendly – Papers work – conference hall – watching TV)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-11-consumer-age-c-clear-hand-in-natural-history-visit-a-city"
+                                               class="">
+                                                Reading : 11 - Consumer Age C (Clear – Hand in – Natural history – Visit a city)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-12-consumer-age-d-clear-paper-work-conference-hall-watching-television"
+                                               class="">
+                                                Reading 12:  Consumer Age D (Clear – paper work – conference hall – watching television)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-13-doggetts-coat-and-badge-early-hand-in-key-card-watching-a-movie"
+                                               class="">
+                                                Reading 13:  Doggett&#039;s coat and badge (Early – Hand in – Key card – Watching a movie)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-14-early-australia-clear-report-printer-travelling"
+                                               class="">
+                                                Reading 14:  EARLY AUSTRALIA (Clear – report – printer – travelling)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-15-eating-in-china-b-miss-instructions-key-card-volunteering"
+                                               class="">
+                                                Reading 15: Eating in China B (Miss – instructions – key card – volunteering)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-16-eating-in-china-c-late-participate-in-a-race-scientist-sport"
+                                               class="">
+                                                Reading 16 - Eating in China C (Late – Participate in a race – Scientist – Sport)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-17-consumer-age-a-friendly-hand-in-car-park-visit-a-city"
+                                               class="">
+                                                Reading 17: Consumer age A (Friendly - Hand in - Car park - visit a city)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-18-hotel-near-rose-vu-tru-internet"
+                                               class="">
+                                                Reading 18: Hotel (Near - Rose - Vũ trụ - Internet)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-19-tulip-a-my-colleague-a-famous-hand-in-a-new"
+                                               class="">
+                                                Reading 19: Tulip A (My colleague - A famous - Hand in - a new)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-20-tulip-b-friendly-car-park-paper-visit-a-city"
+                                               class="">
+                                                Reading 20: Tulip B (Friendly - Car park - Paper - Visit a city)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-21-zoo-long-conference-hall-natural-history-a-new-restaurant"
+                                               class="">
+                                                Reading 21: ZOO (Long – Conference hall – Natural history – a new restaurant)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-22-children-and-exercise-b-balance-new-students-conference-hall-flying"
+                                               class="">
+                                                Reading 22: Children and exercise B (Balance – New students – Conference hall – Flying)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-23-de-an-chay-meatless-diet-b-just-go-to-the-buying-a-new-house-the-first-using-public-bicycle-art"
+                                               class="">
+                                                Reading 23: Đề Ăn Chay (Meatless diet) B (Just – Go to the (Buying a new house) – The first (Using public bicycle) – Art)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-24-eating-in-china-miss-instructions-key-card-volunteering"
+                                               class="">
+                                                Reading 24: Eating in China (Miss – instructions – key card – volunteering)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-25-eating-in-china-a-miss-delivery-man-a-famous-football-player-going-on-holiday"
+                                               class="">
+                                                Reading  25: Eating in China A (Miss – Delivery man – A famous football player - Going on holiday)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-26-de-an-chay-meatless-diet-b-just-go-to-the-buying-a-new-house-the-first-using-public-bicycle-art"
+                                               class="">
+                                                Reading 26: Đề Ăn Chay (Meatless diet) B (Just – Go to the (Buying a new house) – The first (Using public bicycle) – Art)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-27-music-late-jay-dien-vien-noi-tieng-trong-khoai-visit"
+                                               class="">
+                                                Reading 27: Music (Late - Jay (diễn viên nổi tiếng) - Trồng khoai - Visit)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-28-coffee-c-near-papers-work-traffic-lights-different-types-of-vacations"
+                                               class="">
+                                                Reading 28: Coffee C (Near - Papers work - Traffic lights - Different types of vacations)
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-29-consumer-age-e-clear-hand-in-natural-history-new-station"
+                                               class="">
+                                                Reading 29: Consumer Age E (Clear – Hand in – Natural history – New station
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-30-sick-a-famous-football-player-hand-in-assignment-a-new-restaurant-tulip"
+                                               class="">
+                                                Reading 30: Sick – A famous football player – Hand in assignment – A new restaurant - Tulip
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-31-great-my-first-car-bettys-life-visit-a-city-10-charles-dickens"
+                                               class="">
+                                                Reading 31: Great – My first car – Betty’s life – Visit a city (1.0) – Charles Dickens
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-32-clear-quy-trinh-nop-report-quy-trinh-dung-may-tin-printer-volunteering-to-clean-a-local-park-10-early-australia"
+                                               class="">
+                                                Reading 32: Clear – Quy trình nộp report – Quy trình dung máy tin (printer) - Volunteering to clean a local park (1.0) – Early Australia
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-33-miss-instructions-for-new-students-key-card-sports-10-eating-in-china"
+                                               class="">
+                                                Reading 33: Miss - Instructions for new students - Key card - sports (1.0) - Eating in China
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-34-near-instructions-of-sending-paper-work-traffic-problems-opinions-on-flying-coffee"
+                                               class="">
+                                                Reading 34: Near - Instructions of sending paper work - Traffic problems - Opinions on flying - Coffee
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-35-friendly-car-park-bibliography-of-tom-harper-watching-a-movie-consumer-age"
+                                               class="">
+                                                Reading 35: Friendly - Car park - Bibliography of Tom Harper - Watching a movie - Consumer age
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-36-early-fire-instructions-the-steps-in-the-scientific-method-watching-television-antartica-frozen-land"
+                                               class="">
+                                                Reading 36: Early - Fire instructions - The steps in the scientific method - Watching television - Antartica – Frozen land
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-37-live-using-public-bicycle-quy-trinh-vao-conference-hall-internet-doggets-coat-and-badge"
+                                               class="">
+                                                Reading 37: Live – Using public bicycle – Quy trình vào conference hall – Internet – Dogget’s coat and badge
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-38-window-animal-hospital-delivery-man-going-on-holiday-meatless-diet"
+                                               class="">
+                                                Reading 38: Window – Animal hospital – Delivery man – Going on holiday – Meatless diet
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-39-just-rose-quy-trinh-trong-hoa-hong-uoc-mo-du-hanh-vu-tru-reading-books-children-and-exercises"
+                                               class="">
+                                                Reading 39: Just – Rose (quy trình trồng hoa hồng) – (Ước mơ du hành vũ trụ) – Reading books – Children and exercises
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-40-late-jay-mist-potato-growing-process-quy-trinh-trong-khoai-new-station-zoo"
+                                               class="">
+                                                Reading 40: Late – Jay Mist – Potato growing process (Quy trình trồng khoai) – New station - Zoo
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-41-long-satefy-guide-participate-in-a-race-different-type-of-vacations-hotel"
+                                               class="">
+                                                Reading 41: Long – Satefy guide – Participate in a race – Different type of vacations - Hotel
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-42-balance-scientist-cuoc-doi-1-nha-khoa-hoc-natural-history-center-art-music"
+                                               class="">
+                                                Reading 42: Balance – Scientist (cuộc đời 1 nhà khoa học) – Natural history center – Art - Music
+                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-43-buying-a-new-house-solve-a-problem-volunteering-to-clean-a-local-park-20"
+                                               class="">
+                                                Reading 43: Buying a new house – Solve a problem – Volunteering to clean a local park (2.0)
+                                            </a>
+                                        </li>
+                                                                    
+                            </ul>
+                        </li>
+                                        
+                </ul>
+            </div>
+        
+    </div>
+
+    <div class="list-courses-control mt-5">
+        <div class="d-flex ai-center">
+            <div class="list-courses-control--btn control--btn">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="grid" role="img"
+                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-grid fa-lg">
+                    <path fill="currentColor"
+                          d="M0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40L0 72zM0 232c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM128 392l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM160 72c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM288 232l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM160 392c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM448 72l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM320 232c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM448 392l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40z"
+                          class=""></path>
+                </svg>
+            </div>
+            <div class="control-title ml-2">
+                <span class="name-lesson ellipsis-1">[Reading] - Reading 20: Tulip B (Friendly - Car park - Paper - Visit a city)</span>
+            </div>
+        </div>
+    </div>
+
+    <form action="https://chungchigiaoduc.vn/reading-submit" class="form-reading" id="readingSubmit" method="POST">
+        <h2 class="text-center">Reading 20: Tulip B (Friendly - Car park - Paper - Visit a city)</h2>
+        <input type="hidden" name="_token" value="Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB">
+                                    
+                    <section class="exercise reading">
+                        <div class="container">
+                            <div class="exercise-body">
+                                <h2 class="exercise-title">
+                                    Question 1 of 5
+                                </h2>
+                                <div class="exercise-sub" data-question-id="1375">
+                                    Choose one word from the list for each gap. The first one is done for you.
+                                </div>
+
+                                                                                                            <div class="exercise-desc resultQuestion"
+                                             data-question-id="1376">
+                                            <p>
+                                                <strong>Everyone is.......</strong>
+                                                                                                    <select class="lrn-cloze-select lrn_cloze_response fillInWord"
+                                                            data-question-id="1376"
+                                                            data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                            name="fillInWordId[]">
+                                                        <option role="option" aria-label="Please select an option - "
+                                                                selected disabled></option>
+                                                                                                                    <option data-result-id="7750"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                unapproachable
+                                                            </option>
+                                                                                                                    <option data-result-id="7751"
+                                                                    data-corect="1"
+                                                                    role="option" value="1">
+                                                                friendly
+                                                            </option>
+                                                                                                                    <option data-result-id="7752"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                stress
+                                                            </option>
+                                                                                                            </select>
+                                                                                            </p>
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion"
+                                             data-question-id="1377">
+                                            <p>
+                                                <strong>We eat dinner......</strong>
+                                                                                                    <select class="lrn-cloze-select lrn_cloze_response fillInWord"
+                                                            data-question-id="1377"
+                                                            data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                            name="fillInWordId[]">
+                                                        <option role="option" aria-label="Please select an option - "
+                                                                selected disabled></option>
+                                                                                                                    <option data-result-id="7774"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                alone
+                                                            </option>
+                                                                                                                    <option data-result-id="7775"
+                                                                    data-corect="1"
+                                                                    role="option" value="1">
+                                                                together
+                                                            </option>
+                                                                                                                    <option data-result-id="7776"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                with friends
+                                                            </option>
+                                                                                                            </select>
+                                                                                            </p>
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion"
+                                             data-question-id="1378">
+                                            <p>
+                                                <strong>She can ........5 languages</strong>
+                                                                                                    <select class="lrn-cloze-select lrn_cloze_response fillInWord"
+                                                            data-question-id="1378"
+                                                            data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                            name="fillInWordId[]">
+                                                        <option role="option" aria-label="Please select an option - "
+                                                                selected disabled></option>
+                                                                                                                    <option data-result-id="7771"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                write
+                                                            </option>
+                                                                                                                    <option data-result-id="7772"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                read
+                                                            </option>
+                                                                                                                    <option data-result-id="7773"
+                                                                    data-corect="1"
+                                                                    role="option" value="1">
+                                                                speak
+                                                            </option>
+                                                                                                            </select>
+                                                                                            </p>
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion"
+                                             data-question-id="1379">
+                                            <p>
+                                                <strong>&nbsp;I meet her for the.....time&nbsp;</strong>
+                                                                                                    <select class="lrn-cloze-select lrn_cloze_response fillInWord"
+                                                            data-question-id="1379"
+                                                            data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                            name="fillInWordId[]">
+                                                        <option role="option" aria-label="Please select an option - "
+                                                                selected disabled></option>
+                                                                                                                    <option data-result-id="7768"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                third time
+                                                            </option>
+                                                                                                                    <option data-result-id="7769"
+                                                                    data-corect="1"
+                                                                    role="option" value="1">
+                                                                first
+                                                            </option>
+                                                                                                                    <option data-result-id="7770"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                the second time
+                                                            </option>
+                                                                                                            </select>
+                                                                                            </p>
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion"
+                                             data-question-id="1380">
+                                            <p>
+                                                <strong>&nbsp;I can.....to my class</strong>
+                                                                                                    <select class="lrn-cloze-select lrn_cloze_response fillInWord"
+                                                            data-question-id="1380"
+                                                            data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                            name="fillInWordId[]">
+                                                        <option role="option" aria-label="Please select an option - "
+                                                                selected disabled></option>
+                                                                                                                    <option data-result-id="7765"
+                                                                    data-corect="1"
+                                                                    role="option" value="1">
+                                                                walk
+                                                            </option>
+                                                                                                                    <option data-result-id="7766"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                take the bus
+                                                            </option>
+                                                                                                                    <option data-result-id="7767"
+                                                                    data-corect="0"
+                                                                    role="option" value="0">
+                                                                ride bicycle
+                                                            </option>
+                                                                                                            </select>
+                                                                                            </p>
+                                        </div>
+                                                                                                </div>
+                        </div>
+                    </section>
+                                            
+                    <section class="exercise reading">
+                        <div class="container">
+
+                            <div class="exercise-body">
+                                <h2 class="exercise-title">
+                                    Question 2 of 5
+                                </h2>
+                                <div class="exercise-sub" data-question-id="1381">
+                                    The sentences below are from a report. Put the sentences in the right order. The first sentence is done for you.
+                                </div>
+
+                                                                    <div class="exercise-desc" data-question-id="1382">
+                                        <div class="exercise-table">
+                                                                                            <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <div class="exercise-read-left resultQuestion">
+                                                            
+
+                                                            <div class="lrn_response_input"
+                                                                 data-question-id="1382">
+                                                                                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1382"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1382"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1382"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1382"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1382"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="exercise-read-right drop-area" ondrop="drop(event)"
+                                                             ondragover="allowDrop(event)"
+                                                             data-id="1382">
+                                                                                                                                                                                                                                                                <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20135"
+                                                                         data-id="1382"
+                                                                         data-result-id="20135"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            Before you leave, please put the ticket on the machine by the gate
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20136"
+                                                                         data-id="1382"
+                                                                         data-result-id="20136"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            The machine will read your information and tell you how much you have to pay
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20133"
+                                                                         data-id="1382"
+                                                                         data-result-id="20133"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            This ticket will show the date and the time you arrived
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20132"
+                                                                         data-id="1382"
+                                                                         data-result-id="20132"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            When you arrive, please take a ticket from a machine at the entrance
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20134"
+                                                                         data-id="1382"
+                                                                         data-result-id="20134"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            Please display the ticket with this information in the window of your car
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                                                                    </div>
+                                                    </div>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </section>
+                                            
+                    <section class="exercise reading">
+                        <div class="container">
+
+                            <div class="exercise-body">
+                                <h2 class="exercise-title">
+                                    Question 3 of 5
+                                </h2>
+                                <div class="exercise-sub" data-question-id="1383">
+                                    The sentences below are from a report. Put the sentences in the right order. The first sentence is done for you.
+                                </div>
+
+                                                                    <div class="exercise-desc" data-question-id="1384">
+                                        <div class="exercise-table">
+                                                                                            <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <div class="exercise-read-left resultQuestion">
+                                                            
+
+                                                            <div class="lrn_response_input"
+                                                                 data-question-id="1384">
+                                                                                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1384"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1384"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1384"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1384"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                            <p>
+                                                                            <span ondrop="drop(event)"
+                                                                                  ondragover="allowDrop(event)"
+                                                                                  data-id="1384"
+                                                                                  data-corect="1"></span>
+                                                                        </p>
+                                                                                                                                                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="exercise-read-right drop-area" ondrop="drop(event)"
+                                                             ondragover="allowDrop(event)"
+                                                             data-id="1384">
+                                                                                                                                                                                                                                                                <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20761"
+                                                                         data-id="1384"
+                                                                         data-result-id="20761"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            Simply drag and drop your files
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20760"
+                                                                         data-id="1384"
+                                                                         data-result-id="20760"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            When you do this, a new window will open
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20759"
+                                                                         data-id="1384"
+                                                                         data-result-id="20759"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            In your account, press "open new window"
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20762"
+                                                                         data-id="1384"
+                                                                         data-result-id="20762"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            After that, go back to your account and click the submit button.
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                    <div class="exercise-read-box"
+                                                                         data-corect="1"
+                                                                         draggable="true" id="box20763"
+                                                                         data-id="1384"
+                                                                         data-result-id="20763"
+                                                                         data-url="https://chungchigiaoduc.vn/drop-result"
+                                                                         data-method="POST" ondragstart="drag(event)">
+                                                                        <svg aria-hidden="true" focusable="false"
+                                                                             data-prefix="fas" data-icon="grid-2"
+                                                                             role="img"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             viewBox="0 0 512 512"
+                                                                             class="svg-inline--fa fa-grid-2 fa-lg">
+                                                                            <path fill="currentColor"
+                                                                                  d="M224 80c0-26.5-21.5-48-48-48L80 32C53.5 32 32 53.5 32 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zm0 256c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96zM288 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96z"
+                                                                                  class=""></path>
+                                                                        </svg>
+                                                                        <div class="ta-center">
+                                                                            Finally, check your email to confirm that your submission was successful
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                                                                    </div>
+                                                    </div>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </section>
+                                            
+                    <section class="exercise reading">
+                        <div class="container">
+                            <div class="exercise-body">
+                                <h2 class="exercise-title">
+                                    Question 4 of 5
+                                </h2>
+                                <div class="exercise-sub" data-question-id="1385">
+                                    <strong>.</strong>
+                                </div>
+
+                                                                                                            <div class="exercise-desc" data-question-id="1385">
+                                            <div>
+                                                <p>
+                                                    <p style="line-height:1.2; margin-bottom:7px"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Part 4:</span></span></span></span></span></span></p>
+
+<p style="line-height:1.284; margin-left:7px; margin-right:8px; margin-top:9px"><span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">A: This is my first time coming to this restaurant. The food is very cheap but the quality is excellent. I was very surprised with the starter because its menu is very diverse. but there is one thing that I want the restaurant to improve. The music was too low and it didn&#39;t make the meal atmosphere lively. Next time turn the music louder, please!</span></span></span></span></span></span></p>
+
+<p style="line-height:1.284; margin-left:7px; margin-right:8px; margin-top:11px"><span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">B: This is a very famous restaurant that I saw in the newspaper. Sadly, I arrived later than the rest of the party, so I didn&#39;t get to order dinner. However, I ordered orange juice and mango juice and they were both delicious. What about the surroundings? Lively music along with fashionable and appropriate decor makes me feel very comfortable.</span></span></span></span></span></span></p>
+
+<p style="line-height:1.284; margin-left:7px; margin-right:8px; margin-top:11px"><span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">C: I&#39;m not sure if I will return to this restaurant. I think the staff was arguing when I got there, because the atmosphere here was not very comfortable. As for the food, I think there&#39;s nothing to write about. I ordered fish and chips, it wasn&#39;t bad, but it wasn&#39;t good either. But many people say that the food here is fabulous. So, I think I&#39;m an exception.</span></span></span></span></span></span></p>
+
+<p style="line-height:1.284; margin-left:7px; margin-right:8px; margin-top:11px"><span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">D: I don&#39;t understand why this restaurant is so famous. When I arrived and saw a menu with lots of different dishes, I saw this as a bad sign. Furthermore, the menu with traditional dishes contrasting with the modern decoration style made me feel very confused and strange. The staff here are also not friendly. This was one of my worst experiences eating at a restaurant.</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:11px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">1.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who was impressed by the range of appetisers? A</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:12px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">2.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who thought his experience was probably unusual? C</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:12px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">3.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who thought the food was of average quality? C</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:16px; margin-bottom:16px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">4.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who will definitely not return to the restaurant? D</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:16px; margin-bottom:16px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">5.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who thought the music was too quiet? A</span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:16px; margin-bottom:16px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">6.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who didn&#39;t eat anything at the restaurant? B</span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none"> </span></span></span></span></span></span></p>
+
+<p style="line-height:1.2; margin-left:24px; text-indent:-13pt; margin-top:16px; margin-bottom:16px; padding:0pt 0pt 0pt 13pt"><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">7.</span></span></span></span></span></span><span style="font-size:6.999999999999999pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">&nbsp; </span></span></span></span></span></span><span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"><span style="font-family:'Times New Roman',serif"><span style="color:#000000"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">Who enjoyed the atmosphere? B</span></span></span></span></span></span></p>
+                                                </p>
+                                            </div>
+                                            <div class="answer resultQuestion">
+                                                                                            </div>
+                                        </div>
+                                                                    
+                            </div>
+                        </div>
+                    </section>
+                                            
+                    <section class="exercise reading">
+                        <div class="container">
+                            <div class="exercise-body">
+                                <h2 class="exercise-title">
+                                    Question 5 of 5
+                                </h2>
+                                <div class="exercise-sub" data-question-id="1394">
+                                    Read the passage quickly. Choose a heading for each numbered paragraph (1-7) from the drop-down box. There is one more heading than you need.
+                                </div>
+                                                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>1.</strong>
+                                                <select data-question-id="1624"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="10127"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="10126"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                    <option data-result-id="10121"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="10123"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="10122"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="10124"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="10125"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>2.</strong>
+                                                <select data-question-id="1625"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="10130"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="10128"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="10129"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="10132"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="10134"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="10131"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="10133"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>3.</strong>
+                                                <select data-question-id="1626"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="18245"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="18241"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="18244"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="18247"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="18243"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="18246"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                    <option data-result-id="18242"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>4.</strong>
+                                                <select data-question-id="1627"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="10168"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                    <option data-result-id="10164"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="10166"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="10167"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="10163"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="10165"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="10169"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>5.</strong>
+                                                <select data-question-id="1628"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="18238"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="18237"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="18235"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="18239"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                    <option data-result-id="18240"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="18236"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="18234"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>6.</strong>
+                                                <select data-question-id="1629"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="10210"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                    <option data-result-id="10207"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="10211"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="10206"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="10205"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="10209"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="10208"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                            <div class="exercise-desc resultQuestion">
+                                            <p>
+                                                <strong>7.</strong>
+                                                <select data-question-id="1630"
+                                                        data-url="https://chungchigiaoduc.vn/change-select" data-method="POST"
+                                                        class=" lrn-cloze-select lrn_cloze_response">
+                                                    <option role="option" value=""
+                                                            aria-label="Please select an option - "></option>
+                                                                                                                                                                        <option data-result-id="10220"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Coming into fashion">
+                                                                Coming into fashion</option>
+                                                                                                                    <option data-result-id="10221"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade mechanics">
+                                                                Trade mechanics</option>
+                                                                                                                    <option data-result-id="10223"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="An object of trade">
+                                                                An object of trade</option>
+                                                                                                                    <option data-result-id="10225"
+                                                                    role="option"
+                                                                    data-corect="1"
+                                                                    value="An unexpected turn of events">
+                                                                An unexpected turn of events</option>
+                                                                                                                    <option data-result-id="10222"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Different types of tulip">
+                                                                Different types of tulip</option>
+                                                                                                                    <option data-result-id="10219"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="Trade across Europe">
+                                                                Trade across Europe</option>
+                                                                                                                    <option data-result-id="10224"
+                                                                    role="option"
+                                                                    data-corect="0"
+                                                                    value="The stock market and economics">
+                                                                The stock market and economics</option>
+                                                                                                                                                            </select>
+                                            </p>
+                                            
+                                        </div>
+                                                                                                </div>
+                        </div>
+                    </section>
+                                    
+        <style>
+            .btn_next {
+                color: #fff;
+                background-color: #000;
+                border-color: #000;
+                padding: 5px 20px;
+                font-size: 16px;
+                line-height: 1.5;
+                border-radius: 4px;
+                display: inline-block;
+                cursor: pointer;
+                border: none;
+            }
+        </style>
+        <div class="d-flex gap-2 justify-content-center mb-5">
+                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-19-tulip-a-my-colleague-a-famous-hand-in-a-new" class="btn_next" style="width: unset">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    Bài trước
+                </a>
+            
+            <a class="btn_next" id="btn_refesh_exam" href="">Làm lại</a>
+
+                            <a href="https://chungchigiaoduc.vn/thi-doc/reading-21-zoo-long-conference-hall-natural-history-a-new-restaurant" class="btn_next">
+                    Bài sau <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+                    </div>
+
+    </form>
+
+    
+
+    <script>
+        $(document).ready(function() {
+            $('.control--btn').on('click', function(event) {
+                event.preventDefault();
+                $('.popup-menu').toggleClass('active');
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.popup-menu-main li').on('click', function(e) {
+                e.stopPropagation();
+
+                var span = $(this).find('span').first();
+                var ul = $(this).find('ul').first();
+
+                if (span.length) {
+                    if (!span.hasClass('active')) {
+                        span.addClass('active');
+                        ul.slideDown(500).addClass('active');
+                    } else {
+                        span.removeClass('active');
+                        ul.slideUp(500).removeClass('active');
+                    }
+                } else if (ul.length) {
+                    if (!ul.hasClass('active')) {
+                        ul.slideDown(500).addClass('active');
+                    } else {
+                        ul.slideUp(500).removeClass('active');
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        var answers = {};
+
+        $('.lrn-cloze-select').each(function() {
+            $(this).on('change', function() {
+                let selectedOption = $(this).find('option:selected');
+                var exerciseSub = document.querySelectorAll('.exercise-sub');
+                let resultId = selectedOption.data('result-id');
+                let corect = selectedOption.data('corect');
+                let question = $(this).data('question-id');
+
+                let formData = new FormData();
+
+                formData.append('id', resultId);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: $(this).data('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // console.log(response)
+                        if (response.success) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Bạn chọn đúng"
+                            });
+                        } else {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "error",
+                                title: "Bạn chọn sai"
+                            });
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        Swal.fire('Lỗi!', 'Có lỗi xảy ra, vui lòng thử lại!', 'error');
+                    }
+                })
+
+                answers[question] = [];
+                answers[question].push({
+                    "result_id": resultId,
+                    "question_id": question,
+                    "corect": corect
+                });
+
+                // console.log(answers);
+
+            });
+        });
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var element = document.getElementById(data);
+            var target = ev.target;
+
+            while (target && !target.hasAttribute('data-id')) {
+                target = target.parentElement;
+            }
+
+            if (target && (target.children.length === 0 || target.classList.contains("exercise-read-right"))) {
+                if (target.getAttribute('data-id') && (element.getAttribute('data-id') === target.getAttribute(
+                    'data-id'))) {
+                    target.appendChild(element);
+                    target.style.border = "0";
+
+                    var questionId = target.getAttribute('data-id');
+                    var url = element.getAttribute('data-url');
+                    var method = element.getAttribute('data-method');
+
+                    let formData = new FormData();
+                    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                    var lrnResponseInput = document.querySelectorAll(`.lrn_response_input div[data-id='${questionId}']`);
+
+                    if (!answers[questionId]) {
+                        answers[questionId] = [];
+                    }
+
+                    answers[questionId] = Array.from(lrnResponseInput).map(item => {
+                        return {
+                            "result_id": item.getAttribute('data-result-id'),
+                            "question_id": item.getAttribute('data-id'),
+                            "corect": item.getAttribute('data-corect')
+                        }
+                    })
+
+                    $.ajax({
+                        url: url,
+                        method: method,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: JSON.stringify({
+                            answers: Object.values(answers[questionId]).flat()
+                        }),
+                        processData: false,
+                        contentType: "application/json",
+                        success: function(response) {
+                            // console.log(response)
+                            if (response.success) {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.onmouseenter = Swal.stopTimer;
+                                        toast.onmouseleave = Swal.resumeTimer;
+                                    }
+                                });
+                                Toast.fire({
+                                    icon: "success",
+                                    title: `${response.message}`
+                                });
+                            }
+
+                            if (response.success == false) {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.onmouseenter = Swal.stopTimer;
+                                        toast.onmouseleave = Swal.resumeTimer;
+                                    }
+                                });
+                                Toast.fire({
+                                    icon: "error",
+                                    title: `${response.message}`
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire('Lỗi!', 'Có lỗi xảy ra, vui lòng thử lại!', 'error');
+                        }
+                    });
+
+                    // console.log(answers)
+                }
+            }
+        }
+
+        // làm lại
+        $("#btn_refesh_exam").on("click", function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: 'Bạn muốn làm lại hay không?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, làm lại',
+                cancelButtonText: 'Hủy'
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    window.location.href = "https://chungchigiaoduc.vn/thi-doc/reading-20-tulip-b-friendly-car-park-paper-visit-a-city";
+                }
+            });
+        });
+
+        // $('#readingSubmit').on('submit', function(e) {
+        //     e.preventDefault();
+        //     Swal.fire({
+        //         title: 'Bạn muốn nộp bài hay không?',
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Nộp bài',
+        //         cancelButtonText: 'Hủy'
+        //     }).then(function(result) {
+        //         if (result.isConfirmed) {
+
+        //             var exerciseSub = document.querySelectorAll('.exercise-sub');
+        //             let dataQuestionId = [];
+
+        //             exerciseSub.forEach(item => {
+        //                 var questionId = item.getAttribute('data-question-id');
+        //                 dataQuestionId.push(questionId);
+        //             });
+
+        //             $.ajax({
+        //                 url: 'https://chungchigiaoduc.vn/reading-submit',
+        //                 method: 'POST',
+        //                 data: {
+        //                     _token: "Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB",
+        //                     answers: answers,
+        //                     exam_id: 86,
+        //                     dataQuestionId: dataQuestionId
+        //                 },
+        //                 success: function(response) {
+        //                     if (response.success) {
+        //                         // Swal.fire('Bạn đã nộp bài!', response.message, 'success');
+        //                         localStorage.clear();
+        //                         window.location.href = `${response.url}`;
+        //                     } else {
+        //                         Swal.fire('Lỗi!', response.message, 'error');
+        //                     }
+        //                     // console.log(response);
+        //                 },
+        //                 error: function(xhr, status, error) {
+        //                     console.error('AJAX Error:', status, error);
+        //                     Swal.fire('Lỗi!', 'Có lỗi xảy ra, vui lòng thử lại!', 'error');
+        //                 }
+        //             });
+
+        //             // console.log(answers)
+        //         }
+        //     });
+        // });
+
+        // document.querySelectorAll('.exercise-read-box').forEach(function(element) {
+        //     element.setAttribute('ondragstart', 'drag(event)');
+        // });
+
+        // document.querySelectorAll('.lrn_response_input span, .exercise-read-right').forEach(function(element) {
+        //     element.addEventListener('dragenter', function() {
+        //         this.style.border = '2px dashed grey';
+        //     });
+
+        //     element.addEventListener('dragleave', function() {
+        //         this.style.border = '1px solid #ccc';
+        //     });
+        // });
+
+        document.querySelectorAll('.exercise-read-box').forEach(function(element) {
+            element.setAttribute('ondragstart', 'drag(event)');
+
+            element.addEventListener('touchstart', function(e) {
+                drag(e);
+            });
+        });
+
+        document.querySelectorAll('.lrn_response_input span, .exercise-read-right').forEach(function(element) {
+            element.addEventListener('dragenter', function() {
+                this.style.border = '2px dashed grey';
+            });
+
+            element.addEventListener('touchstart', function() {
+                this.style.border = '2px dashed grey';
+            });
+
+            element.addEventListener('dragleave', function() {
+                this.style.border = '1px solid #ccc';
+            });
+
+            element.addEventListener('touchend', function() {
+                this.style.border = '1px solid #ccc';
+            });
+        });
+
+        document.addEventListener('dragover', function(event) {
+            event.preventDefault();
+
+            let y = event.clientY;
+            let windowHeight = window.innerHeight;
+
+            if (y < 50) {
+                window.scrollBy(0, -10); // Trượt lên
+            }
+
+            if (y > windowHeight - 50) {
+                window.scrollBy(0, 10); // Trượt xuống
+            }
+        });
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+
+
+        // document.querySelectorAll('.exercise-read-box').forEach(function(element) {
+        //     element.setAttribute('ondragstart', 'drag(event)');
+
+        //     element.addEventListener('touchstart', function(e) {
+        //         dragStart(e);
+        //     });
+
+        //     element.addEventListener('touchmove', function(e) {
+        //         drag(e);
+        //     });
+
+        //     element.addEventListener('touchend', function(e) {
+        //         dragEnd(e);
+        //     });
+        // });
+
+        // document.querySelectorAll('.lrn_response_input span, .exercise-read-right').forEach(function(element) {
+        //     element.addEventListener('dragenter', function() {
+        //         this.style.border = '2px dashed grey';
+        //     });
+
+        //     element.addEventListener('dragleave', function() {
+        //         this.style.border = '1px solid #ccc';
+        //     });
+
+        //     element.addEventListener('dragover', function(e) {
+        //         allowDrop(e);
+        //         autoScroll(e);
+        //     });
+
+        //     element.addEventListener('drop', function(e) {
+        //         drop(e);
+        //         this.style.border = '1px solid #ccc';
+        //     });
+        // });
+
+        // function allowDrop(event) {
+        //     event.preventDefault();
+        // }
+
+        // function drag(event) {
+        //     event.dataTransfer.setData("text", event.target.id);
+        // }
+
+        // function drop(event) {
+        //     event.preventDefault();
+        //     var data = event.dataTransfer.getData("text");
+        //     event.target.appendChild(document.getElementById(data));
+        // }
+
+        // // Tự động cuộn khi kéo đến gần đầu hoặc cuối màn hình
+        // function autoScroll(event) {
+        //     var scrollThreshold = 50; // Khoảng cách đến cuối màn hình để bắt đầu cuộn
+        //     var scrollAmount = 10; // Lượng cuộn mỗi lần
+
+        //     var viewportHeight = window.innerHeight;
+        //     var rect = event.target.getBoundingClientRect();
+
+        //     if (rect.bottom > viewportHeight - scrollThreshold) {
+        //         window.scrollBy(0, scrollAmount); // Cuộn xuống
+        //     } else if (rect.top < scrollThreshold) {
+        //         window.scrollBy(0, -scrollAmount); // Cuộn lên
+        //     }
+        // }
+
+        // // Xử lý sự kiện cho các thiết bị di động
+        // function dragStart(event) {
+        //     event.dataTransfer = event.dataTransfer || {};
+        //     event.dataTransfer.setData("text", event.target.id);
+        // }
+
+        // function dragEnd(event) {
+        //     event.preventDefault();
+        // }
+
+        // var totalMinutes = 1; // thời gian
+        var totalMinutes = $(".timer-view").data('date'); // thời gian
+        var id = $(".timer-view").data('id');
+
+
+        if (totalMinutes > 0) {
+
+            var totalTimeInSeconds = totalMinutes * 60;
+            var timeRemaining;
+
+            // Kiểm tra xem đã có thời gian lưu trữ trong localStorage chưa
+            if (localStorage.getItem('timeRemaining_' + id)) {
+                timeRemaining = parseInt(localStorage.getItem('timeRemaining_' + id), 10);
+            } else {
+                timeRemaining = totalTimeInSeconds;
+            }
+
+            var hours = Math.floor(timeRemaining / 3600);
+            var minutes = Math.floor((timeRemaining % 3600) / 60);
+            var seconds = timeRemaining % 60;
+
+            $('#hours').text(hours.toString().padStart(2, '0'));
+            $('#minutes').text(minutes.toString().padStart(2, '0'));
+            $('#seconds').text(seconds.toString().padStart(2, '0'));
+
+            // Hàm đếm ngược
+            function countdown() {
+                if (timeRemaining <= 0) {
+                    clearInterval(timer); // Dừng đếm ngược khi hết giờ
+                    $.ajax({
+                        type: "post",
+                        url: "https://chungchigiaoduc.vn/reading-submit",
+                        data: {
+                            _token: "Utdsgnw8KytJMmXxAV14QoNifhk6r9LQDa8RO2HB",
+                            answers: answers,
+                            exam_id: 86,
+                            time_exam: timeRemaining
+                        },
+                        success: function(data) {
+                            if (data.success == true) {
+                                localStorage.clear();
+                                window.location.href = data.url;
+                                return;
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('Đã xảy ra lỗi khi nộp bài.');
+                        }
+                    });
+
+
+                    localStorage.removeItem('timeRemaining_' + id);
+                    return;
+                }
+
+                timeRemaining--;
+                // timeRemaining = timeRemaining - 10;
+
+                // Lưu thời gian còn lại vào localStorage
+                localStorage.setItem('timeRemaining_' + id, timeRemaining);
+
+                hours = Math.floor(timeRemaining / 3600);
+                minutes = Math.floor((timeRemaining % 3600) / 60);
+                seconds = timeRemaining % 60;
+
+                // Cập nhật hiển thị
+                $('#hours').text(hours.toString().padStart(2, '0'));
+                $('#minutes').text(minutes.toString().padStart(2, '0'));
+                $('#seconds').text(seconds.toString().padStart(2, '0'));
+
+                // Cập nhật thanh tiến trình
+                var progressPercentage = ((totalTimeInSeconds - timeRemaining) / totalTimeInSeconds) *
+                    100;
+                $('.countdown').css('width', (100 - progressPercentage) + '%');
+            }
+            var timer = setInterval(countdown, 1000); // Cập nhật mỗi giây
+        }
+    </script>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="https://chungchigiaoduc.vn/lib/sweetalert2/js/sweetalert2.all.min.js"></script>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        const clientId = '342';
+
+        setInterval(() => {
+            fetch('/api/auth/heartbeat', {
+                method: 'POST',
+                headers: {
+                    'x-client-id': clientId
+                }
+            });
+        }, 30 * 1000);
+
+    </script>
+    </body>
+
+</html>
