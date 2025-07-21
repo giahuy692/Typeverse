@@ -36,12 +36,12 @@ I really enjoyed my time there.`,
     audioQuestion: 'assets/audios/speaking/cau57.mp3',
     question: `Describe the picture? (124)`,
     answerTV: `${2}`,
-    answer: `These two pictures are beautiful, let me talk about them.<br/>
-In the first picture, I can see a group of people playing football on the grass. The weather is sunny.<br/>
-In the second picture, I can see an athlete doing a high jump in a stadium. The weather is clear.<br/>
-The common is sports.<br/>
-The difference is playing football and doing high jump.<br/>
-I prefer the first picture because I like team sports.`,
+    answer: `The pictures are beautiful. Let me talk about them.
+In the first picture, I can see a group of people playing football on the grass. The weather is sunny and they look happy.
+In the second picture, I can see a man doing a high jump in a stadium. The weather is clear and He look focus.
+Both pictures are about sports.
+The difference is that one picture shows people playing football together, and the other shows a man doing a solo sport.
+I prefer the first picture because I like team sports and enjoy playing with others.`,
     audioListen: 'assets/audios/speaking/dapancau124.mp3',
     audioTV: 'assets/audios/speaking/tv-124.mp3',
     img: `assets/images/Audio/124.png`,
