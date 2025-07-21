@@ -874,4 +874,295 @@ export const DE_1_RAW_QUESTIONS_READING = [
     ],
     tip: 'FACTORS - có cái SÍT DU - có Ý TƯỞNG - KINH NGHIỆM/HOẠT ĐỘNG - BẰNG CÁCH - HỌC - ĐÚNG'
   },
+  {
+    "id": 1,
+    "skill_id": 1,
+    "type": 5,
+    "title": "Điền từ vào chỗ trống dựa vào ngữ cảnh",
+    "explain": null,
+    "audio_url": null,
+    "answer": null,
+    "sort_by": 1,
+    "childs": [
+      {
+        "id": 101,
+        "skill_id": 1,
+        "type": 5,
+        "title": "............",
+        "explain": "Chọn đáp án đúng để hoàn thành câu.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "Near", "correct": 1, "choose": false },
+          { "answer": "Normal", "correct": 0, "choose": false },
+          { "answer": "Distant", "correct": 0, "choose": false }
+        ],
+        "sort_by": 1,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 102,
+        "skill_id": 1,
+        "type": 5,
+        "title": "............",
+        "explain": "Chọn đáp án đúng để hoàn thành câu.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "Normal", "correct": 0, "choose": false },
+          { "answer": "Bad", "correct": 0, "choose": false },
+          { "answer": "Pretty", "correct": 1, "choose": false }
+        ],
+        "sort_by": 2,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 103,
+        "skill_id": 1,
+        "type": 5,
+        "title": "............",
+        "explain": "Chọn đáp án đúng để hoàn thành câu.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "Walk", "correct": 1, "choose": false },
+          { "answer": "Cycling", "correct": 0, "choose": false },
+          { "answer": "Jogging", "correct": 0, "choose": false }
+        ],
+        "sort_by": 3,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 104,
+        "skill_id": 1,
+        "type": 5,
+        "title": "............",
+        "explain": "Chọn đáp án đúng để hoàn thành câu.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "Listen", "correct": 0, "choose": false },
+          { "answer": "Go camping", "correct": 0, "choose": false },
+          { "answer": "Drive", "correct": 1, "choose": false }
+        ],
+        "sort_by": 4,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 105,
+        "skill_id": 1,
+        "type": 5,
+        "title": "............",
+        "explain": "Chọn đáp án đúng để hoàn thành câu.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "Swim", "correct": 0, "choose": false },
+          { "answer": "Move", "correct": 1, "choose": false },
+          { "answer": "Play", "correct": 0, "choose": false }
+        ],
+        "sort_by": 5,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      }
+    ],
+    "tip": "Đọc kỹ ngữ cảnh trước khi chọn đáp án."
+  },
+  {
+    "id": 2,
+    "skill_id": 1,
+    "type": 6,
+    "title": "Sắp xếp các câu để tạo thành đoạn văn hoàn chỉnh",
+    "explain": null,
+    "audio_url": null,
+    "answer": null,
+    "sort_by": 2,
+    "childs": [
+      {
+        "id": 201,
+        "skill_id": 1,
+        "type": 6,
+        "title": "Sắp xếp 5 câu sau vào đúng thứ tự",
+        "explain": "Kéo thả để sắp xếp các câu sau thành đoạn văn hợp lý.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "When you arrive at the university, go to the help desk", "correct": 1, "choose": false },
+          { "answer": "A member of staff will ask for your name and your address", "correct": 1, "choose": false },
+          { "answer": "He or she will enter your information into the computer and give you an identification card", "correct": 1, "choose": false },
+          { "answer": "You can use this card to borrow books from library and access lesson materials online", "correct": 1, "choose": false },
+          { "answer": "You will find these in material links on your home page", "correct": 1, "choose": false },
+        ],
+        "sort_by": 1,
+        "parent_id": 2,
+        "maximum_number": 5,
+        "seconds_max": 180
+      }
+    ],
+    "tip": "Sắp xếp logic dựa theo ý nghĩa và trình tự sự kiện."
+  },{
+    "id": 1,
+    "skill_id": 1,
+    "type": 5,
+    "title": "Choose one word from the list for each gap. The first one is done for you.",
+    "explain": null,
+    "audio_url": null,
+    "answer": null,
+    "sort_by": 1,
+    "childs": [
+      {
+        "id": 101,
+        "skill_id": 1,
+        "type": 5,
+        "title": "My colleague is ........?",
+        "explain": "Chọn từ phù hợp.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "healthy", "correct": 0, "choose": false },
+          { "answer": "sick", "correct": 1, "choose": false },
+          { "answer": "strong", "correct": 0, "choose": false }
+        ],
+        "sort_by": 1,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 102,
+        "skill_id": 1,
+        "type": 5,
+        "title": "The phone in my office is ......... all the time",
+        "explain": "Chọn từ phù hợp.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "shout", "correct": 0, "choose": false },
+          { "answer": "ringing", "correct": 1, "choose": false },
+          { "answer": "shutdown", "correct": 0, "choose": false }
+        ],
+        "sort_by": 2,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 103,
+        "skill_id": 1,
+        "type": 5,
+        "title": "I have an important .......... with a client",
+        "explain": "Chọn từ phù hợp.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "game", "correct": 0, "choose": false },
+          { "answer": "meeting", "correct": 1, "choose": false },
+          { "answer": "movie viewing", "correct": 0, "choose": false }
+        ],
+        "sort_by": 3,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 104,
+        "skill_id": 1,
+        "type": 5,
+        "title": "I need to.........some reports",
+        "explain": "Chọn từ phù hợp.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "read", "correct": 1, "choose": false },
+          { "answer": "listen", "correct": 0, "choose": false },
+          { "answer": "write", "correct": 0, "choose": false }
+        ],
+        "sort_by": 4,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      },
+      {
+        "id": 105,
+        "skill_id": 1,
+        "type": 5,
+        "title": "I need to take a break and ....... coffee.",
+        "explain": "Chọn từ phù hợp.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "drink", "correct": 1, "choose": false },
+          { "answer": "eat", "correct": 0, "choose": false },
+          { "answer": "play", "correct": 0, "choose": false }
+        ],
+        "sort_by": 5,
+        "parent_id": 1,
+        "maximum_number": 1,
+        "seconds_max": 60
+      }
+    ],
+    "tip": "Chọn đáp án đúng cho từng câu hỏi."
+  },
+  {
+    "id": 2,
+    "skill_id": 1,
+    "type": 6,
+    "title": "The sentences below are from a report. Put the sentences in the right order. The first sentence is done for you.",
+    "explain": null,
+    "audio_url": null,
+    "answer": null,
+    "sort_by": 2,
+    "childs": [
+      {
+        "id": 201,
+        "skill_id": 1,
+        "type": 6,
+        "title": "Arrange the sentences about a football player:",
+        "explain": "Kéo thả để sắp xếp thứ tự đúng.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "When he was a child, he played for some local teams near his home in Marseille.", "correct": 1, "choose": false },
+          { "answer": "He then moved away from his home to join Cannes Football Club in the southern France.", "correct": 1, "choose": false },
+          { "answer": "While he was at that club, people throughout France saw that he was a brilliant player.", "correct": 1, "choose": false },
+          { "answer": "After that, he moved to Italy and Spain, where he finished his playing career.", "correct": 1, "choose": false },
+          { "answer": "Since he retired from playing, he has worked as a football club manager.", "correct": 1, "choose": false }
+        ],
+        "sort_by": 1,
+        "parent_id": 2,
+        "maximum_number": 5,
+        "seconds_max": 180
+      }
+    ],
+    "tip": "Sắp xếp logic dựa theo trình tự sự kiện."
+  },
+  {
+    "id": 3,
+    "skill_id": 1,
+    "type": 6,
+    "title": "The sentences below are from a report. Put the sentences in the right order. The first sentence is done for you. (Bản sao)",
+    "explain": null,
+    "audio_url": null,
+    "answer": null,
+    "sort_by": 3,
+    "childs": [
+      {
+        "id": 301,
+        "skill_id": 1,
+        "type": 6,
+        "title": "Arrange the sentences about submitting assignment:",
+        "explain": "Kéo thả để sắp xếp thứ tự đúng.",
+        "audio_url": null,
+        "answer": [
+          { "answer": "First, it is a good idea for you to read your work and correct spelling mistakes.", "correct": 1, "choose": false },
+          { "answer": "When you have corrected all mistakes, print out your assignment.", "correct": 1, "choose": false },
+          { "answer": "Also, remember to print a separate cover sheet and attach it to your assignment.", "correct": 1, "choose": false },
+          { "answer": "You hand your assignment and attached document to the front desk in the library.", "correct": 1, "choose": false },
+          { "answer": "A staff will check and confirm that you complete.", "correct": 1, "choose": false }
+        ],
+        "sort_by": 1,
+        "parent_id": 3,
+        "maximum_number": 5,
+        "seconds_max": 180
+      }
+    ],
+    "tip": "Sắp xếp logic các bước theo hướng dẫn."
+  }
 ];

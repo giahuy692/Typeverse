@@ -11,6 +11,7 @@ import { ReadingTestComponent } from './components/reading-test/reading-test.com
 import { ListeningTestComponent } from './components/listening-test/listening-test.component';
 
 import { DropdownModule } from 'primeng/dropdown';
+import { AptisReadingComponent } from './components/aptis-reading/aptis-reading.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ListeningTestComponent,
     SpeakingComponent,
     ReadingTestComponent,
+    AptisReadingComponent,
   ],
   imports: [
     CommonModule,
