@@ -9,6 +9,7 @@ import { WritingComponent } from '../shared/components/writing/writing.component
 import { ReadingTestComponent } from '../shared/components/reading-test/reading-test.component';
 import { PdfListComponent } from './components/pdf-list/pdf-list.component';
 import { AptisReadingComponent } from '../shared/components/aptis-reading/aptis-reading.component';
+import { AudioPlayerComponent } from '../pages/audio-player/audio-player.component';
 
 const routes: Routes = [
   {
@@ -19,12 +20,13 @@ const routes: Routes = [
       { path: 'listening/test', component: ListeningTestComponent },
       { path: 'reading/test', component: ReadingTestComponent },
       { path: 'listening/audio', component: ListeningAudioComponent },
+      { path: 'listening/audio1', component: AudioPlayerComponent },
       { path: 'speaking', component: SpeakingComponent },
       { path: 'writing', component: WritingComponent },
       { path: 'aptis/reading', component: AptisReadingComponent },
 
       // Route mặc định cho layout, sẽ điều hướng đến 'welcome'
-      { path: '', redirectTo: 'listening/test', pathMatch: 'full' },
+      { path: '', redirectTo: 'listening/audio1', pathMatch: 'full' },
     ],
   },
 ];

@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms'; // FormsModule thường được 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module'; // SharedModule sẽ không còn khai báo ListeningComponent
 import { LayoutModule } from './layout/layout.module';
-import { HttpClientModule } from '@angular/common/http'; // Thêm HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
+import { AudioPlayerComponent } from './pages/audio-player/audio-player.component'; // Thêm HttpClientModule
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AudioPlayerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
