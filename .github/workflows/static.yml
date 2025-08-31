@@ -1,0 +1,74 @@
+name: Build & Deploy Angular (GitHub Pages)
+
+on:
+  push:
+    branches: [ main ]     # đổi nếu branch mặc định khác
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install deps (clean)
+        run: npm ci
+
+      # Kendo deps bắt buộc để tránh lỗi Module not found
+      - name: Ensure Kendo peer deps exist
+        run: npm i -S @progress/kendo-licensing @progress/kendo-font-icons
+
+      # Kích hoạt license nếu có secret
+      - name: Activate Kendo license (optional)
+        if: ${{ secrets.KENDO_UI_LICENSE != '' }}
+        run: npx kendo-ui-license activate --key "${{ secrets.KENDO_UI_LICENSE }}"
+
+      # Lấy outputPath từ angular.json (thư mục dist)
+      - name: Detect Angular dist path
+        id: detect
+        run: |
+          node -e "const fs=require('fs');const a=JSON.parse(fs.readFileSync('angular.json','utf8'));const proj=Object.keys(a.projects)[0];const out=a.projects[proj]?.architect?.build?.options?.outputPath||'dist';process.stdout.write(out);" > distpath.txt
+          echo "DIST_DIR=$(cat distpath.txt)" >> $GITHUB_ENV
+          echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "Dist path: $(cat distpath.txt)"
+          echo "Repo name: ${GITHUB_REPOSITORY#*/}"
+
+      # Build prod với base-href đúng /Typeverse/
+      - name: Build Angular (prod)
+        run: npx ng build --configuration production --base-href "/${{ env.REPO_NAME }}/"
+
+      - name: Verify dist exists
+        run: |
+          test -f "${{ env.DIST_DIR }}/index.html" || (echo "index.html not found in ${{ env.DIST_DIR }}"; ls -la "${{ env.DIST_DIR }}"; exit 1)
+
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.DIST_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
